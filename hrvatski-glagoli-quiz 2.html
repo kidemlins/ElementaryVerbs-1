@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hrvatski Glagoli — Günlük Hırvatça Fiiller Quiz'i</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B3B4F;
+    --navy-deep:#082A38;
+    --stone:#EFE7D6;
+    --stone-dim:#E3D8C0;
+    --red:#C4132B;
+    --olive:#6F7B3E;
+    --gold:#E3A93B;
+    --ink:#1E2A2E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--navy-deep);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(227,169,59,0.10), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(196,19,43,0.10), transparent 45%);
+    color:var(--stone);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 60px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  header{
+    text-align:center;
+    max-width:640px;
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(28px, 5vw, 44px);
+    margin:0 0 10px;
+    color:var(--stone);
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--gold);
+  }
+  .sub{
+    color:#C9D6D9;
+    font-size:15px;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+
+  /* Šahovnica progress strip — the signature element */
+  .board{
+    display:flex;
+    gap:4px;
+    margin:26px 0 6px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:560px;
+  }
+  .sq{
+    width:16px;
+    height:16px;
+    background:rgba(239,231,214,0.14);
+    border-radius:2px;
+    transition:background 0.35s ease, transform 0.35s ease;
+  }
+  .sq.correct{background:var(--olive); transform:scale(1.05);}
+  .sq.wrong{background:var(--red); transform:scale(1.05);}
+  .sq.current{outline:2px solid var(--gold); outline-offset:1px;}
+
+  .counter{
+    font-size:13px;
+    color:#9FB2B6;
+    margin-bottom:18px;
+    letter-spacing:0.04em;
+  }
+
+  main{
+    width:100%;
+    max-width:560px;
+  }
+
+  .card{
+    background:var(--stone);
+    color:var(--ink);
+    border-radius:18px;
+    padding:36px 30px 30px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:6px;
+    background:repeating-linear-gradient(90deg, var(--navy) 0 14px, var(--red) 14px 28px);
+    opacity:0.85;
+  }
+
+  .prompt-label{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:#8A7A55;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .prompt{
+    font-family:'Fraunces', serif;
+    font-size:clamp(24px, 4vw, 32px);
+    font-weight:600;
+    line-height:1.25;
+    margin:0 0 28px;
+    color:var(--navy-deep);
+  }
+
+  .options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  @media (max-width:420px){
+    .options{grid-template-columns:1fr;}
+  }
+  .opt{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    font-weight:500;
+    text-align:left;
+    padding:14px 16px;
+    border-radius:10px;
+    border:1.5px solid rgba(11,59,79,0.18);
+    background:#fff;
+    color:var(--ink);
+    cursor:pointer;
+    transition:border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  }
+  .opt:hover:not(:disabled){
+    border-color:var(--navy);
+    transform:translateY(-1px);
+  }
+  .opt:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:2px;
+  }
+  .opt:disabled{cursor:default;}
+  .opt.is-correct{
+    background:var(--olive);
+    border-color:var(--olive);
+    color:#fff;
+  }
+  .opt.is-wrong{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+  }
+
+  .feedback{
+    min-height:24px;
+    margin-top:18px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--navy);
+  }
+  .feedback.wrong-msg{color:var(--red);}
+
+  .conj-panel{
+    display:none;
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1.5px dashed rgba(11,59,79,0.18);
+    animation:fadeIn 0.35s ease both;
+  }
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(4px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .conj-title{
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    font-weight:600;
+    color:#8A7A55;
+    margin-bottom:10px;
+  }
+  .conj-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 16px;
+  }
+  .conj-row{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    font-size:14px;
+    padding:4px 0;
+    border-bottom:1px solid rgba(11,59,79,0.08);
+  }
+  .conj-pron{
+    color:#6E7C80;
+    font-weight:500;
+  }
+  .conj-form{
+    color:var(--navy-deep);
+    font-weight:600;
+  }
+
+  .next-btn{
+    margin-top:16px;
+    display:none;
+    width:100%;
+    padding:13px 16px;
+    border-radius:10px;
+    border:none;
+    background:var(--navy);
+    color:var(--stone);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .next-btn:hover{background:var(--navy-deep);}
+
+  /* Results screen */
+  .results{
+    text-align:center;
+    padding:44px 30px;
+  }
+  .results .big{
+    font-family:'Fraunces', serif;
+    font-size:52px;
+    font-weight:700;
+    color:var(--navy-deep);
+    margin:6px 0 4px;
+  }
+  .results p{color:#4A5A5F; font-size:15px; line-height:1.6;}
+  .restart-btn{
+    margin-top:22px;
+    padding:13px 26px;
+    border-radius:10px;
+    border:none;
+    background:var(--red);
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+  }
+  .restart-btn:hover{background:#a30f24;}
+
+  footer{
+    margin-top:32px;
+    font-size:12px;
+    color:#7C8E92;
+    text-align:center;
+    max-width:480px;
+  }
+  footer a{color:var(--gold);}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">A1 · Riječ dana</div>
+  <h1>Hırvatça Günlük <em>Fiiller</em></h1>
+  <p class="sub">İngilizce fiili oku, dört seçenek arasından doğru Hırvatçasını bul. 20 soruluk bir tur — her doğru cevap şahovnica şeridini dolduruyor.</p>
+</header>
+
+<div class="board" id="board" aria-hidden="true"></div>
+<div class="counter" id="counter">Soru 1 / 20</div>
+
+<main>
+  <div class="card" id="quizCard">
+    <div class="prompt-label">İngilizce fiil</div>
+    <p class="prompt" id="promptText">to eat</p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="conj-panel" id="conjPanel">
+      <div class="conj-title" id="conjTitle">Şimdiki zaman çekimi</div>
+      <div class="conj-grid" id="conjGrid"></div>
+    </div>
+    <button class="next-btn" id="nextBtn">Sonraki soru →</button>
+  </div>
+
+  <div class="card hidden" id="resultsCard">
+    <div class="results">
+      <div class="prompt-label">Tur bitti</div>
+      <div class="big" id="scoreText">0 / 20</div>
+      <p id="scoreMsg">Sonuç değerlendiriliyor…</p>
+      <button class="restart-btn" id="restartBtn">Yeniden başla</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Kelime seçimi A1 seviyesi günlük Hırvatça fiillerden oluşur (biti, imati, raditi, jesti…). İlham: <a href="https://www.easy-croatian.com/" target="_blank" rel="noopener">easy-croatian.com</a>
+</footer>
+
+<script>
+  // A1 daily verb pool. conj = [ja, ti, on/ona/ono, mi, vi, oni] — present tense
+  const VERBS = [
+    { hr:"biti",       en:"to be",                conj:["sam","si","je","smo","ste","su"] },
+    { hr:"imati",      en:"to have",              conj:["imam","imaš","ima","imamo","imate","imaju"] },
+    { hr:"raditi",     en:"to work / to do",      conj:["radim","radiš","radi","radimo","radite","rade"] },
+    { hr:"jesti",      en:"to eat",               conj:["jedem","jedeš","jede","jedemo","jedete","jedu"] },
+    { hr:"piti",       en:"to drink",             conj:["pijem","piješ","pije","pijemo","pijete","piju"] },
+    { hr:"spavati",    en:"to sleep",             conj:["spavam","spavaš","spava","spavamo","spavate","spavaju"] },
+    { hr:"ići",        en:"to go",                conj:["idem","ideš","ide","idemo","idete","idu"] },
+    { hr:"doći",       en:"to come",              conj:["dođem","dođeš","dođe","dođemo","dođete","dođu"] },
+    { hr:"gledati",    en:"to watch",             conj:["gledam","gledaš","gleda","gledamo","gledate","gledaju"] },
+    { hr:"slušati",    en:"to listen",            conj:["slušam","slušaš","sluša","slušamo","slušate","slušaju"] },
+    { hr:"govoriti",   en:"to speak",             conj:["govorim","govoriš","govori","govorimo","govorite","govore"] },
+    { hr:"čitati",     en:"to read",              conj:["čitam","čitaš","čita","čitamo","čitate","čitaju"] },
+    { hr:"pisati",     en:"to write",             conj:["pišem","pišeš","piše","pišemo","pišete","pišu"] },
+    { hr:"učiti",      en:"to study / to learn",  conj:["učim","učiš","uči","učimo","učite","uče"] },
+    { hr:"kupovati",   en:"to buy / to shop",     conj:["kupujem","kupuješ","kupuje","kupujemo","kupujete","kupuju"] },
+    { hr:"voljeti",    en:"to love",              conj:["volim","voliš","voli","volimo","volite","vole"] },
+    { hr:"znati",      en:"to know",              conj:["znam","znaš","zna","znamo","znate","znaju"] },
+    { hr:"htjeti",     en:"to want",              conj:["hoću","hoćeš","hoće","hoćemo","hoćete","hoće"] },
+    { hr:"moći",       en:"to be able to / can",  conj:["mogu","možeš","može","možemo","možete","mogu"] },
+    { hr:"živjeti",    en:"to live",              conj:["živim","živiš","živi","živimo","živite","žive"] },
+    { hr:"igrati se",  en:"to play",              conj:["igram se","igraš se","igra se","igramo se","igrate se","igraju se"] },
+    { hr:"plesati",    en:"to dance",             conj:["plešem","plešeš","pleše","plešemo","plešete","plešu"] },
+    { hr:"pjevati",    en:"to sing",              conj:["pjevam","pjevaš","pjeva","pjevamo","pjevate","pjevaju"] },
+    { hr:"kuhati",     en:"to cook",              conj:["kuham","kuhaš","kuha","kuhamo","kuhate","kuhaju"] },
+    { hr:"čistiti",    en:"to clean",             conj:["čistim","čistiš","čisti","čistimo","čistite","čiste"] },
+    { hr:"prati",      en:"to wash",              conj:["perem","pereš","pere","peremo","perete","peru"] },
+    { hr:"voziti",     en:"to drive",             conj:["vozim","voziš","vozi","vozimo","vozite","voze"] },
+    { hr:"putovati",   en:"to travel",            conj:["putujem","putuješ","putuje","putujemo","putujete","putuju"] },
+    { hr:"čekati",     en:"to wait",              conj:["čekam","čekaš","čeka","čekamo","čekate","čekaju"] },
+    { hr:"otvoriti",   en:"to open",              conj:["otvorim","otvoriš","otvori","otvorimo","otvorite","otvore"] },
+    { hr:"zatvoriti",  en:"to close",             conj:["zatvorim","zatvoriš","zatvori","zatvorimo","zatvorite","zatvore"] },
+    { hr:"pomoći",     en:"to help",              conj:["pomognem","pomogneš","pomogne","pomognemo","pomognete","pomognu"] },
+    { hr:"tražiti",    en:"to look for / to search", conj:["tražim","tražiš","traži","tražimo","tražite","traže"] },
+    { hr:"naći",       en:"to find",              conj:["nađem","nađeš","nađe","nađemo","nađete","nađu"] },
+    { hr:"misliti",    en:"to think",             conj:["mislim","misliš","misli","mislimo","mislite","misle"] },
+    { hr:"vidjeti",    en:"to see",               conj:["vidim","vidiš","vidi","vidimo","vidite","vide"] },
+    { hr:"čuti",       en:"to hear",              conj:["čujem","čuješ","čuje","čujemo","čujete","čuju"] },
+    { hr:"smijati se", en:"to laugh",             conj:["smijem se","smiješ se","smije se","smijemo se","smijete se","smiju se"] },
+    { hr:"plakati",    en:"to cry",               conj:["plačem","plačeš","plače","plačemo","plačete","plaču"] },
+    { hr:"ustati",     en:"to get up",            conj:["ustanem","ustaneš","ustane","ustanemo","ustanete","ustanu"] },
+  ];
+
+  const PRONOUNS = ["ja","ti","on/ona/ono","mi","vi","oni"];
+
+  const TOTAL_QUESTIONS = 20;
+
+  let quizSet = [];
+  let currentIndex = 0;
+  let score = 0;
+  let answered = false;
+
+  const boardEl = document.getElementById('board');
+  const counterEl = document.getElementById('counter');
+  const promptEl = document.getElementById('promptText');
+  const optionsEl = document.getElementById('options');
+  const feedbackEl = document.getElementById('feedback');
+  const nextBtn = document.getElementById('nextBtn');
+  const conjPanel = document.getElementById('conjPanel');
+  const conjGrid = document.getElementById('conjGrid');
+  const conjTitle = document.getElementById('conjTitle');
+  const quizCard = document.getElementById('quizCard');
+  const resultsCard = document.getElementById('resultsCard');
+  const scoreText = document.getElementById('scoreText');
+  const scoreMsg = document.getElementById('scoreMsg');
+  const restartBtn = document.getElementById('restartBtn');
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildQuizSet(){
+    const pool = shuffle(VERBS).slice(0, TOTAL_QUESTIONS);
+    return pool.map(verb => {
+      const distractorPool = VERBS.filter(v => v.hr !== verb.hr);
+      const distractors = shuffle(distractorPool).slice(0, 3).map(v => v.hr);
+      const choices = shuffle([verb.hr, ...distractors]);
+      return { hr: verb.hr, en: verb.en, conj: verb.conj, choices };
+    });
+  }
+
+  function buildBoard(){
+    boardEl.innerHTML = '';
+    for(let i = 0; i < TOTAL_QUESTIONS; i++){
+      const sq = document.createElement('div');
+      sq.className = 'sq';
+      sq.id = 'sq-' + i;
+      boardEl.appendChild(sq);
+    }
+  }
+
+  function markBoard(index, isCorrect){
+    const sq = document.getElementById('sq-' + index);
+    sq.classList.remove('current');
+    sq.classList.add(isCorrect ? 'correct' : 'wrong');
+  }
+
+  function highlightCurrent(index){
+    document.querySelectorAll('.sq').forEach(s => s.classList.remove('current'));
+    const sq = document.getElementById('sq-' + index);
+    if(sq) sq.classList.add('current');
+  }
+
+  function renderQuestion(){
+    answered = false;
+    const q = quizSet[currentIndex];
+    counterEl.textContent = `Soru ${currentIndex + 1} / ${TOTAL_QUESTIONS}`;
+    promptEl.textContent = q.en;
+    feedbackEl.textContent = '';
+    feedbackEl.classList.remove('wrong-msg');
+    conjPanel.style.display = 'none';
+    nextBtn.style.display = 'none';
+    highlightCurrent(currentIndex);
+
+    optionsEl.innerHTML = '';
+    q.choices.forEach(choice => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = choice;
+      btn.addEventListener('click', () => handleAnswer(btn, choice, q.hr));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function handleAnswer(btn, chosen, correct){
+    if(answered) return;
+    answered = true;
+    const isCorrect = chosen === correct;
+    if(isCorrect) score++;
+
+    document.querySelectorAll('.opt').forEach(o => {
+      o.disabled = true;
+      if(o.textContent === correct) o.classList.add('is-correct');
+      else if(o === btn) o.classList.add('is-wrong');
+    });
+
+    feedbackEl.textContent = isCorrect
+      ? 'Doğru! ✓'
+      : `Yanlış. Doğru cevap: "${correct}"`;
+    feedbackEl.classList.toggle('wrong-msg', !isCorrect);
+
+    if(isCorrect) showConjugation();
+
+    markBoard(currentIndex, isCorrect);
+    nextBtn.style.display = 'block';
+    nextBtn.focus();
+  }
+
+  function showConjugation(){
+    const q = quizSet[currentIndex];
+    conjTitle.textContent = `"${q.hr}" — şimdiki zaman çekimi`;
+    conjGrid.innerHTML = '';
+    PRONOUNS.forEach((pron, i) => {
+      const row = document.createElement('div');
+      row.className = 'conj-row';
+      const pronSpan = document.createElement('span');
+      pronSpan.className = 'conj-pron';
+      pronSpan.textContent = pron;
+      const formSpan = document.createElement('span');
+      formSpan.className = 'conj-form';
+      formSpan.textContent = q.conj[i];
+      row.appendChild(pronSpan);
+      row.appendChild(formSpan);
+      conjGrid.appendChild(row);
+    });
+    conjPanel.style.display = 'block';
+  }
+
+  function nextQuestion(){
+    currentIndex++;
+    if(currentIndex >= TOTAL_QUESTIONS){
+      showResults();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showResults(){
+    quizCard.classList.add('hidden');
+    resultsCard.classList.remove('hidden');
+    scoreText.textContent = `${score} / ${TOTAL_QUESTIONS}`;
+    const pct = score / TOTAL_QUESTIONS;
+    let msg;
+    if(pct === 1) msg = 'Mükemmel! Bütün fiilleri biliyorsun. Bravo!';
+    else if(pct >= 0.7) msg = 'Çok iyi gidiyorsun — birkaç fiili tekrar et.';
+    else if(pct >= 0.4) msg = 'İyi bir başlangıç. Tekrar oynayarak pekiştirebilirsin.';
+    else msg = 'Sorun değil, tekrar dene — her tekrar kelimeleri kalıcılaştırır.';
+    scoreMsg.textContent = msg;
+  }
+
+  function startQuiz(){
+    quizSet = buildQuizSet();
+    currentIndex = 0;
+    score = 0;
+    resultsCard.classList.add('hidden');
+    quizCard.classList.remove('hidden');
+    buildBoard();
+    renderQuestion();
+  }
+
+  nextBtn.addEventListener('click', nextQuestion);
+  restartBtn.addEventListener('click', startQuiz);
+
+  startQuiz();
+</script>
+
+</body>
+</html>
