@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hrvatski padeži — Hırvatça 7 Hâl · Konuşma Odaklı Factsheet</title>
+<meta name="description" content="Hırvatça 7 hâl (padeži): muški, ženski, srednji rod ekleri, zamirler, edatlar, soru kalıpları ve günlük konuşma cümleleri.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --stone:#DEDDD4;
+    --paper:#FBFAF6;
+    --ink:#15191E;
+    --ink-soft:#4C545E;
+    --red:#B3121D;
+    --red-tint:#F3DEDE;
+    --sea:#14535F;
+    --sun:#D9A020;
+    --line:#C6C4B8;
+    --display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+    --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--stone);color:var(--ink);
+    font-family:var(--body);font-size:16px;line-height:1.55;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding:0 16px 72px}
+
+  /* ---------- header ---------- */
+  header{padding:34px 0 18px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--sea);margin:0 0 10px
+  }
+  h1{
+    font-family:var(--display);font-weight:800;font-size:clamp(34px,9vw,60px);
+    line-height:.95;letter-spacing:-.02em;margin:0 0 6px
+  }
+  h1 em{font-style:normal;color:var(--red)}
+  .lede{margin:0;max-width:52ch;color:var(--ink-soft);font-size:15px}
+  .qmap{
+    display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0;list-style:none;
+    font-family:var(--mono);font-size:12px
+  }
+  .qmap li{background:var(--paper);border:1px solid var(--line);padding:5px 9px}
+  .qmap b{color:var(--red);font-weight:600}
+
+  /* ---------- checkerboard grid (šahovnica) ---------- */
+  .board{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:4px;margin:26px 0 0;
+    border:4px solid var(--ink);background:var(--ink)
+  }
+  @media(min-width:640px){.board{grid-template-columns:repeat(4,1fr)}}
+  .sq{
+    appearance:none;border:0;text-align:left;cursor:pointer;font:inherit;color:var(--ink);
+    background:var(--paper);padding:14px 12px 16px;min-height:118px;
+    display:flex;flex-direction:column;gap:4px;transition:background .15s ease,transform .15s ease
+  }
+  .sq:nth-child(even){background:var(--red-tint)}
+  .sq .abbr{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--sea)}
+  .sq .nm{font-family:var(--display);font-weight:600;font-size:20px;line-height:1.05}
+  .sq .q{font-family:var(--mono);font-size:12px;color:var(--red)}
+  .sq .hint{font-size:12.5px;color:var(--ink-soft);margin-top:auto}
+  .sq:hover{transform:translateY(-2px)}
+  .sq[aria-expanded="true"]{background:var(--red);color:#fff}
+  .sq[aria-expanded="true"] .abbr,
+  .sq[aria-expanded="true"] .q,
+  .sq[aria-expanded="true"] .hint{color:rgba(255,255,255,.85)}
+  .sq:focus-visible{outline:3px solid var(--sun);outline-offset:-3px}
+
+  /* ---------- detail panel ---------- */
+  #panel{margin-top:4px}
+  .card{
+    background:var(--paper);border:4px solid var(--ink);border-top:0;padding:22px 16px 26px;
+    animation:rise .22s ease
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .card h2{
+    font-family:var(--display);font-weight:800;font-size:clamp(26px,7vw,38px);
+    line-height:1;margin:0 0 2px;letter-spacing:-.01em
+  }
+  .card h2 span{color:var(--red)}
+  .sub{font-family:var(--mono);font-size:12px;color:var(--sea);margin:0 0 18px}
+  .card h3{
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-soft);margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)
+  }
+  .use{margin:0;padding:0;list-style:none}
+  .use li{padding:9px 0;border-bottom:1px dashed var(--line)}
+  .use li:last-child{border:0}
+  .use b{display:block;font-size:15px}
+  .use .ex{font-family:var(--mono);font-size:13px;color:var(--sea);display:block;margin-top:3px}
+  .use .tr{font-size:13px;color:var(--ink-soft)}
+
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
+  table{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
+  th,td{border:1px solid var(--line);padding:8px 9px;text-align:left;vertical-align:top}
+  thead th{background:var(--ink);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+  tbody th{background:var(--red-tint);font-weight:600;white-space:nowrap;font-size:13px}
+  td .end{font-family:var(--mono);color:var(--red);font-weight:600}
+  td .w{display:block;font-size:13px;color:var(--ink-soft);font-style:italic}
+
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:0;list-style:none}
+  .chips li{font-family:var(--mono);font-size:12.5px;background:var(--stone);border:1px solid var(--line);padding:4px 8px}
+  .chips li b{color:var(--red);font-weight:600}
+
+  .talk{margin:0;padding:0;list-style:none;counter-reset:t}
+  .talk li{padding:10px 0 10px 30px;position:relative;border-bottom:1px solid var(--line)}
+  .talk li:last-child{border:0}
+  .talk li::before{
+    counter-increment:t;content:counter(t);position:absolute;left:0;top:11px;
+    font-family:var(--mono);font-size:11px;color:#fff;background:var(--sea);
+    width:19px;height:19px;display:grid;place-items:center
+  }
+  .talk .hr{font-size:16px;font-weight:600}
+  .talk .hr u{text-decoration:none;background:linear-gradient(transparent 62%,var(--sun) 62%);padding:0 1px}
+  .talk .tr{font-size:13.5px;color:var(--ink-soft)}
+
+  .tip{
+    margin-top:24px;border-left:5px solid var(--sun);background:#FBF3E0;
+    padding:12px 14px;font-size:14.5px
+  }
+  .tip b{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:4px;color:#8A6410}
+
+  /* ---------- reference sections ---------- */
+  section.ref{margin-top:44px}
+  section.ref > h2{
+    font-family:var(--display);font-weight:800;font-size:clamp(22px,6vw,30px);margin:0 0 4px;letter-spacing:-.01em
+  }
+  section.ref > p{margin:0 0 14px;color:var(--ink-soft);font-size:14px;max-width:56ch}
+  .ref .scroll table{background:var(--paper)}
+  .mono{font-family:var(--mono);font-size:13px}
+  footer{margin-top:52px;padding-top:16px;border-top:2px solid var(--ink);font-size:13px;color:var(--ink-soft)}
+  footer a{color:var(--sea)}
+  .empty{
+    background:var(--paper);border:4px solid var(--ink);border-top:0;padding:20px 16px;
+    font-size:14.5px;color:var(--ink-soft)
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Hrvatski jezik · A1 → A2 · Govorni tečaj</p>
+  <h1>Sedam <em>padeža</em>,<br>bir sayfada.</h1>
+  <p class="lede">Hırvatçada isimler cümledeki görevine göre şekil değiştirir. Bu 7 şekle <b>padež</b> (hâl) denir. Aşağıdaki kareye dokun: o hâlin ne zaman kullanıldığını, muški / ženski / srednji rod eklerini, zamirleri ve günlük cümleleri gör.</p>
+  <ul class="qmap">
+    <li><b>tko?</b> kim</li>
+    <li><b>što?</b> ne</li>
+    <li><b>koga? čega?</b> kimin/neyin</li>
+    <li><b>komu? čemu?</b> kime/neye</li>
+    <li><b>gdje?</b> nerede</li>
+    <li><b>kamo?</b> nereye</li>
+    <li><b>s kim?</b> kiminle</li>
+  </ul>
+</header>
+
+<div class="board" id="board" role="list"></div>
+<div id="panel"><div class="empty">Bir padež seç — detaylar burada açılır.</div></div>
+
+<section class="ref">
+  <h2>Tüm ekler — tek tablo</h2>
+  <p>Yazdırıp duvara asmalık özet. Parantezli biçimler konuşmada seyrek.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Padež</th><th>Muški<br>grad / prijatelj</th><th>Ženski -a<br>kava</th><th>Ženski -∅<br>stvar</th><th>Srednji<br>selo / more</th></tr></thead>
+      <tbody id="master"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>Çoğul (množina) ekleri</h2>
+  <p>Konuşmada en çok N, A ve G çoğul lazım olur. D-L-I çoğulda hep aynıdır: <b>-ima / -ama</b>.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Padež</th><th>Muški</th><th>Ženski -a</th><th>Ženski -∅</th><th>Srednji</th></tr></thead>
+      <tbody id="masterpl"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>Şahıs zamirleri — hepsi</h2>
+  <p>Kısa biçimler (me, mi, ga, joj…) cümlenin başında olmaz; genelde ikinci sırada durur: <span class="mono">Ja <b>ti</b> dam.</span> Uzun biçimler vurgu ve edatlar için: <span class="mono">za <b>mene</b></span>.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th></th><th>ja</th><th>ti</th><th>on / ono</th><th>ona</th><th>mi</th><th>vi</th><th>oni</th></tr></thead>
+      <tbody>
+        <tr><th>N</th><td>ja</td><td>ti</td><td>on / ono</td><td>ona</td><td>mi</td><td>vi</td><td>oni</td></tr>
+        <tr><th>G</th><td>mene / me</td><td>tebe / te</td><td>njega / ga</td><td>nje / je</td><td>nas</td><td>vas</td><td>njih / ih</td></tr>
+        <tr><th>D</th><td>meni / mi</td><td>tebi / ti</td><td>njemu / mu</td><td>njoj / joj</td><td>nama / nam</td><td>vama / vam</td><td>njima / im</td></tr>
+        <tr><th>A</th><td>mene / me</td><td>tebe / te</td><td>njega / ga</td><td>nju / ju</td><td>nas</td><td>vas</td><td>njih / ih</td></tr>
+        <tr><th>V</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><th>L</th><td>(o) meni</td><td>(o) tebi</td><td>(o) njemu</td><td>(o) njoj</td><td>(o) nama</td><td>(o) vama</td><td>(o) njima</td></tr>
+        <tr><th>I</th><td>(sa) mnom</td><td>(s) tobom</td><td>(s) njim</td><td>(s) njom</td><td>(s) nama</td><td>(s) vama</td><td>(s) njima</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>Sıfat: <span style="font-family:var(--mono)">dobar</span> (iyi)</h2>
+  <p>Sıfat, ismin hâline ve cinsine uyar: <b>s dobrim prijateljem</b>, <b>u dobroj kavani</b>.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Padež</th><th>Muški</th><th>Ženski</th><th>Srednji</th><th>Množina (m/ž/s)</th></tr></thead>
+      <tbody>
+        <tr><th>N</th><td>dobar</td><td>dobra</td><td>dobro</td><td>dobri / dobre / dobra</td></tr>
+        <tr><th>G</th><td>dobrog(a)</td><td>dobre</td><td>dobrog(a)</td><td>dobrih</td></tr>
+        <tr><th>D</th><td>dobrom(e)</td><td>dobroj</td><td>dobrom(e)</td><td>dobrim(a)</td></tr>
+        <tr><th>A</th><td>dobar / dobrog<span class="w">canlı ise -og</span></td><td>dobru</td><td>dobro</td><td>dobre / dobre / dobra</td></tr>
+        <tr><th>V</th><td>dobri</td><td>dobra</td><td>dobro</td><td>dobri</td></tr>
+        <tr><th>L</th><td>dobrom(e)</td><td>dobroj</td><td>dobrom(e)</td><td>dobrim(a)</td></tr>
+        <tr><th>I</th><td>dobrim</td><td>dobrom</td><td>dobrim</td><td>dobrim(a)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>Soru kalıpları — konuşmanın iskeleti</h2>
+  <p>Bir hâli öğrenmenin en hızlı yolu: sorusunu ezberle, cevabı taklit et.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Soru</th><th>Anlamı</th><th>Hangi padež</th><th>Örnek cevap</th></tr></thead>
+      <tbody>
+        <tr><th>Tko je to?</th><td>Bu kim?</td><td>N</td><td>To je Ana.</td></tr>
+        <tr><th>Što je to?</th><td>Bu ne?</td><td>N</td><td>To je kava.</td></tr>
+        <tr><th>Čega nema?</th><td>Ne yok?</td><td>G</td><td>Nema mlijeka.</td></tr>
+        <tr><th>Odakle si?</th><td>Nerelisin?</td><td>G <span class="w">iz + G</span></td><td>Iz Turske sam.</td></tr>
+        <tr><th>Koliko košta?</th><td>Kaç para?</td><td>G <span class="w">5+ = G mn.</span></td><td>Pet eura.</td></tr>
+        <tr><th>Komu daješ?</th><td>Kime veriyorsun?</td><td>D</td><td>Prijatelju.</td></tr>
+        <tr><th>Što želiš?</th><td>Ne istersin?</td><td>A</td><td>Želim pivo.</td></tr>
+        <tr><th>Kamo ideš?</th><td>Nereye?</td><td>A <span class="w">u/na + A</span></td><td>Idem u grad.</td></tr>
+        <tr><th>Gdje si?</th><td>Neredesin?</td><td>L <span class="w">u/na + L</span></td><td>U kafiću sam.</td></tr>
+        <tr><th>O čemu pričaš?</th><td>Neden bahsediyorsun?</td><td>L</td><td>O poslu.</td></tr>
+        <tr><th>S kim ideš?</th><td>Kiminle?</td><td>I</td><td>S bratom.</td></tr>
+        <tr><th>Čime ideš?</th><td>Neyle (gidiyorsun)?</td><td>I</td><td>Autobusom.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <p><b>Okuma sırası önerisi:</b> A (akuzativ) → L (lokativ) → G (genitiv) → I (instrumental) → D (dativ) → V. Günlük konuşmanın %80'i ilk üçüyle döner.</p>
+  <p>Daha fazla alıştırma için: <a href="https://www.easy-croatian.com/" target="_blank" rel="noopener">easy-croatian.com</a> · Sretno! 🇭🇷</p>
+</footer>
+</div>
+
+<script>
+const CASES = [
+  {
+    id:"nominativ", abbr:"01 · N", name:"Nominativ", tr:"Yalın hâl",
+    q:"tko? što?", hint:"Cümlenin öznesi. Sözlükteki hâli.",
+    use:[
+      {b:"Özne", d:"Eylemi yapan kişi/şey.", ex:"Marko pije kavu.", t:"Marko kahve içiyor."},
+      {b:"“…dır” cümleleri", d:"biti (olmak) fiilinden sonra isim yalın kalır.", ex:"Ovo je moja sestra.", t:"Bu benim kız kardeşim."},
+      {b:"Tanıtma / isim söyleme", d:"Ne olduğunu söylerken.", ex:"Ja sam student.", t:"Ben öğrenciyim."}
+    ],
+    end:{m:["-∅","grad · prijatelj"], f:["-a","kava"], fc:["-∅","stvar"], n:["-o / -e","selo · more"]},
+    endpl:{m:["-i","gradovi · prijatelji"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela · mora"]},
+    pron:"ja, ti, on/ona/ono, mi, vi, oni/one/ona",
+    adj:"dobar / dobra / dobro",
+    prep:[],
+    talk:[
+      {hr:"Ovo je moj <u>prijatelj</u>.", tr:"Bu benim arkadaşım."},
+      {hr:"<u>Kava</u> je jako dobra.", tr:"Kahve çok güzel."},
+      {hr:"Ja sam <u>Emre</u>, drago mi je.", tr:"Ben Emre, memnun oldum."},
+      {hr:"Gdje je <u>toalet</u>?", tr:"Tuvalet nerede?"},
+      {hr:"Tko je <u>to</u>?", tr:"O kim?"}
+    ],
+    tip:"Sözlükte gördüğün her isim nominativ hâlindedir. Diğer 6 hâl bunun üzerine ek alır — o yüzden önce sonundaki harfe bak: -a ise ženski, -o/-e ise srednji, sessizle bitiyorsa çoğunlukla muški."
+  },
+  {
+    id:"genitiv", abbr:"02 · G", name:"Genitiv", tr:"-in hâli / -den hâli",
+    q:"koga? čega?", hint:"İyelik, yokluk, miktar, çoğu edat.",
+    use:[
+      {b:"Sahiplik (“…nın”)", d:"İki isim yan yana: ikincisi genitivde.", ex:"knjiga mojega brata", t:"kardeşimin kitabı"},
+      {b:"Yokluk / olumsuzluk", d:"nema ve olumsuz imati her zaman G ister.", ex:"Nemam vremena. / Nema mlijeka.", t:"Vaktim yok. / Süt yok."},
+      {b:"Miktar ve sayılar", d:"puno, malo, čaša, kilo… + G. 2-3-4 → tekil G, 5+ → çoğul G.", ex:"puno posla · čaša vode · pet eura", t:"çok iş · bir bardak su · beş euro"},
+      {b:"Edatlarla (en kalabalık grup)", d:"Nereden, kimin yanında, ne zamandan önce…", ex:"Dolazim iz Turske. Kod kuće sam.", t:"Türkiye'den geliyorum. Evdeyim."},
+      {b:"Tarih ve saat", d:"Ayın kaçı, saatin kaçında.", ex:"prvog svibnja · do pet sati", t:"1 Mayıs'ta · saat beşe kadar"}
+    ],
+    end:{m:["-a","grada · prijatelja"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela · mora"]},
+    endpl:{m:["-a / -ova","gradova · prijatelja"], f:["-∅","kava"], fc:["-i","stvari"], n:["-∅","sela · mora"]},
+    pron:"mene/me · tebe/te · njega/ga · nje/je · nas · vas · njih/ih",
+    adj:"dobrog(a) / dobre / dobrog(a)",
+    prep:["od","do","iz","s(a) = -den","bez","kod","blizu","pored / kraj","prije","poslije / nakon","oko","zbog","preko","iznad","ispod","ispred","iza","između"],
+    talk:[
+      {hr:"Nemam <u>vremena</u>, oprosti.", tr:"Vaktim yok, kusura bakma."},
+      {hr:"Čašu <u>vode</u>, molim.", tr:"Bir bardak su, lütfen."},
+      {hr:"Dolazim iz <u>Turske</u>.", tr:"Türkiye'den geliyorum."},
+      {hr:"Kod <u>kuće</u> sam.", tr:"Evdeyim."},
+      {hr:"Nema <u>problema</u>!", tr:"Sorun değil!"},
+      {hr:"Do <u>viđenja</u>.", tr:"Görüşmek üzere."}
+    ],
+    tip:"Konuşmada genitiv, akuzatifden sonra en çok duyduğun hâldir. “nema + G” kalıbını ezberle: nema kave, nema struje, nema veze (önemli değil)."
+  },
+  {
+    id:"dativ", abbr:"03 · D", name:"Dativ", tr:"-e hâli (kime?)",
+    q:"komu? / kome? čemu?", hint:"Dolaylı nesne + “bana lazım / hoşuma gidiyor”.",
+    use:[
+      {b:"Dolaylı nesne (kime?)", d:"Vermek, söylemek, göndermek, yardım etmek fiilleri.", ex:"Dajem knjigu prijatelju.", t:"Kitabı arkadaşıma veriyorum."},
+      {b:"“Hoşuma gidiyor” kalıbı", d:"sviđati se + D. Türkçedeki gibi kişi -e hâlinde.", ex:"Sviđa mi se Zagreb.", t:"Zagreb hoşuma gidiyor."},
+      {b:"“Bana lazım”", d:"trebati + D.", ex:"Treba mi pomoć.", t:"Bana yardım lazım."},
+      {b:"Kişiye doğru gitmek", d:"Bir insana gidiyorsan D (edatsız veya k + D).", ex:"Idem liječniku.", t:"Doktora gidiyorum."},
+      {b:"Duygu kalıpları", d:"Hâl bildiren yapılar.", ex:"Hladno mi je. Drago mi je.", t:"Üşüyorum. Memnun oldum."}
+    ],
+    end:{m:["-u","gradu · prijatelju"], f:["-i","kavi"], fc:["-i","stvari"], n:["-u","selu · moru"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"meni/mi · tebi/ti · njemu/mu · njoj/joj · nama/nam · vama/vam · njima/im",
+    adj:"dobrom(e) / dobroj / dobrom(e)",
+    prep:["k(a) = -e doğru","prema","unatoč / usprkos"],
+    talk:[
+      {hr:"Sviđa <u>mi</u> se ovaj grad.", tr:"Bu şehir hoşuma gidiyor."},
+      {hr:"Možeš li <u>mi</u> pomoći?", tr:"Bana yardım edebilir misin?"},
+      {hr:"Treba <u>mi</u> taksi.", tr:"Bana taksi lazım."},
+      {hr:"Hvala <u>ti</u>! / Hvala <u>vam</u>!", tr:"Sağ ol! / Sağ olun!"},
+      {hr:"Idem <u>prijateljici</u>.", tr:"(Kız) arkadaşıma gidiyorum."},
+      {hr:"Drago <u>mi</u> je.", tr:"Memnun oldum."}
+    ],
+    tip:"Dativ ve lokativ tekilde neredeyse hep aynı görünür (gradu, kavi, selu). Farkı edattan anlarsın: edat yoksa veya k/prema varsa dativ; u/na/o varsa lokativ."
+  },
+  {
+    id:"akuzativ", abbr:"04 · A", name:"Akuzativ", tr:"-i hâli (nesne)",
+    q:"koga? što? kamo?", hint:"Doğrudan nesne + hareket yönü. En çok kullanılan hâl.",
+    use:[
+      {b:"Doğrudan nesne", d:"İstemek, içmek, görmek, sevmek… fiilinin nesnesi.", ex:"Želim kavu. Volim more.", t:"Kahve istiyorum. Denizi seviyorum."},
+      {b:"Hareket: nereye?", d:"u / na + A → gidiş yönü.", ex:"Idem u grad. Idem na plažu.", t:"Şehre gidiyorum. Plaja gidiyorum."},
+      {b:"Süre", d:"Ne kadar zaman.", ex:"Ostajem jedan tjedan.", t:"Bir hafta kalıyorum."},
+      {b:"za + A", d:"“için” ve sipariş verirken.", ex:"Ovo je za tebe.", t:"Bu senin için."},
+      {b:"Canlı / cansız farkı", d:"Muški rodda canlıysa genitiv gibi -a alır, cansızsa hiç değişmez.", ex:"Vidim prijatelja. / Vidim grad.", t:"Arkadaşı görüyorum. / Şehri görüyorum."}
+    ],
+    end:{m:["= N (cansız) / -a (canlı)","grad · prijatelja"], f:["-u","kavu"], fc:["-∅","stvar"], n:["= N","selo · more"]},
+    endpl:{m:["-e","gradove · prijatelje"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela"]},
+    pron:"mene/me · tebe/te · njega/ga · nju/ju · nas · vas · njih/ih",
+    adj:"dobar (cansız) / dobrog (canlı) · dobru · dobro",
+    prep:["u (nereye)","na (nereye)","za","kroz","niz","uz","o (asmak)","po (almaya gitmek)","među / pod / nad / pred (hareket)"],
+    talk:[
+      {hr:"Molim jednu <u>kavu</u> i jedno <u>pivo</u>.", tr:"Bir kahve ve bir bira lütfen."},
+      {hr:"Idem u <u>grad</u>.", tr:"Şehre gidiyorum."},
+      {hr:"Volim <u>hrvatsku hranu</u>.", tr:"Hırvat yemeklerini seviyorum."},
+      {hr:"Vidim <u>te</u> sutra.", tr:"Yarın görüşürüz."},
+      {hr:"Idem na <u>kavu</u>. Ideš <u>li</u> i ti?", tr:"Kahveye gidiyorum. Sen de gelir misin?"},
+      {hr:"Ovo je za <u>tebe</u>.", tr:"Bu senin için."}
+    ],
+    tip:"Ženski rodda tek harflik büyülü kural: -a → -u. Kava → kavu, pizza → pizzu, voda → vodu. Kafede sipariş vermenin %90'ı budur."
+  },
+  {
+    id:"vokativ", abbr:"05 · V", name:"Vokativ", tr:"Seslenme hâli",
+    q:"— (hitap)", hint:"Birine seslenirken. Kısa ama günlük.",
+    use:[
+      {b:"İsimle seslenme", d:"Karşındakine bağırırken/çağırırken.", ex:"Ivane, dođi!", t:"Ivan, gel!"},
+      {b:"Kibar hitap", d:"Restoranda, resmî durumda.", ex:"Oprostite, gospodine!", t:"Affedersiniz, beyefendi!"},
+      {b:"Sevgi sözleri", d:"Yakınlara.", ex:"Dušo, kako si?", t:"Canım, nasılsın?"},
+      {b:"Değişmeyenler", d:"-k, -o ile biten kısa isimler ve çoğu kadın adı konuşmada aynı kalır.", ex:"Marko! Ana! Mama!", t:"Marko! Ana! Anne!"}
+    ],
+    end:{m:["-e / -u (yumuşak)","Ivane · prijatelju"], f:["-o","ženo · Ano"], fc:["-i","stvari"], n:["= N","selo · dijete"]},
+    endpl:{m:["= N","prijatelji"], f:["= N","žene"], fc:["= N","stvari"], n:["= N","sela"]},
+    pron:"— (zamir yok)",
+    adj:"dragi / draga / drago",
+    prep:["o! (ünlem, nadir)"],
+    talk:[
+      {hr:"Bok, <u>Marko</u>! Kako si?", tr:"Selam Marko! Nasılsın?"},
+      {hr:"Oprostite, <u>gospodine</u>!", tr:"Affedersiniz beyefendi!"},
+      {hr:"Konobar, <u>molim</u> vas!", tr:"Garson, lütfen!"},
+      {hr:"<u>Mama</u>, gdje si?", tr:"Anne, neredesin?"},
+      {hr:"Hvala, <u>prijatelju</u>.", tr:"Sağ ol dostum."}
+    ],
+    tip:"Endişelenme: konuşmada birçok kişi ismi vokativde değişmeden bırakılır (Ana, Marko, Ivana). Sadece “gospodine / gospođo / prijatelju / dušo” kalıplarını al, yeter."
+  },
+  {
+    id:"lokativ", abbr:"06 · L", name:"Lokativ", tr:"-de hâli (bulunma)",
+    q:"(o) kome? (o) čemu? gdje?", hint:"Nerede? Ne hakkında? Edatsız asla kullanılmaz.",
+    use:[
+      {b:"Yer: nerede?", d:"u / na + L → durağan konum.", ex:"Živim u Zagrebu. Na plaži sam.", t:"Zagreb'te yaşıyorum. Plajdayım."},
+      {b:"Konu: ne hakkında?", d:"o + L.", ex:"Razgovaramo o poslu.", t:"İş hakkında konuşuyoruz."},
+      {b:"Zaman kalıpları", d:"po + L, u + L.", ex:"po podne · u siječnju", t:"öğleden sonra · ocakta"},
+      {b:"Kural", d:"Lokativ tek başına gelmez; önünde mutlaka bir edat vardır.", ex:"u kafiću · na poslu · o tebi", t:"kafede · işte · senin hakkında"}
+    ],
+    end:{m:["-u","(u) gradu · prijatelju"], f:["-i","(u) kavani"], fc:["-i","(o) stvari"], n:["-u","(u) selu · (na) moru"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavanama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"(o) meni · tebi · njemu · njoj · nama · vama · njima",
+    adj:"dobrom(e) / dobroj / dobrom(e)",
+    prep:["u (nerede)","na (nerede)","o (hakkında)","po","pri"],
+    talk:[
+      {hr:"Živim u <u>Zagrebu</u>.", tr:"Zagreb'te yaşıyorum."},
+      {hr:"Radim u <u>uredu</u>.", tr:"Ofiste çalışıyorum."},
+      {hr:"Na <u>poslu</u> sam.", tr:"İşteyim."},
+      {hr:"Razgovarali smo o <u>tebi</u>.", tr:"Senin hakkında konuştuk."},
+      {hr:"Vidimo se u <u>kafiću</u>.", tr:"Kafede görüşürüz."},
+      {hr:"Nalazim se na <u>trgu</u>.", tr:"Meydandayım."}
+    ],
+    tip:"Altın kural: <b>u + A = nereye</b>, <b>u + L = nerede</b>. “Idem u grad” (şehre gidiyorum) ↔ “Ja sam u gradu” (şehirdeyim). Aynı edat, iki hâl, iki anlam."
+  },
+  {
+    id:"instrumental", abbr:"07 · I", name:"Instrumental",
+    tr:"-le hâli (araç / birliktelik)",
+    q:"s kim? čime?", hint:"Kiminle, neyle. Ulaşım araçları burada.",
+    use:[
+      {b:"Birliktelik: kiminle?", d:"s(a) + I. İnsanlarla mutlaka “s” kullan.", ex:"Idem s bratom.", t:"Kardeşimle gidiyorum."},
+      {b:"Araç / vasıta: neyle?", d:"Edatsız! Bu Türkçedeki “-le” eki gibi.", ex:"Idem autobusom. Pišem olovkom.", t:"Otobüsle gidiyorum. Kalemle yazıyorum."},
+      {b:"İçindekiler", d:"Kahve, yemek siparişinde çok işine yarar.", ex:"kava s mlijekom", t:"sütlü kahve"},
+      {b:"Durağan konum", d:"pod / nad / pred / za / među + I.", ex:"Čekam pred kinom.", t:"Sinemanın önünde bekliyorum."}
+    ],
+    end:{m:["-om / -em (yumuşak)","gradom · prijateljem"], f:["-om","kavom"], fc:["-i / -ju","stvari / stvarju"], n:["-om / -em","selom · morem"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"(sa) mnom · (s) tobom · njim · njom · nama · vama · njima",
+    adj:"dobrim / dobrom / dobrim",
+    prep:["s / sa (ile)","pod","nad","pred","za (arkasında)","među"],
+    talk:[
+      {hr:"Idem <u>autobusom</u>.", tr:"Otobüsle gidiyorum."},
+      {hr:"Kavu s <u>mlijekom</u>, molim.", tr:"Sütlü kahve, lütfen."},
+      {hr:"Idem s <u>tobom</u>.", tr:"Seninle geliyorum."},
+      {hr:"S <u>kim</u> si bio?", tr:"Kiminle beraberdin?"},
+      {hr:"Putujem <u>vlakom</u> u Split.", tr:"Split'e trenle gidiyorum."},
+      {hr:"Čekam te pred <u>zgradom</u>.", tr:"Binanın önünde bekliyorum."}
+    ],
+    tip:"“sa” biçimi sadece s, š, z, ž ile başlayan kelimelerden önce: <b>sa</b> mnom, <b>sa</b> sestrom — ama <b>s</b> bratom. Söylerken kulağa kolay geleni seç, kimse takılmaz."
+  }
+];
+
+/* ---- build board ---- */
+const board = document.getElementById("board");
+CASES.forEach(c=>{
+  const b = document.createElement("button");
+  b.className = "sq"; b.type = "button"; b.id = "sq-"+c.id;
+  b.setAttribute("aria-expanded","false");
+  b.setAttribute("aria-controls","panel");
+  b.innerHTML = `<span class="abbr">${c.abbr}</span>
+    <span class="nm">${c.name}</span>
+    <span class="q">${c.q}</span>
+    <span class="hint">${c.hint}</span>`;
+  b.addEventListener("click",()=>select(c.id,true));
+  board.appendChild(b);
+});
+/* 8th square keeps the checkerboard whole on wide screens */
+const filler = document.createElement("div");
+filler.className = "sq"; filler.style.cursor="default";
+filler.innerHTML = `<span class="abbr">Ø</span><span class="nm" style="font-size:16px">Redoslijed</span>
+  <span class="hint">Öğrenme sırası: A → L → G → I → D → V. Nominativ zaten bildiğin hâl.</span>`;
+board.appendChild(filler);
+
+const panel = document.getElementById("panel");
+const row = (label, arr) => `<tr><th>${label}</th><td><span class="end">${arr[0]}</span><span class="w">${arr[1]}</span></td></tr>`;
+
+function render(c){
+  panel.innerHTML = `
+  <div class="card">
+    <h2>${c.name} <span>·</span> ${c.tr}</h2>
+    <p class="sub">SORUSU: ${c.q}</p>
+
+    <h3>Ne zaman kullanılır</h3>
+    <ul class="use">
+      ${c.use.map(u=>`<li><b>${u.b}</b>${u.d}<span class="ex">${u.ex}</span><span class="tr">${u.t}</span></li>`).join("")}
+    </ul>
+
+    <h3>İsim ekleri — jednina (tekil)</h3>
+    <div class="scroll"><table><thead><tr><th>Rod (cins)</th><th>Ek + örnek</th></tr></thead><tbody>
+      ${row("Muški (eril)", c.end.m)}
+      ${row("Ženski -a", c.end.f)}
+      ${row("Ženski -∅", c.end.fc)}
+      ${row("Srednji (nötr)", c.end.n)}
+    </tbody></table></div>
+
+    <h3>İsim ekleri — množina (çoğul)</h3>
+    <div class="scroll"><table><thead><tr><th>Rod (cins)</th><th>Ek + örnek</th></tr></thead><tbody>
+      ${row("Muški", c.endpl.m)}
+      ${row("Ženski -a", c.endpl.f)}
+      ${row("Ženski -∅", c.endpl.fc)}
+      ${row("Srednji", c.endpl.n)}
+    </tbody></table></div>
+
+    <h3>Zamirler ve sıfat</h3>
+    <ul class="chips">
+      <li><b>Zamirler:</b> ${c.pron}</li>
+      <li><b>dobar:</b> ${c.adj}</li>
+    </ul>
+
+    ${c.prep.length ? `<h3>Bu hâli isteyen edatlar</h3>
+    <ul class="chips">${c.prep.map(p=>`<li>${p}</li>`).join("")}</ul>` : ""}
+
+    <h3>Günlük konuşma</h3>
+    <ul class="talk">
+      ${c.talk.map(t=>`<li><span class="hr">${t.hr}</span><br><span class="tr">${t.tr}</span></li>`).join("")}
+    </ul>
+
+    <div class="tip"><b>Kısa yol</b>${c.tip}</div>
+  </div>`;
+}
+
+function select(id, scroll){
+  const c = CASES.find(x=>x.id===id); if(!c) return;
+  document.querySelectorAll(".sq[aria-expanded]").forEach(b=>b.setAttribute("aria-expanded", b.id==="sq-"+id ? "true":"false"));
+  render(c);
+  history.replaceState(null,"","#"+id);
+  if(scroll) panel.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto":"smooth", block:"start"});
+}
+
+/* ---- master tables ---- */
+const mt = document.getElementById("master"), mp = document.getElementById("masterpl");
+CASES.forEach(c=>{
+  const cell = a => `<span class="end">${a[0]}</span><span class="w">${a[1]}</span>`;
+  mt.insertAdjacentHTML("beforeend",
+    `<tr><th>${c.name}</th><td>${cell(c.end.m)}</td><td>${cell(c.end.f)}</td><td>${cell(c.end.fc)}</td><td>${cell(c.end.n)}</td></tr>`);
+  mp.insertAdjacentHTML("beforeend",
+    `<tr><th>${c.name}</th><td>${cell(c.endpl.m)}</td><td>${cell(c.endpl.f)}</td><td>${cell(c.endpl.fc)}</td><td>${cell(c.endpl.n)}</td></tr>`);
+});
+
+/* ---- open from hash, else default to accusative (most useful) ---- */
+const start = location.hash.replace("#","");
+select(CASES.some(c=>c.id===start) ? start : "akuzativ", false);
+</script>
+</body>
+</html>
