@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dativ · 100 Question Bank</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sea-900:#072831;
+  --sea-800:#0C3A46;
+  --sea-700:#14505F;
+  --stone:#E7E4D9;
+  --stone-2:#F3F1E9;
+  --stone-dim:#9EA79F;
+  --sun:#E8B04B;
+  --ok:#3E9E7C;
+  --no:#CF5F45;
+  --ink:#0A2029;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--sea-900);
+  background-image:linear-gradient(180deg,#0C3A46 0%,#072831 55%,#051E26 100%);
+  background-attachment:fixed;
+  color:var(--stone);
+  font-family:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:20px 16px 48px;
+  display:flex;justify-content:center;
+}
+.shell{width:100%;max-width:560px}
+
+.eyebrow{
+  font-family:"JetBrains Mono",monospace;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sun);
+}
+.display{font-family:"Bricolage Grotesque","Inter Tight",sans-serif;line-height:1.05;}
+
+.rail{position:relative;height:2px;background:rgba(231,228,217,.16);margin:14px 0 26px;border-radius:2px}
+.rail-fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--sun);border-radius:2px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.rail-head{position:absolute;top:50%;left:0;transform:translate(-2px,-50%);font-family:"JetBrains Mono",monospace;font-size:15px;color:var(--sun);transition:left .35s cubic-bezier(.4,0,.2,1);}
+
+.start{padding:44px 0 0;text-align:left}
+.start h1{font-size:clamp(38px,12vw,60px);font-weight:800;color:var(--stone-2);letter-spacing:-.03em;margin:10px 0 4px}
+.start h1 .arrow{color:var(--sun);display:inline-block}
+.start .sub{font-size:16px;color:#B8C4C2;margin:16px 0 26px;line-height:1.55;max-width:44ch}
+.facts{border-top:1px solid rgba(231,228,217,.16);margin-bottom:30px}
+.fact{display:flex;justify-content:space-between;gap:16px;padding:12px 2px;border-bottom:1px solid rgba(231,228,217,.16);font-size:14px}
+.fact span:first-child{color:#8FA3A4}
+.fact span:last-child{font-family:"JetBrains Mono",monospace;color:var(--stone-2);text-align:right}
+
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.btn{
+  display:block;width:100%;padding:17px 20px;border-radius:4px;
+  background:var(--sun);color:#2A1C00;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:17px;
+  letter-spacing:.01em;transition:transform .12s ease,filter .12s ease;
+}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:none;color:var(--stone);border:1px solid rgba(231,228,217,.3);margin-top:10px}
+.btn.ghost:hover{background:rgba(231,228,217,.07);filter:none}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.count{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;color:#8FA3A4}
+.count b{color:var(--stone-2);font-weight:700}
+
+.card{
+  background:var(--stone);color:var(--ink);
+  border-radius:6px;padding:24px 22px 26px;
+  box-shadow:6px 6px 0 rgba(3,18,23,.45);
+}
+.prompt{font-size:14px;color:#4E6169;margin-bottom:12px;font-style:italic}
+.sentence{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:clamp(21px,6.2vw,27px);line-height:1.28;letter-spacing:-.015em;}
+.slot{display:inline-block;min-width:66px;text-align:center;border-bottom:3px solid var(--sun);color:var(--sun);}
+.slot.filled{color:var(--ink);border-bottom-color:rgba(10,32,41,.3)}
+
+.opts{margin-top:22px;display:flex;flex-direction:column;gap:9px}
+.opt{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  padding:14px 15px;border-radius:4px;
+  background:var(--stone-2);border:1.5px solid rgba(10,32,41,.14);
+  color:var(--ink);font-size:16.5px;font-weight:500;
+  transition:border-color .12s ease,background .12s ease;
+}
+.opt:hover:not(:disabled){border-color:var(--sea-700)}
+.opt:disabled{cursor:default}
+.opt .key{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;width:20px;height:20px;flex:none;display:grid;place-items:center;border-radius:3px;background:rgba(10,32,41,.1);color:#4E6169;}
+.opt.correct{background:#DFF1E8;border-color:var(--ok)}
+.opt.correct .key{background:var(--ok);color:#fff}
+.opt.wrong{background:#F8E3DC;border-color:var(--no)}
+.opt.wrong .key{background:var(--no);color:#fff}
+
+.feedback{margin-top:18px;padding-top:16px;border-top:1.5px dashed rgba(10,32,41,.22)}
+.verdict{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:15px;margin-bottom:6px}
+.verdict.y{color:var(--ok)}
+.verdict.n{color:var(--no)}
+.why{font-size:15px;line-height:1.55;color:#2C3F47}
+.why b{color:var(--ink)}
+.hidden{display:none}
+
+.score{text-align:center;padding:26px 0 6px}
+.score .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:72px;line-height:1;color:var(--sun);letter-spacing:-.04em}
+.score .of{font-family:"JetBrains Mono",monospace;font-size:13px;color:#8FA3A4;margin-top:6px}
+.score .verd{margin-top:14px;font-size:16px;color:#C9D6D4;line-height:1.5}
+.bars{margin:26px 0 8px}
+.bar{margin-bottom:13px}
+.bar-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;color:#B8C4C2}
+.bar-top em{font-family:"JetBrains Mono",monospace;font-style:normal;color:var(--stone-2)}
+.bar-track{height:5px;background:rgba(231,228,217,.15);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;background:var(--sun);border-radius:3px}
+.review{margin-top:28px}
+.review h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:18px;margin-bottom:12px;color:var(--stone-2)}
+.miss{background:rgba(231,228,217,.06);border-left:3px solid var(--no);border-radius:0 4px 4px 0;padding:13px 15px;margin-bottom:9px}
+.miss .q{font-size:14px;color:#C9D6D4;margin-bottom:5px}
+.miss .a{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:16px;color:var(--ok)}
+.miss .a s{color:var(--no);font-weight:400;margin-left:8px;opacity:.8}
+.miss .n{font-size:13.5px;color:#93A5A5;margin-top:5px;line-height:1.5}
+.actions{margin-top:26px}
+.pool-note{font-family:"JetBrains Mono",monospace;font-size:11px;color:#6F8385;text-align:center;margin-top:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- START -->
+  <section id="screen-start">
+    <div class="start">
+      <p class="eyebrow">Croatian · Case 3 · Komu? Čemu?</p>
+      <h1 class="display">Dativ <span class="arrow">→</span></h1>
+      <p class="sub">A1 seviyesi. 100 soruluk havuzdan her seferinde rastgele 20 tanesi. Temel isimler, günlük fiiller ve konuşma kalıpları — sıfat yok, istisna yok. Sorular ve şıklar her denemede karışır.</p>
+      <div class="facts">
+        <div class="fact"><span>Soru bankası</span><span>100</span></div>
+        <div class="fact"><span>Bir testte</span><span>20 soru</span></div>
+        <div class="fact"><span>Soru &amp; şık sırası</span><span>her seferinde karışır</span></div>
+        <div class="fact"><span>Seviye</span><span>A1</span></div>
+      </div>
+      <button class="btn" id="go">20 soruluk test başlat</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="screen-quiz" class="hidden">
+    <div class="head">
+      <p class="eyebrow">Dativ Testi</p>
+      <p class="count"><b id="n-now">01</b> / <b id="n-all">20</b> · <b id="n-ok">0</b> doğru</p>
+    </div>
+    <div class="rail"><div class="rail-fill" id="rail-fill"></div><div class="rail-head" id="rail-head">→</div></div>
+
+    <div class="card">
+      <p class="prompt" id="prompt"></p>
+      <p class="sentence" id="sentence"></p>
+      <div class="opts" id="opts"></div>
+      <div class="feedback hidden" id="feedback">
+        <p class="verdict" id="verdict"></p>
+        <p class="why" id="why"></p>
+      </div>
+    </div>
+    <button class="btn hidden" id="next" style="margin-top:16px">Sonraki soru</button>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="screen-done" class="hidden">
+    <p class="eyebrow">Sonuç</p>
+    <div class="score">
+      <div class="big display" id="final"></div>
+      <div class="of" id="of-line"></div>
+      <p class="verd" id="verd-text"></p>
+    </div>
+    <div class="bars" id="bars"></div>
+    <div class="review" id="review"></div>
+    <div class="actions">
+      <button class="btn" id="new-20">Yeni 20 soruluk test</button>
+      <button class="btn ghost hidden" id="again-wrong">Sadece yanlışlarımı tekrar çöz</button>
+    </div>
+    <p class="pool-note">100 soruluk havuzdan rastgele çekilir · aynı soru bir dahaki testte tekrar çıkabilir</p>
+  </section>
+
+</div>
+
+<script>
+const SECTIONS = ["Noun endings","Palatalization","Pronouns","Adjectives","Prepositions","Verbs & phrases"];
+const BANK = [{"s": 0, "en": "I'm giving the book to Ana.", "hr": ["Dajem knjigu ", "."], "o": ["Ana", "Ani", "Anu", "Anom"], "c": 1, "w": "Dişil isim <b>-a</b> → <b>-i</b>. Ana → An<b>i</b>."}, {"s": 0, "en": "Tell it to your brother.", "hr": ["Reci to ", "."], "o": ["brat", "brata", "bratu", "bratom"], "c": 2, "w": "Eril isim → <b>-u</b>. brat → brat<b>u</b>."}, {"s": 0, "en": "I'm writing to my sister.", "hr": ["Pišem ", "."], "o": ["sestra", "sestru", "sestri", "sestrom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. sestra → sestr<b>i</b>."}, {"s": 0, "en": "I'm giving food to the cat.", "hr": ["Dajem hranu ", "."], "o": ["mačka", "mačku", "mački", "mačkom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. mačka → mačk<b>i</b>."}, {"s": 0, "en": "I'm buying a gift for Mum.", "hr": ["Kupujem poklon ", "."], "o": ["mama", "mamu", "mami", "mamom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. mama → mam<b>i</b>."}, {"s": 0, "en": "I'm writing a letter to Dad.", "hr": ["Pišem pismo ", "."], "o": ["tata", "tatu", "tati", "tatom"], "c": 2, "w": "tata eril ama <b>-a</b> ile bittiği için dişil gibi çekilir: tat<b>i</b>."}, {"s": 0, "en": "Say it to the teacher. (m)", "hr": ["Reci to ", "."], "o": ["učitelj", "učitelja", "učitelju", "učiteljem"], "c": 2, "w": "Eril isim → <b>-u</b>. učitelj → učitelj<b>u</b>."}, {"s": 0, "en": "I'm writing a message to my friend. (m)", "hr": ["Pišem poruku ", "."], "o": ["prijatelj", "prijatelja", "prijatelju", "prijateljem"], "c": 2, "w": "Eril isim → <b>-u</b>. prijatelj → prijatelj<b>u</b>."}, {"s": 0, "en": "I'm giving juice to the boy.", "hr": ["Dajem sok ", "."], "o": ["dječak", "dječaka", "dječaku", "dječakom"], "c": 2, "w": "Eril isim → <b>-u</b>. dječak → dječak<b>u</b>."}, {"s": 0, "en": "I'm telling a story to the little girl.", "hr": ["Pričam priču ", "."], "o": ["djevojčica", "djevojčicu", "djevojčici", "djevojčicom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. djevojčica → djevojčic<b>i</b>."}, {"s": 0, "en": "I'm giving a flower to Grandma.", "hr": ["Dajem cvijet ", "."], "o": ["baka", "baku", "baki", "bakom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. baka → bak<b>i</b>."}, {"s": 0, "en": "I'm buying a coffee for Grandpa.", "hr": ["Kupujem kavu ", "."], "o": ["djed", "djeda", "djedu", "djedom"], "c": 2, "w": "Eril isim → <b>-u</b>. djed → djed<b>u</b>."}, {"s": 0, "en": "I'm writing an email to the teacher. (f)", "hr": ["Pišem e-mail ", "."], "o": ["učiteljica", "učiteljicu", "učiteljici", "učiteljicom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. učiteljica → učiteljic<b>i</b>."}, {"s": 0, "en": "I'm giving the key to the neighbor. (m)", "hr": ["Dajem ključ ", "."], "o": ["susjed", "susjeda", "susjedu", "susjedom"], "c": 2, "w": "Eril isim → <b>-u</b>. susjed → susjed<b>u</b>."}, {"s": 0, "en": "I'm helping the neighbor. (f)", "hr": ["Pomažem ", "."], "o": ["susjeda", "susjedu", "susjedi", "susjedom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. susjeda → susjed<b>i</b>."}, {"s": 0, "en": "I'm sending a message to Ivan.", "hr": ["Šaljem poruku ", "."], "o": ["Ivan", "Ivana", "Ivanu", "Ivanom"], "c": 2, "w": "Eril isim → <b>-u</b>. Ivan → Ivan<b>u</b>."}, {"s": 0, "en": "I'm giving the book to Marko.", "hr": ["Dajem knjigu ", "."], "o": ["Marko", "Marka", "Marku", "Markom"], "c": 2, "w": "Marko eril: Mark<b>u</b>."}, {"s": 0, "en": "I'm writing to Maja.", "hr": ["Pišem ", "."], "o": ["Maja", "Maju", "Maji", "Majom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. Maja → Maj<b>i</b>."}, {"s": 0, "en": "We're going toward the sea.", "hr": ["Idemo prema ", "."], "o": ["more", "mora", "moru", "morem"], "c": 2, "w": "Nötr isim <b>-o/-e</b> → <b>-u</b>. more → mor<b>u</b>."}, {"s": 0, "en": "I'm giving a toy to the child.", "hr": ["Dajem igračku ", "."], "o": ["dijete", "djeteta", "djetetu", "djetetom"], "c": 2, "w": "dijete özel: dativi <b>djetetu</b>. Ezberle."}, {"s": 0, "en": "I'm giving a toy to the children.", "hr": ["Dajem igračku ", "."], "o": ["djeca", "djecu", "djeci", "djecom"], "c": 2, "w": "djeca (çocuklar) dişil tekil gibi çekilir: djec<b>i</b>."}, {"s": 0, "en": "I'm telling this to my friends.", "hr": ["Govorim ovo ", "."], "o": ["prijatelji", "prijatelje", "prijateljima", "prijatelja"], "c": 2, "w": "Eril çoğul dativ → <b>-ima</b>. prijatelj<b>ima</b>."}, {"s": 0, "en": "I'm writing a letter to my parents.", "hr": ["Pišem pismo ", "."], "o": ["roditelji", "roditelje", "roditeljima", "roditelja"], "c": 2, "w": "Eril çoğul dativ → <b>-ima</b>. roditelj<b>ima</b>."}, {"s": 0, "en": "Help the women.", "hr": ["Pomozi ", "."], "o": ["žene", "žena", "ženama", "ženom"], "c": 2, "w": "Dişil çoğul dativ → <b>-ama</b>. žen<b>ama</b>."}, {"s": 0, "en": "I'm explaining it to the students.", "hr": ["Objašnjavam to ", "."], "o": ["studenti", "studente", "studentima", "studenata"], "c": 2, "w": "Eril çoğul dativ → <b>-ima</b>. student<b>ima</b>."}, {"s": 0, "en": "I'm giving money to the waiter.", "hr": ["Dajem novac ", "."], "o": ["konobar", "konobara", "konobaru", "konobarom"], "c": 2, "w": "Eril isim → <b>-u</b>. konobar → konobar<b>u</b>."}, {"s": 0, "en": "I'm telling the truth to my friend. (f)", "hr": ["Kažem istinu ", "."], "o": ["prijateljica", "prijateljicu", "prijateljici", "prijateljicom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. prijateljic<b>i</b>."}, {"s": 0, "en": "I'm writing a letter to the woman.", "hr": ["Pišem pismo ", "."], "o": ["žena", "ženu", "ženi", "ženom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. žena → žen<b>i</b>."}, {"s": 0, "en": "I'm giving bread to the bird.", "hr": ["Dajem kruh ", "."], "o": ["ptica", "pticu", "ptici", "pticom"], "c": 2, "w": "Dişil isim <b>-a</b> → <b>-i</b>. ptica → ptic<b>i</b>."}, {"s": 0, "en": "I'm returning the book to the student.", "hr": ["Vraćam knjigu ", "."], "o": ["student", "studenta", "studentu", "studentom"], "c": 2, "w": "Eril isim → <b>-u</b>. student → student<b>u</b>."}, {"s": 0, "en": "I'm giving an apple to my son.", "hr": ["Dajem jabuku ", "."], "o": ["sin", "sina", "sinu", "sinom"], "c": 2, "w": "Eril isim → <b>-u</b>. sin → sin<b>u</b>."}, {"s": 0, "en": "I'm buying ice cream for my grandson.", "hr": ["Kupujem sladoled ", "."], "o": ["unuk", "unuka", "unuku", "unukom"], "c": 2, "w": "Eril isim → <b>-u</b>. unuk → unuk<b>u</b>."}, {"s": 0, "en": "I'm writing to my sisters.", "hr": ["Pišem ", "."], "o": ["sestre", "sestara", "sestrama", "sestrom"], "c": 2, "w": "Dişil çoğul dativ → <b>-ama</b>. sestr<b>ama</b>."}, {"s": 0, "en": "I'm giving water to the guest.", "hr": ["Dajem vodu ", "."], "o": ["gost", "gosta", "gostu", "gostom"], "c": 2, "w": "Eril isim → <b>-u</b>. gost → gost<b>u</b>."}, {"s": 0, "en": "Say it to the doctor.", "hr": ["Reci to ", "."], "o": ["doktor", "doktora", "doktoru", "doktorom"], "c": 2, "w": "Eril isim → <b>-u</b>. doktor → doktor<b>u</b>."}, {"s": 1, "en": "Give it to Mum.", "hr": ["Daj to ", "."], "o": ["majka", "majki", "majci", "majku"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. majka → maj<b>c</b>i."}, {"s": 1, "en": "Thanks to the book I learned a lot.", "hr": ["Zahvaljujući ", "naučio sam puno."], "o": ["knjiga", "knjigi", "knjizi", "knjigu"], "c": 2, "w": "<b>g → z</b>: knjiga → knji<b>z</b>i."}, {"s": 1, "en": "What is the dative of ruka (hand)?", "hr": ["ruka → ", "?"], "o": ["ruka", "ruki", "ruci", "ruku"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. ruka → ru<b>c</b>i."}, {"s": 1, "en": "I'm walking toward the bank.", "hr": ["Idem prema ", "."], "o": ["banka", "banki", "banci", "banku"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. banka → ban<b>c</b>i."}, {"s": 1, "en": "Say it to the girl.", "hr": ["Reci to ", "."], "o": ["djevojka", "djevojki", "djevojci", "djevojku"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. djevojka → djevoj<b>c</b>i."}, {"s": 1, "en": "They are travelling to America.", "hr": ["Putuju prema ", "."], "o": ["Amerika", "Ameriki", "Americi", "Amerikom"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. Amerika → Ameri<b>c</b>i."}, {"s": 1, "en": "What is the dative of noga (leg)?", "hr": ["noga → ", "?"], "o": ["noga", "nogi", "nozi", "nogom"], "c": 2, "w": "<b>g → z</b>: noga → no<b>z</b>i."}, {"s": 1, "en": "I'm looking at the picture. (dative form?)", "hr": ["slika → ", "?"], "o": ["slika", "sliki", "slici", "sliku"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. slika → sli<b>c</b>i."}, {"s": 1, "en": "I'm giving a book to my granddaughter.", "hr": ["Dajem knjigu ", "."], "o": ["unuka", "unuki", "unuci", "unukom"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. unuka → unu<b>c</b>i."}, {"s": 1, "en": "We're travelling toward Rijeka.", "hr": ["Putujemo prema ", "."], "o": ["Rijeka", "Rijeki", "Rijeci", "Rijekom"], "c": 2, "w": "<b>k → c</b> kuralı: -i ekinden önce k, c olur. Rijeka → Rije<b>c</b>i."}, {"s": 2, "en": "I like it.", "hr": ["Sviđa ", "se."], "o": ["me", "mi", "mene", "moj"], "c": 1, "w": "<b>mi</b> = bana. Kalıp: sviđa mi se."}, {"s": 2, "en": "Nice to meet you.", "hr": ["Drago ", "je."], "o": ["me", "mi", "mene", "moje"], "c": 1, "w": "Kalıp: <b>Drago mi je.</b>"}, {"s": 2, "en": "Thank you. (formal)", "hr": ["Hvala ", "."], "o": ["vas", "vam", "vi", "vaš"], "c": 1, "w": "Resmî/çoğul: Hvala <b>vam</b>."}, {"s": 2, "en": "Thanks. (to a friend)", "hr": ["Hvala ", "."], "o": ["te", "ti", "tebe", "tvoj"], "c": 1, "w": "Samimi: Hvala <b>ti</b>."}, {"s": 2, "en": "I'm sorry.", "hr": ["Žao ", "je."], "o": ["me", "mi", "mene", "moje"], "c": 1, "w": "Kalıp: <b>Žao mi je.</b>"}, {"s": 2, "en": "I'm cold.", "hr": ["Hladno ", "je."], "o": ["me", "mi", "sam", "se"], "c": 1, "w": "Hâl kalıpları dativ: <b>Hladno mi je.</b>"}, {"s": 2, "en": "I'm hot.", "hr": ["Vruće ", "je."], "o": ["me", "mi", "sam", "se"], "c": 1, "w": "<b>Vruće mi je.</b>"}, {"s": 2, "en": "I'm bored.", "hr": ["Dosadno ", "je."], "o": ["me", "mi", "sam", "se"], "c": 1, "w": "<b>Dosadno mi je.</b>"}, {"s": 2, "en": "I miss you.", "hr": ["Nedostaješ ", "."], "o": ["me", "mi", "mene", "te"], "c": 1, "w": "Hırvatçada 'sen bana eksiksin': Nedostaješ <b>mi</b>."}, {"s": 2, "en": "Give me the book.", "hr": ["Daj ", "knjigu."], "o": ["me", "mi", "mene", "moju"], "c": 1, "w": "Alıcı dativ: Daj <b>mi</b>."}, {"s": 2, "en": "Tell me the truth.", "hr": ["Reci ", "istinu."], "o": ["me", "mi", "mene", "moju"], "c": 1, "w": "Reci <b>mi</b> istinu."}, {"s": 2, "en": "Help him.", "hr": ["Pomozi ", "."], "o": ["ga", "mu", "njega", "njegov"], "c": 1, "w": "<b>pomoći</b> dativ ister: Pomozi <b>mu</b>."}, {"s": 2, "en": "Tell her.", "hr": ["Reci ", "."], "o": ["ju", "joj", "nju", "je"], "c": 1, "w": "<b>joj</b> = ona (dişil)."}, {"s": 2, "en": "Give her the keys.", "hr": ["Daj ", "ključeve."], "o": ["ju", "joj", "nju", "je"], "c": 1, "w": "Daj <b>joj</b> ključeve."}, {"s": 2, "en": "I'll tell him tomorrow.", "hr": ["Reći ću ", "sutra."], "o": ["ga", "mu", "njega", "on"], "c": 1, "w": "<b>mu</b> = ona (eril)."}, {"s": 2, "en": "Show us the photos.", "hr": ["Pokaži ", "fotografije."], "o": ["nas", "nam", "mi", "naše"], "c": 1, "w": "<b>nam</b> = bize."}, {"s": 2, "en": "I'll send it to them.", "hr": ["Poslat ću ", "to."], "o": ["ih", "im", "oni", "njih"], "c": 1, "w": "<b>im</b> = onlara."}, {"s": 2, "en": "Let me know.", "hr": ["Javi ", "."], "o": ["me", "mi", "mene", "moj"], "c": 1, "w": "Javi <b>mi</b> = bana haber ver."}, {"s": 2, "en": "I like it, he doesn't.", "hr": ["", "se sviđa, njemu ne."], "o": ["Mi", "Meni", "Mene", "Ja"], "c": 1, "w": "Cümle başında uzun biçim: <b>Meni</b>."}, {"s": 2, "en": "How are you?", "hr": ["Kako ", "je?"], "o": ["te", "ti", "tebe", "tvoj"], "c": 1, "w": "<b>Kako ti je?</b> = Nasılsın?"}, {"s": 2, "en": "Which word order is correct?", "hr": ["I like that song."], "o": ["Mi se sviđa ta pjesma.", "Sviđa mi se ta pjesma.", "Sviđa se mi ta pjesma.", "Se mi sviđa ta pjesma."], "c": 1, "w": "Doğru sıra: <b>sviđa mi se</b> — mi daima se'den önce."}, {"s": 2, "en": "I need water.", "hr": ["Treba ", "voda."], "o": ["me", "mi", "mene", "moja"], "c": 1, "w": "<b>Treba mi</b> = bana lazım."}, {"s": 2, "en": "I bought you a coffee.", "hr": ["Kupio sam ", "kavu."], "o": ["te", "ti", "tebe", "tvoju"], "c": 1, "w": "Kupio sam <b>ti</b> kavu."}, {"s": 2, "en": "Do you like it?", "hr": ["Sviđa ", "se?"], "o": ["te", "ti", "tebe", "tvoj"], "c": 1, "w": "Sviđa <b>ti</b> se? = Beğendin mi?"}, {"s": 2, "en": "He is doing well.", "hr": ["Dobro ", "je."], "o": ["ga", "mu", "njega", "njegov"], "c": 1, "w": "Dobro <b>mu</b> je. = Onun keyfi yerinde."}, {"s": 4, "en": "I'm going to school.", "hr": ["(Okula gidiyorum.)"], "o": ["Idem školi.", "Idem u školu.", "Idem u školi.", "Idem k školi."], "c": 1, "w": "Bir yere hareket = <b>u + akuzativ</b>. Türkçe -e hâli burada dativ değil!"}, {"s": 4, "en": "I'm going to work.", "hr": ["(İşe gidiyorum.)"], "o": ["Idem poslu.", "Idem na posao.", "Idem na poslu.", "Idem k posao."], "c": 1, "w": "Hareket → akuzativ: <b>na posao</b>."}, {"s": 4, "en": "I'm going to the doctor.", "hr": ["(Doktora gidiyorum.)"], "o": ["Idem u liječnika.", "Idem liječnika.", "Idem k liječniku.", "Idem na liječnik."], "c": 2, "w": "İnsana doğru = <b>k + dativ</b>: k liječnik<b>u</b>."}, {"s": 4, "en": "toward the centre", "hr": ["prema ", "…"], "o": ["centar", "centru", "centra", "centrom"], "c": 1, "w": "<b>prema</b> daima dativ: centr<b>u</b>."}, {"s": 4, "en": "We are at school.", "hr": ["Mi smo ", "."], "o": ["u školu", "u školi", "školi", "na škola"], "c": 1, "w": "Duruş → <b>u + lokativ</b>: u škol<b>i</b>. (Biçim dativle aynı.)"}, {"s": 4, "en": "I'm going into town.", "hr": ["(Şehre gidiyorum.)"], "o": ["Idem gradu.", "Idem u grad.", "Idem u gradu.", "Idem k gradu."], "c": 1, "w": "İçine girmek = <b>u + akuzativ</b>: u grad."}, {"s": 4, "en": "I'm going to Grandma's place.", "hr": ["(Büyükanneme gidiyorum.)"], "o": ["Idem baki.", "Idem k baki.", "Idem kod bake.", "Idem na baku."], "c": 2, "w": "Birinin <u>evine</u> gitmek = <b>kod + genitiv</b>: kod bak<b>e</b>."}, {"s": 4, "en": "I'm going home.", "hr": ["(Eve gidiyorum.)"], "o": ["Idem kuća.", "Idem kuću.", "Idem kući.", "Idem u kuća."], "c": 2, "w": "<b>Idem kući</b> = eve gidiyorum. Sabit kalıp, ezberle."}, {"s": 4, "en": "I'm going toward the station.", "hr": ["Idem prema ", "."], "o": ["kolodvor", "kolodvora", "kolodvoru", "kolodvorom"], "c": 2, "w": "prema → dativ: kolodvor<b>u</b>."}, {"s": 4, "en": "I'm going to the shop.", "hr": ["(Dükkâna gidiyorum.)"], "o": ["Idem trgovini.", "Idem u trgovinu.", "Idem u trgovini.", "Idem k trgovinu."], "c": 1, "w": "Hareket → akuzativ: <b>u trgovinu</b>."}, {"s": 4, "en": "I'm coming to you.", "hr": ["Dolazim k ", "."], "o": ["tebe", "tebi", "ti", "te"], "c": 1, "w": "<b>k</b> edatından sonra uzun dativ: k <b>tebi</b>."}, {"s": 4, "en": "I'm going to the market.", "hr": ["(Pazara gidiyorum.)"], "o": ["Idem tržnici.", "Idem na tržnicu.", "Idem na tržnici.", "Idem k tržnicu."], "c": 1, "w": "Hareket → akuzativ: <b>na tržnicu</b>."}, {"s": 4, "en": "We're walking toward the beach.", "hr": ["Šećemo prema ", "."], "o": ["plaža", "plažu", "plaži", "plažom"], "c": 2, "w": "prema → dativ: plaž<b>i</b>."}, {"s": 4, "en": "I'm going to a restaurant.", "hr": ["(Restorana gidiyorum.)"], "o": ["Idem restoranu.", "Idem u restoran.", "Idem u restoranu.", "Idem k restoran."], "c": 1, "w": "Hareket → akuzativ: <b>u restoran</b>."}, {"s": 4, "en": "toward the hotel", "hr": ["prema ", "…"], "o": ["hotel", "hotelu", "hotela", "hotelom"], "c": 1, "w": "prema → dativ: hotel<b>u</b>."}, {"s": 5, "en": "I need money.", "hr": ["(Bana para lazım.)"], "o": ["Trebam mi novac.", "Treba mi novac.", "Treba me novac.", "Treba mi novca."], "c": 1, "w": "<b>Treba mi + yalın hâl.</b>"}, {"s": 5, "en": "I need a pen.", "hr": ["(Bana kalem lazım.)"], "o": ["Trebam mi olovka.", "Treba mi olovka.", "Treba me olovka.", "Treba mi olovku."], "c": 1, "w": "<b>Treba mi olovka.</b>"}, {"s": 5, "en": "My head hurts.", "hr": ["(Başım ağrıyor.)"], "o": ["Boli mi glava.", "Boli me glava.", "Boli me glavu.", "Boli mi glavu."], "c": 1, "w": "<b>Dikkat:</b> boljeti dativ değil <b>akuzativ</b> alır: Boli <b>me</b> glava."}, {"s": 5, "en": "I like this song.", "hr": ["Sviđa ", "se ova pjesma."], "o": ["me", "mi", "mene", "moja"], "c": 1, "w": "<b>sviđati se</b> dativ ister: sviđa <b>mi</b> se."}, {"s": 5, "en": "I miss my family.", "hr": ["Nedostaje ", "obitelj."], "o": ["me", "mi", "mene", "moja"], "c": 1, "w": "<b>nedostajati</b> dativ ister: Nedostaje <b>mi</b> obitelj."}, {"s": 5, "en": "Happy birthday! (I congratulate you)", "hr": ["Čestitam ", "rođendan!"], "o": ["te", "ti", "tebe", "tvoj"], "c": 1, "w": "<b>čestitati</b> dativ ister: Čestitam <b>ti</b>."}, {"s": 5, "en": "I don't believe you.", "hr": ["Ne vjerujem ", "."], "o": ["tebe", "tebi", "te", "tvoje"], "c": 1, "w": "<b>vjerovati</b> dativ ister: <b>tebi</b>."}, {"s": 5, "en": "Help me, please.", "hr": ["Pomozi ", ", molim te."], "o": ["me", "mi", "mene", "moj"], "c": 1, "w": "<b>pomoći</b> dativ ister: Pomozi <b>mi</b>."}, {"s": 5, "en": "Give me some water.", "hr": ["Daj ", "vode."], "o": ["me", "mi", "mene", "moje"], "c": 1, "w": "Daj <b>mi</b> vode."}, {"s": 5, "en": "Thanks for the help.", "hr": ["Hvala ", "na pomoći."], "o": ["te", "ti", "tebe", "tvoj"], "c": 1, "w": "Hvala <b>ti</b> na pomoći."}, {"s": 5, "en": "That doesn't bother me.", "hr": ["To ", "ne smeta."], "o": ["me", "mi", "mene", "moje"], "c": 1, "w": "<b>smetati</b> dativ ister: ne smeta <b>mi</b>."}, {"s": 5, "en": "I bought my sister a gift.", "hr": ["Kupio sam ", "poklon."], "o": ["sestra", "sestru", "sestri", "sestrom"], "c": 2, "w": "Birine bir şey almak dativ ister: sestr<b>i</b>."}, {"s": 5, "en": "I returned the book to my friend. (m)", "hr": ["Vratio sam knjigu ", "."], "o": ["prijatelj", "prijatelja", "prijatelju", "prijateljem"], "c": 2, "w": "<b>vratiti</b> alıcı dativ ister: prijatelj<b>u</b>."}, {"s": 5, "en": "I sent a message to Mum.", "hr": ["Poslao sam poruku ", "."], "o": ["mama", "mamu", "mami", "mamom"], "c": 2, "w": "<b>poslati</b> alıcı dativ ister: mam<b>i</b>."}, {"s": 5, "en": "This doesn't suit me.", "hr": ["Ovo ", "ne odgovara."], "o": ["me", "mi", "mene", "moje"], "c": 1, "w": "<b>odgovarati</b> dativ ister: ne odgovara <b>mi</b>."}];
+
+/* ---------- shuffle helpers ---------- */
+function shuffled(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function pickSession(n){
+  const idx = shuffled(BANK.map((_,i)=>i)).slice(0,n);
+  return idx.map(i=>{
+    const src = BANK[i];
+    const order = shuffled(src.o.map((_,k)=>k));
+    const o = order.map(k=>src.o[k]);
+    const c = order.indexOf(src.c);
+    return {s:src.s, en:src.en, hr:src.hr, o, c, w:src.w, bankIndex:i};
+  });
+}
+
+/* ---------- state ---------- */
+let session = [], pos = 0, score = 0, answered = false;
+let missed = [], perSection = SECTIONS.map(()=>({ok:0,total:0}));
+
+const $ = id => document.getElementById(id);
+const KEYS = ["A","B","C","D"];
+
+function show(id){
+  ["screen-start","screen-quiz","screen-done"].forEach(s=>$(s).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+function startSession(list){
+  session = list; pos = 0; score = 0; missed = [];
+  perSection = SECTIONS.map(()=>({ok:0,total:0}));
+  $("n-all").textContent = session.length;
+  show("screen-quiz"); render();
+}
+
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+
+function render(){
+  answered = false;
+  const q = session[pos];
+  $("n-now").textContent = String(pos+1).padStart(2,"0");
+  $("n-ok").textContent = score;
+
+  const pct = (pos/session.length)*100;
+  $("rail-fill").style.width = pct+"%";
+  $("rail-head").style.left = pct+"%";
+
+  $("prompt").textContent = q.en;
+  $("sentence").innerHTML = q.hr.length>1
+    ? esc(q.hr[0])+'<span class="slot" id="slot">&nbsp;&nbsp;→&nbsp;&nbsp;</span>'+esc(q.hr[1])
+    : esc(q.hr[0]);
+
+  const box = $("opts"); box.innerHTML = "";
+  q.o.forEach((txt,i)=>{
+    const b = document.createElement("button");
+    b.className = "opt";
+    b.innerHTML = '<span class="key">'+KEYS[i]+'</span><span>'+esc(txt)+'</span>';
+    b.onclick = ()=>choose(i);
+    box.appendChild(b);
+  });
+
+  $("feedback").classList.add("hidden");
+  $("next").classList.add("hidden");
+  $("next").textContent = (pos === session.length-1) ? "Sonucu gör" : "Sonraki soru";
+}
+
+function choose(i){
+  if(answered) return;
+  answered = true;
+  const q = session[pos];
+  const right = i === q.c;
+  const buttons = $("opts").querySelectorAll(".opt");
+
+  buttons.forEach((b,j)=>{
+    b.disabled = true;
+    if(j === q.c) b.classList.add("correct");
+    else if(j === i) b.classList.add("wrong");
+  });
+
+  const slot = $("slot");
+  if(slot){ slot.textContent = q.o[q.c]; slot.classList.add("filled"); }
+
+  perSection[q.s].total++;
+  if(right){ score++; perSection[q.s].ok++; }
+  else missed.push({q, picked:q.o[i]});
+
+  $("n-ok").textContent = score;
+  $("verdict").className = "verdict " + (right ? "y" : "n");
+  $("verdict").textContent = right ? "Doğru — točno!" : "Olmadı — netočno.";
+  $("why").innerHTML = q.w;
+  $("feedback").classList.remove("hidden");
+  $("next").classList.remove("hidden");
+}
+
+function next(){
+  if(!answered) return;
+  if(pos === session.length-1) return finish();
+  pos++; render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function finish(){
+  const total = session.length;
+  const pct = Math.round(score/total*100);
+  $("final").textContent = score;
+  $("of-line").textContent = total+" sorudan "+score+" doğru · %"+pct;
+
+  let msg;
+  if(pct>=90) msg = "Bu artık refleks olmuş. Farklı bir 20'lik daha çöz, aynı seviyede kalıyor musun bak.";
+  else if(pct>=70) msg = "Sağlam temel. Yanlışların çoğu muhtemelen tek bir noktada toplanıyor — aşağıya bak.";
+  else if(pct>=50) msg = "Kurallar oturmaya başlamış. Önce yanlışları çöz, sonra yeni bir 20'lik dene.";
+  else msg = "Panik yok, havuz geniş. Yanlışlarını tekrar çöz, örüntüler oturunca sayı hızlı yükselir.";
+  $("verd-text").textContent = msg;
+
+  const bars = $("bars"); bars.innerHTML = "";
+  perSection.forEach((p,i)=>{
+    if(!p.total) return;
+    const d = document.createElement("div");
+    d.className = "bar";
+    d.innerHTML = '<div class="bar-top"><span>'+SECTIONS[i]+'</span><em>'+p.ok+'/'+p.total+'</em></div>'+
+                  '<div class="bar-track"><div class="bar-fill" style="width:'+(p.ok/p.total*100)+'%"></div></div>';
+    bars.appendChild(d);
+  });
+
+  const rev = $("review"); rev.innerHTML = "";
+  if(missed.length){
+    rev.innerHTML = "<h3>Gözden geçir · "+missed.length+" tanesi</h3>";
+    missed.forEach(m=>{
+      const d = document.createElement("div");
+      d.className = "miss";
+      d.innerHTML = '<p class="q">'+esc(m.q.en)+'</p>'+
+                    '<p class="a">'+esc(m.q.o[m.q.c])+' <s>'+esc(m.picked)+'</s></p>'+
+                    '<p class="n">'+m.q.w+'</p>';
+      rev.appendChild(d);
+    });
+    $("again-wrong").classList.remove("hidden");
+  } else {
+    rev.innerHTML = '<h3>Hiç yanlışın yok. Svaka čast!</h3>';
+    $("again-wrong").classList.add("hidden");
+  }
+  show("screen-done");
+}
+
+$("go").onclick = ()=>startSession(pickSession(20));
+$("next").onclick = next;
+$("new-20").onclick = ()=>startSession(pickSession(20));
+$("again-wrong").onclick = ()=>{
+  if(!missed.length) return;
+  const list = missed.map(m=>{
+    const order = shuffled(m.q.o.map((_,k)=>k));
+    const o = order.map(k=>m.q.o[k]);
+    const c = order.indexOf(m.q.c);
+    return {s:m.q.s, en:m.q.en, hr:m.q.hr, o, c, w:m.q.w};
+  });
+  startSession(shuffled(list));
+};
+
+document.addEventListener("keydown", e=>{
+  if($("screen-quiz").classList.contains("hidden")) return;
+  if(!answered && ["1","2","3","4"].includes(e.key)){
+    const b = $("opts").children[+e.key-1];
+    if(b) b.click();
+  }
+  if(answered && (e.key === "Enter" || e.key === " ")){ e.preventDefault(); next(); }
+});
+</script>
+</body>
+</html>
