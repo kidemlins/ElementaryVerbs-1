@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Genitiv Quiz — Hrvatski</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#14304A;
+  --navy-deep:#0C1E30;
+  --stone:#F4F0E8;
+  --stone-2:#E7E0D2;
+  --red:#C0453B;
+  --olive:#6B7A4F;
+  --gold:#C89B3C;
+  --ink:#2A2622;
+  --muted:#6E6759;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  background:var(--stone);
+  color:var(--ink);
+  line-height:1.55;
+  min-height:100vh;
+  padding:env(safe-area-inset-top) 0 calc(24px + env(safe-area-inset-bottom));
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+/* ---- header ---- */
+header{
+  background:var(--navy);
+  color:var(--stone);
+  padding:26px 0 22px;
+  margin-bottom:22px;
+  border-bottom:3px solid var(--gold);
+}
+header .eyebrow{
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;margin-bottom:6px;
+}
+header h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:600;font-size:2rem;line-height:1.1;letter-spacing:-.01em;
+}
+header p{font-size:.92rem;color:#B9C6D2;margin-top:8px}
+
+/* ---- cards ---- */
+.card{
+  background:#fff;
+  border:1px solid var(--stone-2);
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:0 1px 2px rgba(20,48,74,.04);
+}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:1.25rem;margin-bottom:10px;color:var(--navy)}
+.lede{color:var(--muted);font-size:.93rem;margin-bottom:18px}
+
+.label{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:10px;display:block;
+}
+
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.chip{
+  border:1.5px solid var(--stone-2);background:#fff;border-radius:10px;
+  padding:12px 6px;font-family:inherit;font-size:.95rem;font-weight:600;
+  color:var(--navy);cursor:pointer;transition:.15s;
+}
+.chip:hover{border-color:var(--navy)}
+.chip.on{background:var(--navy);color:var(--stone);border-color:var(--navy)}
+
+select{
+  width:100%;padding:12px;border:1.5px solid var(--stone-2);border-radius:10px;
+  font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink);
+  margin-bottom:20px;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236E6759' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+}
+
+.btn{
+  width:100%;padding:15px;border:none;border-radius:10px;
+  background:var(--red);color:#fff;font-family:inherit;
+  font-size:1rem;font-weight:600;cursor:pointer;transition:.15s;
+}
+.btn:hover{background:#A63930}
+.btn.ghost{background:transparent;color:var(--navy);border:1.5px solid var(--stone-2)}
+.btn.ghost:hover{background:var(--stone-2)}
+.btn.navy{background:var(--navy)}
+.btn.navy:hover{background:var(--navy-deep)}
+
+/* ---- progress ---- */
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;font-size:.8rem;color:var(--muted);font-weight:500}
+.bar-top b{color:var(--navy);font-weight:600}
+.bar{height:5px;background:var(--stone-2);border-radius:3px;overflow:hidden;margin-bottom:20px}
+.bar span{display:block;height:100%;background:var(--gold);transition:width .3s}
+
+/* ---- question ---- */
+.qtext{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:1.35rem;line-height:1.45;color:var(--navy);
+  margin-bottom:10px;font-weight:400;
+}
+.qtext u{text-decoration:none;border-bottom:2.5px solid var(--gold);padding:0 14px}
+.hint{
+  font-size:.9rem;color:var(--muted);font-style:italic;
+  padding-left:12px;border-left:2px solid var(--stone-2);margin-bottom:20px;
+}
+
+.opts{display:grid;gap:9px}
+.opt{
+  text-align:left;padding:14px 16px;border:1.5px solid var(--stone-2);
+  border-radius:10px;background:#fff;font-family:inherit;font-size:1.02rem;
+  font-weight:500;color:var(--ink);cursor:pointer;transition:.13s;
+  display:flex;align-items:center;gap:12px;
+}
+.opt .k{
+  flex:0 0 24px;height:24px;border-radius:6px;background:var(--stone);
+  display:grid;place-items:center;font-size:.75rem;font-weight:600;color:var(--muted);
+}
+.opt:hover:not(:disabled){border-color:var(--navy)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--olive);background:#F1F4EB}
+.opt.correct .k{background:var(--olive);color:#fff}
+.opt.wrong{border-color:var(--red);background:#FBF0EF}
+.opt.wrong .k{background:var(--red);color:#fff}
+.opt.dim{opacity:.5}
+
+.exp{
+  margin-top:16px;padding:14px 16px;border-radius:10px;
+  background:var(--stone);border-left:3px solid var(--gold);
+  font-size:.92rem;color:var(--ink);
+}
+.exp .verdict{font-weight:600;display:block;margin-bottom:4px}
+.exp .verdict.ok{color:var(--olive)}
+.exp .verdict.no{color:var(--red)}
+.hidden{display:none}
+
+/* ---- results ---- */
+.score{text-align:center;padding:8px 0 20px}
+.score .big{font-family:'Fraunces',Georgia,serif;font-size:3.4rem;line-height:1;color:var(--navy);font-weight:600}
+.score .of{color:var(--muted);font-size:1rem;margin-top:6px}
+.score .msg{margin-top:12px;font-size:.95rem;color:var(--ink)}
+
+.brk{display:grid;gap:8px;margin-bottom:6px}
+.brk-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.9rem;padding:9px 0;border-bottom:1px solid var(--stone-2)}
+.brk-row:last-child{border-bottom:none}
+.brk-row span:first-child{color:var(--ink)}
+.brk-row b{font-variant-numeric:tabular-nums;color:var(--navy)}
+
+.review{display:grid;gap:12px}
+.rev{padding:13px 15px;border-radius:10px;background:var(--stone);border-left:3px solid var(--red)}
+.rev .s{font-family:'Fraunces',Georgia,serif;font-size:1.02rem;color:var(--navy);margin-bottom:6px}
+.rev .a{font-size:.86rem;color:var(--muted)}
+.rev .a b{color:var(--olive);font-weight:600}
+.rev .a i{color:var(--red);font-style:normal}
+
+footer{text-align:center;font-size:.78rem;color:var(--muted);padding:18px 0 4px}
+@media(max-width:400px){
+  header h1{font-size:1.7rem}
+  .qtext{font-size:1.2rem}
+  .card{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Padeži · 2. padež</div>
+    <h1>Genitiv</h1>
+    <p>Kimin? Neyin? Nereden? — 100 soruluk havuz</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- START -->
+  <section id="start">
+    <div class="card">
+      <h2>Teste başla</h2>
+      <p class="lede">Sorular ve şıklar her seferinde karışır. Genitiv'i akuzativ ve lokativ ile karşılaştıran karma sorular da var.</p>
+
+      <span class="label">Kaç soru?</span>
+      <div class="choices" id="counts">
+        <button class="chip on" data-n="20">20</button>
+        <button class="chip" data-n="40">40</button>
+        <button class="chip" data-n="100">Hepsi</button>
+      </div>
+
+      <span class="label">Konu</span>
+      <select id="topic">
+        <option value="all">Tüm konular</option>
+        <option value="Posvojnost">İyelik — kimin?</option>
+        <option value="Prijedlozi">Edatlar — iz, od, do, kod, bez…</option>
+        <option value="Količina">Miktar — koliko?</option>
+        <option value="Nema">Olumsuzluk — nema / nemam</option>
+        <option value="Vrijeme">Zaman ve tarih</option>
+        <option value="Miks">Karma — G / A / L ayrımı</option>
+      </select>
+
+      <button class="btn" id="go">Başla</button>
+    </div>
+
+    <div class="card">
+      <h2>Kısa hatırlatma</h2>
+      <p style="font-size:.92rem;color:var(--muted)">
+        <b style="color:var(--navy)">Eril / nötr:</b> grad → grad<b style="color:var(--gold)">a</b>, more → mor<b style="color:var(--gold)">a</b><br>
+        <b style="color:var(--navy)">Dişil -a:</b> kuća → kuć<b style="color:var(--gold)">e</b>, sestra → sestr<b style="color:var(--gold)">e</b><br>
+        <b style="color:var(--navy)">Dişil -Ø:</b> noć → noć<b style="color:var(--gold)">i</b>, sol → sol<b style="color:var(--gold)">i</b>
+      </p>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="bar-top"><span>Soru <b id="qn">1</b> / <span id="qt">20</span></span><span><b id="sc">0</b> doğru</span></div>
+    <div class="bar"><span id="fill" style="width:0%"></span></div>
+
+    <div class="card">
+      <div class="qtext" id="qtext"></div>
+      <div class="hint" id="hint"></div>
+      <div class="opts" id="opts"></div>
+      <div class="exp hidden" id="exp"></div>
+    </div>
+
+    <button class="btn hidden" id="next">Sonraki soru</button>
+    <button class="btn ghost" id="quit" style="margin-top:8px">Testi bitir</button>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="hidden">
+    <div class="card">
+      <div class="score">
+        <div class="big" id="rBig">0</div>
+        <div class="of" id="rOf">/ 20 doğru</div>
+        <div class="msg" id="rMsg"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Konulara göre</h2>
+      <div class="brk" id="brk"></div>
+    </div>
+
+    <div class="card hidden" id="revCard">
+      <h2>Tekrar et</h2>
+      <p class="lede">Yanlış cevapladığın sorular:</p>
+      <div class="review" id="rev"></div>
+    </div>
+
+    <button class="btn" id="again">Yeni test</button>
+    <button class="btn ghost" id="home" style="margin-top:8px">Ayarlara dön</button>
+  </section>
+
+  <footer>Genitiv · hrvatski jezik · A1</footer>
+</div>
+
+<script>
+const BANK = [
+
+/* ══════════ 1. POSVOJNOST — İyelik (kimin? neyin?) ══════════ */
+{c:"Posvojnost",q:"Ovo je knjiga moje ___.",h:"Bu benim kız kardeşimin kitabı. (sestra)",o:["sestre","sestra","sestru","sestri"],a:"sestre",e:"Dişil -a isimler genitivde -e alır: sestra → sestre. «Kimin kitabı?» sorusunun cevabı genitivdir."},
+{c:"Posvojnost",q:"Gdje je ključ od ___?",h:"Arabanın anahtarı nerede? (auto)",o:["auta","auto","autu","autom"],a:"auta",e:"auto nötr gibi çekilir: auto → auta. «od + genitiv» sahiplik için çok yaygın: ključ od auta, ključ od stana."},
+{c:"Posvojnost",q:"To je auto mog ___.",h:"O benim erkek kardeşimin arabası. (brat)",o:["brata","brat","bratu","bratom"],a:"brata",e:"Eril isimler genitivde -a alır: brat → brata. mog brata = «kardeşimin»."},
+{c:"Posvojnost",q:"Ime moje ___ je Ana.",h:"Arkadaşımın adı Ana. (prijateljica)",o:["prijateljice","prijateljica","prijateljicu","prijateljici"],a:"prijateljice",e:"prijateljica → prijateljice. Dişil -a → -e."},
+{c:"Posvojnost",q:"Broj moje ___ je dvanaest.",h:"Odamın numarası 12. (soba)",o:["sobe","soba","sobu","sobi"],a:"sobe",e:"soba → sobe. Otelde çok işine yarar: «Broj moje sobe je…»"},
+{c:"Posvojnost",q:"Vrata ___ su otvorena.",h:"Evin kapısı açık. (kuća)",o:["kuće","kuća","kuću","kući"],a:"kuće",e:"kuća → kuće. Türkçedeki «-in» eki burada genitivdir."},
+{c:"Posvojnost",q:"Ovo je telefon mog ___.",h:"Bu babamın telefonu. (tata)",o:["tate","tata","tatu","tati"],a:"tate",e:"Dikkat! tata eril anlamlıdır ama -a ile bittiği için dişil gibi çekilir: tata → tate. Aynısı: kolega → kolege."},
+{c:"Posvojnost",q:"Kraj ___ je bio jako dobar.",h:"Filmin sonu çok iyiydi. (film)",o:["filma","film","filmu","filmom"],a:"filma",e:"film → filma. kraj (son) + genitiv."},
+{c:"Posvojnost",q:"Centar ___ je prekrasan.",h:"Şehrin merkezi çok güzel. (grad)",o:["grada","grad","gradu","gradom"],a:"grada",e:"grad → grada. «centar grada» = şehir merkezi, günlük konuşmada çok geçer."},
+{c:"Posvojnost",q:"Torba moje ___ je crvena.",h:"Annemin çantası kırmızı. (mama)",o:["mame","mama","mamu","mami"],a:"mame",e:"mama → mame."},
+{c:"Posvojnost",q:"Cijena ___ je previsoka.",h:"Kahvenin fiyatı çok yüksek. (kava)",o:["kave","kava","kavu","kavi"],a:"kave",e:"kava → kave. cijena + genitiv = «…nın fiyatı»."},
+{c:"Posvojnost",q:"Vlasnik ovog ___ je moj prijatelj.",h:"Bu restoranın sahibi arkadaşım. (restoran)",o:["restorana","restoran","restoranu","restoranom"],a:"restorana",e:"restoran → restorana. Sıfat da genitive girer: ovog restorana."},
+{c:"Posvojnost",q:"Boja ___ mi se jako sviđa.",h:"Denizin rengini çok seviyorum. (more)",o:["mora","more","moru","morem"],a:"mora",e:"Nötr isimler de -a alır: more → mora, selo → sela, pivo → piva."},
+{c:"Posvojnost",q:"Ovo je pas moje ___.",h:"Bu komşumun köpeği. (susjeda)",o:["susjede","susjeda","susjedu","susjedi"],a:"susjede",e:"susjeda → susjede."},
+{c:"Posvojnost",q:"Prozor ___ gleda na more.",h:"Odanın penceresi denize bakıyor. (soba)",o:["sobe","soba","sobu","sobom"],a:"sobe",e:"soba → sobe."},
+
+/* ══════════ 2. PRIJEDLOZI — Edatlar ══════════ */
+{c:"Prijedlozi",q:"Dolazim ___ škole.",h:"Okuldan geliyorum. (nereden?)",o:["iz","u","na","kod"],a:"iz",e:"iz + genitiv = «içinden dışarı». u škol<b>u</b> (gidiyorum) ↔ iz škol<b>e</b> (geliyorum)."},
+{c:"Prijedlozi",q:"Idem ___ doktora.",h:"Doktora gidiyorum. (kişinin yanına)",o:["kod","u","na","od"],a:"kod",e:"Bir <b>kişiye</b> gitmek/onun yanında olmak: kod + genitiv. kod doktora, kod bake, kod prijatelja."},
+{c:"Prijedlozi",q:"Pijem kavu ___ šećera.",h:"Kahveyi şekersiz içiyorum.",o:["bez","od","do","s"],a:"bez",e:"bez + genitiv = -sız/-siz. bez šećera, bez mlijeka, bez problema."},
+{c:"Prijedlozi",q:"Stanujem ___ parka.",h:"Parkın yakınında oturuyorum.",o:["blizu","u","na","po"],a:"blizu",e:"blizu + genitiv = yakınında. blizu parka, blizu centra."},
+{c:"Prijedlozi",q:"Radim od ponedjeljka ___ petka.",h:"Pazartesiden cumaya çalışıyorum.",o:["do","u","na","za"],a:"do",e:"od … do … ikisi de genitiv ister. od ponedjeljka do petka, od jutra do večeri."},
+{c:"Prijedlozi",q:"Upravo dolazim iz ___.",h:"Az önce kafeden geldim. (kavana)",o:["kavane","kavanu","kavani","kavana"],a:"kavane",e:"iz + genitiv: kavana → kavane."},
+{c:"Prijedlozi",q:"Idemo do ___.",h:"Gara kadar gidiyoruz. (kolodvor)",o:["kolodvora","kolodvor","kolodvoru","kolodvorom"],a:"kolodvora",e:"do + genitiv: kolodvor → kolodvora."},
+{c:"Prijedlozi",q:"Jednu kavu bez ___, molim.",h:"Bir sütsüz kahve lütfen. (mlijeko)",o:["mlijeka","mlijeko","mlijeku","mlijekom"],a:"mlijeka",e:"bez + genitiv: mlijeko → mlijeka. Kafede birebir bu cümle."},
+{c:"Prijedlozi",q:"Sastanak je poslije ___.",h:"Toplantı öğle yemeğinden sonra. (ručak)",o:["ručka","ručak","ručku","ručkom"],a:"ručka",e:"Dikkat: «kaçak a». ručak → ru<b>čk</b>a (a düşer). Aynısı: doručak → doručka, petak → petka."},
+{c:"Prijedlozi",q:"Nazovi me prije ___.",h:"Akşam yemeğinden önce beni ara. (večera)",o:["večere","večera","večeru","večeri"],a:"večere",e:"prije + genitiv: večera → večere."},
+{c:"Prijedlozi",q:"Večeras sam kod ___.",h:"Bu akşam arkadaşımdayım. (prijatelj)",o:["prijatelja","prijatelj","prijatelju","prijateljem"],a:"prijatelja",e:"kod + genitiv: prijatelj → prijatelja."},
+{c:"Prijedlozi",q:"Ljekarna je blizu ___.",h:"Eczane hastanenin yakınında. (bolnica)",o:["bolnice","bolnica","bolnicu","bolnici"],a:"bolnice",e:"blizu + genitiv: bolnica → bolnice."},
+{c:"Prijedlozi",q:"Trgovina je pored ___.",h:"Market bankanın yanında. (banka)",o:["banke","banka","banku","banki"],a:"banke",e:"pored / kraj / do + genitiv = yanında. banka → banke."},
+{c:"Prijedlozi",q:"Slika je iznad ___.",h:"Tablo masanın üstünde (duvarda). (stol)",o:["stola","stol","stolu","stolom"],a:"stola",e:"iznad + genitiv = üstünde. stol → stola."},
+{c:"Prijedlozi",q:"Torba je ispod ___.",h:"Çanta sandalyenin altında. (stolica)",o:["stolice","stolica","stolicu","stolici"],a:"stolice",e:"ispod + genitiv = altında. stolica → stolice."},
+{c:"Prijedlozi",q:"Idemo preko ___.",h:"Köprüden geçiyoruz. (most)",o:["mosta","most","mostu","mostom"],a:"mosta",e:"preko + genitiv = üzerinden, karşıdan karşıya. most → mosta."},
+{c:"Prijedlozi",q:"Vraćam se s ___.",h:"İşten dönüyorum. (posao)",o:["posla","posao","poslu","poslom"],a:"posla",e:"s / sa + genitiv = «üzerinden geri». posao → posla (kaçak a!). na posao → na poslu → s posla."},
+{c:"Prijedlozi",q:"Dolazim s ___.",h:"Plajdan geliyorum. (plaža)",o:["plaže","plaža","plažu","plaži"],a:"plaže",e:"«na» alan yerlerden dönerken «s + genitiv»: s plaže, s posla, s fakulteta."},
+{c:"Prijedlozi",q:"Čekam te ispred ___.",h:"Seni sinemanın önünde bekliyorum. (kino)",o:["kina","kino","kinu","kinom"],a:"kina",e:"ispred + genitiv = önünde. kino → kina."},
+{c:"Prijedlozi",q:"Auto je iza ___.",h:"Araba evin arkasında. (kuća)",o:["kuće","kuća","kuću","kući"],a:"kuće",e:"iza + genitiv = arkasında. kuća → kuće."},
+{c:"Prijedlozi",q:"Oko ___ sjedi cijela obitelj.",h:"Bütün aile masanın etrafında oturuyor. (stol)",o:["stola","stol","stolu","stolom"],a:"stola",e:"oko + genitiv = etrafında. Ayrıca «yaklaşık» anlamı da var: oko deset sati."},
+{c:"Prijedlozi",q:"Umjesto ___ pijem čaj.",h:"Kahve yerine çay içiyorum. (kava)",o:["kave","kava","kavu","kavi"],a:"kave",e:"umjesto + genitiv = yerine. umjesto kave, umjesto mene."},
+{c:"Prijedlozi",q:"U nedjelju idem ___ bake.",h:"Pazar günü babaanneme gidiyorum.",o:["kod","u","na","do"],a:"kod",e:"Kişiler için her zaman «kod + genitiv»: kod bake, kod mame, kod frizera."},
+{c:"Prijedlozi",q:"Ovaj poklon je ___ mene.",h:"Bu hediye benden.",o:["od","iz","s","do"],a:"od",e:"od + genitiv = -den (kaynak/kimden). Poklon od mene, pismo od sestre."},
+{c:"Prijedlozi",q:"Nakon ___ idem doma.",h:"İşten sonra eve gidiyorum. (posao)",o:["posla","posao","poslu","poslom"],a:"posla",e:"nakon = poslije, ikisi de genitiv. posao → posla."},
+{c:"Prijedlozi",q:"Do ___ ima deset minuta.",h:"Merkeze on dakika var. (centar)",o:["centra","centar","centru","centrom"],a:"centra",e:"centar → centra (kaçak a). do + genitiv."},
+{c:"Prijedlozi",q:"Sjedim kraj ___.",h:"Pencerenin yanında oturuyorum. (prozor)",o:["prozora","prozor","prozoru","prozorom"],a:"prozora",e:"kraj + genitiv = yanında. prozor → prozora."},
+{c:"Prijedlozi",q:"Ovo pismo je od moje ___.",h:"Bu mektup kız kardeşimden. (sestra)",o:["sestre","sestra","sestru","sestri"],a:"sestre",e:"od + genitiv: sestra → sestre."},
+{c:"Prijedlozi",q:"Vlak ide iz ___ u Split.",h:"Tren Zagreb'den Split'e gidiyor. (Zagreb)",o:["Zagreba","Zagreb","Zagrebu","Zagrebom"],a:"Zagreba",e:"iz + genitiv: Zagreb → Zagreba. «Ja sam iz Zagreba» = Zagreb'liyim."},
+{c:"Prijedlozi",q:"Restoran je preko ___.",h:"Restoran yolun karşısında. (put)",o:["puta","put","putu","putem"],a:"puta",e:"«preko puta» = karşısında — çok kullanışlı kalıp: preko puta banke."},
+
+/* ══════════ 3. KOLIČINA — Miktar ══════════ */
+{c:"Količina",q:"Čašu ___, molim.",h:"Bir bardak su lütfen. (voda)",o:["vode","voda","vodu","vodi"],a:"vode",e:"Miktar bildiren sözcükten sonra genitiv: čaša vode, boca vode."},
+{c:"Količina",q:"Litru ___, molim.",h:"Bir litre süt lütfen. (mlijeko)",o:["mlijeka","mlijeko","mlijeku","mlijekom"],a:"mlijeka",e:"litra + genitiv: mlijeko → mlijeka."},
+{c:"Količina",q:"Imam samo malo ___.",h:"Sadece biraz ekmeğim var. (kruh)",o:["kruha","kruh","kruhu","kruhom"],a:"kruha",e:"malo / puno / mnogo + genitiv. kruh → kruha."},
+{c:"Količina",q:"Danas ima puno ___ na plaži.",h:"Bugün plajda çok insan var.",o:["ljudi","ljude","ljudima","čovjeka"],a:"ljudi",e:"ljudi'nin genitiv çoğulu yine <b>ljudi</b>'dir. puno ljudi, malo ljudi."},
+{c:"Količina",q:"Molim kilogram ___.",h:"Bir kilo elma lütfen. (jabuke)",o:["jabuka","jabuke","jabukama","jabuku"],a:"jabuka",e:"Dişil -a isimlerin genitiv çoğulu eksiz olur: jabuke → jabuk<b>a</b>. Aynısı: kruška → krušaka, banana → banana."},
+{c:"Količina",q:"Šalicu ___, molim.",h:"Bir fincan çay lütfen. (čaj)",o:["čaja","čaj","čaju","čajem"],a:"čaja",e:"šalica + genitiv: čaj → čaja."},
+{c:"Količina",q:"Dvije ___, molim.",h:"İki kahve lütfen. (kava)",o:["kave","kava","kavu","kavama"],a:"kave",e:"2, 3, 4 sayılarından sonra <b>genitiv tekil</b> gelir: dvije kave, tri kave, četiri kave."},
+{c:"Količina",q:"Tri ___, molim.",h:"Üç bira lütfen. (pivo)",o:["piva","pivo","pivu","pivima"],a:"piva",e:"2–4 → genitiv tekil: tri piva. (5'ten sonra genitiv çoğul: pet piva — bu kelimede aynı görünür.)"},
+{c:"Količina",q:"To košta pet ___.",h:"Bu beş avro. (euro)",o:["eura","euro","euru","eurima"],a:"eura",e:"5 ve üstü → genitiv çoğul: pet eura, deset eura. (2–4: dva eura — burada da aynı.)"},
+{c:"Količina",q:"Imam deset ___.",h:"On kunam var. (kuna)",o:["kuna","kune","kunu","kunama"],a:"kuna",e:"Dişil -a genitiv çoğulu eksizdir: kune → kuna."},
+{c:"Količina",q:"Čekam već šest ___.",h:"Altı saattir bekliyorum. (sat)",o:["sati","sata","sat","satima"],a:"sati",e:"sat özeldir: 2–4 → sata (dva sata), 5+ → sati (pet sati, šest sati)."},
+{c:"Količina",q:"Ostajem četiri ___.",h:"Dört gün kalıyorum. (dan)",o:["dana","dan","danu","danima"],a:"dana",e:"2–4 → genitiv tekil: četiri dana. 5+ → genitiv çoğul: pet dana (burada aynı görünür)."},
+{c:"Količina",q:"Dodaj malo ___.",h:"Biraz tuz ekle. (sol)",o:["soli","sol","solju","sola"],a:"soli",e:"Sessizle biten dişil isimler genitivde -i alır: sol → soli, noć → noći, stvar → stvari."},
+{c:"Količina",q:"Bocu ___, molim.",h:"Bir şişe şarap lütfen. (vino)",o:["vina","vino","vinu","vinom"],a:"vina",e:"boca + genitiv: vino → vina."},
+{c:"Količina",q:"Želim komad ___.",h:"Bir dilim pasta istiyorum. (torta)",o:["torte","torta","tortu","torti"],a:"torte",e:"komad + genitiv: torta → torte."},
+{c:"Količina",q:"Nemam puno ___.",h:"Çok param yok. (novac)",o:["novca","novac","novcu","novcem"],a:"novca",e:"novac → nov<b>c</b>a (kaçak a). puno novca / malo novca."},
+
+/* ══════════ 4. NEMA / NEMAM — Olumsuzluk ══════════ */
+{c:"Nema",q:"Danas nemam ___.",h:"Bugün vaktim yok. (vrijeme)",o:["vremena","vrijeme","vremenu","vremenom"],a:"vremena",e:"vrijeme düzensizdir: vrijeme → vre<b>men</b>a. «Nemam vremena» = vaktim yok — günlük konuşmada çok geçer."},
+{c:"Nema",q:"U trgovini nema ___.",h:"Markette ekmek yok. (kruh)",o:["kruha","kruh","kruhu","kruhom"],a:"kruha",e:"«nema» + genitiv = yok. Olumlu hali akuzativdir: Ima kruh<b>a</b>… aslında ima da genitiv alır. Ama «Kupujem kruh» → akuzativ."},
+{c:"Nema",q:"Nemam ___ za taksi.",h:"Taksi için param yok. (novac)",o:["novca","novac","novcu","novcem"],a:"novca",e:"nemati + genitiv: novac → novca."},
+{c:"Nema",q:"U hladnjaku nema ___.",h:"Buzdolabında süt yok. (mlijeko)",o:["mlijeka","mlijeko","mlijeku","mlijekom"],a:"mlijeka",e:"nema + genitiv: mlijeko → mlijeka."},
+{c:"Nema",q:"Nemam ___, idem autobusom.",h:"Arabam yok, otobüsle gidiyorum. (auto)",o:["auta","auto","autu","autom"],a:"auta",e:"nemam + genitiv: auto → auta."},
+{c:"Nema",q:"U sobi nema ___.",h:"Odada sandalye yok. (stolica)",o:["stolice","stolica","stolicu","stolici"],a:"stolice",e:"nema + genitiv: stolica → stolice."},
+{c:"Nema",q:"Nemamo ___ kod kuće.",h:"Evde şekerimiz yok. (šećer)",o:["šećera","šećer","šećeru","šećerom"],a:"šećera",e:"nemamo + genitiv: šećer → šećera."},
+{c:"Nema",q:"Danas nemam ___.",h:"Bugün işim yok. (posao)",o:["posla","posao","poslu","poslom"],a:"posla",e:"posao → posla. «Nemam posla» hem «işim yok» hem «boşum» anlamında."},
+{c:"Nema",q:"Nema ___ u boci.",h:"Şişede su yok. (voda)",o:["vode","voda","vodu","vodi"],a:"vode",e:"nema + genitiv: voda → vode."},
+{c:"Nema",q:"Zimi ovdje nema ___.",h:"Kışın burada insan olmaz.",o:["ljudi","ljude","ljudima","čovjek"],a:"ljudi",e:"nema + genitiv çoğul: ljudi → ljudi."},
+{c:"Nema",q:"Nemam dobre ___.",h:"İyi bir fikrim yok. (ideja)",o:["ideje","ideja","ideju","ideji"],a:"ideje",e:"Sıfat da genitive girer: dobr<b>e</b> idej<b>e</b>."},
+{c:"Nema",q:"Nedjeljom nema ___.",h:"Pazar günleri otobüs yok. (autobus)",o:["autobusa","autobus","autobusu","autobusom"],a:"autobusa",e:"nema + genitiv: autobus → autobusa."},
+
+/* ══════════ 5. VRIJEME — Zaman ve tarih ══════════ */
+{c:"Vrijeme",q:"Danas je peti ___.",h:"Bugün 5 Mayıs. (svibanj)",o:["svibnja","svibanj","svibnju","svibnjem"],a:"svibnja",e:"Tarihlerde ay genitivde olur: svibanj → svib<b>nj</b>a (kaçak a). «petog svibnja» de denir."},
+{c:"Vrijeme",q:"Rođen sam tisuću devetsto devedesete ___.",h:"1990 yılında doğdum. (godina)",o:["godine","godina","godinu","godini"],a:"godine",e:"Yıl belirtirken genitiv: …devedesete godine."},
+{c:"Vrijeme",q:"Radim od ___ do večeri.",h:"Sabahtan akşama çalışıyorum. (jutro)",o:["jutra","jutro","jutru","jutrom"],a:"jutra",e:"od … do … → genitiv: od jutra do večeri."},
+{c:"Vrijeme",q:"Prvog ___ idem na more.",h:"1 Temmuz'da denize gidiyorum. (srpanj)",o:["srpnja","srpanj","srpnju","srpnjem"],a:"srpnja",e:"srpanj → srpnja. Ay adları tarihte hep genitivdir."},
+{c:"Vrijeme",q:"To je bilo prošle ___.",h:"Bu geçen yıl oldu. (godina)",o:["godine","godina","godinu","godini"],a:"godine",e:"prošle godine = geçen yıl, ove godine = bu yıl — ikisi de genitiv kalıbı."},
+{c:"Vrijeme",q:"Idem na more sredinom ___.",h:"Ağustos ortasında denize gidiyorum. (kolovoz)",o:["kolovoza","kolovoz","kolovozu","kolovozom"],a:"kolovoza",e:"sredinom / početkom / krajem + genitiv: sredinom kolovoza."},
+{c:"Vrijeme",q:"Do ___ moram završiti.",h:"Cumaya kadar bitirmeliyim. (petak)",o:["petka","petak","petku","petkom"],a:"petka",e:"petak → pe<b>tk</b>a (kaçak a). do + genitiv."},
+{c:"Vrijeme",q:"Vidimo se poslije ___.",h:"Dersten sonra görüşürüz. (nastava)",o:["nastave","nastava","nastavu","nastavi"],a:"nastave",e:"poslije + genitiv: nastava → nastave."},
+
+/* ══════════ 6. MIKS — Genitiv / Akuzativ / Lokativ ══════════ */
+{c:"Miks",q:"Idem u ___.",h:"Markete gidiyorum. (trgovina)",o:["trgovinu","trgovine","trgovini","trgovina"],a:"trgovinu",e:"<b>Hareket</b> → u + akuzativ: u trgovin<b>u</b>. (Kamo? Nereye?)"},
+{c:"Miks",q:"Sada sam u ___.",h:"Şu an marketteyim. (trgovina)",o:["trgovini","trgovinu","trgovine","trgovina"],a:"trgovini",e:"<b>Durağan konum</b> → u + lokativ: u trgovin<b>i</b>. (Gdje? Nerede?)"},
+{c:"Miks",q:"Dolazim iz ___.",h:"Marketten geliyorum. (trgovina)",o:["trgovine","trgovinu","trgovini","trgovina"],a:"trgovine",e:"<b>Çıkış noktası</b> → iz + genitiv: iz trgovin<b>e</b>. (Odakle? Nereden?) Üçlü: u trgovinu → u trgovini → iz trgovine."},
+{c:"Miks",q:"Ujutro idem na ___.",h:"Sabah işe gidiyorum. (posao)",o:["posao","posla","poslu","poslom"],a:"posao",e:"Hareket → na + akuzativ. posao cansız olduğu için akuzativ = nominativ: na posao."},
+{c:"Miks",q:"Sada sam na ___.",h:"Şu an işteyim. (posao)",o:["poslu","posao","posla","poslom"],a:"poslu",e:"Konum → na + lokativ: na poslu (kaçak a düşer)."},
+{c:"Miks",q:"U pet se vraćam s ___.",h:"Beşte işten dönüyorum. (posao)",o:["posla","posao","poslu","poslom"],a:"posla",e:"Çıkış → s + genitiv: s posla. Tam üçlü: na posao → na poslu → s posla."},
+{c:"Miks",q:"Dijete ide u ___.",h:"Çocuk okula gidiyor. (škola)",o:["školu","školi","škole","škola"],a:"školu",e:"Hareket → akuzativ: u škol<b>u</b>."},
+{c:"Miks",q:"Djeca su u ___.",h:"Çocuklar okulda. (škola)",o:["školi","školu","škole","škola"],a:"školi",e:"Konum → lokativ: u škol<b>i</b>."},
+{c:"Miks",q:"Ovo je učiteljica iz ___.",h:"Bu okuldan bir öğretmen. (škola)",o:["škole","školu","školi","škola"],a:"škole",e:"Köken → genitiv: iz škol<b>e</b>."},
+{c:"Miks",q:"Ljeti idemo na ___.",h:"Yazın plaja gidiyoruz. (plaža)",o:["plažu","plaži","plaže","plažom"],a:"plažu",e:"Hareket → na + akuzativ: na plaž<b>u</b>."},
+{c:"Miks",q:"Cijeli dan ležimo na ___.",h:"Bütün gün plajda yatıyoruz. (plaža)",o:["plaži","plažu","plaže","plažom"],a:"plaži",e:"Konum → na + lokativ: na plaž<b>i</b>."},
+{c:"Miks",q:"Umorni smo, dolazimo s ___.",h:"Yorgunuz, plajdan geliyoruz. (plaža)",o:["plaže","plažu","plaži","plažom"],a:"plaže",e:"Çıkış → s + genitiv: s plaž<b>e</b>."},
+{c:"Miks",q:"Sutra idem kod ___.",h:"Yarın doktora gidiyorum. (doktor)",o:["doktora","doktor","doktoru","doktorom"],a:"doktora",e:"Kişiye gitmek → kod + <b>genitiv</b>, hareket olsa bile akuzativ değil. kod doktora."},
+{c:"Miks",q:"Sinoć smo gledali ___.",h:"Dün akşam film izledik. (film)",o:["film","filma","filmu","filmom"],a:"film",e:"Doğrudan nesne → akuzativ: gledati film."},
+{c:"Miks",q:"Razgovaramo o ___.",h:"Film hakkında konuşuyoruz. (film)",o:["filmu","film","filma","filmom"],a:"filmu",e:"o (hakkında) → lokativ: o filmu. pričati o + lokativ."},
+{c:"Miks",q:"Kraj ___ je bio predivan.",h:"Filmin sonu harikaydı. (film)",o:["filma","film","filmu","filmom"],a:"filma",e:"İyelik → genitiv: kraj film<b>a</b>. Üçlü: gledam film → o filmu → kraj filma."},
+{c:"Miks",q:"Već pet godina živim u ___.",h:"Beş yıldır Zagreb'de yaşıyorum. (Zagreb)",o:["Zagrebu","Zagreb","Zagreba","Zagrebom"],a:"Zagrebu",e:"Konum → lokativ: u Zagreb<b>u</b>."},
+{c:"Miks",q:"Sutra putujem u ___.",h:"Yarın Zagreb'e gidiyorum. (Zagreb)",o:["Zagreb","Zagrebu","Zagreba","Zagrebom"],a:"Zagreb",e:"Hareket → akuzativ: u Zagreb (şehir adlarında akuzativ = nominativ)."},
+{c:"Miks",q:"Ja sam iz ___.",h:"Ben Zagrebliyim. (Zagreb)",o:["Zagreba","Zagreb","Zagrebu","Zagrebom"],a:"Zagreba",e:"Köken → genitiv: iz Zagreb<b>a</b>. «Odakle si?» sorusunun cevabı."},
+{c:"Miks",q:"Svako jutro pijem ___.",h:"Her sabah kahve içiyorum. (kava)",o:["kavu","kave","kavi","kavom"],a:"kavu",e:"Nesne → akuzativ: pijem kav<b>u</b>."},
+{c:"Miks",q:"Molim jednu šalicu ___.",h:"Bir fincan kahve lütfen. (kava)",o:["kave","kavu","kavi","kavom"],a:"kave",e:"Miktar → genitiv: šalica kav<b>e</b>. Karşılaştır: pijem kavu (A) ↔ šalica kave (G)."},
+
+];
+
+/* ---------- state ---------- */
+let pool=[],i=0,score=0,answered=false,wrong=[],stats={},N=20;
+
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=[...a];for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a};
+const KEYS=['A','B','C','D'];
+const CATNAME={Posvojnost:"İyelik",Prijedlozi:"Edatlar",Količina:"Miktar",Nema:"Olumsuzluk",Vrijeme:"Zaman",Miks:"Karma G/A/L"};
+
+/* count chips */
+$('counts').addEventListener('click',e=>{
+  const b=e.target.closest('.chip'); if(!b)return;
+  [...$('counts').children].forEach(c=>c.classList.remove('on'));
+  b.classList.add('on'); N=+b.dataset.n;
+});
+
+$('go').onclick=start;
+$('again').onclick=start;
+$('home').onclick=()=>{show('start')};
+$('next').onclick=next;
+$('quit').onclick=finish;
+
+function show(s){['start','quiz','result'].forEach(x=>$(x).classList.toggle('hidden',x!==s));window.scrollTo(0,0)}
+
+function start(){
+  const t=$('topic').value;
+  let src = t==='all' ? BANK : BANK.filter(q=>q.c===t);
+  pool = shuffle(src).slice(0, Math.min(N, src.length));
+  i=0;score=0;wrong=[];stats={};
+  $('qt').textContent=pool.length;
+  show('quiz'); render();
+}
+
+function render(){
+  answered=false;
+  const q=pool[i];
+  $('qn').textContent=i+1;
+  $('sc').textContent=score;
+  $('fill').style.width=(i/pool.length*100)+'%';
+  $('qtext').innerHTML=q.q.replace('___','<u>&nbsp;</u>');
+  $('hint').textContent=q.h;
+  $('exp').classList.add('hidden');
+  $('next').classList.add('hidden');
+
+  const opts=shuffle(q.o);
+  $('opts').innerHTML='';
+  opts.forEach((o,n)=>{
+    const b=document.createElement('button');
+    b.className='opt';
+    b.innerHTML=`<span class="k">${KEYS[n]}</span><span>${o}</span>`;
+    b.onclick=()=>pick(o,b);
+    $('opts').appendChild(b);
+  });
+}
+
+function pick(choice,btn){
+  if(answered)return; answered=true;
+  const q=pool[i];
+  const ok = choice===q.a;
+  if(!stats[q.c])stats[q.c]={ok:0,n:0};
+  stats[q.c].n++; if(ok){stats[q.c].ok++;score++}else{wrong.push({q,choice})}
+
+  [...$('opts').children].forEach(b=>{
+    b.disabled=true;
+    const txt=b.querySelector('span:last-child').textContent;
+    if(txt===q.a){b.classList.add('correct')}
+    else if(b===btn){b.classList.add('wrong')}
+    else{b.classList.add('dim')}
+  });
+
+  $('sc').textContent=score;
+  $('exp').innerHTML=`<span class="verdict ${ok?'ok':'no'}">${ok?'Točno!':'Netočno — doğrusu: '+q.a}</span>${q.e}`;
+  $('exp').classList.remove('hidden');
+  $('next').textContent = i===pool.length-1 ? 'Sonuçları gör' : 'Sonraki soru';
+  $('next').classList.remove('hidden');
+}
+
+function next(){ i++; if(i>=pool.length){finish()}else{render();window.scrollTo(0,0)} }
+
+function finish(){
+  const done = i + (answered?1:0);
+  const pct = done ? Math.round(score/done*100) : 0;
+  $('rBig').textContent=score;
+  $('rOf').textContent=`/ ${done} doğru — %${pct}`;
+  $('rMsg').textContent =
+    pct>=90 ? 'Odlično! Genitiv sende oturmuş.' :
+    pct>=70 ? 'Vrlo dobro. Birkaç edat tekrarı yeter.' :
+    pct>=50 ? 'Dobro je. Yanlışları okuyup tekrar dene.' :
+              'Polako! Önce iz / od / do / kod / bez ile başla.';
+
+  $('brk').innerHTML = Object.keys(stats).length
+    ? Object.entries(stats).map(([c,v])=>
+        `<div class="brk-row"><span>${CATNAME[c]||c}</span><b>${v.ok}/${v.n}</b></div>`).join('')
+    : '<div class="brk-row"><span>Henüz veri yok</span><b>—</b></div>';
+
+  if(wrong.length){
+    $('revCard').classList.remove('hidden');
+    $('rev').innerHTML = wrong.map(w=>
+      `<div class="rev">
+         <div class="s">${w.q.q.replace('___','<b style="color:var(--olive)">'+w.q.a+'</b>')}</div>
+         <div class="a">Senin cevabın: <i>${w.choice}</i> · ${w.q.e}</div>
+       </div>`).join('');
+  } else {
+    $('revCard').classList.add('hidden');
+  }
+  show('result');
+}
+</script>
+</body>
+</html>
