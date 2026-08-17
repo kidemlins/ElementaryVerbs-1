@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hrvatske Imenice — Günlük Hırvatça İsimler Quiz'i</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B3B4F;
+    --navy-deep:#082A38;
+    --stone:#EFE7D6;
+    --red:#C4132B;
+    --olive:#6F7B3E;
+    --gold:#E3A93B;
+    --ink:#1E2A2E;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--navy-deep);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(227,169,59,0.10), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(196,19,43,0.10), transparent 45%);
+    color:var(--stone);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 60px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  header{text-align:center; max-width:640px; margin-bottom:28px;}
+  .eyebrow{
+    font-size:12px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces', serif; font-weight:700;
+    font-size:clamp(28px, 5vw, 44px); margin:0 0 10px;
+    color:var(--stone); letter-spacing:-0.01em;
+  }
+  h1 em{font-style:italic; color:var(--gold);}
+  .sub{color:#C9D6D9; font-size:15px; line-height:1.6; max-width:520px; margin:0 auto;}
+
+  .len-picker{
+    display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+    justify-content:center; margin-top:20px;
+  }
+  .len-label{font-size:12px; color:#8FA3A8; letter-spacing:0.1em; text-transform:uppercase;}
+  .len-btn{
+    padding:7px 15px; border-radius:20px;
+    border:1.5px solid rgba(239,231,214,0.28);
+    background:transparent; color:var(--stone);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:13.5px; font-weight:600; cursor:pointer;
+    transition:background 0.15s ease, border-color 0.15s ease;
+  }
+  .len-btn:hover{border-color:var(--gold);}
+  .len-btn.active{background:var(--gold); border-color:var(--gold); color:var(--navy-deep);}
+
+  .board{
+    display:flex; gap:3px; margin:22px 0 6px;
+    flex-wrap:wrap; justify-content:center; max-width:560px;
+  }
+  .sq{
+    width:13px; height:13px;
+    background:rgba(239,231,214,0.14);
+    border-radius:2px;
+    transition:background 0.35s ease, transform 0.35s ease;
+  }
+  .sq.correct{background:var(--olive); transform:scale(1.05);}
+  .sq.wrong{background:var(--red); transform:scale(1.05);}
+  .sq.current{outline:2px solid var(--gold); outline-offset:1px;}
+
+  .counter{font-size:13px; color:#9FB2B6; margin-bottom:18px; letter-spacing:0.04em;}
+
+  main{width:100%; max-width:560px;}
+
+  .card{
+    background:var(--stone); color:var(--ink);
+    border-radius:18px; padding:36px 30px 30px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+    position:relative; overflow:hidden;
+  }
+  .card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:6px;
+    background:repeating-linear-gradient(90deg, var(--navy) 0 14px, var(--red) 14px 28px);
+    opacity:0.85;
+  }
+
+  .prompt-label{
+    font-size:12px; text-transform:uppercase; letter-spacing:0.16em;
+    color:#8A7A55; font-weight:600; margin-bottom:8px;
+  }
+  .prompt{
+    font-family:'Fraunces', serif;
+    font-size:clamp(24px, 4vw, 32px); font-weight:600;
+    line-height:1.25; margin:0 0 28px; color:var(--navy-deep);
+  }
+
+  .options{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:420px){.options{grid-template-columns:1fr;}}
+  .opt{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px; font-weight:500; text-align:left;
+    padding:14px 16px; border-radius:10px;
+    border:1.5px solid rgba(11,59,79,0.18);
+    background:#fff; color:var(--ink); cursor:pointer;
+    transition:border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  }
+  .opt:hover:not(:disabled){border-color:var(--navy); transform:translateY(-1px);}
+  .opt:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .opt:disabled{cursor:default;}
+  .opt.is-correct{background:var(--olive); border-color:var(--olive); color:#fff;}
+  .opt.is-wrong{background:var(--red); border-color:var(--red); color:#fff;}
+
+  .feedback{
+    min-height:24px; margin-top:18px;
+    font-size:14px; font-weight:600; color:var(--navy);
+  }
+  .feedback.wrong-msg{color:var(--red);}
+
+  .info-panel{
+    display:none; margin-top:16px; padding-top:16px;
+    border-top:1.5px dashed rgba(11,59,79,0.18);
+    animation:fadeIn 0.35s ease both;
+  }
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(4px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+  .info-title{
+    font-size:12px; text-transform:uppercase; letter-spacing:0.14em;
+    font-weight:600; color:#8A7A55; margin-bottom:10px;
+  }
+  .info-row{
+    display:flex; justify-content:space-between; gap:8px;
+    font-size:14px; padding:5px 0;
+    border-bottom:1px solid rgba(11,59,79,0.08);
+  }
+  .info-key{color:#6E7C80; font-weight:500;}
+  .info-val{color:var(--navy-deep); font-weight:600;}
+  .gender-chip{
+    display:inline-block; padding:2px 8px; border-radius:20px;
+    font-size:12px; font-weight:700; color:#fff; letter-spacing:0.04em;
+  }
+  .g-m{background:var(--navy);}
+  .g-z{background:var(--red);}
+  .g-s{background:var(--olive);}
+
+  .next-btn{
+    margin-top:16px; display:none; width:100%;
+    padding:13px 16px; border-radius:10px; border:none;
+    background:var(--navy); color:var(--stone);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600; font-size:15px; cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .next-btn:hover{background:var(--navy-deep);}
+
+  .results{text-align:center; padding:44px 30px;}
+  .results .big{
+    font-family:'Fraunces', serif; font-size:52px; font-weight:700;
+    color:var(--navy-deep); margin:6px 0 4px;
+  }
+  .results p{color:#4A5A5F; font-size:15px; line-height:1.6;}
+  .restart-btn{
+    margin-top:22px; padding:13px 26px; border-radius:10px; border:none;
+    background:var(--red); color:#fff; font-weight:600; font-size:15px; cursor:pointer;
+  }
+  .restart-btn:hover{background:#a30f24;}
+
+  footer{
+    margin-top:32px; font-size:12px; color:#7C8E92;
+    text-align:center; max-width:480px;
+  }
+  footer a{color:var(--gold);}
+  .hidden{display:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">A1 · Imenice</div>
+  <h1>Hırvatça Günlük <em>İsimler</em></h1>
+  <p class="sub">İngilizce ismi oku, doğru Hırvatçasını seç. Doğru cevapta ismin cinsiyeti (m / ž / s) ve çoğul hali gösterilir.</p>
+  <div class="len-picker">
+    <span class="len-label">Tur uzunluğu</span>
+    <button class="len-btn active" data-len="20">20</button>
+    <button class="len-btn" data-len="50">50</button>
+    <button class="len-btn" data-len="100">100</button>
+  </div>
+</header>
+
+<div class="board" id="board" aria-hidden="true"></div>
+<div class="counter" id="counter">Soru 1 / 20</div>
+
+<main>
+  <div class="card" id="quizCard">
+    <div class="prompt-label">İngilizce isim</div>
+    <p class="prompt" id="promptText">house</p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback"></div>
+    <div class="info-panel" id="infoPanel">
+      <div class="info-title" id="infoTitle">Detaylar</div>
+      <div id="infoBody"></div>
+    </div>
+    <button class="next-btn" id="nextBtn">Sonraki soru →</button>
+  </div>
+
+  <div class="card hidden" id="resultsCard">
+    <div class="results">
+      <div class="prompt-label">Tur bitti</div>
+      <div class="big" id="scoreText">0 / 20</div>
+      <p id="scoreMsg">Sonuç değerlendiriliyor…</p>
+      <button class="restart-btn" id="restartBtn">Yeniden başla</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  149 günlük Hırvatça isim. Cinsiyet: <strong>m</strong> = muški (eril), <strong>ž</strong> = ženski (dişil), <strong>s</strong> = srednji (nötr).
+</footer>
+
+<script>
+  // g: cinsiyet (m / ž / s), pl: çoğul hâli
+  const NOUNS = [
+    { hr:"kuća", en:"house", g:"ž", pl:"kuće" },
+    { hr:"stan", en:"apartment", g:"m", pl:"stanovi" },
+    { hr:"zgrada", en:"building", g:"ž", pl:"zgrade" },
+    { hr:"soba", en:"room", g:"ž", pl:"sobe" },
+    { hr:"kuhinja", en:"kitchen", g:"ž", pl:"kuhinje" },
+    { hr:"kupaonica", en:"bathroom", g:"ž", pl:"kupaonice" },
+    { hr:"vrata", en:"door", g:"s", pl:"vrata" },
+    { hr:"prozor", en:"window", g:"m", pl:"prozori" },
+    { hr:"zid", en:"wall", g:"m", pl:"zidovi" },
+    { hr:"pod", en:"floor", g:"m", pl:"podovi" },
+    { hr:"krov", en:"roof", g:"m", pl:"krovovi" },
+    { hr:"stol", en:"table", g:"m", pl:"stolovi" },
+    { hr:"stolica", en:"chair", g:"ž", pl:"stolice" },
+    { hr:"krevet", en:"bed", g:"m", pl:"kreveti" },
+    { hr:"hladnjak", en:"fridge", g:"m", pl:"hladnjaci" },
+    { hr:"ključ", en:"key", g:"m", pl:"ključevi" },
+    { hr:"torba", en:"bag", g:"ž", pl:"torbe" },
+    { hr:"novčanik", en:"wallet", g:"m", pl:"novčanici" },
+    { hr:"televizor", en:"television", g:"m", pl:"televizori" },
+    { hr:"mobitel", en:"mobile phone", g:"m", pl:"mobiteli" },
+    { hr:"računalo", en:"computer", g:"s", pl:"računala" },
+    { hr:"telefon", en:"phone", g:"m", pl:"telefoni" },
+    { hr:"čaša", en:"glass", g:"ž", pl:"čaše" },
+    { hr:"šalica", en:"cup", g:"ž", pl:"šalice" },
+    { hr:"tanjur", en:"plate", g:"m", pl:"tanjuri" },
+    { hr:"žlica", en:"spoon", g:"ž", pl:"žlice" },
+    { hr:"vilica", en:"fork", g:"ž", pl:"vilice" },
+    { hr:"nož", en:"knife", g:"m", pl:"noževi" },
+    { hr:"voda", en:"water", g:"ž", pl:"vode" },
+    { hr:"kruh", en:"bread", g:"m", pl:"kruhovi" },
+    { hr:"mlijeko", en:"milk", g:"s", pl:"—" },
+    { hr:"kava", en:"coffee", g:"ž", pl:"kave" },
+    { hr:"čaj", en:"tea", g:"m", pl:"čajevi" },
+    { hr:"sok", en:"juice", g:"m", pl:"sokovi" },
+    { hr:"vino", en:"wine", g:"s", pl:"vina" },
+    { hr:"pivo", en:"beer", g:"s", pl:"piva" },
+    { hr:"jabuka", en:"apple", g:"ž", pl:"jabuke" },
+    { hr:"meso", en:"meat", g:"s", pl:"—" },
+    { hr:"riba", en:"fish", g:"ž", pl:"ribe" },
+    { hr:"sir", en:"cheese", g:"m", pl:"sirevi" },
+    { hr:"jaje", en:"egg", g:"s", pl:"jaja" },
+    { hr:"juha", en:"soup", g:"ž", pl:"juhe" },
+    { hr:"salata", en:"salad", g:"ž", pl:"salate" },
+    { hr:"povrće", en:"vegetables", g:"s", pl:"—" },
+    { hr:"voće", en:"fruit", g:"s", pl:"—" },
+    { hr:"krumpir", en:"potato", g:"m", pl:"krumpiri" },
+    { hr:"rajčica", en:"tomato", g:"ž", pl:"rajčice" },
+    { hr:"šećer", en:"sugar", g:"m", pl:"—" },
+    { hr:"sol", en:"salt", g:"ž", pl:"—" },
+    { hr:"ulje", en:"oil", g:"s", pl:"ulja" },
+    { hr:"hrana", en:"food", g:"ž", pl:"—" },
+    { hr:"doručak", en:"breakfast", g:"m", pl:"doručci" },
+    { hr:"ručak", en:"lunch", g:"m", pl:"ručkovi" },
+    { hr:"večera", en:"dinner", g:"ž", pl:"večere" },
+    { hr:"grad", en:"city", g:"m", pl:"gradovi" },
+    { hr:"selo", en:"village", g:"s", pl:"sela" },
+    { hr:"ulica", en:"street", g:"ž", pl:"ulice" },
+    { hr:"trg", en:"square", g:"m", pl:"trgovi" },
+    { hr:"trgovina", en:"shop", g:"ž", pl:"trgovine" },
+    { hr:"tržnica", en:"market", g:"ž", pl:"tržnice" },
+    { hr:"restoran", en:"restaurant", g:"m", pl:"restorani" },
+    { hr:"kafić", en:"café", g:"m", pl:"kafići" },
+    { hr:"hotel", en:"hotel", g:"m", pl:"hoteli" },
+    { hr:"banka", en:"bank", g:"ž", pl:"banke" },
+    { hr:"pošta", en:"post office", g:"ž", pl:"pošte" },
+    { hr:"bolnica", en:"hospital", g:"ž", pl:"bolnice" },
+    { hr:"park", en:"park", g:"m", pl:"parkovi" },
+    { hr:"kino", en:"cinema", g:"s", pl:"kina" },
+    { hr:"kazalište", en:"theatre", g:"s", pl:"kazališta" },
+    { hr:"auto", en:"car", g:"m", pl:"auti" },
+    { hr:"vlak", en:"train", g:"m", pl:"vlakovi" },
+    { hr:"autobus", en:"bus", g:"m", pl:"autobusi" },
+    { hr:"kolodvor", en:"station", g:"m", pl:"kolodvori" },
+    { hr:"karta", en:"ticket", g:"ž", pl:"karte" },
+    { hr:"putovnica", en:"passport", g:"ž", pl:"putovnice" },
+    { hr:"putovanje", en:"trip", g:"s", pl:"putovanja" },
+    { hr:"more", en:"sea", g:"s", pl:"mora" },
+    { hr:"plaža", en:"beach", g:"ž", pl:"plaže" },
+    { hr:"otok", en:"island", g:"m", pl:"otoci" },
+    { hr:"rijeka", en:"river", g:"ž", pl:"rijeke" },
+    { hr:"jezero", en:"lake", g:"s", pl:"jezera" },
+    { hr:"planina", en:"mountain", g:"ž", pl:"planine" },
+    { hr:"sunce", en:"sun", g:"s", pl:"sunca" },
+    { hr:"kiša", en:"rain", g:"ž", pl:"kiše" },
+    { hr:"snijeg", en:"snow", g:"m", pl:"snjegovi" },
+    { hr:"vjetar", en:"wind", g:"m", pl:"vjetrovi" },
+    { hr:"drvo", en:"tree", g:"s", pl:"drveća" },
+    { hr:"cvijet", en:"flower", g:"m", pl:"cvjetovi" },
+    { hr:"čovjek", en:"man / person", g:"m", pl:"ljudi" },
+    { hr:"žena", en:"woman / wife", g:"ž", pl:"žene" },
+    { hr:"muž", en:"husband", g:"m", pl:"muževi" },
+    { hr:"dijete", en:"child", g:"s", pl:"djeca" },
+    { hr:"majka", en:"mother", g:"ž", pl:"majke" },
+    { hr:"otac", en:"father", g:"m", pl:"očevi" },
+    { hr:"brat", en:"brother", g:"m", pl:"braća" },
+    { hr:"sestra", en:"sister", g:"ž", pl:"sestre" },
+    { hr:"sin", en:"son", g:"m", pl:"sinovi" },
+    { hr:"kći", en:"daughter", g:"ž", pl:"kćeri" },
+    { hr:"baka", en:"grandmother", g:"ž", pl:"bake" },
+    { hr:"djed", en:"grandfather", g:"m", pl:"djedovi" },
+    { hr:"obitelj", en:"family", g:"ž", pl:"obitelji" },
+    { hr:"prijatelj", en:"friend", g:"m", pl:"prijatelji" },
+    { hr:"susjed", en:"neighbour", g:"m", pl:"susjedi" },
+    { hr:"učitelj", en:"teacher", g:"m", pl:"učitelji" },
+    { hr:"liječnik", en:"doctor", g:"m", pl:"liječnici" },
+    { hr:"student", en:"student", g:"m", pl:"studenti" },
+    { hr:"glava", en:"head", g:"ž", pl:"glave" },
+    { hr:"ruka", en:"hand / arm", g:"ž", pl:"ruke" },
+    { hr:"noga", en:"leg / foot", g:"ž", pl:"noge" },
+    { hr:"oko", en:"eye", g:"s", pl:"oči" },
+    { hr:"srce", en:"heart", g:"s", pl:"srca" },
+    { hr:"lijek", en:"medicine", g:"m", pl:"lijekovi" },
+    { hr:"odjeća", en:"clothes", g:"ž", pl:"—" },
+    { hr:"majica", en:"T-shirt", g:"ž", pl:"majice" },
+    { hr:"haljina", en:"dress", g:"ž", pl:"haljine" },
+    { hr:"jakna", en:"jacket", g:"ž", pl:"jakne" },
+    { hr:"cipela", en:"shoe", g:"ž", pl:"cipele" },
+    { hr:"škola", en:"school", g:"ž", pl:"škole" },
+    { hr:"knjiga", en:"book", g:"ž", pl:"knjige" },
+    { hr:"olovka", en:"pencil", g:"ž", pl:"olovke" },
+    { hr:"papir", en:"paper", g:"m", pl:"papiri" },
+    { hr:"zadaća", en:"homework", g:"ž", pl:"zadaće" },
+    { hr:"razred", en:"class", g:"m", pl:"razredi" },
+    { hr:"jezik", en:"language / tongue", g:"m", pl:"jezici" },
+    { hr:"riječ", en:"word", g:"ž", pl:"riječi" },
+    { hr:"pitanje", en:"question", g:"s", pl:"pitanja" },
+    { hr:"odgovor", en:"answer", g:"m", pl:"odgovori" },
+    { hr:"posao", en:"job / work", g:"m", pl:"poslovi" },
+    { hr:"ured", en:"office", g:"m", pl:"uredi" },
+    { hr:"novac", en:"money", g:"m", pl:"—" },
+    { hr:"problem", en:"problem", g:"m", pl:"problemi" },
+    { hr:"dan", en:"day", g:"m", pl:"dani" },
+    { hr:"noć", en:"night", g:"ž", pl:"noći" },
+    { hr:"jutro", en:"morning", g:"s", pl:"jutra" },
+    { hr:"večer", en:"evening", g:"ž", pl:"večeri" },
+    { hr:"tjedan", en:"week", g:"m", pl:"tjedni" },
+    { hr:"mjesec", en:"month / moon", g:"m", pl:"mjeseci" },
+    { hr:"godina", en:"year", g:"ž", pl:"godine" },
+    { hr:"sat", en:"hour / clock", g:"m", pl:"sati" },
+    { hr:"vrijeme", en:"time / weather", g:"s", pl:"vremena" },
+    { hr:"ljeto", en:"summer", g:"s", pl:"ljeta" },
+    { hr:"zima", en:"winter", g:"ž", pl:"zime" },
+    { hr:"ime", en:"name", g:"s", pl:"imena" },
+    { hr:"glazba", en:"music", g:"ž", pl:"—" },
+    { hr:"pjesma", en:"song", g:"ž", pl:"pjesme" },
+    { hr:"film", en:"film", g:"m", pl:"filmovi" },
+    { hr:"ljubav", en:"love", g:"ž", pl:"ljubavi" },
+    { hr:"pas", en:"dog", g:"m", pl:"psi" },
+    { hr:"mačka", en:"cat", g:"ž", pl:"mačke" },
+  ];
+
+  const GENDER_LABEL = {
+    "m":"muški (eril)",
+    "ž":"ženski (dişil)",
+    "s":"srednji (nötr)"
+  };
+  const GENDER_CLASS = { "m":"g-m", "ž":"g-z", "s":"g-s" };
+
+  const TOTAL_QUESTIONS_DEFAULT = 20;
+  let TOTAL_QUESTIONS = TOTAL_QUESTIONS_DEFAULT;
+
+  let quizSet = [];
+  let currentIndex = 0;
+  let score = 0;
+  let answered = false;
+
+  const boardEl = document.getElementById('board');
+  const counterEl = document.getElementById('counter');
+  const promptEl = document.getElementById('promptText');
+  const optionsEl = document.getElementById('options');
+  const feedbackEl = document.getElementById('feedback');
+  const nextBtn = document.getElementById('nextBtn');
+  const infoPanel = document.getElementById('infoPanel');
+  const infoTitle = document.getElementById('infoTitle');
+  const infoBody = document.getElementById('infoBody');
+  const quizCard = document.getElementById('quizCard');
+  const resultsCard = document.getElementById('resultsCard');
+  const scoreText = document.getElementById('scoreText');
+  const scoreMsg = document.getElementById('scoreMsg');
+  const restartBtn = document.getElementById('restartBtn');
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildQuizSet(){
+    const pool = shuffle(NOUNS).slice(0, TOTAL_QUESTIONS);
+    return pool.map(noun => {
+      const distractorPool = NOUNS.filter(n => n.hr !== noun.hr);
+      const distractors = shuffle(distractorPool).slice(0, 3).map(n => n.hr);
+      const choices = shuffle([noun.hr, ...distractors]);
+      return { ...noun, choices };
+    });
+  }
+
+  function buildBoard(){
+    boardEl.innerHTML = '';
+    for(let i = 0; i < TOTAL_QUESTIONS; i++){
+      const sq = document.createElement('div');
+      sq.className = 'sq';
+      sq.id = 'sq-' + i;
+      boardEl.appendChild(sq);
+    }
+  }
+
+  function markBoard(index, isCorrect){
+    const sq = document.getElementById('sq-' + index);
+    if(!sq) return;
+    sq.classList.remove('current');
+    sq.classList.add(isCorrect ? 'correct' : 'wrong');
+  }
+
+  function highlightCurrent(index){
+    document.querySelectorAll('.sq').forEach(s => s.classList.remove('current'));
+    const sq = document.getElementById('sq-' + index);
+    if(sq) sq.classList.add('current');
+  }
+
+  function renderQuestion(){
+    answered = false;
+    const q = quizSet[currentIndex];
+    counterEl.textContent = `Soru ${currentIndex + 1} / ${TOTAL_QUESTIONS}`;
+    promptEl.textContent = q.en;
+    feedbackEl.textContent = '';
+    feedbackEl.classList.remove('wrong-msg');
+    infoPanel.style.display = 'none';
+    nextBtn.style.display = 'none';
+    highlightCurrent(currentIndex);
+
+    optionsEl.innerHTML = '';
+    q.choices.forEach(choice => {
+      const btn = document.createElement('button');
+      btn.className = 'opt';
+      btn.textContent = choice;
+      btn.addEventListener('click', () => handleAnswer(btn, choice, q.hr));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function handleAnswer(btn, chosen, correct){
+    if(answered) return;
+    answered = true;
+    const isCorrect = chosen === correct;
+    if(isCorrect) score++;
+
+    document.querySelectorAll('.opt').forEach(o => {
+      o.disabled = true;
+      if(o.textContent === correct) o.classList.add('is-correct');
+      else if(o === btn) o.classList.add('is-wrong');
+    });
+
+    feedbackEl.textContent = isCorrect
+      ? 'Doğru! ✓'
+      : `Yanlış. Doğru cevap: "${correct}"`;
+    feedbackEl.classList.toggle('wrong-msg', !isCorrect);
+
+    if(isCorrect) showInfo();
+
+    markBoard(currentIndex, isCorrect);
+    nextBtn.style.display = 'block';
+    nextBtn.focus();
+  }
+
+  function addInfoRow(keyText, valNode){
+    const row = document.createElement('div');
+    row.className = 'info-row';
+    const k = document.createElement('span');
+    k.className = 'info-key';
+    k.textContent = keyText;
+    const v = document.createElement('span');
+    v.className = 'info-val';
+    if(typeof valNode === 'string') v.textContent = valNode;
+    else v.appendChild(valNode);
+    row.appendChild(k);
+    row.appendChild(v);
+    infoBody.appendChild(row);
+  }
+
+  function showInfo(){
+    const q = quizSet[currentIndex];
+    infoTitle.textContent = `"${q.hr}" — detaylar`;
+    infoBody.innerHTML = '';
+
+    const chipWrap = document.createElement('span');
+    const chip = document.createElement('span');
+    chip.className = 'gender-chip ' + GENDER_CLASS[q.g];
+    chip.textContent = q.g;
+    chipWrap.appendChild(chip);
+    const label = document.createElement('span');
+    label.textContent = ' ' + GENDER_LABEL[q.g];
+    chipWrap.appendChild(label);
+
+    addInfoRow('Cinsiyet', chipWrap);
+    addInfoRow('Çoğul', q.pl === '—' ? 'çoğulu yok (sayılamaz)' : q.pl);
+    addInfoRow('Anlam', q.en);
+
+    infoPanel.style.display = 'block';
+  }
+
+  function nextQuestion(){
+    currentIndex++;
+    if(currentIndex >= TOTAL_QUESTIONS){
+      showResults();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function showResults(){
+    quizCard.classList.add('hidden');
+    resultsCard.classList.remove('hidden');
+    scoreText.textContent = `${score} / ${TOTAL_QUESTIONS}`;
+    const pct = score / TOTAL_QUESTIONS;
+    let msg;
+    if(pct === 1) msg = 'Mükemmel! Bütün isimleri biliyorsun. Bravo!';
+    else if(pct >= 0.7) msg = 'Çok iyi gidiyorsun — birkaç kelimeyi tekrar et.';
+    else if(pct >= 0.4) msg = 'İyi bir başlangıç. Tekrar oynayarak pekiştirebilirsin.';
+    else msg = 'Sorun değil, tekrar dene — her tekrar kelimeleri kalıcılaştırır.';
+    scoreMsg.textContent = msg;
+  }
+
+  function startQuiz(){
+    quizSet = buildQuizSet();
+    TOTAL_QUESTIONS = quizSet.length;
+    currentIndex = 0;
+    score = 0;
+    resultsCard.classList.add('hidden');
+    quizCard.classList.remove('hidden');
+    buildBoard();
+    renderQuestion();
+  }
+
+  document.querySelectorAll('.len-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.len-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      TOTAL_QUESTIONS = parseInt(btn.dataset.len, 10);
+      startQuiz();
+    });
+  });
+
+  nextBtn.addEventListener('click', nextQuestion);
+  restartBtn.addEventListener('click', startQuiz);
+
+  startQuiz();
+</script>
+
+</body>
+</html>
