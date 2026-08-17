@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enes ile Hırvatça</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#12324B;
+  --stone:#F2EEE4;
+  --paper:#FBF9F4;
+  --red:#C1272D;
+  --gold:#D9A441;
+  --gold-dark:#B4842C;
+  --olive:#6B7B5E;
+  --sea:#1D6B6B;
+  --ink:#22252A;
+  --muted:#6E7580;
+  --line:rgba(18,50,75,.14);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;background:var(--stone);color:var(--ink);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:16px;line-height:1.5;
+  padding-bottom:40px;
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+/* ---------- header ---------- */
+header{
+  background:var(--navy);color:var(--paper);
+  padding:36px 0 24px;position:relative;overflow:hidden;
+}
+header .wrap{position:relative;z-index:1}
+.kicker{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px;
+}
+header h1{
+  font-family:'Fraunces',Georgia,serif;font-weight:600;
+  font-size:32px;line-height:1.1;margin:0;letter-spacing:-.01em;
+}
+header h1 em{font-style:italic;font-weight:500;color:var(--gold)}
+
+.board-deco{
+  position:absolute;top:-30px;right:-30px;width:150px;height:150px;
+  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);
+  transform:rotate(6deg);border:2px solid rgba(251,249,244,.2);
+}
+.board-deco div{background:var(--paper)}
+.board-deco div:nth-child(odd){background:var(--red)}
+
+.tricolour{height:5px;display:flex}
+.tricolour span{flex:1}
+.tricolour span:nth-child(1){background:var(--red)}
+.tricolour span:nth-child(2){background:var(--paper)}
+.tricolour span:nth-child(3){background:var(--navy)}
+
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+/* ---------- grid ---------- */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.card{
+  display:flex;flex-direction:column;justify-content:center;
+  text-decoration:none;color:inherit;
+  background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent,var(--gold));
+  border-radius:10px;
+  padding:18px 15px;min-height:84px;
+}
+.card h2{
+  font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:16.5px;
+  color:var(--navy);margin:0;line-height:1.2;
+}
+.card p{
+  font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.35;
+}
+
+footer{
+  text-align:center;font-size:12px;color:var(--muted);margin-top:34px;
+  font-family:'IBM Plex Mono',monospace;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="board-deco" id="deco"></div>
+  <div class="wrap">
+    <div class="kicker">Hrvatski jezik · A1 → A2</div>
+    <h1>Enes ile <em>Hırvatça</em></h1>
+  </div>
+</header>
+<div class="tricolour"><span></span><span></span><span></span></div>
+
+<div class="wrap">
+  <div class="grid">
+    <a class="card" href="Genel.html" style="--accent:var(--red)">
+      <h2>Genel</h2>
+      <p>Yedi padež — tüm ekler tek sayfada</p>
+    </a>
+    <a class="card" href="padezi.html" style="--accent:var(--navy)">
+      <h2>Akuzativ ve Lokativ</h2>
+      <p>Nereye? / Nerede? kvizi</p>
+    </a>
+    <a class="card" href="genitiv.html" style="--accent:var(--sea)">
+      <h2>Genitiv</h2>
+      <p>Yokluk, miktar, "-den" kvizi</p>
+    </a>
+    <a class="card" href="dativ.html" style="--accent:var(--gold-dark)">
+      <h2>Dativ</h2>
+      <p>Kime? kvizi</p>
+    </a>
+    <a class="card" href="imenice.html" style="--accent:var(--olive)">
+      <h2>İsimler</h2>
+      <p>Cins ve çoğul kvizi</p>
+    </a>
+    <a class="card" href="Adjectives.html" style="--accent:var(--red)">
+      <h2>Sıfatlar</h2>
+      <p>Sıfat çekimleri</p>
+    </a>
+    <a class="card" href="verbtest.html" style="--accent:var(--navy)">
+      <h2>Fiiller</h2>
+      <p>Şimdiki zaman fiil kvizi</p>
+    </a>
+    <a class="card" href="Daily.html" style="--accent:var(--sea)">
+      <h2>Günlük</h2>
+      <p>Günlük konuşma ve diyaloglar</p>
+    </a>
+  </div>
+</div>
+
+<footer>kidemlins.github.io 🇭🇷</footer>
+
+<script>
+const deco = document.getElementById('deco');
+for(let i=0;i<25;i++){ deco.appendChild(document.createElement('div')); }
+</script>
+
+</body>
+</html>
