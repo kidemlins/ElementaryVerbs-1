@@ -1,188 +1,1131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verbs — Croatian</title>
-<link rel="manifest" href="manifest.json">
+<title>Glagoli — Croatian</title>
 <meta name="theme-color" content="#14120E">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Croatian">
+<meta name="apple-mobile-web-app-title" content="Glagoli">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="theme.css">
+<style>
+:root{
+  --bg:#14120E; --panel:#1B1813; --panel2:#211D17; --line:#2F2A22;
+  --ink:#EDE7DA; --dim:#9C9384; --gold:#D9A441; --red:#D8564E; --sea:#6E9AA8;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;
+  font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+
+.pagehead{padding:34px 0 22px}
+.glagstrip{font-family:'Noto Sans Glagolitic','IBM Plex Mono',monospace;font-size:12px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+h1{font-family:'Spectral',Georgia,serif;font-weight:700;font-size:2.1rem;line-height:1.12;
+  margin:0 0 10px;letter-spacing:-.01em}
+h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+.sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--dim);margin:0 0 14px;letter-spacing:.04em}
+.lede{font-family:'Spectral',Georgia,serif;font-size:1.02rem;color:#CFC6B4;margin:0}
+.lede b{color:var(--ink);font-weight:600}
+.headrule{height:1px;background:var(--line);margin:0 0 22px}
+
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 12px}
+.seg button{flex:1;appearance:none;background:transparent;border:0;color:var(--dim);
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
+  padding:11px 6px;cursor:pointer}
+.seg button.on{background:var(--panel2);color:var(--ink)}
+.seg button+button{border-left:1px solid var(--line)}
+
+.chips{display:flex;gap:8px;margin:0 0 22px}
+.chips button{flex:1;appearance:none;cursor:pointer;background:transparent;
+  border:1px solid var(--line);border-radius:20px;color:var(--dim);
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;padding:7px 4px}
+.chips button.on{border-color:#5A4522;color:var(--gold)}
+
+.frame{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:26px 20px;text-align:center;position:relative}
+.frame:before,.ctx:before{content:attr(data-n);position:absolute;top:12px;left:16px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;color:#544C3F;letter-spacing:.1em}
+svg.ico{width:185px;height:185px;display:block;margin:0 auto}
+svg.ico g.stroke{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+svg.ico .acc{stroke:var(--gold)}
+svg.ico .accfill{fill:var(--gold);stroke:none}
+.ask{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);
+  letter-spacing:.1em;text-transform:uppercase;margin:14px 0 0}
+
+.ctx{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:26px 22px 22px;position:relative}
+.ctx .line{font-family:'Spectral',Georgia,serif;font-size:1.3rem;line-height:1.5;margin:14px 0}
+.ctx .line+.line{border-top:1px solid var(--line);padding-top:16px}
+.blank{color:var(--gold);letter-spacing:.06em;font-family:'IBM Plex Mono',monospace;font-size:1rem}
+
+.btn{display:block;width:100%;appearance:none;cursor:pointer;background:var(--panel2);
+  border:1px solid var(--line);border-radius:11px;color:var(--ink);
+  font-family:'Public Sans',sans-serif;font-size:16px;font-weight:500;padding:14px;margin-top:14px}
+.btn:active{background:#2A251D}
+.btn.gold{border-color:#5A4522;color:var(--gold)}
+.row{display:flex;gap:10px}
+.row .btn{margin-top:12px}
+.btn.small{font-size:14.5px;padding:12px 8px}
+.btn.again{color:var(--red);border-color:#4A2723}
+
+.ans{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ans .top{padding:16px 18px;background:var(--panel2);border-bottom:1px solid var(--line)}
+.hrv{font-family:'Spectral',Georgia,serif;font-size:1.95rem;font-weight:700;line-height:1.1;margin:0}
+.tr{font-size:1rem;color:var(--gold);margin:2px 0 0}
+.pat{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);margin:8px 0 0}
+.pat b{color:var(--sea);font-weight:500}
+.conj{display:grid;grid-template-columns:1fr 1fr}
+.conj div{padding:9px 18px;border-bottom:1px solid var(--line);font-size:14.5px}
+.conj div:nth-child(odd){border-right:1px solid var(--line)}
+.conj .p{font-family:'IBM Plex Mono',monospace;color:#6C6455;font-size:12px;margin-right:7px}
+.ex{padding:13px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
+.ex .cro{font-family:'Spectral',Georgia,serif;font-size:1.1rem;font-style:italic}
+.ex .cro .hit{font-style:normal;font-weight:700;color:var(--gold)}
+.ex .glo{font-size:14px;color:var(--dim);margin-top:3px}
+.note{padding:12px 18px;background:#1F1A12;border-top:1px solid var(--line);font-size:13.5px;color:#C3B79C}
+.note b{color:var(--gold);font-weight:600}
+
+.meta{display:flex;justify-content:space-between;margin:0 0 12px;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.08em}
+.bar{height:2px;background:var(--line);margin-bottom:20px}
+.bar i{display:block;height:2px;background:var(--gold);transition:width .3s}
+
+.gsec{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 8px 12px;text-align:center}
+.cell svg{width:100%;height:auto;max-width:112px}
+.cell .n{font-family:'Spectral',Georgia,serif;font-size:1rem;font-weight:600;margin-top:4px}
+.cell .t{font-size:12.5px;color:var(--dim)}
+.crow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.crow .n{font-family:'Spectral',serif;font-size:1.1rem;font-weight:600}
+.crow .n span{font-family:'Public Sans',sans-serif;font-size:13px;font-weight:400;color:var(--dim);margin-left:8px}
+.crow .s{font-family:'Spectral',serif;font-style:italic;font-size:.98rem;color:#CFC6B4;margin-top:4px}
+
+.end{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+.end h2{font-family:'Spectral',serif;font-size:1.4rem;margin:0 0 10px}
+.end ul{margin:8px 0 0;padding-left:20px}
+.end li{margin-bottom:5px}
+.end .bad{color:var(--red)}
+.pagefoot{border-top:1px solid var(--line);margin:34px 0 0;padding:16px 0 40px;font-size:13.5px;color:var(--dim)}
+</style>
 </head>
 <body>
 
-<div class="pagehead">
-  <div class="wrap">
+<div class="wrap">
+  <div class="pagehead">
     <div class="glagstrip">Ⰷ · Glagoli</div>
-    <h1>105 verbs,<br><em>present tense</em>.</h1>
-    <p class="sub">meaning · conjugation · what case follows</p>
-    <p class="lede">Knowing a Croatian verb means knowing two things: how it conjugates, and which case it drags along behind it. <b>Pomoći</b> takes the dative, <b>bojati se</b> takes the genitive — get the pairing wrong and the sentence collapses.</p>
+    <h1>105 fiil,<br><em>İngilizcesiz</em>.</h1>
+    <p class="sub">çizim veya bağlam → Hırvatça</p>
+    <p class="lede">Somut fiiller çizilir. Soyut fiiller çizilmez — onlar iki Hırvatça cümlenin boşluğundan tanınır. İki yolda da <b>write</b> ara durağı yok, doğrudan üretiyorsun. Cevabı açmadan önce fiili <b>sesli söyle</b>.</p>
   </div>
 </div>
 <div class="headrule"></div>
 
 <div class="wrap">
-
   <div class="seg" id="mode">
-    <button class="on" data-m="browse">Browse</button>
-    <button data-m="quiz">Quiz</button>
+    <button class="on" data-m="quiz">Üretim</button>
+    <button data-m="gallery">Galeri</button>
   </div>
-
+  <div class="chips" id="filter">
+    <button class="on" data-f="all">Hepsi · 105</button>
+    <button data-f="icon">Çizim · 57</button>
+    <button data-f="ctx">Bağlam · 48</button>
+  </div>
   <div id="view"></div>
-
   <footer class="pagefoot">
-    <p>The six slots are always in this order: <b>ja · ti · on/ona · mi · vi · oni</b>.</p>
+    Her turda 20 fiil gelir, karışık. İkonlarda <span style="color:var(--gold)">altın</span> parça eylemi taşır; bağlam kartlarında <span style="color:var(--gold)">altın</span> boşluk senin dolduracağın yerdir. Altı çekim hep aynı sırada: <b>ja · ti · on/ona · mi · vi · oni</b>.
   </footer>
 </div>
 
 <script>
-var VERBS = [{"hr": "biti", "en": "to be", "conj": ["sam", "si", "je", "smo", "ste", "su"], "pat": "+ nominative", "ex": "Ja sam student.", "gloss": "I'm a student."}, {"hr": "imati", "en": "to have", "conj": ["imam", "imaš", "ima", "imamo", "imate", "imaju"], "pat": "+ accusative", "ex": "Imam auto.", "gloss": "I have a car."}, {"hr": "raditi", "en": "to work / to do", "conj": ["radim", "radiš", "radi", "radimo", "radite", "rade"], "pat": "u / na + locative (place)", "ex": "Radim u uredu.", "gloss": "I work in an office."}, {"hr": "jesti", "en": "to eat", "conj": ["jedem", "jedeš", "jede", "jedemo", "jedete", "jedu"], "pat": "+ accusative", "ex": "Jedem kruh.", "gloss": "I'm eating bread."}, {"hr": "piti", "en": "to drink", "conj": ["pijem", "piješ", "pije", "pijemo", "pijete", "piju"], "pat": "+ accusative", "ex": "Pijem vodu.", "gloss": "I'm drinking water."}, {"hr": "spavati", "en": "to sleep", "conj": ["spavam", "spavaš", "spava", "spavamo", "spavate", "spavaju"], "pat": "no object · u + locative", "ex": "Spavam u sobi.", "gloss": "I sleep in the room."}, {"hr": "ići", "en": "to go", "conj": ["idem", "ideš", "ide", "idemo", "idete", "idu"], "pat": "u / na + accusative (motion)", "ex": "Idem u grad.", "gloss": "I'm going into town."}, {"hr": "doći", "en": "to come", "conj": ["dođem", "dođeš", "dođe", "dođemo", "dođete", "dođu"], "pat": "u / na + accusative (motion)", "ex": "Došao sam u Zagreb.", "gloss": "I came to Zagreb."}, {"hr": "gledati", "en": "to watch", "conj": ["gledam", "gledaš", "gleda", "gledamo", "gledate", "gledaju"], "pat": "+ accusative", "ex": "Gledam film.", "gloss": "I'm watching a film."}, {"hr": "slušati", "en": "to listen", "conj": ["slušam", "slušaš", "sluša", "slušamo", "slušate", "slušaju"], "pat": "+ accusative — no preposition", "ex": "Slušam glazbu.", "gloss": "I'm listening to music."}, {"hr": "govoriti", "en": "to speak", "conj": ["govorim", "govoriš", "govori", "govorimo", "govorite", "govore"], "pat": "o + locative · + accusative (a language)", "ex": "Govorim o poslu.", "gloss": "I'm talking about work."}, {"hr": "čitati", "en": "to read", "conj": ["čitam", "čitaš", "čita", "čitamo", "čitate", "čitaju"], "pat": "+ accusative", "ex": "Čitam knjigu.", "gloss": "I'm reading a book."}, {"hr": "pisati", "en": "to write", "conj": ["pišem", "pišeš", "piše", "pišemo", "pišete", "pišu"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Pišem pismo majci.", "gloss": "I'm writing a letter to my mother."}, {"hr": "učiti", "en": "to study / to learn", "conj": ["učim", "učiš", "uči", "učimo", "učite", "uče"], "pat": "+ accusative", "ex": "Učim hrvatski.", "gloss": "I'm learning Croatian."}, {"hr": "kupovati", "en": "to buy / to shop", "conj": ["kupujem", "kupuješ", "kupuje", "kupujemo", "kupujete", "kupuju"], "pat": "+ accusative", "ex": "Kupujem kruh.", "gloss": "I'm buying bread."}, {"hr": "voljeti", "en": "to love", "conj": ["volim", "voliš", "voli", "volimo", "volite", "vole"], "pat": "+ accusative", "ex": "Volim more.", "gloss": "I love the sea."}, {"hr": "znati", "en": "to know", "conj": ["znam", "znaš", "zna", "znamo", "znate", "znaju"], "pat": "+ accusative", "ex": "Znam odgovor.", "gloss": "I know the answer."}, {"hr": "htjeti", "en": "to want", "conj": ["hoću", "hoćeš", "hoće", "hoćemo", "hoćete", "hoće"], "pat": "+ accusative · + infinitive", "ex": "Hoću kavu.", "gloss": "I want a coffee."}, {"hr": "moći", "en": "can / to be able to", "conj": ["mogu", "možeš", "može", "možemo", "možete", "mogu"], "pat": "+ infinitive", "ex": "Mogu doći.", "gloss": "I can come."}, {"hr": "živjeti", "en": "to live", "conj": ["živim", "živiš", "živi", "živimo", "živite", "žive"], "pat": "u + locative", "ex": "Živim u Zagrebu.", "gloss": "I live in Zagreb."}, {"hr": "igrati se", "en": "to play", "conj": ["igram se", "igraš se", "igra se", "igramo se", "igrate se", "igraju se"], "pat": "s + instrumental · u + locative", "ex": "Djeca se igraju u parku.", "gloss": "The children are playing in the park."}, {"hr": "plesati", "en": "to dance", "conj": ["plešem", "plešeš", "pleše", "plešemo", "plešete", "plešu"], "pat": "no object · u + locative", "ex": "Plešem u klubu.", "gloss": "I'm dancing at the club."}, {"hr": "pjevati", "en": "to sing", "conj": ["pjevam", "pjevaš", "pjeva", "pjevamo", "pjevate", "pjevaju"], "pat": "+ accusative", "ex": "Pjevam pjesmu.", "gloss": "I'm singing a song."}, {"hr": "kuhati", "en": "to cook", "conj": ["kuham", "kuhaš", "kuha", "kuhamo", "kuhate", "kuhaju"], "pat": "+ accusative", "ex": "Kuham ribu.", "gloss": "I'm cooking fish."}, {"hr": "čistiti", "en": "to clean", "conj": ["čistim", "čistiš", "čisti", "čistimo", "čistite", "čiste"], "pat": "+ accusative", "ex": "Čistim sobu.", "gloss": "I'm cleaning the room."}, {"hr": "prati", "en": "to wash", "conj": ["perem", "pereš", "pere", "peremo", "perete", "peru"], "pat": "+ accusative", "ex": "Perem auto.", "gloss": "I'm washing the car."}, {"hr": "voziti", "en": "to drive", "conj": ["vozim", "voziš", "vozi", "vozimo", "vozite", "voze"], "pat": "+ accusative", "ex": "Vozim auto.", "gloss": "I'm driving the car."}, {"hr": "putovati", "en": "to travel", "conj": ["putujem", "putuješ", "putuje", "putujemo", "putujete", "putuju"], "pat": "u / na + accusative", "ex": "Putujem u Split.", "gloss": "I'm travelling to Split."}, {"hr": "čekati", "en": "to wait", "conj": ["čekam", "čekaš", "čeka", "čekamo", "čekate", "čekaju"], "pat": "+ accusative — no preposition", "ex": "Čekam autobus.", "gloss": "I'm waiting for the bus."}, {"hr": "otvoriti", "en": "to open", "conj": ["otvorim", "otvoriš", "otvori", "otvorimo", "otvorite", "otvore"], "pat": "+ accusative", "ex": "Otvorim prozor.", "gloss": "I open the window."}, {"hr": "zatvoriti", "en": "to close", "conj": ["zatvorim", "zatvoriš", "zatvori", "zatvorimo", "zatvorite", "zatvore"], "pat": "+ accusative", "ex": "Zatvorim vrata.", "gloss": "I close the door."}, {"hr": "pomoći", "en": "to help", "conj": ["pomognem", "pomogneš", "pomogne", "pomognemo", "pomognete", "pomognu"], "pat": "+ <b>dative</b> — not the accusative", "ex": "Pomognem majci.", "gloss": "I help my mother."}, {"hr": "tražiti", "en": "to look for", "conj": ["tražim", "tražiš", "traži", "tražimo", "tražite", "traže"], "pat": "+ accusative — no preposition", "ex": "Tražim ključ.", "gloss": "I'm looking for the key."}, {"hr": "naći", "en": "to find", "conj": ["nađem", "nađeš", "nađe", "nađemo", "nađete", "nađu"], "pat": "+ accusative", "ex": "Našao sam ključ.", "gloss": "I found the key."}, {"hr": "misliti", "en": "to think", "conj": ["mislim", "misliš", "misli", "mislimo", "mislite", "misle"], "pat": "o + locative · na + accusative", "ex": "Mislim o poslu.", "gloss": "I'm thinking about work."}, {"hr": "vidjeti", "en": "to see", "conj": ["vidim", "vidiš", "vidi", "vidimo", "vidite", "vide"], "pat": "+ accusative", "ex": "Vidim more.", "gloss": "I see the sea."}, {"hr": "čuti", "en": "to hear", "conj": ["čujem", "čuješ", "čuje", "čujemo", "čujete", "čuju"], "pat": "+ accusative", "ex": "Čujem glazbu.", "gloss": "I hear the music."}, {"hr": "smijati se", "en": "to laugh", "conj": ["smijem se", "smiješ se", "smije se", "smijemo se", "smijete se", "smiju se"], "pat": "no object · + dative (to laugh at someone)", "ex": "Djeca se smiju.", "gloss": "The children are laughing."}, {"hr": "plakati", "en": "to cry", "conj": ["plačem", "plačeš", "plače", "plačemo", "plačete", "plaču"], "pat": "no object", "ex": "Dijete plače.", "gloss": "The child is crying."}, {"hr": "ustati", "en": "to get up", "conj": ["ustanem", "ustaneš", "ustane", "ustanemo", "ustanete", "ustanu"], "pat": "no object · u + accusative (clock time)", "ex": "Ustanem u sedam.", "gloss": "I get up at seven."}, {"hr": "nedostajati", "en": "to miss (someone)", "conj": ["nedostajem", "nedostaješ", "nedostaje", "nedostajemo", "nedostajete", "nedostaju"], "pat": "+ <b>dative</b> — the one doing the missing goes in the dative", "ex": "Nedostaje mi obitelj.", "gloss": "I miss my family. (literally: my family is missing to me)"}, {"hr": "nadati se", "en": "to hope", "conj": ["nadam se", "nadaš se", "nada se", "nadamo se", "nadate se", "nadaju se"], "pat": "+ dative · da + clause", "ex": "Nadam se lijepom vremenu.", "gloss": "I'm hoping for good weather."}, {"hr": "zaboraviti", "en": "to forget", "conj": ["zaboravim", "zaboraviš", "zaboravi", "zaboravimo", "zaboravite", "zaborave"], "pat": "+ accusative", "ex": "Zaboravio sam ključ.", "gloss": "I forgot the key."}, {"hr": "šetati", "en": "to stroll / to walk around", "conj": ["šetam", "šetaš", "šeta", "šetamo", "šetate", "šetaju"], "pat": "po + locative", "ex": "Šetam po gradu.", "gloss": "I'm strolling around the city."}, {"hr": "hodati", "en": "to walk", "conj": ["hodam", "hodaš", "hoda", "hodamo", "hodate", "hodaju"], "pat": "no object", "ex": "Hodam polako.", "gloss": "I walk slowly."}, {"hr": "trčati", "en": "to run", "conj": ["trčim", "trčiš", "trči", "trčimo", "trčite", "trče"], "pat": "no object · u + locative", "ex": "Trčim u parku.", "gloss": "I run in the park."}, {"hr": "peći", "en": "to bake / to roast", "conj": ["pečem", "pečeš", "peče", "pečemo", "pečete", "peku"], "pat": "+ accusative", "ex": "Pečem kruh.", "gloss": "I'm baking bread."}, {"hr": "pripremati", "en": "to prepare", "conj": ["pripremam", "pripremaš", "priprema", "pripremamo", "pripremate", "pripremaju"], "pat": "+ accusative", "ex": "Pripremam večeru.", "gloss": "I'm preparing dinner."}, {"hr": "napraviti", "en": "to make / to do", "conj": ["napravim", "napraviš", "napravi", "napravimo", "napravite", "naprave"], "pat": "+ accusative", "ex": "Napravim kavu.", "gloss": "I make a coffee."}, {"hr": "razumjeti", "en": "to understand", "conj": ["razumijem", "razumiješ", "razumije", "razumijemo", "razumijete", "razumiju"], "pat": "+ accusative", "ex": "Razumijem hrvatski.", "gloss": "I understand Croatian."}, {"hr": "pitati", "en": "to ask", "conj": ["pitam", "pitaš", "pita", "pitamo", "pitate", "pitaju"], "pat": "+ accusative — the person too", "ex": "Pitam učitelja.", "gloss": "I'm asking the teacher."}, {"hr": "odgovoriti", "en": "to answer", "conj": ["odgovorim", "odgovoriš", "odgovori", "odgovorimo", "odgovorite", "odgovore"], "pat": "+ dative (to whom)", "ex": "Odgovorim prijatelju.", "gloss": "I answer my friend."}, {"hr": "zvati", "en": "to call", "conj": ["zovem", "zoveš", "zove", "zovemo", "zovete", "zovu"], "pat": "+ accusative", "ex": "Zovem majku.", "gloss": "I'm calling my mother."}, {"hr": "trebati", "en": "to need", "conj": ["trebam", "trebaš", "treba", "trebamo", "trebate", "trebaju"], "pat": "+ accusative · + infinitive", "ex": "Trebam pomoć.", "gloss": "I need help."}, {"hr": "morati", "en": "must / to have to", "conj": ["moram", "moraš", "mora", "moramo", "morate", "moraju"], "pat": "+ infinitive", "ex": "Moram raditi.", "gloss": "I have to work."}, {"hr": "smjeti", "en": "to be allowed to", "conj": ["smijem", "smiješ", "smije", "smijemo", "smijete", "smiju"], "pat": "+ infinitive", "ex": "Smijem ući.", "gloss": "I'm allowed in."}, {"hr": "sviđati se", "en": "to like", "conj": ["sviđam se", "sviđaš se", "sviđa se", "sviđamo se", "sviđate se", "sviđaju se"], "pat": "+ <b>dative</b> — the person who likes it goes in the dative", "ex": "Sviđa mi se grad.", "gloss": "I like the city."}, {"hr": "bojati se", "en": "to be afraid", "conj": ["bojim se", "bojiš se", "boji se", "bojimo se", "bojite se", "boje se"], "pat": "+ <b>genitive</b>", "ex": "Bojim se psa.", "gloss": "I'm afraid of the dog."}, {"hr": "sjećati se", "en": "to remember", "conj": ["sjećam se", "sjećaš se", "sjeća se", "sjećamo se", "sjećate se", "sjećaju se"], "pat": "+ <b>genitive</b>", "ex": "Sjećam se ljeta.", "gloss": "I remember the summer."}, {"hr": "brinuti se", "en": "to worry", "conj": ["brinem se", "brineš se", "brine se", "brinemo se", "brinete se", "brinu se"], "pat": "o + locative", "ex": "Brinem se o djeci.", "gloss": "I worry about the children."}, {"hr": "radovati se", "en": "to look forward to", "conj": ["radujem se", "raduješ se", "raduje se", "radujemo se", "radujete se", "raduju se"], "pat": "+ dative", "ex": "Radujem se putovanju.", "gloss": "I'm looking forward to the trip."}, {"hr": "kupati se", "en": "to bathe / to swim", "conj": ["kupam se", "kupaš se", "kupa se", "kupamo se", "kupate se", "kupaju se"], "pat": "u + locative", "ex": "Kupam se u moru.", "gloss": "I'm swimming in the sea."}, {"hr": "plivati", "en": "to swim", "conj": ["plivam", "plivaš", "pliva", "plivamo", "plivate", "plivaju"], "pat": "no object", "ex": "Plivam svaki dan.", "gloss": "I swim every day."}, {"hr": "ući", "en": "to enter", "conj": ["uđem", "uđeš", "uđe", "uđemo", "uđete", "uđu"], "pat": "u + accusative", "ex": "Uđem u sobu.", "gloss": "I go into the room."}, {"hr": "izaći", "en": "to go out", "conj": ["izađem", "izađeš", "izađe", "izađemo", "izađete", "izađu"], "pat": "iz + <b>genitive</b>", "ex": "Izađem iz kuće.", "gloss": "I leave the house."}, {"hr": "sjediti", "en": "to sit (be seated)", "conj": ["sjedim", "sjediš", "sjedi", "sjedimo", "sjedite", "sjede"], "pat": "u / na + locative", "ex": "Sjedim u kafiću.", "gloss": "I'm sitting in a café."}, {"hr": "sjesti", "en": "to sit down", "conj": ["sjednem", "sjedneš", "sjedne", "sjednemo", "sjednete", "sjednu"], "pat": "na + accusative — motion", "ex": "Sjednem na stolicu.", "gloss": "I sit down on the chair."}, {"hr": "stajati", "en": "to stand", "conj": ["stojim", "stojiš", "stoji", "stojimo", "stojite", "stoje"], "pat": "no object", "ex": "Stojim ispred kuće.", "gloss": "I'm standing in front of the house."}, {"hr": "ležati", "en": "to lie (be lying)", "conj": ["ležim", "ležiš", "leži", "ležimo", "ležite", "leže"], "pat": "na + locative", "ex": "Ležim na plaži.", "gloss": "I'm lying on the beach."}, {"hr": "leći", "en": "to lie down", "conj": ["legnem", "legneš", "legne", "legnemo", "legnete", "legnu"], "pat": "na + accusative — motion", "ex": "Legnem na krevet.", "gloss": "I lie down on the bed."}, {"hr": "oblačiti se", "en": "to get dressed", "conj": ["oblačim se", "oblačiš se", "oblači se", "oblačimo se", "oblačite se", "oblače se"], "pat": "no object", "ex": "Oblačim se brzo.", "gloss": "I get dressed quickly."}, {"hr": "tuširati se", "en": "to shower", "conj": ["tuširam se", "tuširaš se", "tušira se", "tuširamo se", "tuširate se", "tuširaju se"], "pat": "no object", "ex": "Tuširam se ujutro.", "gloss": "I shower in the morning."}, {"hr": "kupiti", "en": "to buy", "conj": ["kupim", "kupiš", "kupi", "kupimo", "kupite", "kupe"], "pat": "+ accusative", "ex": "Kupim kruh.", "gloss": "I buy bread."}, {"hr": "prodati", "en": "to sell", "conj": ["prodam", "prodaš", "proda", "prodamo", "prodate", "prodaju"], "pat": "+ accusative", "ex": "Prodam auto.", "gloss": "I sell the car."}, {"hr": "platiti", "en": "to pay", "conj": ["platim", "platiš", "plati", "platimo", "platite", "plate"], "pat": "+ accusative", "ex": "Platim račun.", "gloss": "I pay the bill."}, {"hr": "koštati", "en": "to cost", "conj": ["koštam", "koštaš", "košta", "koštamo", "koštate", "koštaju"], "pat": "no object", "ex": "Kava košta dva eura.", "gloss": "The coffee costs two euros."}, {"hr": "dati", "en": "to give", "conj": ["dam", "daš", "da", "damo", "date", "daju"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Dam knjigu prijatelju.", "gloss": "I give the book to my friend."}, {"hr": "uzeti", "en": "to take", "conj": ["uzmem", "uzmeš", "uzme", "uzmemo", "uzmete", "uzmu"], "pat": "+ accusative", "ex": "Uzmem torbu.", "gloss": "I take the bag."}, {"hr": "donijeti", "en": "to bring", "conj": ["donesem", "doneseš", "donese", "donesemo", "donesete", "donesu"], "pat": "+ accusative", "ex": "Donesem vodu.", "gloss": "I bring water."}, {"hr": "nositi", "en": "to carry / to wear", "conj": ["nosim", "nosiš", "nosi", "nosimo", "nosite", "nose"], "pat": "+ accusative", "ex": "Nosim jaknu.", "gloss": "I'm wearing a jacket."}, {"hr": "staviti", "en": "to put", "conj": ["stavim", "staviš", "stavi", "stavimo", "stavite", "stave"], "pat": "u / na + accusative", "ex": "Stavim knjigu na stol.", "gloss": "I put the book on the table."}, {"hr": "upaliti", "en": "to turn on", "conj": ["upalim", "upališ", "upali", "upalimo", "upalite", "upale"], "pat": "+ accusative", "ex": "Upalim svjetlo.", "gloss": "I turn on the light."}, {"hr": "ugasiti", "en": "to turn off", "conj": ["ugasim", "ugasiš", "ugasi", "ugasimo", "ugasite", "ugase"], "pat": "+ accusative", "ex": "Ugasim televizor.", "gloss": "I turn off the television."}, {"hr": "razgovarati", "en": "to converse", "conj": ["razgovaram", "razgovaraš", "razgovara", "razgovaramo", "razgovarate", "razgovaraju"], "pat": "s + <b>instrumental</b> · o + locative", "ex": "Razgovaram s prijateljem.", "gloss": "I'm talking with a friend."}, {"hr": "pričati", "en": "to tell / to chat", "conj": ["pričam", "pričaš", "priča", "pričamo", "pričate", "pričaju"], "pat": "o + locative", "ex": "Pričam o putovanju.", "gloss": "I'm telling you about the trip."}, {"hr": "reći", "en": "to say", "conj": ["kažem", "kažeš", "kaže", "kažemo", "kažete", "kažu"], "pat": "+ dative (to whom) · + accusative (what)", "ex": "Kažem ti istinu.", "gloss": "I'm telling you the truth."}, {"hr": "objasniti", "en": "to explain", "conj": ["objasnim", "objasniš", "objasni", "objasnimo", "objasnite", "objasne"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Objasnim lekciju studentu.", "gloss": "I explain the lesson to the student."}, {"hr": "ponoviti", "en": "to repeat", "conj": ["ponovim", "ponoviš", "ponovi", "ponovimo", "ponovite", "ponove"], "pat": "+ accusative", "ex": "Ponovim riječ.", "gloss": "I repeat the word."}, {"hr": "posjetiti", "en": "to visit", "conj": ["posjetim", "posjetiš", "posjeti", "posjetimo", "posjetite", "posjete"], "pat": "+ accusative", "ex": "Posjetim baku.", "gloss": "I visit my grandmother."}, {"hr": "upoznati", "en": "to meet / to get to know", "conj": ["upoznam", "upoznaš", "upozna", "upoznamo", "upoznate", "upoznaju"], "pat": "+ accusative", "ex": "Upoznam novog susjeda.", "gloss": "I meet the new neighbour."}, {"hr": "probati", "en": "to try", "conj": ["probam", "probaš", "proba", "probamo", "probate", "probaju"], "pat": "+ accusative · + infinitive", "ex": "Probam kolač.", "gloss": "I try the cake."}, {"hr": "osjećati se", "en": "to feel", "conj": ["osjećam se", "osjećaš se", "osjeća se", "osjećamo se", "osjećate se", "osjećaju se"], "pat": "no object + adverb", "ex": "Osjećam se dobro.", "gloss": "I feel good."}, {"hr": "boljeti", "en": "to hurt", "conj": ["bolim", "boliš", "boli", "bolimo", "bolite", "bole"], "pat": "+ <b>accusative</b> — the person in pain goes in the accusative", "ex": "Boli me glava.", "gloss": "My head hurts. (literally: it hurts me, the head)"}, {"hr": "izgledati", "en": "to look / to seem", "conj": ["izgledam", "izgledaš", "izgleda", "izgledamo", "izgledate", "izgledaju"], "pat": "no object + adverb", "ex": "Izgledaš umorno.", "gloss": "You look tired."}, {"hr": "izgubiti", "en": "to lose", "conj": ["izgubim", "izgubiš", "izgubi", "izgubimo", "izgubite", "izgube"], "pat": "+ accusative", "ex": "Izgubim ključ.", "gloss": "I lose the key."}, {"hr": "vjerovati", "en": "to believe", "conj": ["vjerujem", "vjeruješ", "vjeruje", "vjerujemo", "vjerujete", "vjeruju"], "pat": "+ <b>dative</b>", "ex": "Vjerujem ti.", "gloss": "I believe you."}, {"hr": "pozvati", "en": "to invite", "conj": ["pozovem", "pozoveš", "pozove", "pozovemo", "pozovete", "pozovu"], "pat": "+ accusative", "ex": "Pozovem prijatelje.", "gloss": "I invite my friends."}, {"hr": "slaviti", "en": "to celebrate", "conj": ["slavim", "slaviš", "slavi", "slavimo", "slavite", "slave"], "pat": "+ accusative", "ex": "Slavim rođendan.", "gloss": "I'm celebrating a birthday."}, {"hr": "paziti", "en": "to be careful / to look after", "conj": ["pazim", "paziš", "pazi", "pazimo", "pazite", "paze"], "pat": "na + accusative", "ex": "Pazim na djecu.", "gloss": "I'm looking after the children."}, {"hr": "početi", "en": "to begin", "conj": ["počnem", "počneš", "počne", "počnemo", "počnete", "počnu"], "pat": "+ accusative · + infinitive", "ex": "Počnem raditi.", "gloss": "I start working."}, {"hr": "završiti", "en": "to finish", "conj": ["završim", "završiš", "završi", "završimo", "završite", "završe"], "pat": "+ accusative", "ex": "Završim posao.", "gloss": "I finish the job."}, {"hr": "ostati", "en": "to stay", "conj": ["ostanem", "ostaneš", "ostane", "ostanemo", "ostanete", "ostanu"], "pat": "u / na + locative", "ex": "Ostanem u hotelu.", "gloss": "I stay in the hotel."}, {"hr": "vratiti se", "en": "to return", "conj": ["vratim se", "vratiš se", "vrati se", "vratimo se", "vratite se", "vrate se"], "pat": "iz + <b>genitive</b>", "ex": "Vratim se iz škole.", "gloss": "I come back from school."}, {"hr": "letjeti", "en": "to fly", "conj": ["letim", "letiš", "leti", "letimo", "letite", "lete"], "pat": "u / na + accusative", "ex": "Letim u Zagreb.", "gloss": "I'm flying to Zagreb."}, {"hr": "stanovati", "en": "to reside", "conj": ["stanujem", "stanuješ", "stanuje", "stanujemo", "stanujete", "stanuju"], "pat": "u + locative", "ex": "Stanujem u Splitu.", "gloss": "I live in Split."}];
-var PRON = ["ja","ti","on / ona","mi","vi","oni"];
-var KEYS = ["A","B","C","D"];
-var GLAG = ["Ⰰ","Ⰱ","Ⰲ","Ⰳ","Ⰴ","Ⰵ","Ⰶ","Ⰷ","Ⰸ","Ⰹ"];
+/* ================= icons ================= */
+var ICONS = {
 
-var view = document.getElementById("view");
-var mode = "browse";
+piti:
+ '<circle cx="34" cy="30" r="13"/>'+
+ '<path d="M16 84c0-15 8-26 18-26s18 11 18 26"/>'+
+ '<path d="M44 62L60 42"/>'+
+ '<g class="acc"><path d="M50 18l22 7-7 21-22-7z"/><path d="M76 16c3-3 7-3 9 0"/></g>',
 
-document.querySelectorAll("#mode button").forEach(function(b){
-  b.addEventListener("click", function(){
-    document.querySelectorAll("#mode button").forEach(function(x){ x.classList.remove("on"); });
-    b.classList.add("on");
-    mode = b.dataset.m;
-    if(mode === "browse") browse(); else startQuiz();
-  });
-});
+jesti:
+ '<circle cx="28" cy="28" r="12"/>'+
+ '<path d="M10 84c0-16 8-26 18-26s18 10 18 26"/>'+
+ '<g class="acc"><path d="M44 36L64 58"/><ellipse cx="42" cy="34" rx="8" ry="5" transform="rotate(45 42 34)"/></g>'+
+ '<path d="M42 66L58 56"/>'+
+ '<path d="M56 68h34c0 10-8 18-17 18s-17-8-17-18z"/>',
 
-function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+spavati:
+ '<path d="M10 80h80"/>'+
+ '<path d="M18 80V58h64v22"/>'+
+ '<path d="M22 58c2-13 21-13 24 0"/>'+
+ '<circle cx="34" cy="48" r="10"/>'+
+ '<path d="M46 58c11-7 25-7 34 0"/>'+
+ '<g class="acc"><path d="M54 34h11l-11 11h11"/><path d="M70 18h9l-9 9h9"/></g>',
 
-function conjTable(v){
-  return '<div class="scroll"><table><tbody>'+
-    v.conj.map(function(c,i){
-      return '<tr><th>'+PRON[i]+'</th><td><span class="end">'+c+'</span></td></tr>';
-    }).join("")+'</tbody></table></div>';
+cekati:
+ '<circle cx="28" cy="20" r="9"/>'+
+ '<path d="M28 29v26"/>'+
+ '<path d="M28 55l-8 24M28 55l8 24"/>'+
+ '<path d="M28 36l-10 9M28 36l10 9"/>'+
+ '<g class="acc"><circle cx="68" cy="56" r="19"/><path d="M68 43v13h10"/></g>',
+
+kupovati:
+ '<path d="M8 20h10l5 14"/>'+
+ '<path d="M23 34h61l-9 25H32z"/>'+
+ '<circle cx="40" cy="72" r="6"/><circle cx="68" cy="72" r="6"/>'+
+ '<g class="acc"><circle cx="48" cy="26" r="7"/><path d="M62 34l8-12 6 4-6 8"/></g>',
+
+pomoci:
+ '<circle cx="22" cy="18" r="9"/>'+
+ '<path d="M22 27v24"/>'+
+ '<path d="M22 51l-8 26M22 51l8 26"/>'+
+ '<path d="M22 34l22 11"/>'+
+ '<circle cx="74" cy="44" r="9"/>'+
+ '<path d="M74 53v16"/>'+
+ '<path d="M74 58L52 47"/>'+
+ '<path d="M74 69l-12 8M74 69h12"/>'+
+ '<g class="acc"><circle cx="48" cy="46" r="6"/></g>',
+
+boljeti:
+ '<circle cx="46" cy="52" r="21"/>'+
+ '<path d="M35 46c3-4 8-4 11 0M50 46c3-4 8-4 11 0"/>'+
+ '<path d="M37 64c5-9 13-9 18 0"/>'+
+ '<g class="acc"><path d="M31 32l-7-8 9-3-6-9"/><path d="M63 32l8-7-9-4 6-9"/></g>',
+
+ici:
+ '<circle cx="38" cy="18" r="9"/>'+
+ '<path d="M38 27l-2 22"/>'+
+ '<path d="M36 49l-10 26M36 49l13 24"/>'+
+ '<path d="M37 34l-13 9M37 34l14 5"/>'+
+ '<g class="acc"><path d="M62 64h24"/><path d="M78 56l9 8-9 8"/></g>',
+
+raditi:
+ '<circle cx="24" cy="26" r="10"/>'+
+ '<path d="M8 74c0-15 7-24 16-24"/>'+
+ '<path d="M24 42l22 18"/>'+
+ '<g class="acc"><path d="M52 46h24l4 20H48z"/><path d="M42 66h44l6 10H36z"/></g>'+
+ '<path d="M6 80h88"/>',
+
+citati:
+ '<circle cx="28" cy="20" r="11"/>'+
+ '<path d="M10 76c0-15 8-25 18-25s18 10 18 25"/>'+
+ '<g class="acc"><path d="M38 50c9-6 17-6 24 0 7-6 15-6 24 0v24c-9-6-17-6-24 0-7-6-15-6-24 0z"/>'+
+ '<path d="M62 50v24"/></g>',
+
+pisati:
+ '<path d="M14 16h56v66H14z"/>'+
+ '<path d="M26 34h30M26 46h34M26 58h20"/>'+
+ '<g class="acc"><path d="M48 86l4-16 24-24 12 12-24 24z"/><path d="M60 58l12 12"/></g>',
+
+kuhati:
+ '<path d="M20 42h60l-7 34H27z"/>'+
+ '<path d="M12 42h76"/>'+
+ '<path d="M14 50h-6M86 50h6"/>'+
+ '<g class="acc"><path d="M36 32c-6-6 4-10 0-16M52 32c-6-6 4-10 0-16M68 32c-6-6 4-10 0-16"/></g>'+
+ '<path d="M16 84h68"/>',
+
+voziti:
+ '<circle cx="50" cy="52" r="30"/>'+
+ '<circle cx="50" cy="52" r="9"/>'+
+ '<path d="M50 43V22M42 57L26 73M58 57l16 16"/>'+
+ '<g class="acc"><path d="M22 40c4-6 11-8 16-4M78 40c-4-6-11-8-16-4"/></g>',
+
+trcati:
+ '<circle cx="54" cy="18" r="9"/>'+
+ '<path d="M54 28l-8 20"/>'+
+ '<path d="M46 48l-3 15-11 13M46 48l15 9 3 19"/>'+
+ '<path d="M51 34l16-5M51 34l-13 11"/>'+
+ '<g class="acc"><path d="M6 28h16M2 46h18M8 64h14"/></g>',
+
+tusiratise:
+ '<path d="M50 6v12"/>'+
+ '<path d="M30 18h40l-7 12H37z"/>'+
+ '<g class="acc"><path d="M38 38v12M46 36v16M54 36v16M62 38v12"/></g>'+
+ '<circle cx="50" cy="64" r="10"/>'+
+ '<path d="M32 94c0-15 8-24 18-24s18 9 18 24"/>',
+
+platiti:
+ '<path d="M52 26h38v52H52z"/>'+
+ '<path d="M58 34h26v14H58z"/>'+
+ '<circle cx="63" cy="60" r="2.6"/><circle cx="71" cy="60" r="2.6"/><circle cx="79" cy="60" r="2.6"/>'+
+ '<g class="acc"><path d="M8 40h32v20H8z"/><path d="M8 47h32"/></g>'+
+ '<path d="M42 52h8"/><path d="M46 47l6 5-6 5"/>',
+
+gledati:
+ '<path d="M40 22h52v40H40z"/>'+
+ '<path d="M62 62v10M50 72h24"/>'+
+ '<circle cx="18" cy="44" r="11"/>'+
+ '<path d="M0 86c0-15 8-24 18-24s18 9 18 24"/>'+
+ '<g class="accfill"><path d="M60 32l16 10-16 10z"/></g>',
+
+pjevati:
+ '<circle cx="32" cy="40" r="16"/>'+
+ '<circle cx="26" cy="34" r="2.6"/><circle cx="38" cy="34" r="2.6"/>'+
+ '<ellipse cx="34" cy="49" rx="7" ry="6"/>'+
+ '<path d="M12 86c0-15 9-24 20-24s20 9 20 24"/>'+
+ '<g class="acc"><path d="M64 58V24l20-7v34"/><ellipse cx="58" cy="60" rx="7" ry="5"/><ellipse cx="78" cy="53" rx="7" ry="5"/></g>',
+
+sjediti:
+ '<g class="acc"><path d="M28 14v46M28 60h42M32 60v22M68 60v22"/></g>'+
+ '<circle cx="44" cy="26" r="10"/>'+
+ '<path d="M44 36v20"/>'+
+ '<path d="M44 56h20"/>'+
+ '<path d="M64 56v26"/>'+
+ '<path d="M44 42l14 10"/>',
+
+zvati:
+ '<circle cx="30" cy="38" r="14"/>'+
+ '<path d="M10 86c0-15 9-24 20-24s20 9 20 24"/>'+
+ '<g class="acc"><path d="M46 22h16v32H46z"/></g>'+
+ '<g class="acc"><path d="M70 28c6 6 6 20 0 26M80 20c10 10 10 34 0 44"/></g>',
+
+slusati:
+ '<path d="M22 60V48a28 28 0 0 1 56 0v12"/>'+
+ '<path d="M10 58h14v22H10z"/><path d="M76 58h14v22H76z"/>'+
+ '<g class="acc"><path d="M44 44V22l16-5v22"/><ellipse cx="38" cy="46" rx="6" ry="4.5"/><ellipse cx="54" cy="41" rx="6" ry="4.5"/></g>',
+
+govoriti:
+ '<circle cx="24" cy="46" r="14"/>'+
+ '<path d="M4 90c0-16 9-26 20-26s20 10 20 26"/>'+
+ '<g class="acc"><path d="M48 10h46v34H68l-12 12V44h-8z"/><path d="M58 20h26M58 32h18"/></g>',
+
+igratise:
+ '<circle cx="24" cy="24" r="9"/>'+
+ '<path d="M24 33v18"/>'+
+ '<path d="M24 51l-8 22M24 51l9 22"/>'+
+ '<path d="M24 38l-11 8M24 38l13-5"/>'+
+ '<g class="acc"><circle cx="68" cy="62" r="16"/><path d="M52 62h32M68 46v32"/></g>',
+
+plesati:
+ '<circle cx="42" cy="18" r="9"/>'+
+ '<path d="M42 27l5 21"/>'+
+ '<path d="M47 48l-15 14v16M47 48l14 9 3 20"/>'+
+ '<path d="M43 34l-17-7M43 34l13-13"/>'+
+ '<g class="acc"><path d="M76 40V16l12-4v24"/><ellipse cx="71" cy="42" rx="6" ry="4.5"/><ellipse cx="83" cy="38" rx="6" ry="4.5"/></g>',
+
+cistiti:
+ '<path d="M72 8L38 50"/>'+
+ '<path d="M26 46l16 14-10 12-16-14z"/>'+
+ '<path d="M20 62l-6 6M28 70l-6 6M12 54l-6 6"/>'+
+ '<g class="accfill"><path d="M74 60l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/><path d="M56 76l1.5 5 5 1.5-5 1.5-1.5 5-1.5-5-5-1.5 5-1.5z"/></g>',
+
+prati:
+ '<path d="M14 14h30v18"/>'+
+ '<path d="M24 58h52c0 15-12 26-26 26S24 73 24 58z"/>'+
+ '<g class="acc"><path d="M44 36v10M38 42v8M50 42v8"/><circle cx="34" cy="50" r="4"/><circle cx="62" cy="44" r="5"/><circle cx="74" cy="54" r="3.5"/></g>',
+
+putovati:
+ '<path d="M24 42h44v36H24z"/>'+
+ '<path d="M38 42v-8h16v8"/>'+
+ '<path d="M46 42v36"/>'+
+ '<g class="acc"><path d="M4 24c22-14 62-14 82 0" stroke-dasharray="6 7"/></g>'+
+ '<g class="accfill"><path d="M78 10l14 8-14 8-2-8z"/></g>',
+
+otvoriti:
+ '<path d="M28 86V18h32v68"/>'+
+ '<path d="M60 18l22-10v88l-22-10"/>'+
+ '<circle cx="66" cy="52" r="2.4"/>'+
+ '<g class="acc"><path d="M6 52h26"/><path d="M24 44l9 8-9 8"/></g>',
+
+zatvoriti:
+ '<path d="M40 86V18h32v68"/>'+
+ '<path d="M40 18L20 8v88l20-10"/>'+
+ '<circle cx="46" cy="52" r="2.4"/>'+
+ '<g class="acc"><path d="M92 52H70"/><path d="M78 44l-9 8 9 8"/></g>',
+
+traziti:
+ '<circle cx="42" cy="40" r="24"/>'+
+ '<path d="M60 58l24 24"/>'+
+ '<g class="acc"><path d="M35 33c0-9 14-9 14 0 0 7-7 6-7 13"/><circle cx="42" cy="54" r="2.6"/></g>',
+
+vidjeti:
+ '<path d="M4 50c14-21 30-31 46-31s32 10 46 31c-14 21-30 31-46 31S18 71 4 50z"/>'+
+ '<g class="acc"><circle cx="50" cy="50" r="13"/></g>'+
+ '<g class="accfill"><circle cx="50" cy="50" r="5"/></g>',
+
+smijatise:
+ '<circle cx="44" cy="50" r="22"/>'+
+ '<path d="M32 42c3-5 9-5 12 0M46 42c3-5 9-5 12 0"/>'+
+ '<path d="M30 56c4 12 24 12 28 0z"/>'+
+ '<g class="acc"><path d="M78 28l8-6M82 46h12M76 62l9 6"/></g>',
+
+plakati:
+ '<circle cx="42" cy="48" r="22"/>'+
+ '<path d="M30 44c3 5 9 5 12 0M44 44c3 5 9 5 12 0"/>'+
+ '<path d="M32 64c5-9 15-9 20 0"/>'+
+ '<g class="accfill"><path d="M62 50c0 0-8 11-8 16a8 8 0 0 0 16 0c0-5-8-16-8-16z"/></g>',
+
+ustati:
+ '<circle cx="38" cy="24" r="10"/>'+
+ '<path d="M38 34v24"/>'+
+ '<path d="M38 58l-9 24M38 58l9 24"/>'+
+ '<path d="M38 40l-12 8M38 40l12 8"/>'+
+ '<g class="acc"><path d="M76 84V32"/><path d="M66 42l10-10 10 10"/></g>',
+
+setati:
+ '<circle cx="26" cy="24" r="9"/>'+
+ '<path d="M26 33v18"/>'+
+ '<path d="M26 51l-9 24M26 51l11 24"/>'+
+ '<path d="M26 38l-9 9M26 38l11 5"/>'+
+ '<g class="acc"><circle cx="68" cy="42" r="15"/><path d="M68 57v22"/><circle cx="88" cy="58" r="9"/><path d="M88 67v12"/></g>'+
+ '<path d="M8 80h84"/>',
+
+peci:
+ '<path d="M12 22h76v60H12z"/>'+
+ '<path d="M12 42h76"/>'+
+ '<path d="M24 32h44"/>'+
+ '<g class="acc"><path d="M28 72c0-11 9-18 22-18s22 7 22 18z"/><path d="M40 62l5-7M56 60l5-7"/></g>',
+
+pitati:
+ '<circle cx="22" cy="48" r="13"/>'+
+ '<path d="M2 88c0-15 9-24 20-24s20 9 20 24"/>'+
+ '<g class="acc"><path d="M48 8h46v34H70l-11 12V42h-11z"/>'+
+ '<path d="M64 20c0-8 14-8 14 0 0 6-7 5-7 12"/><circle cx="71" cy="38" r="2.4"/></g>',
+
+odgovoriti:
+ '<circle cx="78" cy="48" r="13"/>'+
+ '<path d="M58 88c0-15 9-24 20-24s20 9 20 24"/>'+
+ '<g class="acc"><path d="M52 8H6v34h24l11 12V42h11z"/>'+
+ '<path d="M29 18v16"/><circle cx="29" cy="40" r="2.4"/></g>',
+
+kupatise:
+ '<path d="M8 52h84v8c0 13-10 22-24 22H32c-14 0-24-9-24-22z"/>'+
+ '<path d="M14 52V30a8 8 0 0 1 16 0"/>'+
+ '<circle cx="52" cy="40" r="10"/>'+
+ '<g class="acc"><path d="M72 44c-6-7 5-11 0-17M86 44c-6-7 5-11 0-17"/></g>',
+
+plivati:
+ '<circle cx="34" cy="34" r="10"/>'+
+ '<path d="M44 42h30"/>'+
+ '<path d="M34 24l12-14"/>'+
+ '<g class="acc"><path d="M4 62c7-7 14-7 21 0s14 7 21 0 14-7 21 0 14 7 21 0"/>'+
+ '<path d="M4 78c7-7 14-7 21 0s14 7 21 0 14-7 21 0 14 7 21 0"/></g>',
+
+uci:
+ '<path d="M52 88V14h34v74"/>'+
+ '<circle cx="58" cy="52" r="2.4"/>'+
+ '<g class="acc"><path d="M8 52h30"/><path d="M30 44l9 8-9 8"/></g>',
+
+izaci:
+ '<path d="M14 88V14h34v74"/>'+
+ '<circle cx="42" cy="52" r="2.4"/>'+
+ '<g class="acc"><path d="M58 52h30"/><path d="M80 44l9 8-9 8"/></g>',
+
+stajati:
+ '<circle cx="50" cy="20" r="10"/>'+
+ '<path d="M50 30v28"/>'+
+ '<path d="M50 38l-14 12M50 38l14 12"/>'+
+ '<path d="M50 58l-8 22M50 58l8 22"/>'+
+ '<g class="acc"><path d="M14 82h72"/><path d="M34 88v6M66 88v6"/></g>',
+
+lezati:
+ '<circle cx="22" cy="50" r="11"/>'+
+ '<path d="M33 56h32"/>'+
+ '<path d="M65 56l16 8"/>'+
+ '<path d="M42 54l12-10"/>'+
+ '<g class="acc"><path d="M6 70h86"/></g>',
+
+oblacitise:
+ '<path d="M36 30L16 42l10 14 10-8v38h38V48l10 8 10-14-20-12z"/>'+
+ '<path d="M36 30c0 8 6 12 14 12s14-4 14-12"/>'+
+ '<g class="acc"><path d="M50 4v16"/><path d="M42 14l8 10 8-10"/></g>',
+
+kostati:
+ '<path d="M6 48L46 8h36v36L42 84z"/>'+
+ '<circle cx="68" cy="22" r="5"/>'+
+ '<g class="acc"><path d="M52 34c-9-4-16 3-16 12s7 16 16 12M32 42h14M32 52h14"/></g>',
+
+dati:
+ '<g class="acc"><path d="M18 34h22v20H18z"/></g>'+
+ '<path d="M6 62c6-8 24-8 30 0"/>'+
+ '<path d="M6 62v12h30V62"/>'+
+ '<g class="acc"><path d="M46 46h30"/><path d="M68 38l9 8-9 8"/></g>'+
+ '<path d="M94 66c-4-10-14-12-20-6"/>',
+
+uzeti:
+ '<g class="acc"><path d="M60 34h22v20H60z"/></g>'+
+ '<path d="M64 62c6-8 24-8 30 0"/>'+
+ '<path d="M64 62v12h30V62"/>'+
+ '<g class="acc"><path d="M54 46H24"/><path d="M32 38l-9 8 9 8"/></g>'+
+ '<path d="M6 66c4-10 14-12 20-6"/>',
+
+nositi:
+ '<circle cx="32" cy="20" r="10"/>'+
+ '<path d="M32 30v24"/>'+
+ '<path d="M32 54l-8 26M32 54l8 26"/>'+
+ '<path d="M32 38l14 14"/>'+
+ '<g class="acc"><path d="M46 52h24v24H46z"/><path d="M52 52v-6a6 6 0 0 1 12 0v6"/></g>',
+
+staviti:
+ '<path d="M8 74h84"/>'+
+ '<path d="M18 74v10M82 74v10"/>'+
+ '<g class="acc"><path d="M32 58h36v14H32z"/></g>'+
+ '<g class="acc"><path d="M50 20v22"/><path d="M40 34l10 10 10-10"/></g>',
+
+upaliti:
+ '<path d="M36 54c-9-7-12-19-5-28s25-9 32 0 4 21-5 28v8H36z"/>'+
+ '<path d="M36 70h20M40 78h12"/>'+
+ '<g class="acc"><path d="M46 8V0M14 22l-8-6M78 22l8-6M16 50H6M76 50h10"/></g>',
+
+ugasiti:
+ '<path d="M36 54c-9-7-12-19-5-28s25-9 32 0 4 21-5 28v8H36z"/>'+
+ '<path d="M36 70h20M40 78h12"/>'+
+ '<g class="acc"><path d="M12 12l70 70"/></g>',
+
+razgovarati:
+ '<circle cx="18" cy="72" r="13"/>'+
+ '<circle cx="82" cy="72" r="13"/>'+
+ '<g class="acc"><path d="M4 8h40v26H4z"/><path d="M16 34l-2 12 14-12"/>'+
+ '<path d="M56 8h40v26H56z"/><path d="M84 34l2 12-14-12"/></g>',
+
+ponoviti:
+ '<path d="M78 50a28 28 0 1 1-14-24"/>'+
+ '<g class="acc"><path d="M50 14l16 10-14 12"/></g>'+
+ '<g class="acc"><path d="M40 44h20M40 56h20"/></g>',
+
+slaviti:
+ '<path d="M16 52h68v30H16z"/>'+
+ '<path d="M16 64h68"/>'+
+ '<g class="acc"><path d="M32 52V38M50 52V34M68 52V38"/></g>'+
+ '<g class="accfill"><path d="M32 36c-5-4-1-9 0-11 1 2 5 7 0 11z"/>'+
+ '<path d="M50 32c-5-4-1-9 0-11 1 2 5 7 0 11z"/>'+
+ '<path d="M68 36c-5-4-1-9 0-11 1 2 5 7 0 11z"/></g>',
+
+vratitise:
+ '<path d="M58 84V54h30v30"/>'+
+ '<path d="M54 54l19-17 19 17"/>'+
+ '<g class="acc"><path d="M12 84V46c0-14 12-24 26-24"/><path d="M28 12l12 10-12 10"/></g>',
+
+letjeti:
+ '<path d="M94 8L8 44l38 10 8 34 14-32z"/>'+
+ '<path d="M94 8L46 54"/>'+
+ '<g class="acc"><path d="M4 86c12-8 24-14 34-16" stroke-dasharray="6 7"/></g>'
+
+};
+
+function svg(k,cls){
+  return '<svg class="ico '+(cls||'')+'" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
+         '<g class="stroke">'+ICONS[k]+'</g></svg>';
 }
 
-/* ---------------- browse ---------------- */
-function browse(){
-  view.innerHTML =
-    '<div class="sec"><h2><span class="glag">Ⰰ</span>All '+VERBS.length+' verbs</h2>'+
-    '<p class="note">Tap a verb to open its conjugation.</p>'+
-    '<div class="grid" id="vlist"></div></div>'+
-    '<div id="detail"></div>';
+/* ================= data ================= */
+var PRON=['ja','ti','on/ona','mi','vi','oni'];
+var D='—';
 
-  var list = document.getElementById("vlist");
-  VERBS.forEach(function(v, i){
-    var a = document.createElement("a");
-    a.className = "cell"; a.href = "#";
-    a.innerHTML = '<h2>'+v.hr+'</h2><p>'+v.en+'</p>';
-    a.addEventListener("click", function(e){ e.preventDefault(); detail(i); });
-    list.appendChild(a);
-  });
+var V=[
+{k:null,hr:"biti",tr:"olmak",pat:"+ nominativ",
+ c:["sam","si","je","smo","ste","su"],
+ ex:[["Ja [sam] student.","Ben öğrenciyim."],["Gdje [si]?","Neredesin?"]],
+ note:"Bu biçimler <b>enklitik</b>: cümlenin başında olamazlar. Vurgulu biçim: jesam, jesi, jest."},
+
+{k:null,hr:"imati",tr:"sahip olmak / var",pat:"+ akuzativ",
+ c:["imam","imaš","ima","imamo","imate","imaju"],
+ ex:[["[Imam] auto.","Arabam var."],["[Imaš] li vremena?","Vaktin var mı?"]],
+ note:"Olumsuzu kaynaşır: <b>nemam, nemaš, nema</b>. \"Ne imam\" denmez."},
+
+{k:"raditi",hr:"raditi",tr:"çalışmak / yapmak",pat:"u / na + <b>lokativ</b>",
+ c:["radim","radiš","radi","radimo","radite","rade"],
+ ex:[["[Radim] u uredu.","Ofiste çalışıyorum."],["Što [radiš] danas?","Bugün ne yapıyorsun?"]]},
+
+{k:"jesti",hr:"jesti",tr:"yemek",pat:"+ akuzativ",
+ c:["jedem","jedeš","jede","jedemo","jedete","jedu"],
+ ex:[["[Jedem] ribu i krumpir.","Balık ve patates yiyorum."],["Gdje [jedete] ručak?","Öğle yemeğini nerede yiyorsunuz?"]],
+ note:"Mastar aldatıcı: <b>jesti → jedem</b>. Kökteki -d- sadece çekimde çıkar."},
+
+{k:"piti",hr:"piti",tr:"içmek",pat:"+ akuzativ",
+ c:["pijem","piješ","pije","pijemo","pijete","piju"],
+ ex:[["[Pijem] kavu svako jutro.","Her sabah kahve içiyorum."],["Što [piješ], vodu ili sok?","Ne içiyorsun, su mu meyve suyu mu?"]]},
+
+{k:"spavati",hr:"spavati",tr:"uyumak",pat:"nesnesiz · u + <b>lokativ</b>",
+ c:["spavam","spavaš","spava","spavamo","spavate","spavaju"],
+ ex:[["[Spavam] osam sati.","Sekiz saat uyuyorum."],["Dijete [spava] u sobi.","Çocuk odada uyuyor."]]},
+
+{k:"ici",hr:"ići",tr:"gitmek",pat:"u / na + <b>akuzativ</b> (hareket)",
+ c:["idem","ideš","ide","idemo","idete","idu"],
+ ex:[["[Idem] u grad.","Şehre gidiyorum."],["Kamo [ideš]?","Nereye gidiyorsun?"]],
+ note:"Nereye? = <b>kamo</b> + akuzativ. Nerede? = <b>gdje</b> + lokativ."},
+
+{k:null,hr:"doći",tr:"gelmek",pat:"u / na + <b>akuzativ</b> (hareket)",
+ c:["dođem","dođeš","dođe","dođemo","dođete","dođu"],
+ ex:[["[Dođi] večeras kod nas.","Bu akşam bize gel."],["[Došao] sam jučer.","Dün geldim."]],
+ note:"Tekrarlayan geliş için <b>dolaziti</b>: <i>dolazim svaki dan</i>."},
+
+{k:"gledati",hr:"gledati",tr:"izlemek / bakmak",pat:"+ akuzativ",
+ c:["gledam","gledaš","gleda","gledamo","gledate","gledaju"],
+ ex:[["[Gledam] film.","Film izliyorum."],["Što [gledaš]?","Ne izliyorsun?"]]},
+
+{k:"slusati",hr:"slušati",tr:"dinlemek",pat:"+ akuzativ — edat yok",
+ c:["slušam","slušaš","sluša","slušamo","slušate","slušaju"],
+ ex:[["[Slušam] glazbu.","Müzik dinliyorum."],["[Slušaš] li me?","Beni dinliyor musun?"]],
+ note:"Edat almaz: <b>slušam glazbu</b>. İngilizcedeki \"listen to\" seni yanıltmasın."},
+
+{k:"govoriti",hr:"govoriti",tr:"konuşmak",pat:"o + lokativ · + akuzativ (dil)",
+ c:["govorim","govoriš","govori","govorimo","govorite","govore"],
+ ex:[["[Govorim] malo hrvatski.","Biraz Hırvatça konuşuyorum."],["[Govorite] li sporije, molim?","Biraz daha yavaş konuşur musunuz?"]]},
+
+{k:"citati",hr:"čitati",tr:"okumak",pat:"+ akuzativ",
+ c:["čitam","čitaš","čita","čitamo","čitate","čitaju"],
+ ex:[["[Čitam] knjigu na hrvatskom.","Hırvatça bir kitap okuyorum."],["[Čitaš] li novine?","Gazete okur musun?"]]},
+
+{k:"pisati",hr:"pisati",tr:"yazmak",pat:"+ akuzativ (ne) · + dativ (kime)",
+ c:["pišem","pišeš","piše","pišemo","pišete","pišu"],
+ ex:[["[Pišem] poruku prijatelju.","Arkadaşıma mesaj yazıyorum."],["Kako se to [piše]?","Bu nasıl yazılıyor?"]],
+ note:"<b>pisati → pišem</b>: s harfi š olur. Aynı değişim <i>plesati → plešem</i>'de de var."},
+
+{k:null,hr:"učiti",tr:"öğrenmek / ders çalışmak",pat:"+ akuzativ",
+ c:["učim","učiš","uči","učimo","učite","uče"],
+ ex:[["[Učim] hrvatski.","Hırvatça öğreniyorum."],["Što [učiš] danas?","Bugün ne çalışıyorsun?"]]},
+
+{k:"kupovati",hr:"kupovati",tr:"alışveriş yapmak / satın almak",pat:"+ akuzativ",
+ c:["kupujem","kupuješ","kupuje","kupujemo","kupujete","kupuju"],
+ ex:[["[Kupujem] kruh u pekarnici.","Fırından ekmek alıyorum."],["Gdje [kupuješ] povrće?","Sebzeyi nereden alıyorsun?"]],
+ note:"Tek seferlik alış için <b>kupiti</b>. <i>Kupovati</i> süregelen eylemdir."},
+
+{k:null,hr:"voljeti",tr:"sevmek",pat:"+ akuzativ",
+ c:["volim","voliš","voli","volimo","volite","vole"],
+ ex:[["[Volim] more.","Denizi seviyorum."],["[Voliš] li kavu?","Kahveyi sever misin?"]],
+ note:"<b>volim te</b> seni seviyorum; <b>sviđaš mi se</b> senden hoşlanıyorum. Karıştırma."},
+
+{k:null,hr:"znati",tr:"bilmek",pat:"+ akuzativ · + mastar",
+ c:["znam","znaš","zna","znamo","znate","znaju"],
+ ex:[["Ne [znam] gdje je.","Nerede olduğunu bilmiyorum."],["[Znaš] li hrvatski?","Hırvatça biliyor musun?"]]},
+
+{k:null,hr:"htjeti",tr:"istemek",pat:"+ akuzativ · + mastar",
+ c:["hoću","hoćeš","hoće","hoćemo","hoćete","hoće"],
+ ex:[["[Hoćeš] li kavu?","Kahve ister misin?"],["Što [hoćeš] jesti?","Ne yemek istiyorsun?"]],
+ note:"Mastarla hiç benzemez: <b>htjeti → hoću</b>. Kısa biçimi (ću, ćeš, će…) gelecek zamanı kurar."},
+
+{k:null,hr:"moći",tr:"-ebilmek (yeti)",pat:"+ mastar",
+ c:["mogu","možeš","može","možemo","možete","mogu"],
+ ex:[["[Možeš] li mi pomoći?","Bana yardım edebilir misin?"],["Ne [mogu] doći večeras.","Bu akşam gelemem."]],
+ note:"1. tekil ile 3. çoğul aynı: <b>mogu</b>. Tek başına <i>Može!</i> = Olur! — günlük hayatta çok sık."},
+
+{k:null,hr:"živjeti",tr:"yaşamak",pat:"u + <b>lokativ</b>",
+ c:["živim","živiš","živi","živimo","živite","žive"],
+ ex:[["[Živim] u Zagrebu.","Zagreb'te yaşıyorum."],["Gdje [živiš]?","Nerede yaşıyorsun?"]],
+ note:"<b>živjeti</b> yaşamak (hayat), <b>stanovati</b> ikamet etmek (adres)."},
+
+{k:"igratise",hr:"igrati se",tr:"oynamak",pat:"s + instrumental · u + lokativ",
+ c:["igram se","igraš se","igra se","igramo se","igrate se","igraju se"],
+ ex:[["Djeca se [igraju] u parku.","Çocuklar parkta oynuyor."],["[Igraš] li se s njima?","Onlarla oynuyor musun?"]],
+ note:"Spor için <b>se</b> düşer: <i>igram nogomet</i> futbol oynuyorum."},
+
+{k:"plesati",hr:"plesati",tr:"dans etmek",pat:"nesnesiz · u + lokativ",
+ c:["plešem","plešeš","pleše","plešemo","plešete","plešu"],
+ ex:[["[Plešem] cijelu noć.","Bütün gece dans ediyorum."],["Hoćeš li [plesati]?","Dans eder misin?"]]},
+
+{k:"pjevati",hr:"pjevati",tr:"şarkı söylemek",pat:"+ akuzativ",
+ c:["pjevam","pjevaš","pjeva","pjevamo","pjevate","pjevaju"],
+ ex:[["[Pjevam] u autu.","Arabada şarkı söylüyorum."],["Lijepo [pjevaš]!","Güzel söylüyorsun!"]]},
+
+{k:"kuhati",hr:"kuhati",tr:"yemek pişirmek",pat:"+ akuzativ",
+ c:["kuham","kuhaš","kuha","kuhamo","kuhate","kuhaju"],
+ ex:[["[Kuham] juhu za večeru.","Akşam yemeği için çorba pişiriyorum."],["Tko [kuha] večeras?","Bu akşam kim yemek yapıyor?"]]},
+
+{k:"cistiti",hr:"čistiti",tr:"temizlemek",pat:"+ akuzativ",
+ c:["čistim","čistiš","čisti","čistimo","čistite","čiste"],
+ ex:[["[Čistim] sobu.","Odayı temizliyorum."],["Kad [čistiš] stan?","Evi ne zaman temizliyorsun?"]]},
+
+{k:"prati",hr:"prati",tr:"yıkamak",pat:"+ akuzativ",
+ c:["perem","pereš","pere","peremo","perete","peru"],
+ ex:[["[Perem] auto.","Arabayı yıkıyorum."],["[Operi] ruke!","Ellerini yıka!"]],
+ note:"Mastar ile çekim uzak: <b>prati → perem</b>. Tek seferlik için <b>oprati</b>."},
+
+{k:"voziti",hr:"voziti",tr:"sürmek / kullanmak",pat:"+ akuzativ",
+ c:["vozim","voziš","vozi","vozimo","vozite","voze"],
+ ex:[["[Vozim] auto svaki dan.","Her gün araba kullanıyorum."],["[Voziš] prebrzo!","Çok hızlı sürüyorsun!"]]},
+
+{k:"putovati",hr:"putovati",tr:"seyahat etmek",pat:"u / na + akuzativ",
+ c:["putujem","putuješ","putuje","putujemo","putujete","putuju"],
+ ex:[["[Putujem] u Split.","Split'e gidiyorum."],["Voliš li [putovati]?","Seyahat etmeyi sever misin?"]]},
+
+{k:"cekati",hr:"čekati",tr:"beklemek",pat:"+ akuzativ — edat yok",
+ c:["čekam","čekaš","čeka","čekamo","čekate","čekaju"],
+ ex:[["[Čekam] autobus već pola sata.","Yarım saattir otobüs bekliyorum."],["[Čekaj] me pet minuta!","Beni beş dakika bekle!"]],
+ note:"Doğrudan nesne alır, Türkçedeki gibi: <b>čekam autobus</b>. \"za autobus\" deme."},
+
+{k:"otvoriti",hr:"otvoriti",tr:"açmak",pat:"+ akuzativ",
+ c:["otvorim","otvoriš","otvori","otvorimo","otvorite","otvore"],
+ ex:[["[Otvori] prozor, molim te.","Pencereyi aç lütfen."],["Kad [otvara] dućan?","Dükkân ne zaman açılıyor?"]],
+ note:"İkinci cümle <b>otvarati</b> (süregelen) biçiminden: <i>otvara, otvaraju</i>."},
+
+{k:"zatvoriti",hr:"zatvoriti",tr:"kapatmak",pat:"+ akuzativ",
+ c:["zatvorim","zatvoriš","zatvori","zatvorimo","zatvorite","zatvore"],
+ ex:[["[Zatvori] vrata, hladno je.","Kapıyı kapat, hava soğuk."],["Možeš li [zatvoriti] prozor?","Pencereyi kapatabilir misin?"]]},
+
+{k:"pomoci",hr:"pomoći",tr:"yardım etmek",pat:"+ <b>dativ</b> — akuzativ değil",
+ c:["pomognem","pomogneš","pomogne","pomognemo","pomognete","pomognu"],
+ ex:[["Možeš li mi [pomoći]?","Bana yardım edebilir misin?"],["[Pomogni] mi, molim te.","Yardım et bana, lütfen."]],
+ note:"Türkçe \"anne<b>ye</b> yardım\" ile birebir örtüşür — yönelme hâli."},
+
+{k:"traziti",hr:"tražiti",tr:"aramak (bir şeyi)",pat:"+ akuzativ — edat yok",
+ c:["tražim","tražiš","traži","tražimo","tražite","traže"],
+ ex:[["[Tražim] ključeve.","Anahtarları arıyorum."],["Što [tražiš]?","Ne arıyorsun?"]],
+ note:"<b>tražiti</b> aramak (süreç), <b>naći</b> bulmak (sonuç). Telefonla aramak ise <b>zvati</b>."},
+
+{k:null,hr:"naći",tr:"bulmak",pat:"+ akuzativ",
+ c:["nađem","nađeš","nađe","nađemo","nađete","nađu"],
+ ex:[["[Našao] sam ključ.","Anahtarı buldum."],["Ne mogu [naći] mobitel.","Telefonu bulamıyorum."]]},
+
+{k:null,hr:"misliti",tr:"düşünmek",pat:"o + lokativ · na + akuzativ",
+ c:["mislim","misliš","misli","mislimo","mislite","misle"],
+ ex:[["[Mislim] da je dobro.","Bence iyi."],["Na što [misliš]?","Ne düşünüyorsun?"]],
+ note:"<b>na</b> + akuzativ birine/bir şeye dair düşünmek; <b>o</b> + lokativ bir konu üzerine."},
+{k:"vidjeti",hr:"vidjeti",tr:"görmek",pat:"+ akuzativ",
+ c:["vidim","vidiš","vidi","vidimo","vidite","vide"],
+ ex:[["[Vidim] more s prozora.","Pencereden denizi görüyorum."],["[Vidimo] se sutra!","Yarın görüşürüz!"]],
+ note:"<b>Vidimo se!</b> günlük vedalaşmanın en yaygın biçimi."},
+
+{k:null,hr:"čuti",tr:"duymak",pat:"+ akuzativ",
+ c:["čujem","čuješ","čuje","čujemo","čujete","čuju"],
+ ex:[["[Čuješ] li me?","Beni duyuyor musun?"],["Ne [čujem] ništa.","Hiçbir şey duymuyorum."]],
+ note:"<b>čuti</b> duymak (istemsiz), <b>slušati</b> dinlemek (istemli). <i>Čujemo se!</i> = telefonda görüşürüz."},
+
+{k:"smijatise",hr:"smijati se",tr:"gülmek",pat:"nesnesiz · + dativ (birine gülmek)",
+ c:["smijem se","smiješ se","smije se","smijemo se","smijete se","smiju se"],
+ ex:[["Djeca se [smiju].","Çocuklar gülüyor."],["Zašto se [smiješ]?","Neden gülüyorsun?"]],
+ note:"Yazılışı <b>smjeti</b> (izinli olmak) ile neredeyse aynı: <i>smijem</i> izinliyim, <i>smijem se</i> gülüyorum."},
+
+{k:"plakati",hr:"plakati",tr:"ağlamak",pat:"nesnesiz",
+ c:["plačem","plačeš","plače","plačemo","plačete","plaču"],
+ ex:[["Dijete [plače].","Çocuk ağlıyor."],["Nemoj [plakati].","Ağlama."]],
+ note:"<b>plakati → plačem</b>: k harfi č olur."},
+
+{k:"ustati",hr:"ustati",tr:"kalkmak",pat:"nesnesiz · u + akuzativ (saat)",
+ c:["ustanem","ustaneš","ustane","ustanemo","ustanete","ustanu"],
+ ex:[["[Ustanem] u sedam.","Yedide kalkıyorum."],["Kad [ustaješ] ujutro?","Sabah kaçta kalkıyorsun?"]],
+ note:"İkinci cümle süregelen biçimden: <b>ustajati → ustajem, ustaješ</b>."},
+
+{k:null,hr:"nedostajati",tr:"özlemek",pat:"+ <b>dativ</b> — özleyen kişi dativde",
+ c:[D,D,"nedostaje",D,D,"nedostaju"],
+ ex:[["[Nedostaje] mi obitelj.","Ailemi özlüyorum. (ailem bana eksik geliyor)"],["[Nedostaje] li ti Hrvatska?","Hırvatistan'ı özlüyor musun?"]],
+ note:"Cümle tersine döner: özlenen şey özne olur. <b>Nedostaješ mi</b> = seni özlüyorum."},
+
+{k:null,hr:"nadati se",tr:"ummak",pat:"+ dativ · da + cümle",
+ c:["nadam se","nadaš se","nada se","nadamo se","nadate se","nadaju se"],
+ ex:[["[Nadam] se da si dobro.","Umarım iyisindir."],["[Nadam] se lijepom vremenu.","Güzel hava umuyorum."]]},
+
+{k:null,hr:"zaboraviti",tr:"unutmak",pat:"+ akuzativ",
+ c:["zaboravim","zaboraviš","zaboravi","zaboravimo","zaboravite","zaborave"],
+ ex:[["[Zaboravio] sam ključeve.","Anahtarları unuttum."],["Nemoj [zaboraviti] mlijeko!","Sütü unutma!"]],
+ note:"Geçmişte cinsiyet uyumu: erkek <b>zaboravio sam</b>, kadın <b>zaboravila sam</b>."},
+
+{k:"setati",hr:"šetati",tr:"gezinmek / yürüyüşe çıkmak",pat:"po + <b>lokativ</b>",
+ c:["šetam","šetaš","šeta","šetamo","šetate","šetaju"],
+ ex:[["[Šetam] po gradu.","Şehirde geziniyorum."],["Idemo [šetati]?","Yürüyüşe çıkalım mı?"]],
+ note:"<b>po</b> + lokativ: belirsiz bir alanda dolaşmak."},
+
+{k:null,hr:"hodati",tr:"yürümek",pat:"nesnesiz",
+ c:["hodam","hodaš","hoda","hodamo","hodate","hodaju"],
+ ex:[["[Hodam] polako.","Yavaş yürüyorum."],["Dijete već [hoda].","Çocuk artık yürüyor."]],
+ note:"<b>hodati</b> yürüme eylemi, <b>ići</b> bir yere gitmek, <b>šetati</b> keyif için dolaşmak."},
+
+{k:"trcati",hr:"trčati",tr:"koşmak",pat:"nesnesiz · u + lokativ",
+ c:["trčim","trčiš","trči","trčimo","trčite","trče"],
+ ex:[["[Trčim] u parku ujutro.","Sabahları parkta koşuyorum."],["[Trči], kasnimo!","Koş, geç kalıyoruz!"]]},
+
+{k:"peci",hr:"peći",tr:"fırında pişirmek",pat:"+ akuzativ",
+ c:["pečem","pečeš","peče","pečemo","pečete","peku"],
+ ex:[["[Pečem] kruh.","Ekmek pişiriyorum."],["Mama [peče] kolač.","Annem kek yapıyor."]],
+ note:"<b>peći</b> fırında/ateşte, <b>kuhati</b> tencerede. 3. çoğul <b>peku</b> — č değil k."},
+
+{k:null,hr:"pripremati",tr:"hazırlamak",pat:"+ akuzativ",
+ c:["pripremam","pripremaš","priprema","pripremamo","pripremate","pripremaju"],
+ ex:[["[Pripremam] večeru.","Akşam yemeğini hazırlıyorum."],["Što [pripremaš]?","Ne hazırlıyorsun?"]]},
+
+{k:null,hr:"napraviti",tr:"yapmak",pat:"+ akuzativ",
+ c:["napravim","napraviš","napravi","napravimo","napravite","naprave"],
+ ex:[["[Napravi] mi kavu, molim te.","Bana bir kahve yap lütfen."],["Što si [napravio]?","Ne yaptın?"]],
+ note:"<b>raditi</b> çalışmak/yapmak (süreç), <b>napraviti</b> tamamlamak (sonuç)."},
+
+{k:null,hr:"razumjeti",tr:"anlamak",pat:"+ akuzativ",
+ c:["razumijem","razumiješ","razumije","razumijemo","razumijete","razumiju"],
+ ex:[["Ne [razumijem].","Anlamıyorum."],["[Razumiješ] li me?","Beni anlıyor musun?"]],
+ note:"En çok işine yarayacak tek cümle: <b>Ne razumijem.</b>"},
+
+{k:"pitati",hr:"pitati",tr:"sormak",pat:"+ akuzativ — kişi de akuzatifte",
+ c:["pitam","pitaš","pita","pitamo","pitate","pitaju"],
+ ex:[["[Pitam] učitelja.","Öğretmene soruyorum."],["Mogu li te nešto [pitati]?","Sana bir şey sorabilir miyim?"]],
+ note:"Sorulan kişi <b>akuzativ</b>: <i>pitam te</i>. Türkçedeki \"sana sormak\" yönelme hâlini kullanma."},
+
+{k:"odgovoriti",hr:"odgovoriti",tr:"cevap vermek",pat:"+ <b>dativ</b> (kime)",
+ c:["odgovorim","odgovoriš","odgovori","odgovorimo","odgovorite","odgovore"],
+ ex:[["[Odgovori] mi, molim te.","Bana cevap ver lütfen."],["Nije [odgovorio] na poruku.","Mesaja cevap vermedi."]],
+ note:"Dikkat: <b>pitati</b> akuzativ ister ama <b>odgovoriti</b> dativ ister."},
+
+{k:"zvati",hr:"zvati",tr:"aramak / çağırmak",pat:"+ akuzativ",
+ c:["zovem","zoveš","zove","zovemo","zovete","zovu"],
+ ex:[["[Zovem] mamu.","Annemi arıyorum."],["Kako se [zoveš]?","Adın ne?"]],
+ note:"<b>zvati se</b> = adı olmak: <i>Zovem se Enes.</i>"},
+
+{k:null,hr:"trebati",tr:"ihtiyacı olmak",pat:"+ akuzativ · + mastar",
+ c:["trebam","trebaš","treba","trebamo","trebate","trebaju"],
+ ex:[["[Trebam] pomoć.","Yardıma ihtiyacım var."],["Što ti [treba]?","Neye ihtiyacın var?"]],
+ note:"İki kuruluş da yaşıyor: <b>trebam pomoć</b> (ben özne) ve <b>treba mi pomoć</b> (dativ, bana lazım)."},
+
+{k:null,hr:"morati",tr:"-meli / zorunda olmak",pat:"+ mastar",
+ c:["moram","moraš","mora","moramo","morate","moraju"],
+ ex:[["[Moram] raditi u subotu.","Cumartesi çalışmak zorundayım."],["[Moraš] li već ići?","Şimdiden gitmen mi gerekiyor?"]]},
+
+{k:null,hr:"smjeti",tr:"izni olmak / -ebilmek (izin)",pat:"+ mastar",
+ c:["smijem","smiješ","smije","smijemo","smijete","smiju"],
+ ex:[["Ovdje se ne [smije] pušiti.","Burada sigara içilmez."],["[Smijem] li ući?","Girebilir miyim?"]],
+ note:"<b>moći</b> elinden gelmek, <b>smjeti</b> izinli olmak. <i>Mogu plivati</i> yüzme bilirim; <i>smijem plivati</i> yüzmeme izin var."},
+
+{k:null,hr:"sviđati se",tr:"hoşuna gitmek / beğenmek",pat:"+ <b>dativ</b> — beğenen kişi dativde",
+ c:[D,D,"sviđa se",D,D,"sviđaju se"],
+ ex:[["[Sviđa] mi se ovaj grad.","Bu şehri beğeniyorum. (şehir bana hoş geliyor)"],["Kako ti se [sviđa] film?","Filmi nasıl buldun?"]],
+ note:"<b>voljeti</b> ile karıştırma: <i>volim te</i> seni seviyorum, <i>sviđaš mi se</i> senden hoşlanıyorum."},
+
+{k:null,hr:"bojati se",tr:"korkmak",pat:"+ <b>genitiv</b>",
+ c:["bojim se","bojiš se","boji se","bojimo se","bojite se","boje se"],
+ ex:[["[Bojim] se psa.","Köpekten korkuyorum."],["Ne [boj] se!","Korkma!"]],
+ note:"Genitiv ister: <i>bojim se <b>mraka</b></i>, <i>bojim se <b>vode</b></i>."},
+
+{k:null,hr:"sjećati se",tr:"hatırlamak",pat:"+ <b>genitiv</b>",
+ c:["sjećam se","sjećaš se","sjeća se","sjećamo se","sjećate se","sjećaju se"],
+ ex:[["[Sjećaš] li me se?","Beni hatırlıyor musun?"],["Ne [sjećam] se njegova imena.","Adını hatırlamıyorum."]],
+ note:"Genitiv ister: <i>sjećam se <b>ljeta</b></i>, <i>sjećam se <b>tebe</b></i>."},
+
+{k:null,hr:"brinuti se",tr:"endişelenmek / ilgilenmek",pat:"o + <b>lokativ</b>",
+ c:["brinem se","brineš se","brine se","brinemo se","brinete se","brinu se"],
+ ex:[["Ne [brini]!","Merak etme!"],["[Brinem] se o djeci.","Çocuklarla ilgileniyorum."]],
+ note:"Aynı fiil hem endişelenmeyi hem bakıp gözetmeyi karşılar."},
+
+{k:null,hr:"radovati se",tr:"iple çekmek / sevinmek",pat:"+ <b>dativ</b>",
+ c:["radujem se","raduješ se","raduje se","radujemo se","radujete se","raduju se"],
+ ex:[["[Radujem] se putovanju.","Yolculuğu iple çekiyorum."],["[Raduje] me što te vidim.","Seni gördüğüme sevindim."]],
+ note:"Türkçede tam karşılığı yok: gelecekteki bir şeyi şimdiden sevinerek beklemek."},
+
+{k:"kupatise",hr:"kupati se",tr:"yıkanmak / denize girmek",pat:"u + <b>lokativ</b>",
+ c:["kupam se","kupaš se","kupa se","kupamo se","kupate se","kupaju se"],
+ ex:[["[Kupam] se u moru.","Denizde yüzüyorum."],["Idemo se [kupati]!","Denize girelim!"]],
+ note:"<b>kupati se</b> suya girmek, <b>plivati</b> yüzme hareketini yapmak."},
+
+{k:"plivati",hr:"plivati",tr:"yüzmek",pat:"nesnesiz",
+ c:["plivam","plivaš","pliva","plivamo","plivate","plivaju"],
+ ex:[["[Plivam] svaki dan.","Her gün yüzüyorum."],["Znaš li [plivati]?","Yüzme biliyor musun?"]]},
+
+{k:"uci",hr:"ući",tr:"girmek",pat:"u + <b>akuzativ</b>",
+ c:["uđem","uđeš","uđe","uđemo","uđete","uđu"],
+ ex:[["[Uđi], molim te.","Gir, lütfen."],["[Ušao] sam u sobu.","Odaya girdim."]]},
+
+{k:"izaci",hr:"izaći",tr:"çıkmak",pat:"iz + <b>genitiv</b>",
+ c:["izađem","izađeš","izađe","izađemo","izađete","izađu"],
+ ex:[["[Izađem] iz kuće u osam.","Sekizde evden çıkıyorum."],["Hoćemo li [izaći] večeras?","Bu akşam dışarı çıkalım mı?"]],
+ note:"<b>iz</b> + genitiv: <i>iz kuće, iz grada, iz auta</i>."},
+
+{k:"sjediti",hr:"sjediti",tr:"oturmak (oturur hâlde olmak)",pat:"u / na + <b>lokativ</b>",
+ c:["sjedim","sjediš","sjedi","sjedimo","sjedite","sjede"],
+ ex:[["[Sjedim] u kafiću.","Kafede oturuyorum."],["[Sjedimo] vani.","Dışarıda oturuyoruz."]],
+ note:"Oturur hâlde olmak <b>sjediti</b> + lokativ. Oturma eylemi <b>sjesti</b> + akuzativ."},
+
+{k:null,hr:"sjesti",tr:"oturmak (oturma eylemi)",pat:"na + <b>akuzativ</b> — hareket",
+ c:["sjednem","sjedneš","sjedne","sjednemo","sjednete","sjednu"],
+ ex:[["[Sjedni] ovdje.","Buraya otur."],["Možemo li [sjesti] vani?","Dışarıda oturabilir miyiz?"]],
+ note:"Hareket → akuzativ: <i>sjednem <b>na stolicu</b></i>. Duruş → lokativ: <i>sjedim <b>na stolici</b></i>."},
+
+{k:"stajati",hr:"stajati",tr:"ayakta durmak",pat:"nesnesiz",
+ c:["stojim","stojiš","stoji","stojimo","stojite","stoje"],
+ ex:[["[Stojim] ispred kuće.","Evin önünde duruyorum."],["Zašto [stojiš]? Sjedni!","Niye ayakta duruyorsun? Otur!"]],
+ note:"Mastar ile çekim uzak: <b>stajati → stojim</b>."},
+
+{k:"lezati",hr:"ležati",tr:"uzanmak (yatar hâlde olmak)",pat:"na + <b>lokativ</b>",
+ c:["ležim","ležiš","leži","ležimo","ležite","leže"],
+ ex:[["[Ležim] na plaži.","Plajda uzanıyorum."],["Knjiga [leži] na stolu.","Kitap masanın üstünde duruyor."]]},
+
+{k:null,hr:"leći",tr:"uzanmak (yatma eylemi)",pat:"na + <b>akuzativ</b> — hareket",
+ c:["legnem","legneš","legne","legnemo","legnete","legnu"],
+ ex:[["Idem [leći].","Yatmaya gidiyorum."],["[Legnem] u deset.","Onda yatıyorum."]],
+ note:"<b>ležati / leći</b> ikilisi <b>sjediti / sjesti</b> ile aynı mantıkta: duruş lokativ, hareket akuzativ."},
+{k:"oblacitise",hr:"oblačiti se",tr:"giyinmek",pat:"nesnesiz — <b>se</b> ile",
+ c:["oblačim se","oblačiš se","oblači se","oblačimo se","oblačite se","oblače se"],
+ ex:[["[Oblačim] se brzo.","Çabuk giyiniyorum."],["Što [oblačiš] danas?","Bugün ne giyiyorsun?"]],
+ note:"<b>se</b> düşerse nesne gerekir: <i>oblačim dijete</i> çocuğu giydiriyorum."},
+
+{k:"tusiratise",hr:"tuširati se",tr:"duş almak",pat:"nesnesiz — <b>se</b> ile",
+ c:["tuširam se","tuširaš se","tušira se","tuširamo se","tuširate se","tuširaju se"],
+ ex:[["[Tuširam] se ujutro.","Sabahları duş alıyorum."],["Idem se [tuširati].","Duş almaya gidiyorum."]],
+ note:"<b>ujutro</b> her sabah (alışkanlık), <b>jutros</b> bu sabah (tek sefer)."},
+
+{k:null,hr:"kupiti",tr:"satın almak (tek sefer)",pat:"+ akuzativ",
+ c:["kupim","kupiš","kupi","kupimo","kupite","kupe"],
+ ex:[["[Kupio] sam kruh.","Ekmek aldım."],["Što da [kupim]?","Ne alayım?"]],
+ note:"<b>kupiti</b> tek sefer, <b>kupovati</b> süregelen/alışkanlık."},
+
+{k:null,hr:"prodati",tr:"satmak",pat:"+ akuzativ",
+ c:["prodam","prodaš","proda","prodamo","prodate","prodaju"],
+ ex:[["[Prodali] su auto.","Arabayı sattılar."],["Želim [prodati] mobitel.","Telefonu satmak istiyorum."]]},
+
+{k:"platiti",hr:"platiti",tr:"ödemek",pat:"+ akuzativ",
+ c:["platim","platiš","plati","platimo","platite","plate"],
+ ex:[["Mogu li [platiti] karticom?","Kartla ödeyebilir miyim?"],["[Platio] sam račun.","Hesabı ödedim."]],
+ note:"Geçmişte cinsiyet uyumu: erkek <b>platio sam</b>, kadın <b>platila sam</b>."},
+
+{k:"kostati",hr:"koštati",tr:"fiyatı olmak",pat:"nesnesiz — 3. şahıs",
+ c:[D,D,"košta",D,D,"koštaju"],
+ ex:[["Kava [košta] dva eura.","Kahve iki euro."],["Koliko [košta]?","Kaç para?"]],
+ note:"Pratikte sadece 3. şahıs: <b>košta / koštaju</b>. <i>Koliko košta?</i> markette en çok kuracağın cümle."},
+
+{k:"dati",hr:"dati",tr:"vermek",pat:"+ akuzativ (ne) · + dativ (kime)",
+ c:["dam","daš","da","damo","date","daju"],
+ ex:[["[Daj] mi to, molim te.","Onu bana ver lütfen."],["[Dam] knjigu prijatelju.","Kitabı arkadaşıma veriyorum."]],
+ note:"İki nesne: verilen şey akuzativ, alan kişi dativ."},
+
+{k:"uzeti",hr:"uzeti",tr:"almak (eline)",pat:"+ akuzativ",
+ c:["uzmem","uzmeš","uzme","uzmemo","uzmete","uzmu"],
+ ex:[["[Uzmi] torbu.","Çantayı al."],["[Uzet] ću kavu, molim.","Bir kahve alayım lütfen."]],
+ note:"<b>uzeti</b> eline almak, <b>kupiti</b> parayla almak. Kafede sipariş için <i>uzet ću</i>."},
+
+{k:null,hr:"donijeti",tr:"getirmek",pat:"+ akuzativ",
+ c:["donesem","doneseš","donese","donesemo","donesete","donesu"],
+ ex:[["[Donesi] mi vodu, molim te.","Bana su getir lütfen."],["Što da [donesem]?","Ne getireyim?"]]},
+
+{k:"nositi",hr:"nositi",tr:"taşımak / giymek",pat:"+ akuzativ",
+ c:["nosim","nosiš","nosi","nosimo","nosite","nose"],
+ ex:[["[Nosim] jaknu.","Ceket giyiyorum."],["Da ti [nosim] torbu?","Çantanı taşıyayım mı?"]],
+ note:"Üstünde taşımak da giymek de aynı fiil."},
+
+{k:"staviti",hr:"staviti",tr:"koymak",pat:"u / na + <b>akuzativ</b>",
+ c:["stavim","staviš","stavi","stavimo","stavite","stave"],
+ ex:[["[Stavi] knjigu na stol.","Kitabı masaya koy."],["Gdje da [stavim] torbu?","Çantayı nereye koyayım?"]],
+ note:"Hareket var → akuzativ: <i>na stol</i>, <i>na stolu</i> değil."},
+
+{k:"upaliti",hr:"upaliti",tr:"yakmak / açmak (cihaz)",pat:"+ akuzativ",
+ c:["upalim","upališ","upali","upalimo","upalite","upale"],
+ ex:[["[Upali] svjetlo.","Işığı aç."],["Možeš li [upaliti] klimu?","Klimayı açabilir misin?"]],
+ note:"Cihaz açmak <b>upaliti</b>; kapı/pencere açmak <b>otvoriti</b>. Karıştırma."},
+
+{k:"ugasiti",hr:"ugasiti",tr:"söndürmek / kapatmak (cihaz)",pat:"+ akuzativ",
+ c:["ugasim","ugasiš","ugasi","ugasimo","ugasite","ugase"],
+ ex:[["[Ugasi] televizor.","Televizyonu kapat."],["Jesi li [ugasio] svjetlo?","Işığı kapattın mı?"]]},
+
+{k:"razgovarati",hr:"razgovarati",tr:"sohbet etmek",pat:"s + <b>instrumental</b> · o + lokativ",
+ c:["razgovaram","razgovaraš","razgovara","razgovaramo","razgovarate","razgovaraju"],
+ ex:[["[Razgovaram] s prijateljem.","Bir arkadaşımla konuşuyorum."],["Moramo [razgovarati].","Konuşmamız lazım."]],
+ note:"Kiminle? <b>s</b> + instrumental. Ne hakkında? <b>o</b> + lokativ."},
+
+{k:null,hr:"pričati",tr:"anlatmak / sohbet etmek",pat:"o + <b>lokativ</b>",
+ c:["pričam","pričaš","priča","pričamo","pričate","pričaju"],
+ ex:[["[Pričaj] mi o putovanju.","Bana yolculuğu anlat."],["O čemu [pričate]?","Neyden bahsediyorsunuz?"]],
+ note:"Bir konu hakkında konuşurken <b>o</b> + lokativ zorunlu: <i>pričam <b>o poslu</b></i>."},
+
+{k:null,hr:"reći",tr:"söylemek",pat:"+ dativ (kime) · + akuzativ (ne)",
+ c:["kažem","kažeš","kaže","kažemo","kažete","kažu"],
+ ex:[["[Reci] mi istinu.","Bana gerçeği söyle."],["Što si [rekao]?","Ne dedin?"]],
+ note:"Mastar ile çekim tamamen farklı: <b>reći → kažem</b>. Emir kipi <b>reci</b>."},
+
+{k:null,hr:"objasniti",tr:"açıklamak",pat:"+ akuzativ (ne) · + dativ (kime)",
+ c:["objasnim","objasniš","objasni","objasnimo","objasnite","objasne"],
+ ex:[["Možeš li mi [objasniti]?","Bana açıklayabilir misin?"],["[Objasni] mi to još jednom.","Bunu bana bir daha açıkla."]]},
+
+{k:"ponoviti",hr:"ponoviti",tr:"tekrarlamak",pat:"+ akuzativ",
+ c:["ponovim","ponoviš","ponovi","ponovimo","ponovite","ponove"],
+ ex:[["Možete li [ponoviti], molim?","Tekrar eder misiniz lütfen?"],["[Ponovi] to još jednom.","Bunu bir daha tekrarla."]],
+ note:"Karşındaki hızlı konuştuğunda ilk uzanacağın cümle."},
+
+{k:null,hr:"posjetiti",tr:"ziyaret etmek",pat:"+ akuzativ",
+ c:["posjetim","posjetiš","posjeti","posjetimo","posjetite","posjete"],
+ ex:[["[Posjetit] ću baku.","Babaannemi ziyaret edeceğim."],["Došli su nas [posjetiti].","Bizi ziyarete geldiler."]]},
+
+{k:null,hr:"upoznati",tr:"tanışmak / tanıştırmak",pat:"+ akuzativ",
+ c:["upoznam","upoznaš","upozna","upoznamo","upoznate","upoznaju"],
+ ex:[["Drago mi je što smo se [upoznali].","Tanıştığımıza memnun oldum."],["Želim te [upoznati] s Anom.","Seni Ana ile tanıştırmak istiyorum."]],
+ note:"<b>se</b> ile karşılıklı olur: <i>upoznali smo se</i> tanıştık."},
+
+{k:null,hr:"probati",tr:"denemek / tatmak",pat:"+ akuzativ · + mastar",
+ c:["probam","probaš","proba","probamo","probate","probaju"],
+ ex:[["[Probaj] ovo!","Bunu bir dene!"],["Mogu li [probati]?","Deneyebilir miyim?"]],
+ note:"Hem yemeği tatmak hem kıyafeti denemek hem de bir işe kalkışmak."},
+
+{k:null,hr:"osjećati se",tr:"hissetmek",pat:"nesnesiz + <b>zarf</b>",
+ c:["osjećam se","osjećaš se","osjeća se","osjećamo se","osjećate se","osjećaju se"],
+ ex:[["Kako se [osjećaš]?","Nasıl hissediyorsun?"],["[Osjećam] se dobro.","İyi hissediyorum."]],
+ note:"Sıfat değil zarf: <i>dobr<b>o</b></i>, <i>loš<b>e</b></i>, <i>umorn<b>o</b></i>."},
+
+{k:"boljeti",hr:"boljeti",tr:"ağrımak",pat:"+ <b>akuzativ</b> — ağrıyan kişi akuzatifte",
+ c:[D,D,"boli",D,D,"bole"],
+ ex:[["[Boli] me glava.","Başım ağrıyor. (baş beni ağrıtıyor)"],["[Bole] me noge.","Bacaklarım ağrıyor."]],
+ note:"Sadece 3. şahıs: <b>boli me / boli te / boli ga</b>. Ağrıyan organ öznedir, sen nesnesin."},
+
+{k:null,hr:"izgledati",tr:"görünmek",pat:"nesnesiz + <b>zarf</b>",
+ c:["izgledam","izgledaš","izgleda","izgledamo","izgledate","izgledaju"],
+ ex:[["[Izgledaš] umorno.","Yorgun görünüyorsun."],["Ovo jelo [izgleda] odlično.","Bu yemek harika görünüyor."]],
+ note:"Sıfat değil zarf gelir: <i>umorn<b>o</b></i>, <i>dobr<b>o</b></i>, <i>lijep<b>o</b></i>."},
+
+{k:null,hr:"izgubiti",tr:"kaybetmek",pat:"+ akuzativ",
+ c:["izgubim","izgubiš","izgubi","izgubimo","izgubite","izgube"],
+ ex:[["[Izgubio] sam ključ.","Anahtarı kaybettim."],["Bojim se da ću [izgubiti] posao.","İşi kaybedeceğimden korkuyorum."]],
+ note:"<b>izgubiti se</b> = kaybolmak: <i>izgubio sam se</i> kayboldum."},
+
+{k:null,hr:"vjerovati",tr:"inanmak",pat:"+ <b>dativ</b>",
+ c:["vjerujem","vjeruješ","vjeruje","vjerujemo","vjerujete","vjeruju"],
+ ex:[["[Vjerujem] ti.","Sana inanıyorum."],["Ne mogu [vjerovati]!","İnanamıyorum!"]],
+ note:"Dativ ister: <i>vjerujem <b>ti</b></i>, <i>vjerujem <b>mu</b></i>."},
+
+{k:null,hr:"pozvati",tr:"davet etmek / çağırmak",pat:"+ akuzativ",
+ c:["pozovem","pozoveš","pozove","pozovemo","pozovete","pozovu"],
+ ex:[["[Pozvao] sam prijatelje.","Arkadaşları davet ettim."],["Hoćeš li ih [pozvati]?","Onları davet edecek misin?"]]},
+
+{k:"slaviti",hr:"slaviti",tr:"kutlamak",pat:"+ akuzativ",
+ c:["slavim","slaviš","slavi","slavimo","slavite","slave"],
+ ex:[["[Slavim] rođendan.","Doğum günümü kutluyorum."],["Što [slavite]?","Neyi kutluyorsunuz?"]]},
+
+{k:null,hr:"paziti",tr:"dikkat etmek / göz kulak olmak",pat:"na + <b>akuzativ</b>",
+ c:["pazim","paziš","pazi","pazimo","pazite","paze"],
+ ex:[["[Pazi]!","Dikkat et!"],["[Pazim] na djecu.","Çocuklara göz kulak oluyorum."]],
+ note:"Tek kelimelik <b>Pazi!</b> sokakta en sık duyacağın uyarı."},
+
+{k:null,hr:"početi",tr:"başlamak",pat:"+ akuzativ · + mastar",
+ c:["počnem","počneš","počne","počnemo","počnete","počnu"],
+ ex:[["[Počnimo]!","Başlayalım!"],["[Počeo] sam učiti hrvatski.","Hırvatça öğrenmeye başladım."]],
+ note:"Süregelen biçim <b>počinjati</b>: <i>film počinje u osam</i> film sekizde başlıyor."},
+
+{k:null,hr:"završiti",tr:"bitirmek",pat:"+ akuzativ",
+ c:["završim","završiš","završi","završimo","završite","završe"],
+ ex:[["[Završio] sam posao.","İşi bitirdim."],["Moram [završiti] do petka.","Cumaya kadar bitirmem lazım."]]},
+
+{k:null,hr:"ostati",tr:"kalmak",pat:"u / na + <b>lokativ</b>",
+ c:["ostanem","ostaneš","ostane","ostanemo","ostanete","ostanu"],
+ ex:[["[Ostani] još malo.","Biraz daha kal."],["[Ostao] sam u hotelu.","Otelde kaldım."]]},
+
+{k:"vratitise",hr:"vratiti se",tr:"dönmek",pat:"iz + <b>genitiv</b>",
+ c:["vratim se","vratiš se","vrati se","vratimo se","vratite se","vrate se"],
+ ex:[["[Vratim] se iz škole u tri.","Okuldan üçte dönüyorum."],["Kad se [vraćaš]?","Ne zaman dönüyorsun?"]],
+ note:"İkinci cümle süregelen biçimden: <b>vraćati se → vraćam se</b>."},
+
+{k:"letjeti",hr:"letjeti",tr:"uçmak",pat:"u / na + <b>akuzativ</b>",
+ c:["letim","letiš","leti","letimo","letite","lete"],
+ ex:[["[Letim] u Zagreb.","Zagreb'e uçuyorum."],["Avion [leti] u sedam.","Uçak yedide kalkıyor."]]},
+
+{k:null,hr:"stanovati",tr:"ikamet etmek",pat:"u + <b>lokativ</b>",
+ c:["stanujem","stanuješ","stanuje","stanujemo","stanujete","stanuju"],
+ ex:[["[Stanujem] u Splitu.","Split'te oturuyorum."],["Gdje [stanuješ]?","Nerede oturuyorsun?"]],
+ note:"<b>stanovati</b> adres bildirir, <b>živjeti</b> hayat sürmek. İkisi de doğru ama vurgu farklı."}
+];
+
+/* ================= helpers ================= */
+function cue(s){return s.replace(/\[(.+?)\]/g,'<span class="blank">______</span>')}
+function full(s){return s.replace(/\[(.+?)\]/g,'<b class="hit">$1</b>')}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function pool(){
+  if(filter==='icon')return V.filter(function(v){return v.k});
+  if(filter==='ctx')return V.filter(function(v){return !v.k});
+  return V.slice();
 }
 
-function detail(i){
-  var v = VERBS[i];
-  var d = document.getElementById("detail");
-  d.innerHTML =
-    '<div class="card"><h2>'+v.hr+' <span>·</span> '+v.en+'</h2>'+
-    '<p class="cap">'+v.pat+'</p>'+
-    conjTable(v)+
-    '<ul class="talk"><li><span class="hr">'+v.ex+'</span>'+
-    '<span class="en">'+v.gloss+'</span></li></ul></div>';
-  d.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto":"smooth", block:"center"});
+/* ================= state ================= */
+var SESSION=20;
+var order=[],idx=0,shown=false,again=[],mode='quiz',filter='all';
+var view=document.getElementById('view');
+
+function start(){
+  order=shuffle(pool()).slice(0,SESSION);
+  idx=0;shown=false;again=[];render();
 }
 
-/* ---------------- quiz ---------------- */
-var round=[], idx=0, score=0, answered=false, missed=[];
+function render(){
+  if(mode==='gallery')return gallery();
+  if(idx>=order.length)return end();
+  var v=order[idx],n=String(idx+1).padStart(2,'0'),h='';
 
-function startQuiz(){
-  round = shuffle(VERBS).slice(0,20);
-  idx=0; score=0; missed=[];
-  question();
-}
+  h+='<div class="meta"><span>'+(idx+1)+' / '+order.length+'</span><span>'+(v.k?'ÇİZİM':'BAĞLAM')+'</span></div>';
+  h+='<div class="bar"><i style="width:'+(idx/order.length*100)+'%"></i></div>';
 
-function question(){
-  answered = false;
-  var v = round[idx];
-  var wrong = shuffle(VERBS.filter(function(x){ return x.en !== v.en; })).slice(0,3);
-  var all = shuffle([v].concat(wrong));
-  var correct = all.indexOf(v);
-
-  view.innerHTML =
-    '<div class="quizbar"><span class="count">'+(idx+1)+' / '+round.length+'</span>'+
-    '<span class="score">'+score+' correct</span></div>'+
-    '<div class="progress"><i style="width:'+(idx/round.length*100)+'%"></i></div>'+
-    '<div class="qcard">'+
-      '<p class="prompt">What does it mean?</p>'+
-      '<p class="target">'+v.hr+'</p>'+
-      '<div class="opts" id="opts"></div><div id="why"></div>'+
-    '</div><div class="btnrow" id="btnrow"></div>';
-
-  var box = document.getElementById("opts");
-  all.forEach(function(x,i){
-    var b=document.createElement("button");
-    b.className="opt"; b.type="button";
-    b.innerHTML='<span class="key">'+KEYS[i]+'</span><span>'+x.en+'</span>';
-    b.addEventListener("click", function(){ answer(i, correct, v); });
-    box.appendChild(b);
-  });
-}
-
-function answer(i, correct, v){
-  if(answered) return; answered=true;
-  if(i===correct) score++; else missed.push(v);
-  document.querySelectorAll("#opts .opt").forEach(function(b,j){
-    b.disabled=true;
-    if(j===correct) b.classList.add("correct");
-    else if(j===i) b.classList.add("wrong");
-    else b.classList.add("dim");
-  });
-  document.querySelector(".score").textContent = score+" correct";
-  document.getElementById("why").innerHTML =
-    '<div class="why"><b>'+v.hr+'</b> — '+v.en+'. Takes '+v.pat+'.</div>'+
-    conjTable(v)+
-    '<ul class="talk"><li><span class="hr">'+v.ex+'</span><span class="en">'+v.gloss+'</span></li></ul>';
-  var row=document.getElementById("btnrow");
-  row.innerHTML='<button class="btn" id="next">'+(idx+1<round.length?"Next":"See results")+'</button>';
-  document.getElementById("next").addEventListener("click", next);
-  document.getElementById("next").focus();
-}
-
-function next(){ idx++; if(idx<round.length) question(); else results(); }
-
-function results(){
-  var pct=Math.round(score/round.length*100);
-  var review = missed.length
-    ? '<h3 class="sub">What slipped</h3><ul class="talk">'+missed.map(function(v){
-        return '<li><span class="hr">'+v.hr+'</span><span class="en">'+v.en+' · '+v.pat+'</span></li>';
-      }).join("")+'</ul>' : "";
-  view.innerHTML='<div class="card"><div class="result">'+
-    '<div class="glag">'+GLAG[Math.min(Math.floor(pct/10),9)]+'</div>'+
-    '<p class="big">'+pct+'%</p><p class="of">'+score+' of '+round.length+'</p></div>'+
-    review+'<div class="btnrow"><button class="btn" id="again">New round</button>'+
-    '<a class="btn ghost" href="index.html">Home</a></div></div>';
-  document.getElementById("again").addEventListener("click", startQuiz);
-}
-
-document.addEventListener("keydown", function(e){
-  if(mode!=="quiz") return;
-  if(!answered){
-    var k=KEYS.indexOf(e.key.toUpperCase());
-    var btns=document.querySelectorAll("#opts .opt");
-    if(k>-1 && k<btns.length){ e.preventDefault(); btns[k].click(); }
-  } else if(e.key==="Enter"||e.key===" "){
-    var n=document.getElementById("next"); if(n){ e.preventDefault(); n.click(); }
+  if(v.k){
+    h+='<div class="frame" data-n="'+n+'">'+svg(v.k)+
+       '<p class="ask">'+(shown?'&nbsp;':'bu fiil Hırvatça ne?')+'</p></div>';
+  }else{
+    h+='<div class="ctx" data-n="'+n+'">';
+    for(var j=0;j<v.ex.length;j++){
+      h+='<div class="line">'+(shown?full(v.ex[j][0]):cue(v.ex[j][0]))+'</div>';
+    }
+    h+='<p class="ask">'+(shown?'&nbsp;':'boşluğa hangi fiil giriyor?')+'</p></div>';
   }
+
+  if(!shown){
+    h+='<button class="btn gold" onclick="reveal()">Cevabı göster</button>';
+  }else{
+    h+='<div class="ans">';
+    h+='<div class="top"><p class="hrv">'+v.hr+'</p><p class="tr">'+v.tr+'</p><p class="pat">'+v.pat+'</p></div>';
+    h+='<div class="conj">';
+    for(var i=0;i<6;i++){
+      h+='<div><span class="p">'+PRON[i]+'</span>'+
+         (v.c[i]===D?'<span style="color:#544C3F">—</span>':v.c[i])+'</div>';
+    }
+    h+='</div>';
+    for(var e=0;e<v.ex.length;e++){
+      h+='<div class="ex"><div class="cro">'+full(v.ex[e][0])+'</div><div class="glo">'+v.ex[e][1]+'</div></div>';
+    }
+    if(v.note)h+='<div class="note">'+v.note+'</div>';
+    h+='</div>';
+    h+='<div class="row">'+
+       '<button class="btn small" onclick="next(false)">Bildim ✓</button>'+
+       '<button class="btn small again" onclick="next(true)">Tekrar et</button>'+
+       '</div>';
+  }
+  view.innerHTML=h;window.scrollTo(0,0);
+}
+
+function reveal(){shown=true;render()}
+function next(f){if(f)again.push(order[idx]);idx++;shown=false;render()}
+
+function end(){
+  var h='<div class="end"><h2>Tur bitti</h2>';
+  if(again.length===0){
+    h+='<p>Bu turda tekrar işaretlediğin fiil yok.</p>';
+  }else{
+    h+='<p>Tekrar edilecek <b>'+again.length+'</b> fiil:</p><ul>';
+    for(var i=0;i<again.length;i++){
+      h+='<li class="bad">'+again[i].hr+' <span style="color:var(--dim)">— '+again[i].tr+'</span></li>';
+    }
+    h+='</ul><button class="btn gold" onclick="drill()">Sadece bunları çalış</button>';
+  }
+  h+='<button class="btn" onclick="start()">Yeni tur</button></div>';
+  view.innerHTML=h;
+}
+function drill(){order=shuffle(again.slice());idx=0;shown=false;again=[];render()}
+
+function gallery(){
+  var p=pool(),h='',ic=p.filter(function(v){return v.k}),cx=p.filter(function(v){return !v.k});
+  if(ic.length){
+    h+='<div class="gsec">Çizimle — '+ic.length+' fiil</div><div class="grid">';
+    for(var i=0;i<ic.length;i++){
+      h+='<div class="cell">'+svg(ic[i].k)+'<div class="n">'+ic[i].hr+'</div><div class="t">'+ic[i].tr+'</div></div>';
+    }
+    h+='</div>';
+  }
+  if(cx.length){
+    h+='<div class="gsec">Bağlamla — '+cx.length+' fiil</div>';
+    for(var j=0;j<cx.length;j++){
+      h+='<div class="crow"><div class="n">'+cx[j].hr+'<span>'+cx[j].tr+'</span></div>'+
+         '<div class="s">'+full(cx[j].ex[0][0])+'</div></div>';
+    }
+  }
+  view.innerHTML=h;window.scrollTo(0,0);
+}
+
+document.getElementById('mode').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  [].forEach.call(this.children,function(c){c.classList.remove('on')});
+  b.classList.add('on');mode=b.dataset.m;
+  if(mode==='quiz'&&idx>=order.length){start()}else{render()}
 });
 
-browse();
+document.getElementById('filter').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  [].forEach.call(this.children,function(c){c.classList.remove('on')});
+  b.classList.add('on');filter=b.dataset.f;
+  if(mode==='gallery'){gallery()}else{start()}
+});
+
+start();
 </script>
-<script src="nav.js"></script>
 </body>
 </html>
