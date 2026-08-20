@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjectives — Croatian</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14120E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Croatian">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<div class="pagehead">
+  <div class="wrap">
+    <div class="glagstrip">Ⰶ · Pridjevi</div>
+    <h1>50 words<br>that <em>agree</em>.</h1>
+    <p class="sub">browse · meanings · opposites</p>
+    <p class="lede">A Croatian adjective copies the gender, number and case of its noun. <b>dobar</b> film, <b>dobra</b> kava, <b>dobro</b> vino — one word, three shapes, and that's before the cases get involved.</p>
+  </div>
+</div>
+<div class="headrule"></div>
+
+<div class="wrap">
+
+  <div class="seg" id="mode">
+    <button class="on" data-m="browse">Browse</button>
+    <button data-m="meaning">Meanings</button>
+    <button data-m="opposite">Opposites</button>
+  </div>
+
+  <div id="view"></div>
+
+  <div class="sec" id="ref">
+    <h2><span class="glag">Ⰰ</span>Agreement, in one table</h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Adjective</th><th>Masculine</th><th>Feminine</th><th>Neuter</th><th>Plural</th></tr></thead>
+        <tbody>
+          <tr><th>dobar</th><td>dobar film</td><td>dobra kava</td><td>dobro vino</td><td>dobri / dobre / dobra</td></tr>
+          <tr><th>velik</th><td>velik grad</td><td>velika kuća</td><td>veliko more</td><td>veliki / velike / velika</td></tr>
+          <tr><th>lijep</th><td>lijep dan</td><td>lijepa žena</td><td>lijepo mjesto</td><td>lijepi / lijepe / lijepa</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><b>The vanishing a, again</b>Adjectives ending in <span class="mono">-an</span> or <span class="mono">-ar</span> lose that a as soon as an ending is added: dob<b>a</b>r → dobra, umor<b>a</b>n → umorna, ruž<b>a</b>n → ružna, top<b>a</b>o → topla. Only the bare masculine keeps it.</div>
+  </div>
+
+  <footer class="pagefoot">
+    <p>Two intensifiers worth having on hand: <b>vrlo</b> and <b>jako</b> both mean “very”, and <b>malo</b> means “a bit”.</p>
+  </footer>
+</div>
+
+<script>
+var ADJ = [{"hr": "dobar", "en": "good", "emoji": "👍", "ex": "Ovaj film je dobar.", "gloss": "This film is good."}, {"hr": "loš", "en": "bad", "emoji": "👎", "ex": "Vrijeme je danas loše.", "gloss": "The weather is bad today."}, {"hr": "velik", "en": "big", "emoji": "🐘", "ex": "To je velika kuća.", "gloss": "That's a big house."}, {"hr": "malen", "en": "small", "emoji": "🐭", "ex": "Imam malenog psa.", "gloss": "I have a small dog."}, {"hr": "lijep", "en": "beautiful", "emoji": "🌸", "ex": "Ti si vrlo lijepa.", "gloss": "You're very beautiful."}, {"hr": "ružan", "en": "ugly", "emoji": "🤢", "ex": "Ovaj auto je ružan.", "gloss": "This car is ugly."}, {"hr": "sretan", "en": "happy", "emoji": "💃", "ex": "Danas sam vrlo sretan.", "gloss": "I'm very happy today."}, {"hr": "tužan", "en": "sad", "emoji": "😢", "ex": "Zašto si tužan?", "gloss": "Why are you sad?"}, {"hr": "umoran", "en": "tired", "emoji": "😴", "ex": "Jako sam umoran.", "gloss": "I'm really tired."}, {"hr": "odmoran", "en": "rested", "emoji": "😌", "ex": "Nakon spavanja sam odmoran.", "gloss": "After sleeping I feel rested."}, {"hr": "gladan", "en": "hungry", "emoji": "🍽️", "ex": "Jesi li gladan?", "gloss": "Are you hungry?"}, {"hr": "sit", "en": "full (not hungry)", "emoji": "🍚", "ex": "Hvala, ja sam sit.", "gloss": "Thanks, I'm full."}, {"hr": "žedan", "en": "thirsty", "emoji": "🥤", "ex": "Ja sam jako žedan.", "gloss": "I'm very thirsty."}, {"hr": "bolestan", "en": "ill", "emoji": "🤒", "ex": "On je danas bolestan.", "gloss": "He's ill today."}, {"hr": "zdrav", "en": "healthy", "emoji": "💪", "ex": "Moj djed je vrlo zdrav.", "gloss": "My grandfather is very healthy."}, {"hr": "mlad", "en": "young", "emoji": "👶", "ex": "Ona je još uvijek mlada.", "gloss": "She's still young."}, {"hr": "star", "en": "old", "emoji": "👴", "ex": "Ovo je stara zgrada.", "gloss": "This is an old building."}, {"hr": "nov", "en": "new", "emoji": "✨", "ex": "Kupio sam novi telefon.", "gloss": "I bought a new phone."}, {"hr": "brz", "en": "fast", "emoji": "🏃", "ex": "Njegov auto je vrlo brz.", "gloss": "His car is very fast."}, {"hr": "spor", "en": "slow", "emoji": "🐢", "ex": "Internet je danas spor.", "gloss": "The internet is slow today."}, {"hr": "topao", "en": "warm", "emoji": "🌤️", "ex": "Voda je lijepo topla.", "gloss": "The water is nicely warm."}, {"hr": "vruć", "en": "hot", "emoji": "🔥", "ex": "Danas je vrlo vruće.", "gloss": "It's very hot today."}, {"hr": "hladan", "en": "cold", "emoji": "❄️", "ex": "Kava mi je hladna.", "gloss": "My coffee is cold."}, {"hr": "lagan", "en": "light (in weight)", "emoji": "🪶", "ex": "Ova torba je lagana.", "gloss": "This bag is light."}, {"hr": "težak", "en": "heavy / difficult", "emoji": "🏋️", "ex": "Ovaj kofer je težak.", "gloss": "This suitcase is heavy."}, {"hr": "jak", "en": "strong", "emoji": "💪", "ex": "On je jako jak.", "gloss": "He's very strong."}, {"hr": "slab", "en": "weak", "emoji": "🥀", "ex": "Osjećam se slabo.", "gloss": "I feel weak."}, {"hr": "bogat", "en": "rich", "emoji": "💰", "ex": "Njegova obitelj je bogata.", "gloss": "His family is rich."}, {"hr": "siromašan", "en": "poor", "emoji": "🪙", "ex": "Bili su vrlo siromašni.", "gloss": "They were very poor."}, {"hr": "skup", "en": "expensive", "emoji": "💸", "ex": "Ovaj restoran je skup.", "gloss": "This restaurant is expensive."}, {"hr": "jeftin", "en": "cheap", "emoji": "🏷️", "ex": "Tražim nešto jeftinije.", "gloss": "I'm looking for something cheaper."}, {"hr": "čist", "en": "clean", "emoji": "🧼", "ex": "Soba je vrlo čista.", "gloss": "The room is very clean."}, {"hr": "prljav", "en": "dirty", "emoji": "🧹", "ex": "Auto je jako prljav.", "gloss": "The car is really dirty."}, {"hr": "otvoren", "en": "open", "emoji": "🚪", "ex": "Trgovina je otvorena.", "gloss": "The shop is open."}, {"hr": "zatvoren", "en": "closed", "emoji": "🔒", "ex": "Vrata su zatvorena.", "gloss": "The door is closed."}, {"hr": "pun", "en": "full", "emoji": "🍶", "ex": "Čaša je puna.", "gloss": "The glass is full."}, {"hr": "prazan", "en": "empty", "emoji": "📦", "ex": "Kutija je prazna.", "gloss": "The box is empty."}, {"hr": "dug", "en": "long", "emoji": "📏", "ex": "Bio je dug dan.", "gloss": "It was a long day."}, {"hr": "kratak", "en": "short", "emoji": "✂️", "ex": "Film je bio kratak.", "gloss": "The film was short."}, {"hr": "visok", "en": "tall / high", "emoji": "🏢", "ex": "Moj brat je vrlo visok.", "gloss": "My brother is very tall."}, {"hr": "nizak", "en": "short / low", "emoji": "🌱", "ex": "Stol je prilično nizak.", "gloss": "The table is fairly low."}, {"hr": "debeo", "en": "fat / thick", "emoji": "🐻", "ex": "Mačka je malo debela.", "gloss": "The cat is a bit fat."}, {"hr": "mršav", "en": "thin", "emoji": "🥒", "ex": "On je vrlo mršav.", "gloss": "He's very thin."}, {"hr": "glasan", "en": "loud", "emoji": "📢", "ex": "Susjed je jako glasan.", "gloss": "The neighbour is very loud."}, {"hr": "tih", "en": "quiet", "emoji": "🤫", "ex": "Ovo je tiho mjesto.", "gloss": "This is a quiet place."}, {"hr": "zauzet", "en": "busy", "emoji": "📅", "ex": "Danas sam jako zauzet.", "gloss": "I'm very busy today."}, {"hr": "slobodan", "en": "free / available", "emoji": "🕊️", "ex": "Jesi li slobodan sutra?", "gloss": "Are you free tomorrow?"}, {"hr": "ljut", "en": "angry", "emoji": "😠", "ex": "Zašto si tako ljut?", "gloss": "Why are you so angry?"}, {"hr": "veseo", "en": "cheerful", "emoji": "😄", "ex": "Djeca su vrlo vesela.", "gloss": "The children are very cheerful."}, {"hr": "miran", "en": "calm", "emoji": "🧘", "ex": "More je danas mirno.", "gloss": "The sea is calm today."}];
+var PAIRS = [["dobar", "loš"], ["velik", "malen"], ["lijep", "ružan"], ["sretan", "tužan"], ["umoran", "odmoran"], ["gladan", "sit"], ["bolestan", "zdrav"], ["mlad", "star"], ["brz", "spor"], ["topao", "hladan"], ["lagan", "težak"], ["jak", "slab"], ["bogat", "siromašan"], ["skup", "jeftin"], ["čist", "prljav"], ["otvoren", "zatvoren"], ["pun", "prazan"], ["dug", "kratak"], ["visok", "nizak"], ["debeo", "mršav"], ["glasan", "tih"], ["zauzet", "slobodan"]];
+var KEYS=["A","B","C","D"], GLAG=["Ⰰ","Ⰱ","Ⰲ","Ⰳ","Ⰴ","Ⰵ","Ⰶ","Ⰷ","Ⰸ","Ⰹ"];
+
+var byHr = {};
+ADJ.forEach(function(a){ byHr[a.hr] = a; });
+
+var view = document.getElementById("view");
+var ref  = document.getElementById("ref");
+var mode = "browse";
+
+document.querySelectorAll("#mode button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll("#mode button").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    mode = b.dataset.m;
+    ref.style.display = mode === "browse" ? "" : "none";
+    if(mode === "browse") browse(); else startQuiz();
+  });
+});
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+/* ---------------- browse ---------------- */
+function browse(){
+  view.innerHTML =
+    '<div class="sec"><h2><span class="glag">Ⰱ</span>All '+ADJ.length+' adjectives</h2>'+
+    '<p class="note">Each one with a sentence you could actually say.</p>'+
+    '<ul class="talk" id="alist"></ul></div>';
+  document.getElementById("alist").innerHTML = ADJ.map(function(a){
+    return '<li><span class="hr">'+a.emoji+' <b>'+a.hr+'</b> — '+a.en+'</span>'+
+           '<span class="en">'+a.ex+' · '+a.gloss+'</span></li>';
+  }).join("");
+}
+
+/* ---------------- quiz ---------------- */
+var round=[], idx=0, score=0, answered=false, missed=[];
+
+function startQuiz(){
+  if(mode === "opposite"){
+    round = shuffle(PAIRS).slice(0,20).map(function(p){
+      return shuffle([p[0],p[1]]);
+    });
+  } else {
+    round = shuffle(ADJ).slice(0,20);
+  }
+  idx=0; score=0; missed=[];
+  question();
+}
+
+function question(){
+  answered=false;
+  var opts, correct, promptText, targetText, item;
+
+  if(mode === "opposite"){
+    var pair = round[idx];
+    item = byHr[pair[0]];
+    var answerWord = pair[1];
+    var others = shuffle(ADJ.filter(function(a){
+      return a.hr !== pair[0] && a.hr !== pair[1];
+    })).slice(0,3).map(function(a){ return a.hr; });
+    var all = shuffle([answerWord].concat(others));
+    opts = all; correct = all.indexOf(answerWord);
+    promptText = "What's the opposite?";
+    targetText = item.emoji+" "+item.hr;
+  } else {
+    item = round[idx];
+    var wrong = shuffle(ADJ.filter(function(a){ return a.en !== item.en; }))
+                  .slice(0,3).map(function(a){ return a.en; });
+    var all2 = shuffle([item.en].concat(wrong));
+    opts = all2; correct = all2.indexOf(item.en);
+    promptText = "What does it mean?";
+    targetText = item.hr;
+  }
+
+  view.innerHTML =
+    '<div class="quizbar"><span class="count">'+(idx+1)+' / '+round.length+'</span>'+
+    '<span class="score">'+score+' correct</span></div>'+
+    '<div class="progress"><i style="width:'+(idx/round.length*100)+'%"></i></div>'+
+    '<div class="qcard"><p class="prompt">'+promptText+'</p>'+
+    '<p class="target">'+targetText+'</p>'+
+    '<div class="opts" id="opts"></div><div id="why"></div></div>'+
+    '<div class="btnrow" id="btnrow"></div>';
+
+  var box=document.getElementById("opts");
+  opts.forEach(function(t,i){
+    var b=document.createElement("button");
+    b.className="opt"; b.type="button";
+    b.innerHTML='<span class="key">'+KEYS[i]+'</span><span>'+t+'</span>';
+    b.addEventListener("click", function(){ answer(i, correct, item, opts[correct]); });
+    box.appendChild(b);
+  });
+}
+
+function answer(i, correct, item, answerWord){
+  if(answered) return; answered=true;
+  if(i===correct) score++; else missed.push(item);
+  document.querySelectorAll("#opts .opt").forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct) b.classList.add("correct");
+    else if(j===i) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  document.querySelector(".score").textContent = score+" correct";
+
+  var extra = "";
+  if(mode === "opposite" && byHr[answerWord]){
+    var o = byHr[answerWord];
+    extra = ' Opposite: <b>'+o.hr+'</b> — '+o.en+'.';
+  }
+  document.getElementById("why").innerHTML =
+    '<div class="why"><b>'+item.hr+'</b> — '+item.en+'.'+extra+'</div>'+
+    '<ul class="talk"><li><span class="hr">'+item.ex+'</span>'+
+    '<span class="en">'+item.gloss+'</span></li></ul>';
+
+  var row=document.getElementById("btnrow");
+  row.innerHTML='<button class="btn" id="next">'+(idx+1<round.length?"Next":"See results")+'</button>';
+  document.getElementById("next").addEventListener("click", next);
+  document.getElementById("next").focus();
+}
+
+function next(){ idx++; if(idx<round.length) question(); else results(); }
+
+function results(){
+  var pct=Math.round(score/round.length*100);
+  var review = missed.length
+    ? '<h3 class="sub">What slipped</h3><ul class="talk">'+missed.map(function(a){
+        return '<li><span class="hr">'+a.emoji+' '+a.hr+'</span><span class="en">'+a.en+'</span></li>';
+      }).join("")+'</ul>' : "";
+  view.innerHTML='<div class="card"><div class="result">'+
+    '<div class="glag">'+GLAG[Math.min(Math.floor(pct/10),9)]+'</div>'+
+    '<p class="big">'+pct+'%</p><p class="of">'+score+' of '+round.length+'</p></div>'+
+    review+'<div class="btnrow"><button class="btn" id="again">New round</button>'+
+    '<a class="btn ghost" href="index.html">Home</a></div></div>';
+  document.getElementById("again").addEventListener("click", startQuiz);
+}
+
+document.addEventListener("keydown", function(e){
+  if(mode==="browse") return;
+  if(!answered){
+    var k=KEYS.indexOf(e.key.toUpperCase());
+    var btns=document.querySelectorAll("#opts .opt");
+    if(k>-1 && k<btns.length){ e.preventDefault(); btns[k].click(); }
+  } else if(e.key==="Enter"||e.key===" "){
+    var n=document.getElementById("next"); if(n){ e.preventDefault(); n.click(); }
+  }
+});
+
+browse();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

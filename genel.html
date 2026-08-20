@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The seven cases — Croatian</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14120E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Croatian">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<div class="pagehead">
+  <div class="wrap">
+    <div class="glagstrip">Ⰰ · Padeži</div>
+    <h1>Seven <em>padeži</em>,<br>one page.</h1>
+    <p class="sub">tko · koga · komu · što · gdje · kamo · s kim</p>
+    <p class="lede">Croatian nouns change shape depending on the job they do in the sentence. There are seven shapes, called <b>padež</b>. Tap a square below to see when that case is used, the endings for each gender, the pronouns, and sentences you'd actually say.</p>
+  </div>
+</div>
+<div class="headrule"></div>
+
+<div class="wrap">
+
+  <div class="grid" id="board"></div>
+  <div id="panel"></div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰸ</span>Every ending, singular</h2>
+    <p class="note">The wall chart. Bracketed forms are rare in speech.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Case</th><th>Masc.<br>grad · prijatelj</th><th>Fem. -a<br>kava</th><th>Fem. -∅<br>stvar</th><th>Neut.<br>selo · more</th></tr></thead>
+        <tbody id="master"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰹ</span>Every ending, plural</h2>
+    <p class="note">In conversation you mostly need nominative, accusative and genitive plural. Dative, locative and instrumental plural are always the same: <b>-ima / -ama</b>.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Case</th><th>Masculine</th><th>Fem. -a</th><th>Fem. -∅</th><th>Neuter</th></tr></thead>
+        <tbody id="masterpl"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰺ</span>Personal pronouns</h2>
+    <p class="note">Short forms (me, mi, ga, joj…) never start a sentence — they sit in second position: <span class="mono">Ja <b>ti</b> dam.</span> Long forms carry stress and follow prepositions: <span class="mono">za <b>mene</b></span>.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th></th><th>ja</th><th>ti</th><th>on / ono</th><th>ona</th><th>mi</th><th>vi</th><th>oni</th></tr></thead>
+        <tbody>
+          <tr><th>N</th><td>ja</td><td>ti</td><td>on / ono</td><td>ona</td><td>mi</td><td>vi</td><td>oni</td></tr>
+          <tr><th>G</th><td>mene / me</td><td>tebe / te</td><td>njega / ga</td><td>nje / je</td><td>nas</td><td>vas</td><td>njih / ih</td></tr>
+          <tr><th>D</th><td>meni / mi</td><td>tebi / ti</td><td>njemu / mu</td><td>njoj / joj</td><td>nama / nam</td><td>vama / vam</td><td>njima / im</td></tr>
+          <tr><th>A</th><td>mene / me</td><td>tebe / te</td><td>njega / ga</td><td>nju / ju</td><td>nas</td><td>vas</td><td>njih / ih</td></tr>
+          <tr><th>V</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><th>L</th><td>(o) meni</td><td>(o) tebi</td><td>(o) njemu</td><td>(o) njoj</td><td>(o) nama</td><td>(o) vama</td><td>(o) njima</td></tr>
+          <tr><th>I</th><td>(sa) mnom</td><td>(s) tobom</td><td>(s) njim</td><td>(s) njom</td><td>(s) nama</td><td>(s) vama</td><td>(s) njima</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰻ</span>An adjective: <span style="font-family:var(--mono);font-size:15px">dobar</span></h2>
+    <p class="note">Adjectives copy the case and gender of their noun: <b>s dobrim prijateljem</b>, <b>u dobroj kavani</b>.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Case</th><th>Masculine</th><th>Feminine</th><th>Neuter</th><th>Plural (m/f/n)</th></tr></thead>
+        <tbody>
+          <tr><th>N</th><td>dobar</td><td>dobra</td><td>dobro</td><td>dobri / dobre / dobra</td></tr>
+          <tr><th>G</th><td>dobrog(a)</td><td>dobre</td><td>dobrog(a)</td><td>dobrih</td></tr>
+          <tr><th>D</th><td>dobrom(e)</td><td>dobroj</td><td>dobrom(e)</td><td>dobrim(a)</td></tr>
+          <tr><th>A</th><td>dobar / dobrog<span class="w">-og if animate</span></td><td>dobru</td><td>dobro</td><td>dobre / dobre / dobra</td></tr>
+          <tr><th>V</th><td>dobri</td><td>dobra</td><td>dobro</td><td>dobri</td></tr>
+          <tr><th>L</th><td>dobrom(e)</td><td>dobroj</td><td>dobrom(e)</td><td>dobrim(a)</td></tr>
+          <tr><th>I</th><td>dobrim</td><td>dobrom</td><td>dobrim</td><td>dobrim(a)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰼ</span>Question frames</h2>
+    <p class="note">The fastest way into a case: learn the question it answers, then copy the answer shape.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Question</th><th>Means</th><th>Case</th><th>Answer</th></tr></thead>
+        <tbody>
+          <tr><th>Tko je to?</th><td>Who is that?</td><td>N</td><td>To je Ana.</td></tr>
+          <tr><th>Što je to?</th><td>What is that?</td><td>N</td><td>To je kava.</td></tr>
+          <tr><th>Čega nema?</th><td>What's missing?</td><td>G</td><td>Nema mlijeka.</td></tr>
+          <tr><th>Odakle si?</th><td>Where are you from?</td><td>G <span class="w">iz + G</span></td><td>Iz Turske sam.</td></tr>
+          <tr><th>Koliko košta?</th><td>How much is it?</td><td>G <span class="w">5+ → gen. pl.</span></td><td>Pet eura.</td></tr>
+          <tr><th>Komu daješ?</th><td>Who are you giving it to?</td><td>D</td><td>Prijatelju.</td></tr>
+          <tr><th>Što želiš?</th><td>What do you want?</td><td>A</td><td>Želim pivo.</td></tr>
+          <tr><th>Kamo ideš?</th><td>Where are you going?</td><td>A <span class="w">u/na + A</span></td><td>Idem u grad.</td></tr>
+          <tr><th>Gdje si?</th><td>Where are you?</td><td>L <span class="w">u/na + L</span></td><td>U kafiću sam.</td></tr>
+          <tr><th>O čemu pričaš?</th><td>What are you talking about?</td><td>L</td><td>O poslu.</td></tr>
+          <tr><th>S kim ideš?</th><td>Who are you going with?</td><td>I</td><td>S bratom.</td></tr>
+          <tr><th>Čime ideš?</th><td>What are you travelling by?</td><td>I</td><td>Autobusom.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="pagefoot">
+    <p><b>Suggested order:</b> accusative → locative → genitive → instrumental → dative → vocative. Roughly 80% of everyday speech runs on the first three.</p>
+    <p>More practice: <a href="https://www.easy-croatian.com/" target="_blank" rel="noopener">easy-croatian.com</a> · Sretno! 🇭🇷</p>
+  </footer>
+</div>
+
+<script>
+const CASES = [
+  {
+    id:"nominativ", glag:"Ⰰ", abbr:"N", name:"Nominative", gloss:"the dictionary form",
+    q:"tko? što?", hint:"The subject of the sentence.",
+    use:[
+      {b:"The subject", d:"Whoever or whatever performs the action.", ex:"Marko pije kavu.", t:"Marko is drinking coffee."},
+      {b:"After biti (to be)", d:"Nouns stay bare after 'is / are'.", ex:"Ovo je moja sestra.", t:"This is my sister."},
+      {b:"Naming things", d:"Saying what something is.", ex:"Ja sam student.", t:"I'm a student."}
+    ],
+    end:{m:["-∅","grad · prijatelj"], f:["-a","kava"], fc:["-∅","stvar"], n:["-o / -e","selo · more"]},
+    endpl:{m:["-i","gradovi · prijatelji"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela · mora"]},
+    pron:"ja, ti, on/ona/ono, mi, vi, oni/one/ona",
+    adj:"dobar / dobra / dobro",
+    prep:[],
+    talk:[
+      {hr:"Ovo je moj <u>prijatelj</u>.", en:"This is my friend."},
+      {hr:"<u>Kava</u> je jako dobra.", en:"The coffee is really good."},
+      {hr:"Ja sam <u>Enes</u>, drago mi je.", en:"I'm Enes, nice to meet you."},
+      {hr:"Gdje je <u>toalet</u>?", en:"Where's the toilet?"},
+      {hr:"Tko je <u>to</u>?", en:"Who's that?"}
+    ],
+    tip:"Every noun you meet in a dictionary is in the nominative. The other six cases build on it — so check the last letter first: <b>-a</b> is usually feminine, <b>-o/-e</b> neuter, a consonant usually masculine."
+  },
+  {
+    id:"genitiv", glag:"Ⰱ", abbr:"G", name:"Genitive", gloss:"of · from · none of it",
+    q:"koga? čega?", hint:"Possession, absence, quantity, and most prepositions.",
+    use:[
+      {b:"Possession", d:"Two nouns side by side — the second one goes genitive.", ex:"knjiga mojega brata", t:"my brother's book"},
+      {b:"Absence and negation", d:"nema and negated imati always take the genitive.", ex:"Nemam vremena. / Nema mlijeka.", t:"I have no time. / There's no milk."},
+      {b:"Quantity and numbers", d:"puno, malo, čaša, kilo… + genitive. 2–4 take the genitive singular, 5 and up the genitive plural.", ex:"puno posla · čaša vode · pet eura", t:"a lot of work · a glass of water · five euros"},
+      {b:"After prepositions", d:"The largest group by far — where from, next to whom, before when.", ex:"Dolazim iz Turske. Kod kuće sam.", t:"I'm coming from Turkey. I'm at home."},
+      {b:"Dates and times", d:"On the Nth, until N o'clock.", ex:"prvog svibnja · do pet sati", t:"on the first of May · until five"}
+    ],
+    end:{m:["-a","grada · prijatelja"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela · mora"]},
+    endpl:{m:["-a / -ova","gradova · prijatelja"], f:["-∅","kava"], fc:["-i","stvari"], n:["-∅","sela · mora"]},
+    pron:"mene/me · tebe/te · njega/ga · nje/je · nas · vas · njih/ih",
+    adj:"dobrog(a) / dobre / dobrog(a)",
+    prep:["od","do","iz","s(a) = off/from","bez","kod","blizu","pored / kraj","prije","poslije / nakon","oko","zbog","preko","iznad","ispod","ispred","iza","između"],
+    talk:[
+      {hr:"Nemam <u>vremena</u>, oprosti.", en:"I haven't got time, sorry."},
+      {hr:"Čašu <u>vode</u>, molim.", en:"A glass of water, please."},
+      {hr:"Dolazim iz <u>Turske</u>.", en:"I'm from Turkey."},
+      {hr:"Kod <u>kuće</u> sam.", en:"I'm at home."},
+      {hr:"Nema <u>problema</u>!", en:"No problem!"},
+      {hr:"Do <u>viđenja</u>.", en:"Goodbye. (literally: until the seeing)"}
+    ],
+    tip:"After the accusative, this is the case you'll hear most. Memorise the frame <b>nema + genitive</b> and you get a whole family free: nema kave, nema struje, nema veze (never mind)."
+  },
+  {
+    id:"dativ", glag:"Ⰲ", abbr:"D", name:"Dative", gloss:"to whom · for whom",
+    q:"komu? / kome? čemu?", hint:"The indirect object, plus 'I like' and 'I need'.",
+    use:[
+      {b:"Indirect object", d:"Verbs of giving, telling, sending, helping.", ex:"Dajem knjigu prijatelju.", t:"I'm giving the book to my friend."},
+      {b:"Liking something", d:"sviđati se + dative. Croatian says the thing pleases you, not that you like it.", ex:"Sviđa mi se Zagreb.", t:"I like Zagreb."},
+      {b:"Needing something", d:"trebati + dative — literally 'it is needed to me'.", ex:"Treba mi pomoć.", t:"I need help."},
+      {b:"Going to a person", d:"Heading toward a person, not a place: bare dative or k + dative.", ex:"Idem liječniku.", t:"I'm going to the doctor."},
+      {b:"How you feel", d:"State expressions put the person in the dative.", ex:"Hladno mi je. Drago mi je.", t:"I'm cold. Nice to meet you."}
+    ],
+    end:{m:["-u","gradu · prijatelju"], f:["-i","kavi"], fc:["-i","stvari"], n:["-u","selu · moru"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"meni/mi · tebi/ti · njemu/mu · njoj/joj · nama/nam · vama/vam · njima/im",
+    adj:"dobrom(e) / dobroj / dobrom(e)",
+    prep:["k(a) = toward","prema","unatoč / usprkos"],
+    talk:[
+      {hr:"Sviđa <u>mi</u> se ovaj grad.", en:"I like this city."},
+      {hr:"Možeš li <u>mi</u> pomoći?", en:"Can you help me?"},
+      {hr:"Treba <u>mi</u> taksi.", en:"I need a taxi."},
+      {hr:"Hvala <u>ti</u>! / Hvala <u>vam</u>!", en:"Thanks! / Thank you. (formal)"},
+      {hr:"Idem <u>prijateljici</u>.", en:"I'm going to my friend's. (f)"},
+      {hr:"Drago <u>mi</u> je.", en:"Nice to meet you."}
+    ],
+    tip:"In the singular the dative and locative look almost identical (gradu, kavi, selu). The preposition tells you which is which: nothing in front, or k / prema → dative; u / na / o → locative."
+  },
+  {
+    id:"akuzativ", glag:"Ⰳ", abbr:"A", name:"Accusative", gloss:"the direct object · where to",
+    q:"koga? što? kamo?", hint:"The most used case. Objects and destinations.",
+    use:[
+      {b:"Direct object", d:"What you want, drink, see, love.", ex:"Želim kavu. Volim more.", t:"I want a coffee. I love the sea."},
+      {b:"Motion: where to?", d:"u / na + accusative marks the destination.", ex:"Idem u grad. Idem na plažu.", t:"I'm going into town. I'm going to the beach."},
+      {b:"Duration", d:"How long something lasts.", ex:"Ostajem jedan tjedan.", t:"I'm staying one week."},
+      {b:"za + accusative", d:"'for' — and for ordering.", ex:"Ovo je za tebe.", t:"This is for you."},
+      {b:"Animate vs inanimate", d:"Masculine animate nouns take -a like the genitive; inanimate ones don't change at all.", ex:"Vidim prijatelja. / Vidim grad.", t:"I see my friend. / I see the city."}
+    ],
+    end:{m:["= N (inanimate) / -a (animate)","grad · prijatelja"], f:["-u","kavu"], fc:["-∅","stvar"], n:["= N","selo · more"]},
+    endpl:{m:["-e","gradove · prijatelje"], f:["-e","kave"], fc:["-i","stvari"], n:["-a","sela"]},
+    pron:"mene/me · tebe/te · njega/ga · nju/ju · nas · vas · njih/ih",
+    adj:"dobar (inanim.) / dobrog (anim.) · dobru · dobro",
+    prep:["u (where to)","na (where to)","za","kroz","niz","uz","o (hang on)","po (go fetch)","među / pod / nad / pred (motion)"],
+    talk:[
+      {hr:"Molim jednu <u>kavu</u> i jedno <u>pivo</u>.", en:"One coffee and one beer, please."},
+      {hr:"Idem u <u>grad</u>.", en:"I'm going into town."},
+      {hr:"Volim <u>hrvatsku hranu</u>.", en:"I love Croatian food."},
+      {hr:"Vidim <u>te</u> sutra.", en:"See you tomorrow."},
+      {hr:"Idem na <u>kavu</u>. Ideš <u>li</u> i ti?", en:"I'm going for a coffee. Coming?"},
+      {hr:"Ovo je za <u>tebe</u>.", en:"This is for you."}
+    ],
+    tip:"For feminine nouns there's one magic letter: <b>-a → -u</b>. kava → kavu, pizza → pizzu, voda → vodu. That single swap covers about 90% of ordering in a café."
+  },
+  {
+    id:"vokativ", glag:"Ⰴ", abbr:"V", name:"Vocative", gloss:"calling someone",
+    q:"— (direct address)", hint:"Short, but you'll use it every day.",
+    use:[
+      {b:"Calling a name", d:"Shouting for someone or getting their attention.", ex:"Ivane, dođi!", t:"Ivan, come here!"},
+      {b:"Polite address", d:"In a restaurant, in formal situations.", ex:"Oprostite, gospodine!", t:"Excuse me, sir!"},
+      {b:"Terms of affection", d:"For people close to you.", ex:"Dušo, kako si?", t:"Darling, how are you?"},
+      {b:"The ones that don't change", d:"Short names ending in -k or -o, and most women's names, stay as they are in speech.", ex:"Marko! Ana! Mama!", t:"Marko! Ana! Mum!"}
+    ],
+    end:{m:["-e / -u (soft stems)","Ivane · prijatelju"], f:["-o","ženo · Ano"], fc:["-i","stvari"], n:["= N","selo · dijete"]},
+    endpl:{m:["= N","prijatelji"], f:["= N","žene"], fc:["= N","stvari"], n:["= N","sela"]},
+    pron:"— (no pronouns)",
+    adj:"dragi / draga / drago",
+    prep:["o! (exclamation, rare)"],
+    talk:[
+      {hr:"Bok, <u>Marko</u>! Kako si?", en:"Hi Marko! How are you?"},
+      {hr:"Oprostite, <u>gospodine</u>!", en:"Excuse me, sir!"},
+      {hr:"Konobar, <u>molim</u> vas!", en:"Waiter, please!"},
+      {hr:"<u>Mama</u>, gdje si?", en:"Mum, where are you?"},
+      {hr:"Hvala, <u>prijatelju</u>.", en:"Thanks, mate."}
+    ],
+    tip:"Don't lose sleep over this one. In everyday speech plenty of first names are left unchanged (Ana, Marko, Ivana). Learn <b>gospodine / gospođo / prijatelju / dušo</b> and you're covered."
+  },
+  {
+    id:"lokativ", glag:"Ⰵ", abbr:"L", name:"Locative", gloss:"where · about what",
+    q:"(o) kome? (o) čemu? gdje?", hint:"Never appears without a preposition.",
+    use:[
+      {b:"Place: where?", d:"u / na + locative — standing still, not moving.", ex:"Živim u Zagrebu. Na plaži sam.", t:"I live in Zagreb. I'm at the beach."},
+      {b:"Topic: about what?", d:"o + locative.", ex:"Razgovaramo o poslu.", t:"We're talking about work."},
+      {b:"Time expressions", d:"po + locative, u + locative.", ex:"po podne · u siječnju", t:"in the afternoon · in January"},
+      {b:"The hard rule", d:"The locative never stands alone — there is always a preposition in front of it.", ex:"u kafiću · na poslu · o tebi", t:"in the café · at work · about you"}
+    ],
+    end:{m:["-u","(u) gradu · prijatelju"], f:["-i","(u) kavani"], fc:["-i","(o) stvari"], n:["-u","(u) selu · (na) moru"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavanama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"(o) meni · tebi · njemu · njoj · nama · vama · njima",
+    adj:"dobrom(e) / dobroj / dobrom(e)",
+    prep:["u (where)","na (where)","o (about)","po","pri"],
+    talk:[
+      {hr:"Živim u <u>Zagrebu</u>.", en:"I live in Zagreb."},
+      {hr:"Radim u <u>uredu</u>.", en:"I work in an office."},
+      {hr:"Na <u>poslu</u> sam.", en:"I'm at work."},
+      {hr:"Razgovarali smo o <u>tebi</u>.", en:"We were talking about you."},
+      {hr:"Vidimo se u <u>kafiću</u>.", en:"See you at the café."},
+      {hr:"Nalazim se na <u>trgu</u>.", en:"I'm at the square."}
+    ],
+    tip:"The golden rule: <b>u + accusative = where to</b>, <b>u + locative = where</b>. Idem u grad (going into town) ↔ Ja sam u gradu (I'm in town). Same preposition, two cases, two meanings."
+  },
+  {
+    id:"instrumental", glag:"Ⰶ", abbr:"I", name:"Instrumental", gloss:"with whom · by what",
+    q:"s kim? čime?", hint:"Company and means. All transport lives here.",
+    use:[
+      {b:"Company: with whom?", d:"s(a) + instrumental. With people, always use s.", ex:"Idem s bratom.", t:"I'm going with my brother."},
+      {b:"Means: by what?", d:"No preposition at all — the ending alone does the work of English 'by'.", ex:"Idem autobusom. Pišem olovkom.", t:"I go by bus. I write with a pen."},
+      {b:"What's in it", d:"Very handy when ordering food and drink.", ex:"kava s mlijekom", t:"coffee with milk"},
+      {b:"Static position", d:"pod / nad / pred / za / među + instrumental.", ex:"Čekam pred kinom.", t:"I'm waiting in front of the cinema."}
+    ],
+    end:{m:["-om / -em (soft)","gradom · prijateljem"], f:["-om","kavom"], fc:["-i / -ju","stvari / stvarju"], n:["-om / -em","selom · morem"]},
+    endpl:{m:["-ima","gradovima"], f:["-ama","kavama"], fc:["-ima","stvarima"], n:["-ima","selima"]},
+    pron:"(sa) mnom · (s) tobom · njim · njom · nama · vama · njima",
+    adj:"dobrim / dobrom / dobrim",
+    prep:["s / sa (with)","pod","nad","pred","za (behind)","među"],
+    talk:[
+      {hr:"Idem <u>autobusom</u>.", en:"I'm going by bus."},
+      {hr:"Kavu s <u>mlijekom</u>, molim.", en:"Coffee with milk, please."},
+      {hr:"Idem s <u>tobom</u>.", en:"I'm coming with you."},
+      {hr:"S <u>kim</u> si bio?", en:"Who were you with?"},
+      {hr:"Putujem <u>vlakom</u> u Split.", en:"I'm travelling to Split by train."},
+      {hr:"Čekam te pred <u>zgradom</u>.", en:"I'll wait for you in front of the building."}
+    ],
+    tip:"Use <b>sa</b> instead of s only before words starting with s, š, z, ž: <b>sa</b> mnom, <b>sa</b> sestrom — but <b>s</b> bratom. Say whichever is easier to pronounce; nobody will stop you."
+  }
+];
+
+/* ---- board ---- */
+const board = document.getElementById("board");
+CASES.forEach(function(c){
+  const a = document.createElement("a");
+  a.className = "cell"; a.href = "#"+c.id; a.id = "sq-"+c.id;
+  a.innerHTML = '<span class="glag">'+c.glag+'</span><h2>'+c.name+'</h2>'+
+                '<p>'+c.q+'<br>'+c.hint+'</p>';
+  a.addEventListener("click", function(e){ e.preventDefault(); select(c.id, true); });
+  board.appendChild(a);
+});
+const filler = document.createElement("div");
+filler.className = "cell dead";
+filler.innerHTML = '<span class="glag">Ø</span><h2>Redoslijed</h2>'+
+  '<p>Learn them A → L → G → I → D → V. The nominative you already know.</p>';
+board.appendChild(filler);
+
+/* ---- panel ---- */
+const panel = document.getElementById("panel");
+const row = function(label, arr){
+  return '<tr><th>'+label+'</th><td><span class="end">'+arr[0]+'</span><span class="w">'+arr[1]+'</span></td></tr>';
+};
+
+function render(c){
+  panel.innerHTML =
+  '<div class="card">'+
+    '<h2>'+c.name+' <span>·</span> '+c.gloss+'</h2>'+
+    '<p class="cap">asks: '+c.q+'</p>'+
+
+    '<h3 class="sub">When you use it</h3>'+
+    '<ul class="use">'+
+      c.use.map(function(u){
+        return '<li><b>'+u.b+'</b>'+u.d+'<span class="ex">'+u.ex+'</span><span class="gl">'+u.t+'</span></li>';
+      }).join("")+
+    '</ul>'+
+
+    '<h3 class="sub">Noun endings — singular</h3>'+
+    '<div class="scroll"><table><thead><tr><th>Gender</th><th>Ending + example</th></tr></thead><tbody>'+
+      row("Masculine", c.end.m)+row("Feminine -a", c.end.f)+
+      row("Feminine -∅", c.end.fc)+row("Neuter", c.end.n)+
+    '</tbody></table></div>'+
+
+    '<h3 class="sub">Noun endings — plural</h3>'+
+    '<div class="scroll"><table><thead><tr><th>Gender</th><th>Ending + example</th></tr></thead><tbody>'+
+      row("Masculine", c.endpl.m)+row("Feminine -a", c.endpl.f)+
+      row("Feminine -∅", c.endpl.fc)+row("Neuter", c.endpl.n)+
+    '</tbody></table></div>'+
+
+    '<h3 class="sub">Pronouns and adjectives</h3>'+
+    '<ul class="chips"><li><b>Pronouns:</b> '+c.pron+'</li><li><b>dobar:</b> '+c.adj+'</li></ul>'+
+
+    (c.prep.length ? '<h3 class="sub">Prepositions that take it</h3><ul class="chips">'+
+      c.prep.map(function(p){ return '<li>'+p+'</li>'; }).join("")+'</ul>' : "")+
+
+    '<h3 class="sub">Say it out loud</h3>'+
+    '<ul class="talk">'+
+      c.talk.map(function(t){
+        return '<li><span class="hr">'+t.hr+'</span><span class="en">'+t.en+'</span></li>';
+      }).join("")+
+    '</ul>'+
+
+    '<div class="tip"><b>Shortcut</b>'+c.tip+'</div>'+
+  '</div>';
+}
+
+function select(id, scroll){
+  const c = CASES.find(function(x){ return x.id===id; });
+  if(!c) return;
+  render(c);
+  history.replaceState(null,"","#"+id);
+  if(scroll) panel.scrollIntoView({
+    behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    block:"start"
+  });
+}
+
+/* ---- master tables ---- */
+const mt = document.getElementById("master"), mp = document.getElementById("masterpl");
+CASES.forEach(function(c){
+  const cell = function(a){ return '<span class="end">'+a[0]+'</span><span class="w">'+a[1]+'</span>'; };
+  mt.insertAdjacentHTML("beforeend",
+    '<tr><th>'+c.name+'</th><td>'+cell(c.end.m)+'</td><td>'+cell(c.end.f)+'</td><td>'+cell(c.end.fc)+'</td><td>'+cell(c.end.n)+'</td></tr>');
+  mp.insertAdjacentHTML("beforeend",
+    '<tr><th>'+c.name+'</th><td>'+cell(c.endpl.m)+'</td><td>'+cell(c.endpl.f)+'</td><td>'+cell(c.endpl.fc)+'</td><td>'+cell(c.endpl.n)+'</td></tr>');
+});
+
+const start = location.hash.replace("#","");
+select(CASES.some(function(c){ return c.id===start; }) ? start : "akuzativ", false);
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

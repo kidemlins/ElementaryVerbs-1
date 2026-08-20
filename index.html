@@ -1,144 +1,76 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enes ile Hırvatça</title>
+<title>Croatian, every day</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14120E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Croatian">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --navy:#12324B;
-  --stone:#F2EEE4;
-  --paper:#FBF9F4;
-  --red:#C1272D;
-  --gold:#D9A441;
-  --gold-dark:#B4842C;
-  --olive:#6B7B5E;
-  --sea:#1D6B6B;
-  --ink:#22252A;
-  --muted:#6E7580;
-  --line:rgba(18,50,75,.14);
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{
-  margin:0;background:var(--stone);color:var(--ink);
-  font-family:'IBM Plex Sans',system-ui,sans-serif;
-  font-size:16px;line-height:1.5;
-  padding-bottom:40px;
-}
-.wrap{max-width:640px;margin:0 auto;padding:0 18px}
-
-/* ---------- header ---------- */
-header{
-  background:var(--navy);color:var(--paper);
-  padding:36px 0 24px;position:relative;overflow:hidden;
-}
-header .wrap{position:relative;z-index:1}
-.kicker{
-  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:10px;
-}
-header h1{
-  font-family:'Fraunces',Georgia,serif;font-weight:600;
-  font-size:32px;line-height:1.1;margin:0;letter-spacing:-.01em;
-}
-header h1 em{font-style:italic;font-weight:500;color:var(--gold)}
-
-.board-deco{
-  position:absolute;top:-30px;right:-30px;width:150px;height:150px;
-  display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);
-  transform:rotate(6deg);border:2px solid rgba(251,249,244,.2);
-}
-.board-deco div{background:var(--paper)}
-.board-deco div:nth-child(odd){background:var(--red)}
-
-.tricolour{height:5px;display:flex}
-.tricolour span{flex:1}
-.tricolour span:nth-child(1){background:var(--red)}
-.tricolour span:nth-child(2){background:var(--paper)}
-.tricolour span:nth-child(3){background:var(--navy)}
-
-.wrap{max-width:640px;margin:0 auto;padding:0 18px}
-
-/* ---------- grid ---------- */
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
-.card{
-  display:flex;flex-direction:column;justify-content:center;
-  text-decoration:none;color:inherit;
-  background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent,var(--gold));
-  border-radius:10px;
-  padding:18px 15px;min-height:84px;
-}
-.card h2{
-  font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:16.5px;
-  color:var(--navy);margin:0;line-height:1.2;
-}
-.card p{
-  font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.35;
-}
-
-footer{
-  text-align:center;font-size:12px;color:var(--muted);margin-top:34px;
-  font-family:'IBM Plex Mono',monospace;
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 
-<header>
-  <div class="board-deco" id="deco"></div>
+<div class="pagehead">
   <div class="wrap">
-    <div class="kicker">Hrvatski jezik · A1 → A2</div>
-    <h1>Enes ile <em>Hırvatça</em></h1>
-  </div>
-</header>
-<div class="tricolour"><span></span><span></span><span></span></div>
-
-<div class="wrap">
-  <div class="grid">
-    <a class="card" href="Genel.html" style="--accent:var(--red)">
-      <h2>Genel</h2>
-      <p>Yedi padež — tüm ekler tek sayfada</p>
-    </a>
-    <a class="card" href="padezi.html" style="--accent:var(--navy)">
-      <h2>Akuzativ ve Lokativ</h2>
-      <p>Nereye? / Nerede? kvizi</p>
-    </a>
-    <a class="card" href="genitiv.html" style="--accent:var(--sea)">
-      <h2>Genitiv</h2>
-      <p>Yokluk, miktar, "-den" kvizi</p>
-    </a>
-    <a class="card" href="dativ.html" style="--accent:var(--gold-dark)">
-      <h2>Dativ</h2>
-      <p>Kime? kvizi</p>
-    </a>
-    <a class="card" href="imenice.html" style="--accent:var(--olive)">
-      <h2>İsimler</h2>
-      <p>Cins ve çoğul kvizi</p>
-    </a>
-    <a class="card" href="Adjectives.html" style="--accent:var(--red)">
-      <h2>Sıfatlar</h2>
-      <p>Sıfat çekimleri</p>
-    </a>
-    <a class="card" href="verbtest.html" style="--accent:var(--navy)">
-      <h2>Fiiller</h2>
-      <p>Şimdiki zaman fiil kvizi</p>
-    </a>
-    <a class="card" href="Daily.html" style="--accent:var(--sea)">
-      <h2>Günlük</h2>
-      <p>Günlük konuşma ve diyaloglar</p>
-    </a>
+    <div class="glagstrip">Ⰰ Ⰱ Ⰲ Ⰳ Ⰴ Ⰵ Ⰶ Ⰷ</div>
+    <h1>Croatian,<br><em>every day</em></h1>
+    <p class="sub">A1 → A2 · speak first, parse later</p>
+    <p class="lede">Eight sections. Start with <b>Everyday talk</b> if you want to open your mouth today, or <b>The seven cases</b> if you want the map first.</p>
   </div>
 </div>
+<div class="headrule"></div>
 
-<footer>kidemlins.github.io 🇭🇷</footer>
+<div class="wrap">
+  <div class="grid" id="hub"></div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰹ</span>Where to start</h2>
+    <p class="note">You don't need all seven cases to talk. This order gets you speaking fastest.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Order</th><th>Case</th><th>Buys you</th></tr></thead>
+        <tbody>
+          <tr><th>1</th><td><b>Accusative</b><span class="w">Idem u grad.</span></td><td>Ordering, wanting, going somewhere</td></tr>
+          <tr><th>2</th><td><b>Locative</b><span class="w">U kafiću sam.</span></td><td>Saying where you are</td></tr>
+          <tr><th>3</th><td><b>Genitive</b><span class="w">Nemam vremena.</span></td><td>Not having, quantities, most prepositions</td></tr>
+          <tr><th>4</th><td><b>Instrumental</b><span class="w">Idem autobusom.</span></td><td>With whom, by what</td></tr>
+          <tr><th>5</th><td><b>Dative</b><span class="w">Sviđa mi se.</span></td><td>Liking, needing, giving to someone</td></tr>
+          <tr><th>6</th><td><b>Vocative</b><span class="w">Oprostite, gospodine!</span></td><td>Getting someone's attention</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip"><b>One rule to carry</b>Motion takes the accusative, standing still takes the locative. <span class="mono">Idem u grad</span> — I'm going into town. <span class="mono">Ja sam u gradu</span> — I'm in town. Same preposition, two cases, two meanings.</div>
+  </div>
+
+  <footer class="pagefoot">
+    <p>Built for one learner. Croatian throughout, English for the scaffolding.</p>
+    <p>More reading: <a href="https://www.easy-croatian.com/" target="_blank" rel="noopener">easy-croatian.com</a> · Sretno! 🇭🇷</p>
+  </footer>
+</div>
 
 <script>
-const deco = document.getElementById('deco');
-for(let i=0;i<25;i++){ deco.appendChild(document.createElement('div')); }
+var SECTIONS = [
+  {file:"genel.html",      glag:"Ⰰ", name:"The seven cases", desc:"Every ending, one page"},
+  {file:"daily.html",      glag:"Ⰱ", name:"Everyday talk",   desc:"What you'll actually hear"},
+  {file:"padezi.html",     glag:"Ⰲ", name:"Where / where to", desc:"Accusative and locative"},
+  {file:"genitiv.html",    glag:"Ⰳ", name:"Genitive",        desc:"Of, from, none of it"},
+  {file:"dativ.html",      glag:"Ⰴ", name:"Dative",          desc:"Who you give it to"},
+  {file:"imenice.html",    glag:"Ⰵ", name:"Nouns",           desc:"Gender and plurals"},
+  {file:"adjectives.html", glag:"Ⰶ", name:"Adjectives",      desc:"50 words that agree"},
+  {file:"verbtest.html",   glag:"Ⰷ", name:"Verbs",           desc:"105 verbs, present tense"}
+];
+document.getElementById("hub").innerHTML = SECTIONS.map(function(s){
+  return '<a class="cell" href="'+s.file+'"><span class="glag">'+s.glag+'</span>'+
+         '<h2>'+s.name+'</h2><p>'+s.desc+'</p></a>';
+}).join("");
 </script>
-
+<script src="nav.js"></script>
 </body>
 </html>

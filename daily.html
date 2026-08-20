@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everyday talk — Croatian</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#14120E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Croatian">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+
+<div class="pagehead">
+  <div class="wrap">
+    <div class="glagstrip">Ⰱ · Svakodnevni govor</div>
+    <h1>What you'll<br><em>actually hear</em>.</h1>
+    <p class="sub">dialogues · 73 phrases · 28 situations</p>
+    <p class="lede">Textbook Croatian and street Croatian are different languages. This section is the second one: the fillers, the shrugs, the <b>ma</b> that softens everything, and the twenty or so phrases that do most of the work in a café.</p>
+  </div>
+</div>
+<div class="headrule"></div>
+
+<div class="wrap">
+
+  <div class="seg" id="mode">
+    <button class="on" data-m="dialogues">Dialogues</button>
+    <button data-m="phrases">Phrases</button>
+    <button data-m="situations">Situations</button>
+  </div>
+
+  <div id="view"></div>
+
+  <footer class="pagefoot">
+    <p>Tap any <span style="border-bottom:2px dotted var(--cinnabar)">underlined</span> word in a dialogue to see what it's doing.</p>
+  </footer>
+</div>
+
+<script>
+var DIALOGUES = [{"title": "U kafiću", "sub": "In a café · waiter and customer", "lines": [[0, "Konobar", "Dobar dan! {{Izvolite|Here you are / go ahead. A polite all-purpose word you'll hear in every shop and café.}}, što ćete popiti?", "Good afternoon! What would you like to drink?"], [1, "Student", "Jednu kavu, {{molim|Please. On its own it also means “Sorry?” or “You're welcome.”}}.", "One coffee, please."], [0, "Konobar", "{{Evo|Here. Said as you hand something over.}}, izvolite vašu kavu.", "Here you go, your coffee."], [1, "Student", "{{Super|Great. The most-used word of approval in daily life.}}, hvala!", "Great, thanks!"], [0, "Konobar", "{{Nema na čemu|You're welcome / don't mention it.}}. Želite li još nešto?", "You're welcome. Would you like anything else?"], [1, "Student", "{{Ma ne|Oh no / nah. “Ma” softens the sentence and makes it friendly.}}, hvala. To je sve.", "No thanks, that's everything."]]}, {"title": "Susret na ulici", "sub": "Bumping into someone · two friends", "lines": [[0, "Ana", "{{Ej|Hey! Casual greeting.}}, bok! {{Što ima?|What's up? Literally “what is there?”}}", "Hey, hi! What's up?"], [1, "Marko", "{{Ma ništa posebno|Nothing special. The standard answer.}}. A ti?", "Nothing much. You?"], [0, "Ana", "{{Eto|There you go. Used to sum a situation up.}}, idem na posao.", "Well, I'm off to work."], [1, "Marko", "U subotu? {{Ma daj!|Come on! / No way! Disbelief or surprise.}}", "On a Saturday? Come on!"], [0, "Ana", "Znam, znam… {{Isuse|Jesus / oh my God. Tiredness, exasperation, surprise.}}, umorna sam.", "I know, I know… God, I'm tired."], [1, "Marko", "{{Ajde|Come on. Also “right then” when saying goodbye.}}, {{vidimo se|See you.}}!", "Right, see you!"]]}, {"title": "U pekarnici", "sub": "At the bakery · buying something", "lines": [[0, "Prodavačica", "{{Izvolite?|Yes? A way of saying “your turn”.}}", "Yes please?"], [1, "Student", "Jedan burek i jednu kiflu, molim.", "One burek and one roll, please."], [0, "Prodavačica", "{{Još nešto?|Anything else? Short and constant.}}", "Anything else?"], [1, "Student", "Ne, hvala. {{Koliko košta?|How much is it?}}", "No thanks. How much is it?"], [0, "Prodavačica", "Tri eura.", "Three euros."], [1, "Student", "Evo, izvolite. {{Hvala lijepa|Thank you very much. A notch politer than plain hvala.}}.", "Here you are. Thank you very much."], [0, "Prodavačica", "{{Doviđenja|Goodbye. The formal farewell.}}!", "Goodbye!"]]}, {"title": "Telefon", "sub": "On the phone · a quick call", "lines": [[0, "Ana", "{{Halo?|Hello? Only for answering the phone.}}", "Hello?"], [1, "Marko", "Bok Ana, {{ovdje Marko|Marko here. The standard way to introduce yourself on the phone.}}. Jesi li doma?", "Hi Ana, it's Marko. Are you home?"], [0, "Ana", "{{Molim?|Sorry? / Pardon? When you didn't catch it.}} Ne čujem te dobro.", "Sorry? I can't hear you well."], [1, "Marko", "Pitam jesi li doma!", "I'm asking if you're home!"], [0, "Ana", "{{A da|Oh right / ah yes. When it clicks.}}, doma sam. Zašto?", "Oh right, I'm home. Why?"], [1, "Marko", "Dolazim za pet minuta.", "I'll be there in five minutes."], [0, "Ana", "{{Ma super|Brilliant! “Ma” here amps up the delight.}}! {{Čujemo se|Talk to you soon. Literally “we hear each other”.}}.", "Brilliant! Talk soon."]]}, {"title": "Dogovor za večer", "sub": "Making plans · friends", "lines": [[0, "Marko", "Idemo večeras na pivo?", "Shall we go for a beer tonight?"], [1, "Student", "{{Može!|Sure! The most natural way to accept an offer.}} U koliko sati?", "Sure! What time?"], [0, "Marko", "U osam?", "Eight?"], [1, "Student", "{{Ma naravno|Of course. “Naravno” is “of course”; “ma” makes it relaxed.}}. Gdje?", "Of course. Where?"], [0, "Marko", "{{Kod mene|At my place.}}, {{pa onda|and then.}} u grad.", "At mine, and then into town."], [1, "Student", "{{Odlično|Excellent.}}, vidimo se.", "Excellent, see you."]]}, {"title": "Kasniš", "sub": "You're late · apologising", "lines": [[0, "Ana", "{{Gdje si?|Where are you? Also used as a warm greeting, like “where have you been!”}} Čekam te već pola sata!", "Where are you? I've been waiting half an hour!"], [1, "Student", "{{Joj|Ugh / oh. A small noise of dismay.}}, {{oprosti|Sorry. Informal, to one person.}}! Autobus kasni.", "Ugh, sorry! The bus is late."], [0, "Ana", "{{Ma daj…|Come on… Here it's reproachful.}}", "Oh come on…"], [1, "Student", "{{Stvarno|Really. On its own, “Stvarno?” means “Seriously?”}}, {{žao mi je|I'm sorry.}}.", "Really, I'm sorry."], [0, "Ana", "Dobro, dobro. {{Nema veze|Never mind / it doesn't matter.}}. {{Polako|Take it easy.}}.", "All right, all right. Never mind. Take it easy."]]}, {"title": "U taksiju", "sub": "In a taxi · getting there", "lines": [[0, "Vozač", "Dobar dan, kamo idete?", "Good afternoon, where are you going?"], [1, "Student", "Na kolodvor, molim.", "To the station, please."], [0, "Vozač", "{{U redu|All right. Neutral and polite.}}. Žurite li?", "All right. Are you in a hurry?"], [1, "Student", "Malo, da. Vlak mi je u pola tri.", "A bit, yes. My train is at half past two."], [0, "Vozač", "{{Bez brige|Don't worry.}}, stižemo.", "Don't worry, we'll make it."], [1, "Student", "{{Hvala, super|Thanks, great.}}.", "Thanks, great."]]}, {"title": "Novost", "sub": "News travels · gossip", "lines": [[0, "Ana", "{{Znaš da|Did you know that… The standard way to open with news.}} se Ivan ženi?", "Did you know Ivan is getting married?"], [1, "Marko", "{{Ma nemoj!|You don't say! Surprise.}} {{Stvarno?|Seriously?}}", "You don't say! Seriously?"], [0, "Ana", "Stvarno. U rujnu.", "Really. In September."], [1, "Marko", "{{Isuse|God.}}… {{a ja|whereas I. Sets up a contrast.}} nisam znao ništa.", "God… and I had no idea."], [0, "Ana", "{{Ma nitko|Nobody at all. “Ma” adds a shrug.}} nije znao.", "Nobody knew."]]}, {"title": "Vrijeme", "sub": "The weather · chatting to a neighbour", "lines": [[0, "Susjeda", "Kakvo vrijeme danas, {{ha?|eh? / isn't it? Fishing for agreement.}}", "What weather today, eh?"], [1, "Student", "{{Ajme|Oh my. Heat, surprise, sympathy — it covers all three.}}, kako je vruće!", "Oh my, it's so hot!"], [0, "Susjeda", "{{Baš|Exactly / quite. An emphasis word.}}. Ljeto je.", "Exactly. It's summer."], [1, "Student", "{{Pa da|Well yes / true. A soft agreement.}}. Idem na more.", "Well yes. I'm off to the coast."], [0, "Susjeda", "{{Ma bravo|Good for you!}}! Uživajte.", "Good for you! Enjoy."]]}, {"title": "Mali problem", "sub": "A small crisis · calming down", "lines": [[0, "Marko", "Izgubio sam ključeve.", "I've lost my keys."], [1, "Ana", "{{Ma kakvi|No you haven't / nonsense. Rejecting a claim.}}, tu su na stolu!", "No you haven't, they're right there on the table!"], [0, "Marko", "{{O Bože|Oh God.}}… {{baš sam glup|I really am stupid. “Baš” adds emphasis.}}.", "Oh God… I really am an idiot."], [1, "Ana", "{{Ma pusti|Let it go. “Pusti to” = drop it.}}, svima se dogodi.", "Forget it, it happens to everyone."], [0, "Marko", "{{Hvala ti|Thanks. Informal, to one person.}}.", "Thanks."]]}];
+var PHRASES = [{"g": "Pozdravi i pristojnost", "gl": "Greetings and politeness", "items": [["Bok!", "Hi! / Bye! (both hello and goodbye)", "Bok, kako si?", "Hi, how are you?", ""], ["Ej!", "Hey! (very casual)", "Ej, gdje si bio?", "Hey, where have you been?", "sl"], ["Dobar dan", "Good afternoon (formal)", "Dobar dan, izvolite?", "Good afternoon, can I help?", ""], ["Izvoli / Izvolite", "Here you are / go ahead", "Evo, izvolite kavu.", "Here you are, your coffee.", ""], ["Molim", "Please / Sorry? / You're welcome", "Jednu vodu, molim.", "One water, please.", ""], ["Hvala lijepa", "Thank you very much", "Hvala lijepa na pomoći.", "Thanks very much for your help.", ""], ["Nema na čemu", "You're welcome", "— Hvala! — Nema na čemu.", "— Thanks! — You're welcome.", ""], ["Oprosti / Oprostite", "Sorry / excuse me", "Oprostite, gdje je WC?", "Excuse me, where's the toilet?", ""], ["Žao mi je", "I'm sorry", "Stvarno mi je žao.", "I'm really sorry.", ""], ["Vidimo se", "See you", "Ajde, vidimo se sutra.", "Right, see you tomorrow.", ""], ["Čujemo se", "Talk to you soon (on the phone)", "Čujemo se navečer.", "We'll speak this evening.", ""], ["Laku noć", "Good night", "Idem spavati, laku noć.", "I'm off to bed, good night.", ""]]}, {"g": "Slaganje i odbijanje", "gl": "Agreeing and refusing", "items": [["Može!", "Sure! (yes to an offer)", "— Idemo na kavu? — Može!", "— Coffee? — Sure!", ""], ["U redu", "All right, OK", "U redu, dolazim.", "All right, I'm coming.", ""], ["Naravno", "Of course", "Naravno da hoću.", "Of course I will.", ""], ["Ma naravno", "Of course (relaxed)", "Ma naravno, nema problema.", "Of course, no problem.", "sl"], ["Svakako", "Definitely, by all means", "Svakako dođi.", "Do come.", ""], ["Ma ne", "Oh no / nah", "Ma ne, nije tako.", "No no, it's not like that.", "sl"], ["Ma jok", "Nope (very casual — borrowed from Turkish “yok”)", "— Bojiš se? — Ma jok!", "— Are you scared? — Not a chance!", "sl"], ["Ma kakvi", "No way / nonsense", "Ma kakvi, to nije istina.", "Nonsense, that's not true.", "sl"], ["Nikako", "No way, under no circumstances", "To nikako ne može.", "That's absolutely not possible.", ""], ["Možda", "Maybe", "Možda dođem.", "I might come.", ""], ["Valjda", "Presumably, I suppose", "Valjda je doma.", "He's probably home.", ""]]}, {"g": "Čuđenje i emocije", "gl": "Surprise and feeling", "items": [["Ma daj!", "Come on! / No way! (disbelief, reproach)", "Ma daj, ne vjerujem ti!", "Come on, I don't believe you!", "sl"], ["Ma nemoj!", "You don't say!", "Ma nemoj, kad se to dogodilo?", "You don't say — when did that happen?", "sl"], ["Stvarno?", "Really? Seriously?", "Stvarno? Nisam znao.", "Really? I had no idea.", ""], ["Isuse!", "God! (literally “Jesus” — mild swearing, extremely common)", "Isuse, kakva gužva!", "God, what a crowd!", "sl"], ["O Bože", "Oh God", "O Bože, zaboravio sam!", "Oh God, I forgot!", ""], ["Ajme!", "Oh no! / Wow! (sympathy, surprise)", "Ajme, kako je hladno!", "Oh, it's so cold!", ""], ["Joj!", "Ugh! / Ouch!", "Joj, boli me glava.", "Ugh, my head hurts.", ""], ["Bogami", "Honestly, I must say", "Bogami, dobro je bilo.", "It was good, I must say.", "sl"], ["Ne mogu vjerovati", "I can't believe it", "Ne mogu vjerovati da si došao!", "I can't believe you came!", ""]]}, {"g": "Male riječi", "gl": "The small words that carry the tone", "items": [["Ma…", "Softens and warms whatever follows — closest to “oh” or “nah”", "Ma nije problem.", "Oh, it's no problem.", "sl"], ["Pa", "Well, so (opens a sentence)", "Pa da, imaš pravo.", "Well yes, you're right.", ""], ["Eto", "There you go (sums up, closes)", "I eto, tako je bilo.", "And there you go, that's how it was.", ""], ["Evo", "Here (handing something over, pointing at what's present)", "Evo me!", "Here I am!", ""], ["Baš", "Exactly, really, quite (emphasis)", "Baš mi je drago.", "I'm really glad.", ""], ["Ono", "Like… (filler while thinking)", "Bilo je, ono, čudno.", "It was, like, strange.", "sl"], ["Kao", "Supposedly, sort of", "On je kao ozbiljan.", "He's supposedly serious.", "sl"], ["Znaš", "You know", "Znaš, nije lako.", "You know, it isn't easy.", ""], ["Mislim", "I mean", "Mislim, može i tako.", "I mean, that works too.", ""], ["Ha?", "Eh? / isn't it?", "Lijepo je, ha?", "Nice, isn't it?", ""]]}, {"g": "Smirivanje", "gl": "Calming someone down", "items": [["Nema veze", "Never mind, it doesn't matter", "Nema veze, dogodi se.", "Never mind, these things happen.", ""], ["Bez brige", "Don't worry", "Bez brige, stižemo na vrijeme.", "Don't worry, we'll get there in time.", ""], ["Polako", "Take it easy / slowly", "Polako, ima vremena.", "Take it easy, there's time.", ""], ["Pusti to / Ma pusti", "Let it go", "Ma pusti, nije važno.", "Forget it, it doesn't matter.", "sl"], ["Nije strašno", "It's not the end of the world", "Nije strašno, popravit ćemo.", "It's not a disaster, we'll fix it.", ""], ["Sve je u redu", "Everything's fine", "Sve je u redu, ne brini.", "Everything's fine, don't worry.", ""]]}, {"g": "Svakodnevna pitanja", "gl": "Everyday questions", "items": [["Kako si?", "How are you?", "Bok, kako si danas?", "Hi, how are you today?", ""], ["Što ima?", "What's up?", "— Što ima? — Ma ništa.", "— What's up? — Not much.", "sl"], ["Kako ide?", "How's it going?", "Kako ide na poslu?", "How's work going?", ""], ["Gdje si?", "Where are you? (also a warm greeting)", "Ej, gdje si!", "Hey, where have you been!", "sl"], ["Koliko košta?", "How much is it?", "Koliko košta kava?", "How much is a coffee?", ""], ["U koliko sati?", "At what time?", "U koliko sati krećemo?", "What time are we leaving?", ""], ["Još nešto?", "Anything else?", "Još nešto, gospodine?", "Anything else, sir?", ""], ["Ništa posebno", "Nothing special (the standard answer)", "— Što radiš? — Ništa posebno.", "— What are you up to? — Nothing much.", ""]]}, {"g": "Reakcije", "gl": "Reacting", "items": [["Super!", "Great!", "Super, vidimo se!", "Great, see you!", ""], ["Odlično!", "Excellent!", "Odlično si to napravio.", "You did that brilliantly.", ""], ["Sjajno!", "Wonderful!", "Sjajno, čestitam!", "Wonderful, congratulations!", ""], ["Bravo!", "Well done!", "Ma bravo, svaka čast!", "Well done, hats off!", ""], ["Fino", "Nice, pleasant", "Fino je ovdje.", "It's nice here.", ""], ["Grozno / Užasno", "Awful / terrible", "Vrijeme je grozno.", "The weather is awful.", ""], ["Svaka čast", "Hats off / nicely done", "Svaka čast na trudu!", "Hats off for the effort!", ""]]}, {"g": "Turske riječi", "gl": "Words Croatian borrowed from Turkish", "items": [["kava", "coffee", "Idemo na kavu!", "Let's go for a coffee!", ""], ["šećer", "sugar", "Bez šećera, molim.", "No sugar, please.", ""], ["čarapa", "sock", "Gdje su mi čarape?", "Where are my socks?", ""], ["jastuk", "pillow", "Trebam još jedan jastuk.", "I need another pillow.", ""], ["džep", "pocket", "Ključ je u džepu.", "The key is in my pocket.", ""], ["boja", "colour, paint", "Koja je tvoja boja?", "Which is your colour?", ""], ["torba", "bag", "Uzmi torbu.", "Take the bag.", ""], ["sat", "hour, clock", "Koliko je sati?", "What time is it?", ""], ["tavan", "attic", "To je na tavanu.", "That's up in the attic.", ""], ["badava", "free of charge", "Bilo je badava!", "It was free!", "sl"]]}];
+var SITUATIONS = [["The waiter brings your coffee.", "Konobar: Evo, izvolite vašu kavu.", "What do you say?", "Super, hvala!", ["Molim?", "Ma daj!", "Nema veze."], "The natural reaction when you're handed something: <b>Super, hvala!</b>"], ["Your friend says she's off to work on a Saturday.", "Ana: Idem na posao. — U subotu?", "How do you show surprise?", "Ma daj!", ["Izvolite.", "Laku noć.", "U redu."], "<b>Ma daj!</b> = Come on! / No way! Disbelief and surprise."], ["You've thanked someone and they reply.", "— Hvala lijepa!", "What do they say?", "Nema na čemu.", ["Nema veze.", "Ma jok.", "Još nešto?"], "<b>Nema na čemu</b> = you're welcome. <i>Nema veze</i> means “never mind” and follows an apology instead."], ["A friend invites you for a beer and you want to go.", "Marko: Idemo večeras na pivo?", "How do you accept?", "Može!", ["Molim?", "Ajme!", "Žao mi je."], "<b>Može!</b> = Sure! The most natural yes to an offer."], ["You're half an hour late and your friend is annoyed.", "Ana: Čekam te već pola sata!", "What do you say?", "Joj, oprosti!", ["Bravo!", "Ma jok.", "Izvolite."], "<b>Joj</b> is a small noise of dismay; <b>oprosti</b> is “sorry”."], ["You've apologised and your friend is calming you down.", "— Stvarno mi je žao.", "What does she say?", "Nema veze, polako.", ["Nema na čemu.", "Ma daj, super!", "Koliko košta?"], "<b>Nema veze</b> = never mind; <b>polako</b> = take it easy."], ["You can't hear your friend properly on the phone.", "Marko: …dolazim za pet minuta.", "What do you ask?", "Molim? Ne čujem te dobro.", ["Izvolite?", "Ma kakvi!", "Doviđenja."], "<b>Molim?</b> = Sorry? A one-word question when you didn't catch something."], ["You've just heard Ivan is getting married.", "Ana: Znaš da se Ivan ženi?", "You're surprised — what do you say?", "Ma nemoj! Stvarno?", ["Bez brige.", "Fino.", "Molim, izvolite."], "<b>Ma nemoj!</b> = You don't say! Surprise at a piece of news."], ["The taxi driver asked if you're in a hurry; you are, a little.", "Vozač: Bez brige, stižemo.", "What does that mean?", "Don't worry, we'll make it.", ["Never mind, we're not going.", "Please, take a seat.", "Sorry, we're late."], "<b>Bez brige</b> = don't worry; <b>stižemo</b> = we're getting there."], ["You bump into a friend in the street.", "Ana: Ej, bok! Što ima?", "What's the standard reply?", "Ma ništa posebno.", ["Izvolite.", "Nema na čemu.", "Laku noć."], "<b>Ma ništa posebno</b> = nothing special. The most common answer there is."], ["You think you've lost something but it's on the table.", "Marko: Izgubio sam ključeve!", "How does your friend object?", "Ma kakvi, tu su!", ["Ma naravno, tu su!", "Bravo, tu su!", "Molim, tu su!"], "<b>Ma kakvi</b> = nonsense / no you haven't. It rejects a false claim."], ["It's a very hot day and you're chatting to a neighbour.", "Susjeda: Kakvo vrijeme danas, ha?", "How do you react?", "Ajme, kako je vruće!", ["Nema na čemu!", "Može!", "Čujemo se!"], "<b>Ajme</b> = oh my. Heat, cold, surprise, sympathy — it covers all of them."], ["A friend asks whether you're coming; you definitely are.", "Marko: Dolaziš i ti?", "What's a relaxed “of course”?", "Ma naravno!", ["Ma kakvi!", "Ma jok!", "Nikako!"], "<b>Ma naravno</b> = of course. The other three all mean no."], ["You're handing something over — money, a pen, a coffee.", "— …", "What do you say as you hand it over?", "Evo, izvolite.", ["Eto, doviđenja.", "Ajme, molim?", "Pa da."], "<b>Evo</b> = here, for the moment of handing over. <b>Eto</b> closes a topic instead."], ["You want to know the price of a coffee.", "Konobar: Izvolite?", "How do you ask?", "Koliko košta kava?", ["Kako si, kava?", "Gdje si, kava?", "Što ima, kava?"], "<b>Koliko košta…?</b> = how much is…?"], ["You've agreed to speak on the phone this evening.", "Ana: Nazovi me navečer.", "How do you sign off?", "Može, čujemo se!", ["Može, vidimo se sada!", "Može, izvolite!", "Može, oprostite!"], "<b>Čujemo se</b> is for talking on the phone; <b>vidimo se</b> is for meeting in person."], ["Your friend has done a job really well.", "— Napravio sam sve sam.", "How do you praise them?", "Svaka čast!", ["Ma daj…", "Grozno!", "Bez brige."], "<b>Svaka čast</b> = hats off / nicely done. <b>Bravo!</b> works too."], ["You've made a small mistake and feel bad; your friend reassures you.", "— Ma pusti, …", "How does the sentence continue?", "…svima se dogodi.", ["…nikad više!", "…grozno je!", "…doviđenja!"], "<b>Ma pusti</b> = forget it. What follows is always reassuring: it happens to everyone."], ["Something has been offered and you're politely declining.", "Konobar: Želite li još nešto?", "How do you refuse?", "Ma ne, hvala. To je sve.", ["Ma kakvi, hvala!", "Ma jok, bravo!", "Isuse, hvala!"], "<b>Ma ne, hvala</b> is a soft, polite “no thanks”."], ["You're delighted about something.", "Marko: Dolazim za pet minuta!", "How do you show it?", "Ma super!", ["Ma kakvi!", "Grozno!", "Žao mi je!"], "<b>Ma</b> + a positive word amplifies the enthusiasm: <i>ma super, ma bravo, ma odlično</i>."], ["You're asking a stranger for directions and want to be polite.", "— …, gdje je kolodvor?", "How does the sentence start?", "Oprostite", ["Izvolite", "Molim te", "Nema veze"], "<b>Oprostite</b> = excuse me (formal). Standard when approaching a stranger."], ["Your friend says she's exhausted.", "Ana: Isuse, umorna sam.", "What is “Isuse” doing here?", "Marking strong weariness or exasperation", ["A polite thank-you", "A greeting", "A question frame"], "<b>Isuse</b> literally means “Jesus”, but in everyday speech it works like “God” or “honestly”."], ["You've heard some news and want to say “really?”", "Ana: Ivan se ženi u rujnu.", "How do you ask in one word?", "Stvarno?", ["Polako?", "Svakako?", "Izvolite?"], "<b>Stvarno?</b> = Really? <b>Ozbiljno?</b> does the same job."], ["You wholeheartedly agree with what someone said.", "Susjeda: Ljeto je, vruće je.", "What's the short agreement?", "Baš.", ["Molim.", "Izvoli.", "Jok."], "<b>Baš</b> = exactly / quite so. A word of emphasis and agreement."], ["You're heading to bed.", "— Idem spavati.", "What do you say?", "Laku noć!", ["Dobar dan!", "Dobro jutro!", "Što ima?"], "<b>Laku noć</b> = good night."], ["A friend asks if you're scared; you aren't at all.", "Marko: Bojiš se?", "What's a casual “not a chance”?", "Ma jok!", ["Ma naravno!", "Svakako!", "Može!"], "<b>Ma jok</b> — a very casual no. It comes straight from the Turkish word <i>yok</i>."], ["You're sitting in a café and the waiter comes over.", "Konobar: …?", "What does the waiter say?", "Izvolite?", ["Molim?", "Stvarno?", "Ha?"], "<b>Izvolite?</b> = Yes please? Standard when serving someone."], ["Your friend says he'll be late but you have plenty of time.", "Marko: Kasnim deset minuta!", "How do you reassure him?", "Bez brige, ima vremena.", ["Ma daj, grozno!", "Ma kakvi, doviđenja!", "Isuse, nikako!"], "<b>Bez brige</b> = don't worry; <b>ima vremena</b> = there's time."]];
+
+var KEYS=["A","B","C","D"], GLAG=["Ⰰ","Ⰱ","Ⰲ","Ⰳ","Ⰴ","Ⰵ","Ⰶ","Ⰷ","Ⰸ","Ⰹ"];
+var view = document.getElementById("view");
+var mode = "dialogues";
+
+document.querySelectorAll("#mode button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll("#mode button").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    mode = b.dataset.m;
+    if(mode==="dialogues") dialogues();
+    else if(mode==="phrases") phrases();
+    else startQuiz();
+  });
+});
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+/* turn {{word|note}} into a tappable gloss */
+function gloss(text){
+  return text.replace(/\{\{(.+?)\|(.+?)\}\}/g, function(_, word, note){
+    return '<b class="gl-w" data-note="'+esc(note)+'">'+word+'</b>';
+  });
+}
+
+/* ---------------- dialogues ---------------- */
+function dialogues(){
+  view.innerHTML = DIALOGUES.map(function(d, i){
+    var lines = d.lines.map(function(l){
+      return '<li class="dl'+(l[0]===1?" me":"")+'">'+
+             '<span class="who">'+l[1]+'</span>'+
+             '<span class="hr">'+gloss(l[2])+'</span>'+
+             '<span class="en">'+l[3]+'</span></li>';
+    }).join("");
+    return '<div class="sec"><h2><span class="glag">'+GLAG[i%10]+'</span>'+d.title+'</h2>'+
+           '<p class="note">'+d.sub+'</p>'+
+           '<ul class="dialogue">'+lines+'</ul></div>';
+  }).join("");
+  bindGloss();
+}
+
+function bindGloss(){
+  document.querySelectorAll(".gl-w").forEach(function(el){
+    el.addEventListener("click", function(){
+      var open = el.nextElementSibling && el.nextElementSibling.classList.contains("gl-note");
+      document.querySelectorAll(".gl-note").forEach(function(n){ n.remove(); });
+      if(open) return;
+      var n = document.createElement("span");
+      n.className = "gl-note";
+      n.textContent = el.dataset.note;
+      el.insertAdjacentElement("afterend", n);
+    });
+  });
+}
+
+/* ---------------- phrases ---------------- */
+function phrases(){
+  view.innerHTML = PHRASES.map(function(g, i){
+    var items = g.items.map(function(p){
+      return '<li><span class="hr">'+p[0]+(p[4]==="sl"?' <em class="sl">casual</em>':'')+'</span>'+
+             '<span class="en"><b>'+p[1]+'</b></span>'+
+             '<span class="en" style="font-family:var(--display);font-size:14px;color:var(--ink);margin-top:3px">'+p[2]+'</span>'+
+             '<span class="en">'+p[3]+'</span></li>';
+    }).join("");
+    return '<div class="sec"><h2><span class="glag">'+GLAG[i%10]+'</span>'+g.gl+'</h2>'+
+           '<p class="note">'+g.g+'</p><ul class="talk">'+items+'</ul></div>';
+  }).join("");
+}
+
+/* ---------------- situations ---------------- */
+var round=[], idx=0, score=0, answered=false, missed=[];
+
+function startQuiz(){
+  round = shuffle(SITUATIONS).slice(0,15);
+  idx=0; score=0; missed=[];
+  question();
+}
+
+function question(){
+  answered=false;
+  var s = round[idx];
+  var all = shuffle([s[3]].concat(s[4]));
+  var correct = all.indexOf(s[3]);
+
+  view.innerHTML =
+    '<div class="quizbar"><span class="count">'+(idx+1)+' / '+round.length+'</span>'+
+    '<span class="score">'+score+' correct</span></div>'+
+    '<div class="progress"><i style="width:'+(idx/round.length*100)+'%"></i></div>'+
+    '<div class="qcard">'+
+      '<p class="prompt">'+s[0]+'</p>'+
+      '<p class="target" style="font-size:17px">'+s[1]+'</p>'+
+      '<h3 class="sub" style="margin-top:0">'+s[2]+'</h3>'+
+      '<div class="opts" id="opts"></div><div id="why"></div>'+
+    '</div><div class="btnrow" id="btnrow"></div>';
+
+  var box=document.getElementById("opts");
+  all.forEach(function(t,i){
+    var b=document.createElement("button");
+    b.className="opt"; b.type="button";
+    b.innerHTML='<span class="key">'+KEYS[i]+'</span><span>'+t+'</span>';
+    b.addEventListener("click", function(){ answer(i, correct, s); });
+    box.appendChild(b);
+  });
+}
+
+function answer(i, correct, s){
+  if(answered) return; answered=true;
+  if(i===correct) score++; else missed.push(s);
+  document.querySelectorAll("#opts .opt").forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct) b.classList.add("correct");
+    else if(j===i) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  document.querySelector(".score").textContent = score+" correct";
+  document.getElementById("why").innerHTML = '<div class="why">'+s[5]+'</div>';
+  var row=document.getElementById("btnrow");
+  row.innerHTML='<button class="btn" id="next">'+(idx+1<round.length?"Next":"See results")+'</button>';
+  document.getElementById("next").addEventListener("click", next);
+  document.getElementById("next").focus();
+}
+
+function next(){ idx++; if(idx<round.length) question(); else results(); }
+
+function results(){
+  var pct=Math.round(score/round.length*100);
+  var review = missed.length
+    ? '<h3 class="sub">What slipped</h3><ul class="talk">'+missed.map(function(s){
+        return '<li><span class="hr">'+s[3]+'</span><span class="en">'+s[0]+'</span></li>';
+      }).join("")+'</ul>' : "";
+  view.innerHTML='<div class="card"><div class="result">'+
+    '<div class="glag">'+GLAG[Math.min(Math.floor(pct/10),9)]+'</div>'+
+    '<p class="big">'+pct+'%</p><p class="of">'+score+' of '+round.length+'</p></div>'+
+    review+'<div class="btnrow"><button class="btn" id="again">New round</button>'+
+    '<a class="btn ghost" href="index.html">Home</a></div></div>';
+  document.getElementById("again").addEventListener("click", startQuiz);
+}
+
+document.addEventListener("keydown", function(e){
+  if(mode!=="situations") return;
+  if(!answered){
+    var k=KEYS.indexOf(e.key.toUpperCase());
+    var btns=document.querySelectorAll("#opts .opt");
+    if(k>-1 && k<btns.length){ e.preventDefault(); btns[k].click(); }
+  } else if(e.key==="Enter"||e.key===" "){
+    var n=document.getElementById("next"); if(n){ e.preventDefault(); n.click(); }
+  }
+});
+
+dialogues();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>
