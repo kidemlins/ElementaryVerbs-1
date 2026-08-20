@@ -1,150 +1,138 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glagoli — Croatian</title>
+<title>Verbs — Croatian</title>
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#14120E">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Glagoli">
+<meta name="apple-mobile-web-app-title" content="Croatian">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 <style>
-:root{
-  --bg:#14120E; --panel:#1B1813; --panel2:#211D17; --line:#2F2A22;
-  --ink:#EDE7DA; --dim:#9C9384; --gold:#D9A441; --red:#D8564E; --sea:#6E9AA8;
+/* ---------- page-specific: picture prompts ---------- */
+.pcard{
+  background:var(--parchment-lt);
+  border:1px solid var(--rule);
+  border-top:2px solid var(--ink);
+  padding:18px 15px 15px;margin-top:16px;
+  text-align:center;position:relative;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{background:var(--bg);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;
-  font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
-.wrap{max-width:640px;margin:0 auto;padding:0 20px}
-
-.pagehead{padding:34px 0 22px}
-.glagstrip{font-family:'Noto Sans Glagolitic','IBM Plex Mono',monospace;font-size:12px;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-h1{font-family:'Spectral',Georgia,serif;font-weight:700;font-size:2.1rem;line-height:1.12;
-  margin:0 0 10px;letter-spacing:-.01em}
-h1 em{font-style:italic;font-weight:400;color:var(--gold)}
-.sub{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--dim);margin:0 0 14px;letter-spacing:.04em}
-.lede{font-family:'Spectral',Georgia,serif;font-size:1.02rem;color:#CFC6B4;margin:0}
-.lede b{color:var(--ink);font-weight:600}
-.headrule{height:1px;background:var(--line);margin:0 0 22px}
-
-.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 12px}
-.seg button{flex:1;appearance:none;background:transparent;border:0;color:var(--dim);
-  font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;
-  padding:11px 6px;cursor:pointer}
-.seg button.on{background:var(--panel2);color:var(--ink)}
-.seg button+button{border-left:1px solid var(--line)}
-
-.chips{display:flex;gap:8px;margin:0 0 22px}
-.chips button{flex:1;appearance:none;cursor:pointer;background:transparent;
-  border:1px solid var(--line);border-radius:20px;color:var(--dim);
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;padding:7px 4px}
-.chips button.on{border-color:#5A4522;color:var(--gold)}
-
-.frame{background:var(--panel);border:1px solid var(--line);border-radius:14px;
-  padding:26px 20px;text-align:center;position:relative}
-.frame:before,.ctx:before{content:attr(data-n);position:absolute;top:12px;left:16px;
-  font-family:'IBM Plex Mono',monospace;font-size:11px;color:#544C3F;letter-spacing:.1em}
-svg.ico{width:185px;height:185px;display:block;margin:0 auto}
+.pcard .n{
+  position:absolute;top:9px;left:12px;
+  font-family:var(--mono);font-size:10.5px;color:var(--stone);letter-spacing:.08em;
+}
+svg.ico{width:172px;height:172px;display:block;margin:0 auto;color:var(--ink)}
 svg.ico g.stroke{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
-svg.ico .acc{stroke:var(--gold)}
-svg.ico .accfill{fill:var(--gold);stroke:none}
-.ask{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--dim);
-  letter-spacing:.1em;text-transform:uppercase;margin:14px 0 0}
+svg.ico .acc{stroke:var(--cinnabar)}
+svg.ico .accfill{fill:var(--cinnabar);stroke:none}
+.pcard .ask,.ccard .ask{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cinnabar);margin:12px 0 0;
+}
 
-.ctx{background:var(--panel);border:1px solid var(--line);border-radius:14px;
-  padding:26px 22px 22px;position:relative}
-.ctx .line{font-family:'Spectral',Georgia,serif;font-size:1.3rem;line-height:1.5;margin:14px 0}
-.ctx .line+.line{border-top:1px solid var(--line);padding-top:16px}
-.blank{color:var(--gold);letter-spacing:.06em;font-family:'IBM Plex Mono',monospace;font-size:1rem}
+/* ---------- page-specific: context prompts ---------- */
+.ccard{
+  background:var(--parchment-lt);
+  border:1px solid var(--rule);
+  border-top:2px solid var(--ink);
+  padding:18px 15px 15px;margin-top:16px;position:relative;
+}
+.ccard .n{
+  position:absolute;top:9px;left:12px;
+  font-family:var(--mono);font-size:10.5px;color:var(--stone);letter-spacing:.08em;
+}
+.ccard .line{
+  font-family:var(--display);font-size:18px;line-height:1.45;
+  padding:11px 0;color:var(--ink);
+}
+.ccard .line:first-of-type{padding-top:8px}
+.ccard .line + .line{border-top:1px solid var(--rule-soft)}
+.blank{
+  display:inline-block;min-width:74px;
+  border-bottom:2px solid var(--cinnabar);
+}
+.hit{border-bottom:2px solid var(--cinnabar);font-weight:600}
 
-.btn{display:block;width:100%;appearance:none;cursor:pointer;background:var(--panel2);
-  border:1px solid var(--line);border-radius:11px;color:var(--ink);
-  font-family:'Public Sans',sans-serif;font-size:16px;font-weight:500;padding:14px;margin-top:14px}
-.btn:active{background:#2A251D}
-.btn.gold{border-color:#5A4522;color:var(--gold)}
-.row{display:flex;gap:10px}
-.row .btn{margin-top:12px}
-.btn.small{font-size:14.5px;padding:12px 8px}
-.btn.again{color:var(--red);border-color:#4A2723}
+/* ---------- answer panel ---------- */
+.answer{border:1px solid var(--rule);border-top:2px solid var(--cinnabar);margin-top:14px}
+.answer .head{padding:14px 15px;background:var(--parchment-lt);border-bottom:1px solid var(--rule)}
+.answer .hrv{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.15;margin:0}
+.answer .en{font-size:13.5px;color:var(--ink-soft);margin:2px 0 0}
+.answer .rec{font-family:var(--mono);font-size:11px;color:var(--cinnabar);
+  text-transform:uppercase;letter-spacing:.06em;margin:9px 0 0}
+.answer .rec b{color:var(--copper);font-weight:500}
+.conj{display:grid;grid-template-columns:1fr 1fr;background:var(--paper)}
+.conj div{padding:8px 15px;border-bottom:1px solid var(--rule-soft);font-size:14px}
+.conj div:nth-child(odd){border-right:1px solid var(--rule-soft)}
+.conj .p{font-family:var(--mono);font-size:10.5px;color:var(--stone);margin-right:7px}
+.sent{padding:11px 15px;background:var(--parchment-lt);border-bottom:1px solid var(--rule-soft)}
+.sent .hr{font-family:var(--display);font-size:16px;color:var(--ink)}
+.sent .gl{font-size:12.5px;color:var(--stone);margin-top:2px}
+.answer .why{margin:0;padding:12px 15px 13px;border-left:none;
+  background:var(--paper);border-top:1px solid var(--rule)}
 
-.ans{margin-top:16px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.ans .top{padding:16px 18px;background:var(--panel2);border-bottom:1px solid var(--line)}
-.hrv{font-family:'Spectral',Georgia,serif;font-size:1.95rem;font-weight:700;line-height:1.1;margin:0}
-.tr{font-size:1rem;color:var(--gold);margin:2px 0 0}
-.pat{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);margin:8px 0 0}
-.pat b{color:var(--sea);font-weight:500}
-.conj{display:grid;grid-template-columns:1fr 1fr}
-.conj div{padding:9px 18px;border-bottom:1px solid var(--line);font-size:14.5px}
-.conj div:nth-child(odd){border-right:1px solid var(--line)}
-.conj .p{font-family:'IBM Plex Mono',monospace;color:#6C6455;font-size:12px;margin-right:7px}
-.ex{padding:13px 18px;background:var(--panel);border-bottom:1px solid var(--line)}
-.ex .cro{font-family:'Spectral',Georgia,serif;font-size:1.1rem;font-style:italic}
-.ex .cro .hit{font-style:normal;font-weight:700;color:var(--gold)}
-.ex .glo{font-size:14px;color:var(--dim);margin-top:3px}
-.note{padding:12px 18px;background:#1F1A12;border-top:1px solid var(--line);font-size:13.5px;color:#C3B79C}
-.note b{color:var(--gold);font-weight:600}
-
-.meta{display:flex;justify-content:space-between;margin:0 0 12px;
-  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.08em}
-.bar{height:2px;background:var(--line);margin-bottom:20px}
-.bar i{display:block;height:2px;background:var(--gold);transition:width .3s}
-
-.gsec{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--dim);margin:26px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cell{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 8px 12px;text-align:center}
-.cell svg{width:100%;height:auto;max-width:112px}
-.cell .n{font-family:'Spectral',Georgia,serif;font-size:1rem;font-weight:600;margin-top:4px}
-.cell .t{font-size:12.5px;color:var(--dim)}
-.crow{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
-.crow .n{font-family:'Spectral',serif;font-size:1.1rem;font-weight:600}
-.crow .n span{font-family:'Public Sans',sans-serif;font-size:13px;font-weight:400;color:var(--dim);margin-left:8px}
-.crow .s{font-family:'Spectral',serif;font-style:italic;font-size:.98rem;color:#CFC6B4;margin-top:4px}
-
-.end{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
-.end h2{font-family:'Spectral',serif;font-size:1.4rem;margin:0 0 10px}
-.end ul{margin:8px 0 0;padding-left:20px}
-.end li{margin-bottom:5px}
-.end .bad{color:var(--red)}
-.pagefoot{border-top:1px solid var(--line);margin:34px 0 0;padding:16px 0 40px;font-size:13.5px;color:var(--dim)}
+/* ---------- gallery ---------- */
+.iconwall{display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--rule);background:var(--parchment-lt);margin-top:16px}
+.iconwall .box{padding:12px 8px 13px;text-align:center;
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.iconwall .box:nth-child(2n){border-right:none}
+.iconwall .box svg{width:100%;height:auto;max-width:104px}
+.iconwall .box .w{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink);margin-top:3px;display:block}
+.iconwall .box .g{font-size:11.5px;color:var(--stone);display:block;line-height:1.3}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <div class="pagehead">
+<div class="pagehead">
+  <div class="wrap">
     <div class="glagstrip">Ⰷ · Glagoli</div>
-    <h1>105 fiil,<br><em>İngilizcesiz</em>.</h1>
-    <p class="sub">çizim veya bağlam → Hırvatça</p>
-    <p class="lede">Somut fiiller çizilir. Soyut fiiller çizilmez — onlar iki Hırvatça cümlenin boşluğundan tanınır. İki yolda da <b>write</b> ara durağı yok, doğrudan üretiyorsun. Cevabı açmadan önce fiili <b>sesli söyle</b>.</p>
+    <h1>105 verbs,<br><em>no English</em>.</h1>
+    <p class="sub">picture or context → Croatian · 20 per round</p>
+    <p class="lede">Naming a verb through English puts a station in the middle of the line: picture → <b>write</b> → <b>pisati</b>. Here that station is removed. Concrete verbs come as a drawing; abstract ones come as two Croatian sentences with the verb missing. Say the answer out loud before you reveal it.</p>
   </div>
 </div>
 <div class="headrule"></div>
 
 <div class="wrap">
+
   <div class="seg" id="mode">
-    <button class="on" data-m="quiz">Üretim</button>
-    <button data-m="gallery">Galeri</button>
+    <button class="on" data-m="quiz">Practise</button>
+    <button data-m="gallery">Gallery</button>
   </div>
-  <div class="chips" id="filter">
-    <button class="on" data-f="all">Hepsi · 105</button>
-    <button data-f="icon">Çizim · 57</button>
-    <button data-f="ctx">Bağlam · 48</button>
+
+  <div class="seg" id="filter" style="margin-top:8px">
+    <button class="on" data-f="all">All 105</button>
+    <button data-f="icon">Drawn 57</button>
+    <button data-f="ctx">Context 48</button>
   </div>
+
   <div id="view"></div>
+
+  <div class="sec">
+    <h2><span class="glag">Ⰰ</span>Why some verbs aren't drawn</h2>
+    <p class="note">A picture can show an action, but it can't show a distinction. Two verbs that look identical on paper are separated by the sentence they live in.</p>
+    <ul class="chips">
+      <li><b>sjediti</b> / sjesti</li><li><b>ležati</b> / leći</li>
+      <li><b>kupiti</b> / kupovati</li><li><b>čuti</b> / slušati</li>
+      <li><b>tražiti</b> / naći</li><li><b>moći</b> / smjeti</li>
+      <li><b>živjeti</b> / stanovati</li><li><b>ići</b> / hodati</li>
+    </ul>
+    <div class="tip"><b>The pair to learn first</b>Position takes the locative, movement takes the accusative. <b>Sjedim na stolici</b> — I'm sitting on the chair. <b>Sjednem na stolicu</b> — I sit down on the chair. The same split runs through ležati / leći and stajati / stati.</div>
+  </div>
+
   <footer class="pagefoot">
-    Her turda 20 fiil gelir, karışık. İkonlarda <span style="color:var(--gold)">altın</span> parça eylemi taşır; bağlam kartlarında <span style="color:var(--gold)">altın</span> boşluk senin dolduracağın yerdir. Altı çekim hep aynı sırada: <b>ja · ti · on/ona · mi · vi · oni</b>.
+    <p>The six slots are always in this order: <b>ja · ti · on/ona · mi · vi · oni</b>. A dash means the verb only works in the third person — <b>boli me glava</b>, not <b>bolim</b>.</p>
   </footer>
 </div>
 
 <script>
-/* ================= icons ================= */
 var ICONS = {
 
 piti:
@@ -519,500 +507,500 @@ var PRON=['ja','ti','on/ona','mi','vi','oni'];
 var D='—';
 
 var V=[
-{k:null,hr:"biti",tr:"olmak",pat:"+ nominativ",
+{k:null,hr:"biti",en:"to be",pat:"+ nominative",
  c:["sam","si","je","smo","ste","su"],
- ex:[["Ja [sam] student.","Ben öğrenciyim."],["Gdje [si]?","Neredesin?"]],
- note:"Bu biçimler <b>enklitik</b>: cümlenin başında olamazlar. Vurgulu biçim: jesam, jesi, jest."},
+ ex:[["Ja [sam] student.","I'm a student."],["Gdje [si]?","Where are you?"]],
+ note:"These forms are <b>enclitic</b> — they can never open a sentence. The stressed forms are jesam, jesi, jest."},
 
-{k:null,hr:"imati",tr:"sahip olmak / var",pat:"+ akuzativ",
+{k:null,hr:"imati",en:"to have",pat:"+ accusative",
  c:["imam","imaš","ima","imamo","imate","imaju"],
- ex:[["[Imam] auto.","Arabam var."],["[Imaš] li vremena?","Vaktin var mı?"]],
- note:"Olumsuzu kaynaşır: <b>nemam, nemaš, nema</b>. \"Ne imam\" denmez."},
+ ex:[["[Imam] auto.","I have a car."],["[Imaš] li vremena?","Have you got time?"]],
+ note:"The negative fuses into one word: <b>nemam, nemaš, nema</b>. Never \"ne imam\"."},
 
-{k:"raditi",hr:"raditi",tr:"çalışmak / yapmak",pat:"u / na + <b>lokativ</b>",
+{k:"raditi",hr:"raditi",en:"to work / to do",pat:"u / na + <b>locative</b>",
  c:["radim","radiš","radi","radimo","radite","rade"],
- ex:[["[Radim] u uredu.","Ofiste çalışıyorum."],["Što [radiš] danas?","Bugün ne yapıyorsun?"]]},
+ ex:[["[Radim] u uredu.","I work in an office."],["Što [radiš] danas?","What are you doing today?"]]},
 
-{k:"jesti",hr:"jesti",tr:"yemek",pat:"+ akuzativ",
+{k:"jesti",hr:"jesti",en:"to eat",pat:"+ accusative",
  c:["jedem","jedeš","jede","jedemo","jedete","jedu"],
- ex:[["[Jedem] ribu i krumpir.","Balık ve patates yiyorum."],["Gdje [jedete] ručak?","Öğle yemeğini nerede yiyorsunuz?"]],
- note:"Mastar aldatıcı: <b>jesti → jedem</b>. Kökteki -d- sadece çekimde çıkar."},
+ ex:[["[Jedem] ribu i krumpir.","I'm eating fish and potatoes."],["Gdje [jedete] ručak?","Where do you have lunch?"]],
+ note:"The infinitive hides the stem: <b>jesti → jedem</b>. The -d- only shows up once it's conjugated."},
 
-{k:"piti",hr:"piti",tr:"içmek",pat:"+ akuzativ",
+{k:"piti",hr:"piti",en:"to drink",pat:"+ accusative",
  c:["pijem","piješ","pije","pijemo","pijete","piju"],
- ex:[["[Pijem] kavu svako jutro.","Her sabah kahve içiyorum."],["Što [piješ], vodu ili sok?","Ne içiyorsun, su mu meyve suyu mu?"]]},
+ ex:[["[Pijem] kavu svako jutro.","I drink coffee every morning."],["Što [piješ], vodu ili sok?","What are you drinking, water or juice?"]]},
 
-{k:"spavati",hr:"spavati",tr:"uyumak",pat:"nesnesiz · u + <b>lokativ</b>",
+{k:"spavati",hr:"spavati",en:"to sleep",pat:"no object · u + <b>locative</b>",
  c:["spavam","spavaš","spava","spavamo","spavate","spavaju"],
- ex:[["[Spavam] osam sati.","Sekiz saat uyuyorum."],["Dijete [spava] u sobi.","Çocuk odada uyuyor."]]},
+ ex:[["[Spavam] osam sati.","I sleep eight hours."],["Dijete [spava] u sobi.","The child is asleep in the room."]]},
 
-{k:"ici",hr:"ići",tr:"gitmek",pat:"u / na + <b>akuzativ</b> (hareket)",
+{k:"ici",hr:"ići",en:"to go",pat:"u / na + <b>accusative</b> (motion)",
  c:["idem","ideš","ide","idemo","idete","idu"],
- ex:[["[Idem] u grad.","Şehre gidiyorum."],["Kamo [ideš]?","Nereye gidiyorsun?"]],
- note:"Nereye? = <b>kamo</b> + akuzativ. Nerede? = <b>gdje</b> + lokativ."},
+ ex:[["[Idem] u grad.","I'm going into town."],["Kamo [ideš]?","Where are you going?"]],
+ note:"Where to? <b>kamo</b> + accusative. Where at? <b>gdje</b> + locative."},
 
-{k:null,hr:"doći",tr:"gelmek",pat:"u / na + <b>akuzativ</b> (hareket)",
+{k:null,hr:"doći",en:"to come",pat:"u / na + <b>accusative</b> (motion)",
  c:["dođem","dođeš","dođe","dođemo","dođete","dođu"],
- ex:[["[Dođi] večeras kod nas.","Bu akşam bize gel."],["[Došao] sam jučer.","Dün geldim."]],
- note:"Tekrarlayan geliş için <b>dolaziti</b>: <i>dolazim svaki dan</i>."},
+ ex:[["[Dođi] večeras kod nas.","Come over to ours tonight."],["[Došao] sam jučer.","I arrived yesterday."]],
+ note:"For repeated arrivals use <b>dolaziti</b>: <i>dolazim svaki dan</i>."},
 
-{k:"gledati",hr:"gledati",tr:"izlemek / bakmak",pat:"+ akuzativ",
+{k:"gledati",hr:"gledati",en:"to watch / to look at",pat:"+ accusative",
  c:["gledam","gledaš","gleda","gledamo","gledate","gledaju"],
- ex:[["[Gledam] film.","Film izliyorum."],["Što [gledaš]?","Ne izliyorsun?"]]},
+ ex:[["[Gledam] film.","I'm watching a film."],["Što [gledaš]?","What are you watching?"]]},
 
-{k:"slusati",hr:"slušati",tr:"dinlemek",pat:"+ akuzativ — edat yok",
+{k:"slusati",hr:"slušati",en:"to listen",pat:"+ accusative — no preposition",
  c:["slušam","slušaš","sluša","slušamo","slušate","slušaju"],
- ex:[["[Slušam] glazbu.","Müzik dinliyorum."],["[Slušaš] li me?","Beni dinliyor musun?"]],
- note:"Edat almaz: <b>slušam glazbu</b>. İngilizcedeki \"listen to\" seni yanıltmasın."},
+ ex:[["[Slušam] glazbu.","I'm listening to music."],["[Slušaš] li me?","Are you listening to me?"]],
+ note:"No preposition: <b>slušam glazbu</b>. The English \"listen to\" leads you astray here."},
 
-{k:"govoriti",hr:"govoriti",tr:"konuşmak",pat:"o + lokativ · + akuzativ (dil)",
+{k:"govoriti",hr:"govoriti",en:"to speak",pat:"o + locative · + accusative (a language)",
  c:["govorim","govoriš","govori","govorimo","govorite","govore"],
- ex:[["[Govorim] malo hrvatski.","Biraz Hırvatça konuşuyorum."],["[Govorite] li sporije, molim?","Biraz daha yavaş konuşur musunuz?"]]},
+ ex:[["[Govorim] malo hrvatski.","I speak a little Croatian."],["[Govorite] li sporije, molim?","Could you speak more slowly, please?"]]},
 
-{k:"citati",hr:"čitati",tr:"okumak",pat:"+ akuzativ",
+{k:"citati",hr:"čitati",en:"to read",pat:"+ accusative",
  c:["čitam","čitaš","čita","čitamo","čitate","čitaju"],
- ex:[["[Čitam] knjigu na hrvatskom.","Hırvatça bir kitap okuyorum."],["[Čitaš] li novine?","Gazete okur musun?"]]},
+ ex:[["[Čitam] knjigu na hrvatskom.","I'm reading a book in Croatian."],["[Čitaš] li novine?","Do you read the paper?"]]},
 
-{k:"pisati",hr:"pisati",tr:"yazmak",pat:"+ akuzativ (ne) · + dativ (kime)",
+{k:"pisati",hr:"pisati",en:"to write",pat:"+ accusative (what) · + dative (to whom)",
  c:["pišem","pišeš","piše","pišemo","pišete","pišu"],
- ex:[["[Pišem] poruku prijatelju.","Arkadaşıma mesaj yazıyorum."],["Kako se to [piše]?","Bu nasıl yazılıyor?"]],
- note:"<b>pisati → pišem</b>: s harfi š olur. Aynı değişim <i>plesati → plešem</i>'de de var."},
+ ex:[["[Pišem] poruku prijatelju.","I'm writing a message to a friend."],["Kako se to [piše]?","How is that spelled?"]],
+ note:"<b>pisati → pišem</b>: the s turns into š. The same change runs through <i>plesati → plešem</i>."},
 
-{k:null,hr:"učiti",tr:"öğrenmek / ders çalışmak",pat:"+ akuzativ",
+{k:null,hr:"učiti",en:"to learn / to study",pat:"+ accusative",
  c:["učim","učiš","uči","učimo","učite","uče"],
- ex:[["[Učim] hrvatski.","Hırvatça öğreniyorum."],["Što [učiš] danas?","Bugün ne çalışıyorsun?"]]},
+ ex:[["[Učim] hrvatski.","I'm learning Croatian."],["Što [učiš] danas?","What are you studying today?"]]},
 
-{k:"kupovati",hr:"kupovati",tr:"alışveriş yapmak / satın almak",pat:"+ akuzativ",
+{k:"kupovati",hr:"kupovati",en:"to shop / to buy",pat:"+ accusative",
  c:["kupujem","kupuješ","kupuje","kupujemo","kupujete","kupuju"],
- ex:[["[Kupujem] kruh u pekarnici.","Fırından ekmek alıyorum."],["Gdje [kupuješ] povrće?","Sebzeyi nereden alıyorsun?"]],
- note:"Tek seferlik alış için <b>kupiti</b>. <i>Kupovati</i> süregelen eylemdir."},
+ ex:[["[Kupujem] kruh u pekarnici.","I buy bread at the bakery."],["Gdje [kupuješ] povrće?","Where do you buy vegetables?"]],
+ note:"For a single purchase use <b>kupiti</b>. <i>Kupovati</i> is the ongoing, habitual one."},
 
-{k:null,hr:"voljeti",tr:"sevmek",pat:"+ akuzativ",
+{k:null,hr:"voljeti",en:"to love",pat:"+ accusative",
  c:["volim","voliš","voli","volimo","volite","vole"],
- ex:[["[Volim] more.","Denizi seviyorum."],["[Voliš] li kavu?","Kahveyi sever misin?"]],
- note:"<b>volim te</b> seni seviyorum; <b>sviđaš mi se</b> senden hoşlanıyorum. Karıştırma."},
+ ex:[["[Volim] more.","I love the sea."],["[Voliš] li kavu?","Do you like coffee?"]],
+ note:"<b>volim te</b> is I love you; <b>sviđaš mi se</b> is I fancy you. Don't swap them."},
 
-{k:null,hr:"znati",tr:"bilmek",pat:"+ akuzativ · + mastar",
+{k:null,hr:"znati",en:"to know",pat:"+ accusative · + infinitive",
  c:["znam","znaš","zna","znamo","znate","znaju"],
- ex:[["Ne [znam] gdje je.","Nerede olduğunu bilmiyorum."],["[Znaš] li hrvatski?","Hırvatça biliyor musun?"]]},
+ ex:[["Ne [znam] gdje je.","I don't know where it is."],["[Znaš] li hrvatski?","Do you know Croatian?"]]},
 
-{k:null,hr:"htjeti",tr:"istemek",pat:"+ akuzativ · + mastar",
+{k:null,hr:"htjeti",en:"to want",pat:"+ accusative · + infinitive",
  c:["hoću","hoćeš","hoće","hoćemo","hoćete","hoće"],
- ex:[["[Hoćeš] li kavu?","Kahve ister misin?"],["Što [hoćeš] jesti?","Ne yemek istiyorsun?"]],
- note:"Mastarla hiç benzemez: <b>htjeti → hoću</b>. Kısa biçimi (ću, ćeš, će…) gelecek zamanı kurar."},
+ ex:[["[Hoćeš] li kavu?","Do you want a coffee?"],["Što [hoćeš] jesti?","What do you want to eat?"]],
+ note:"Nothing in the infinitive predicts it: <b>htjeti → hoću</b>. Its short forms (ću, ćeš, će…) build the future tense."},
 
-{k:null,hr:"moći",tr:"-ebilmek (yeti)",pat:"+ mastar",
+{k:null,hr:"moći",en:"can / to be able to",pat:"+ infinitive",
  c:["mogu","možeš","može","možemo","možete","mogu"],
- ex:[["[Možeš] li mi pomoći?","Bana yardım edebilir misin?"],["Ne [mogu] doći večeras.","Bu akşam gelemem."]],
- note:"1. tekil ile 3. çoğul aynı: <b>mogu</b>. Tek başına <i>Može!</i> = Olur! — günlük hayatta çok sık."},
+ ex:[["[Možeš] li mi pomoći?","Can you help me?"],["Ne [mogu] doći večeras.","I can't come tonight."]],
+ note:"First singular and third plural are identical: <b>mogu</b>. On its own, <i>Može!</i> means \"Sure!\" — you'll hear it constantly."},
 
-{k:null,hr:"živjeti",tr:"yaşamak",pat:"u + <b>lokativ</b>",
+{k:null,hr:"živjeti",en:"to live",pat:"u + <b>locative</b>",
  c:["živim","živiš","živi","živimo","živite","žive"],
- ex:[["[Živim] u Zagrebu.","Zagreb'te yaşıyorum."],["Gdje [živiš]?","Nerede yaşıyorsun?"]],
- note:"<b>živjeti</b> yaşamak (hayat), <b>stanovati</b> ikamet etmek (adres)."},
+ ex:[["[Živim] u Zagrebu.","I live in Zagreb."],["Gdje [živiš]?","Where do you live?"]],
+ note:"<b>živjeti</b> is to have a life somewhere; <b>stanovati</b> is to have an address there."},
 
-{k:"igratise",hr:"igrati se",tr:"oynamak",pat:"s + instrumental · u + lokativ",
+{k:"igratise",hr:"igrati se",en:"to play",pat:"s + instrumental · u + locative",
  c:["igram se","igraš se","igra se","igramo se","igrate se","igraju se"],
- ex:[["Djeca se [igraju] u parku.","Çocuklar parkta oynuyor."],["[Igraš] li se s njima?","Onlarla oynuyor musun?"]],
- note:"Spor için <b>se</b> düşer: <i>igram nogomet</i> futbol oynuyorum."},
+ ex:[["Djeca se [igraju] u parku.","The children are playing in the park."],["[Igraš] li se s njima?","Are you playing with them?"]],
+ note:"Sport drops the <b>se</b>: <i>igram nogomet</i>, I play football."},
 
-{k:"plesati",hr:"plesati",tr:"dans etmek",pat:"nesnesiz · u + lokativ",
+{k:"plesati",hr:"plesati",en:"to dance",pat:"no object · u + locative",
  c:["plešem","plešeš","pleše","plešemo","plešete","plešu"],
- ex:[["[Plešem] cijelu noć.","Bütün gece dans ediyorum."],["Hoćeš li [plesati]?","Dans eder misin?"]]},
+ ex:[["[Plešem] cijelu noć.","I dance all night."],["Hoćeš li [plesati]?","Do you want to dance?"]]},
 
-{k:"pjevati",hr:"pjevati",tr:"şarkı söylemek",pat:"+ akuzativ",
+{k:"pjevati",hr:"pjevati",en:"to sing",pat:"+ accusative",
  c:["pjevam","pjevaš","pjeva","pjevamo","pjevate","pjevaju"],
- ex:[["[Pjevam] u autu.","Arabada şarkı söylüyorum."],["Lijepo [pjevaš]!","Güzel söylüyorsun!"]]},
+ ex:[["[Pjevam] u autu.","I sing in the car."],["Lijepo [pjevaš]!","You sing beautifully!"]]},
 
-{k:"kuhati",hr:"kuhati",tr:"yemek pişirmek",pat:"+ akuzativ",
+{k:"kuhati",hr:"kuhati",en:"to cook",pat:"+ accusative",
  c:["kuham","kuhaš","kuha","kuhamo","kuhate","kuhaju"],
- ex:[["[Kuham] juhu za večeru.","Akşam yemeği için çorba pişiriyorum."],["Tko [kuha] večeras?","Bu akşam kim yemek yapıyor?"]]},
+ ex:[["[Kuham] juhu za večeru.","I'm making soup for dinner."],["Tko [kuha] večeras?","Who's cooking tonight?"]]},
 
-{k:"cistiti",hr:"čistiti",tr:"temizlemek",pat:"+ akuzativ",
+{k:"cistiti",hr:"čistiti",en:"to clean",pat:"+ accusative",
  c:["čistim","čistiš","čisti","čistimo","čistite","čiste"],
- ex:[["[Čistim] sobu.","Odayı temizliyorum."],["Kad [čistiš] stan?","Evi ne zaman temizliyorsun?"]]},
+ ex:[["[Čistim] sobu.","I'm cleaning the room."],["Kad [čistiš] stan?","When do you clean the flat?"]]},
 
-{k:"prati",hr:"prati",tr:"yıkamak",pat:"+ akuzativ",
+{k:"prati",hr:"prati",en:"to wash",pat:"+ accusative",
  c:["perem","pereš","pere","peremo","perete","peru"],
- ex:[["[Perem] auto.","Arabayı yıkıyorum."],["[Operi] ruke!","Ellerini yıka!"]],
- note:"Mastar ile çekim uzak: <b>prati → perem</b>. Tek seferlik için <b>oprati</b>."},
+ ex:[["[Perem] auto.","I'm washing the car."],["[Operi] ruke!","Wash your hands!"]],
+ note:"Infinitive and stem sit far apart: <b>prati → perem</b>. For one completed wash, <b>oprati</b>."},
 
-{k:"voziti",hr:"voziti",tr:"sürmek / kullanmak",pat:"+ akuzativ",
+{k:"voziti",hr:"voziti",en:"to drive",pat:"+ accusative",
  c:["vozim","voziš","vozi","vozimo","vozite","voze"],
- ex:[["[Vozim] auto svaki dan.","Her gün araba kullanıyorum."],["[Voziš] prebrzo!","Çok hızlı sürüyorsun!"]]},
+ ex:[["[Vozim] auto svaki dan.","I drive every day."],["[Voziš] prebrzo!","You're driving too fast!"]]},
 
-{k:"putovati",hr:"putovati",tr:"seyahat etmek",pat:"u / na + akuzativ",
+{k:"putovati",hr:"putovati",en:"to travel",pat:"u / na + accusative",
  c:["putujem","putuješ","putuje","putujemo","putujete","putuju"],
- ex:[["[Putujem] u Split.","Split'e gidiyorum."],["Voliš li [putovati]?","Seyahat etmeyi sever misin?"]]},
+ ex:[["[Putujem] u Split.","I'm travelling to Split."],["Voliš li [putovati]?","Do you like travelling?"]]},
 
-{k:"cekati",hr:"čekati",tr:"beklemek",pat:"+ akuzativ — edat yok",
+{k:"cekati",hr:"čekati",en:"to wait for",pat:"+ accusative — no preposition",
  c:["čekam","čekaš","čeka","čekamo","čekate","čekaju"],
- ex:[["[Čekam] autobus već pola sata.","Yarım saattir otobüs bekliyorum."],["[Čekaj] me pet minuta!","Beni beş dakika bekle!"]],
- note:"Doğrudan nesne alır, Türkçedeki gibi: <b>čekam autobus</b>. \"za autobus\" deme."},
+ ex:[["[Čekam] autobus već pola sata.","I've been waiting for the bus for half an hour."],["[Čekaj] me pet minuta!","Wait for me five minutes!"]],
+ note:"It takes a plain object: <b>čekam autobus</b>. No \"za\" anywhere."},
 
-{k:"otvoriti",hr:"otvoriti",tr:"açmak",pat:"+ akuzativ",
+{k:"otvoriti",hr:"otvoriti",en:"to open",pat:"+ accusative",
  c:["otvorim","otvoriš","otvori","otvorimo","otvorite","otvore"],
- ex:[["[Otvori] prozor, molim te.","Pencereyi aç lütfen."],["Kad [otvara] dućan?","Dükkân ne zaman açılıyor?"]],
- note:"İkinci cümle <b>otvarati</b> (süregelen) biçiminden: <i>otvara, otvaraju</i>."},
+ ex:[["[Otvori] prozor, molim te.","Open the window, please."],["Kad [otvara] dućan?","When does the shop open?"]],
+ note:"The second sentence uses the ongoing form <b>otvarati</b>: <i>otvara, otvaraju</i>."},
 
-{k:"zatvoriti",hr:"zatvoriti",tr:"kapatmak",pat:"+ akuzativ",
+{k:"zatvoriti",hr:"zatvoriti",en:"to close",pat:"+ accusative",
  c:["zatvorim","zatvoriš","zatvori","zatvorimo","zatvorite","zatvore"],
- ex:[["[Zatvori] vrata, hladno je.","Kapıyı kapat, hava soğuk."],["Možeš li [zatvoriti] prozor?","Pencereyi kapatabilir misin?"]]},
+ ex:[["[Zatvori] vrata, hladno je.","Close the door, it's cold."],["Možeš li [zatvoriti] prozor?","Can you close the window?"]]},
 
-{k:"pomoci",hr:"pomoći",tr:"yardım etmek",pat:"+ <b>dativ</b> — akuzativ değil",
+{k:"pomoci",hr:"pomoći",en:"to help",pat:"+ <b>dative</b> — not the accusative",
  c:["pomognem","pomogneš","pomogne","pomognemo","pomognete","pomognu"],
- ex:[["Možeš li mi [pomoći]?","Bana yardım edebilir misin?"],["[Pomogni] mi, molim te.","Yardım et bana, lütfen."]],
- note:"Türkçe \"anne<b>ye</b> yardım\" ile birebir örtüşür — yönelme hâli."},
+ ex:[["Možeš li mi [pomoći]?","Can you help me?"],["[Pomogni] mi, molim te.","Help me, please."]],
+ note:"You help <i>to</i> someone in Croatian: <b>pomognem majci</b>, never <b>majku</b>."},
 
-{k:"traziti",hr:"tražiti",tr:"aramak (bir şeyi)",pat:"+ akuzativ — edat yok",
+{k:"traziti",hr:"tražiti",en:"to look for",pat:"+ accusative — no preposition",
  c:["tražim","tražiš","traži","tražimo","tražite","traže"],
- ex:[["[Tražim] ključeve.","Anahtarları arıyorum."],["Što [tražiš]?","Ne arıyorsun?"]],
- note:"<b>tražiti</b> aramak (süreç), <b>naći</b> bulmak (sonuç). Telefonla aramak ise <b>zvati</b>."},
+ ex:[["[Tražim] ključeve.","I'm looking for my keys."],["Što [tražiš]?","What are you looking for?"]],
+ note:"<b>tražiti</b> is the searching, <b>naći</b> is the finding. Phoning someone is <b>zvati</b>."},
 
-{k:null,hr:"naći",tr:"bulmak",pat:"+ akuzativ",
+{k:null,hr:"naći",en:"to find",pat:"+ accusative",
  c:["nađem","nađeš","nađe","nađemo","nađete","nađu"],
- ex:[["[Našao] sam ključ.","Anahtarı buldum."],["Ne mogu [naći] mobitel.","Telefonu bulamıyorum."]]},
+ ex:[["[Našao] sam ključ.","I found the key."],["Ne mogu [naći] mobitel.","I can't find my phone."]]},
 
-{k:null,hr:"misliti",tr:"düşünmek",pat:"o + lokativ · na + akuzativ",
+{k:null,hr:"misliti",en:"to think",pat:"o + locative · na + accusative",
  c:["mislim","misliš","misli","mislimo","mislite","misle"],
- ex:[["[Mislim] da je dobro.","Bence iyi."],["Na što [misliš]?","Ne düşünüyorsun?"]],
- note:"<b>na</b> + akuzativ birine/bir şeye dair düşünmek; <b>o</b> + lokativ bir konu üzerine."},
-{k:"vidjeti",hr:"vidjeti",tr:"görmek",pat:"+ akuzativ",
+ ex:[["[Mislim] da je dobro.","I think it's fine."],["Na što [misliš]?","What are you thinking about?"]],
+ note:"<b>na</b> + accusative for having someone on your mind; <b>o</b> + locative for thinking a subject over."},
+{k:"vidjeti",hr:"vidjeti",en:"to see",pat:"+ accusative",
  c:["vidim","vidiš","vidi","vidimo","vidite","vide"],
- ex:[["[Vidim] more s prozora.","Pencereden denizi görüyorum."],["[Vidimo] se sutra!","Yarın görüşürüz!"]],
- note:"<b>Vidimo se!</b> günlük vedalaşmanın en yaygın biçimi."},
+ ex:[["[Vidim] more s prozora.","I can see the sea from the window."],["[Vidimo] se sutra!","See you tomorrow!"]],
+ note:"<b>Vidimo se!</b> is the everyday goodbye — literally \"we see each other\"."},
 
-{k:null,hr:"čuti",tr:"duymak",pat:"+ akuzativ",
+{k:null,hr:"čuti",en:"to hear",pat:"+ accusative",
  c:["čujem","čuješ","čuje","čujemo","čujete","čuju"],
- ex:[["[Čuješ] li me?","Beni duyuyor musun?"],["Ne [čujem] ništa.","Hiçbir şey duymuyorum."]],
- note:"<b>čuti</b> duymak (istemsiz), <b>slušati</b> dinlemek (istemli). <i>Čujemo se!</i> = telefonda görüşürüz."},
+ ex:[["[Čuješ] li me?","Can you hear me?"],["Ne [čujem] ništa.","I can't hear anything."]],
+ note:"<b>čuti</b> happens to you, <b>slušati</b> you choose. <i>Čujemo se!</i> = we'll speak soon."},
 
-{k:"smijatise",hr:"smijati se",tr:"gülmek",pat:"nesnesiz · + dativ (birine gülmek)",
+{k:"smijatise",hr:"smijati se",en:"to laugh",pat:"no object · + dative (at someone)",
  c:["smijem se","smiješ se","smije se","smijemo se","smijete se","smiju se"],
- ex:[["Djeca se [smiju].","Çocuklar gülüyor."],["Zašto se [smiješ]?","Neden gülüyorsun?"]],
- note:"Yazılışı <b>smjeti</b> (izinli olmak) ile neredeyse aynı: <i>smijem</i> izinliyim, <i>smijem se</i> gülüyorum."},
+ ex:[["Djeca se [smiju].","The children are laughing."],["Zašto se [smiješ]?","Why are you laughing?"]],
+ note:"Almost identical to <b>smjeti</b>: <i>smijem</i> I'm allowed, <i>smijem se</i> I'm laughing. Only the <b>se</b> separates them."},
 
-{k:"plakati",hr:"plakati",tr:"ağlamak",pat:"nesnesiz",
+{k:"plakati",hr:"plakati",en:"to cry",pat:"no object",
  c:["plačem","plačeš","plače","plačemo","plačete","plaču"],
- ex:[["Dijete [plače].","Çocuk ağlıyor."],["Nemoj [plakati].","Ağlama."]],
- note:"<b>plakati → plačem</b>: k harfi č olur."},
+ ex:[["Dijete [plače].","The child is crying."],["Nemoj [plakati].","Don't cry."]],
+ note:"<b>plakati → plačem</b>: the k turns into č."},
 
-{k:"ustati",hr:"ustati",tr:"kalkmak",pat:"nesnesiz · u + akuzativ (saat)",
+{k:"ustati",hr:"ustati",en:"to get up",pat:"no object · u + accusative (clock time)",
  c:["ustanem","ustaneš","ustane","ustanemo","ustanete","ustanu"],
- ex:[["[Ustanem] u sedam.","Yedide kalkıyorum."],["Kad [ustaješ] ujutro?","Sabah kaçta kalkıyorsun?"]],
- note:"İkinci cümle süregelen biçimden: <b>ustajati → ustajem, ustaješ</b>."},
+ ex:[["[Ustanem] u sedam.","I get up at seven."],["Kad [ustaješ] ujutro?","What time do you get up?"]],
+ note:"The second sentence uses the ongoing form <b>ustajati → ustajem, ustaješ</b>."},
 
-{k:null,hr:"nedostajati",tr:"özlemek",pat:"+ <b>dativ</b> — özleyen kişi dativde",
+{k:null,hr:"nedostajati",en:"to miss (someone)",pat:"+ <b>dative</b> — the one missing goes in the dative",
  c:[D,D,"nedostaje",D,D,"nedostaju"],
- ex:[["[Nedostaje] mi obitelj.","Ailemi özlüyorum. (ailem bana eksik geliyor)"],["[Nedostaje] li ti Hrvatska?","Hırvatistan'ı özlüyor musun?"]],
- note:"Cümle tersine döner: özlenen şey özne olur. <b>Nedostaješ mi</b> = seni özlüyorum."},
+ ex:[["[Nedostaje] mi obitelj.","I miss my family."],["[Nedostaje] li ti Hrvatska?","Do you miss Croatia?"]],
+ note:"The sentence flips: the thing missed becomes the subject. <b>Nedostaješ mi</b> = I miss you."},
 
-{k:null,hr:"nadati se",tr:"ummak",pat:"+ dativ · da + cümle",
+{k:null,hr:"nadati se",en:"to hope",pat:"+ dative · da + clause",
  c:["nadam se","nadaš se","nada se","nadamo se","nadate se","nadaju se"],
- ex:[["[Nadam] se da si dobro.","Umarım iyisindir."],["[Nadam] se lijepom vremenu.","Güzel hava umuyorum."]]},
+ ex:[["[Nadam] se da si dobro.","I hope you're well."],["[Nadam] se lijepom vremenu.","I'm hoping for good weather."]]},
 
-{k:null,hr:"zaboraviti",tr:"unutmak",pat:"+ akuzativ",
+{k:null,hr:"zaboraviti",en:"to forget",pat:"+ accusative",
  c:["zaboravim","zaboraviš","zaboravi","zaboravimo","zaboravite","zaborave"],
- ex:[["[Zaboravio] sam ključeve.","Anahtarları unuttum."],["Nemoj [zaboraviti] mlijeko!","Sütü unutma!"]],
- note:"Geçmişte cinsiyet uyumu: erkek <b>zaboravio sam</b>, kadın <b>zaboravila sam</b>."},
+ ex:[["[Zaboravio] sam ključeve.","I forgot my keys."],["Nemoj [zaboraviti] mlijeko!","Don't forget the milk!"]],
+ note:"The past agrees with gender: a man says <b>zaboravio sam</b>, a woman <b>zaboravila sam</b>."},
 
-{k:"setati",hr:"šetati",tr:"gezinmek / yürüyüşe çıkmak",pat:"po + <b>lokativ</b>",
+{k:"setati",hr:"šetati",en:"to stroll",pat:"po + <b>locative</b>",
  c:["šetam","šetaš","šeta","šetamo","šetate","šetaju"],
- ex:[["[Šetam] po gradu.","Şehirde geziniyorum."],["Idemo [šetati]?","Yürüyüşe çıkalım mı?"]],
- note:"<b>po</b> + lokativ: belirsiz bir alanda dolaşmak."},
+ ex:[["[Šetam] po gradu.","I'm strolling around the city."],["Idemo [šetati]?","Shall we go for a walk?"]],
+ note:"<b>po</b> + locative covers wandering around an area rather than crossing it."},
 
-{k:null,hr:"hodati",tr:"yürümek",pat:"nesnesiz",
+{k:null,hr:"hodati",en:"to walk",pat:"no object",
  c:["hodam","hodaš","hoda","hodamo","hodate","hodaju"],
- ex:[["[Hodam] polako.","Yavaş yürüyorum."],["Dijete već [hoda].","Çocuk artık yürüyor."]],
- note:"<b>hodati</b> yürüme eylemi, <b>ići</b> bir yere gitmek, <b>šetati</b> keyif için dolaşmak."},
+ ex:[["[Hodam] polako.","I walk slowly."],["Dijete već [hoda].","The child can walk already."]],
+ note:"<b>hodati</b> is the physical act, <b>ići</b> is heading somewhere, <b>šetati</b> is walking for pleasure."},
 
-{k:"trcati",hr:"trčati",tr:"koşmak",pat:"nesnesiz · u + lokativ",
+{k:"trcati",hr:"trčati",en:"to run",pat:"no object · u + locative",
  c:["trčim","trčiš","trči","trčimo","trčite","trče"],
- ex:[["[Trčim] u parku ujutro.","Sabahları parkta koşuyorum."],["[Trči], kasnimo!","Koş, geç kalıyoruz!"]]},
+ ex:[["[Trčim] u parku ujutro.","I run in the park in the mornings."],["[Trči], kasnimo!","Run, we're late!"]]},
 
-{k:"peci",hr:"peći",tr:"fırında pişirmek",pat:"+ akuzativ",
+{k:"peci",hr:"peći",en:"to bake / to roast",pat:"+ accusative",
  c:["pečem","pečeš","peče","pečemo","pečete","peku"],
- ex:[["[Pečem] kruh.","Ekmek pişiriyorum."],["Mama [peče] kolač.","Annem kek yapıyor."]],
- note:"<b>peći</b> fırında/ateşte, <b>kuhati</b> tencerede. 3. çoğul <b>peku</b> — č değil k."},
+ ex:[["[Pečem] kruh.","I'm baking bread."],["Mama [peče] kolač.","Mum is baking a cake."]],
+ note:"<b>peći</b> is dry heat, <b>kuhati</b> is in a pot. Third plural is <b>peku</b> — k, not č."},
 
-{k:null,hr:"pripremati",tr:"hazırlamak",pat:"+ akuzativ",
+{k:null,hr:"pripremati",en:"to prepare",pat:"+ accusative",
  c:["pripremam","pripremaš","priprema","pripremamo","pripremate","pripremaju"],
- ex:[["[Pripremam] večeru.","Akşam yemeğini hazırlıyorum."],["Što [pripremaš]?","Ne hazırlıyorsun?"]]},
+ ex:[["[Pripremam] večeru.","I'm preparing dinner."],["Što [pripremaš]?","What are you making?"]]},
 
-{k:null,hr:"napraviti",tr:"yapmak",pat:"+ akuzativ",
+{k:null,hr:"napraviti",en:"to make / to do",pat:"+ accusative",
  c:["napravim","napraviš","napravi","napravimo","napravite","naprave"],
- ex:[["[Napravi] mi kavu, molim te.","Bana bir kahve yap lütfen."],["Što si [napravio]?","Ne yaptın?"]],
- note:"<b>raditi</b> çalışmak/yapmak (süreç), <b>napraviti</b> tamamlamak (sonuç)."},
+ ex:[["[Napravi] mi kavu, molim te.","Make me a coffee, please."],["Što si [napravio]?","What have you done?"]],
+ note:"<b>raditi</b> is the doing, <b>napraviti</b> is the finishing."},
 
-{k:null,hr:"razumjeti",tr:"anlamak",pat:"+ akuzativ",
+{k:null,hr:"razumjeti",en:"to understand",pat:"+ accusative",
  c:["razumijem","razumiješ","razumije","razumijemo","razumijete","razumiju"],
- ex:[["Ne [razumijem].","Anlamıyorum."],["[Razumiješ] li me?","Beni anlıyor musun?"]],
- note:"En çok işine yarayacak tek cümle: <b>Ne razumijem.</b>"},
+ ex:[["Ne [razumijem].","I don't understand."],["[Razumiješ] li me?","Do you understand me?"]],
+ note:"If you learn one sentence from this page, make it <b>Ne razumijem.</b>"},
 
-{k:"pitati",hr:"pitati",tr:"sormak",pat:"+ akuzativ — kişi de akuzatifte",
+{k:"pitati",hr:"pitati",en:"to ask",pat:"+ accusative — the person too",
  c:["pitam","pitaš","pita","pitamo","pitate","pitaju"],
- ex:[["[Pitam] učitelja.","Öğretmene soruyorum."],["Mogu li te nešto [pitati]?","Sana bir şey sorabilir miyim?"]],
- note:"Sorulan kişi <b>akuzativ</b>: <i>pitam te</i>. Türkçedeki \"sana sormak\" yönelme hâlini kullanma."},
+ ex:[["[Pitam] učitelja.","I'm asking the teacher."],["Mogu li te nešto [pitati]?","Can I ask you something?"]],
+ note:"The person asked goes in the <b>accusative</b>: <i>pitam te</i>. Compare odgovoriti, which wants the dative."},
 
-{k:"odgovoriti",hr:"odgovoriti",tr:"cevap vermek",pat:"+ <b>dativ</b> (kime)",
+{k:"odgovoriti",hr:"odgovoriti",en:"to answer",pat:"+ <b>dative</b> (to whom)",
  c:["odgovorim","odgovoriš","odgovori","odgovorimo","odgovorite","odgovore"],
- ex:[["[Odgovori] mi, molim te.","Bana cevap ver lütfen."],["Nije [odgovorio] na poruku.","Mesaja cevap vermedi."]],
- note:"Dikkat: <b>pitati</b> akuzativ ister ama <b>odgovoriti</b> dativ ister."},
+ ex:[["[Odgovori] mi, molim te.","Answer me, please."],["Nije [odgovorio] na poruku.","He didn't reply to the message."]],
+ note:"Careful: <b>pitati</b> takes the accusative but <b>odgovoriti</b> takes the dative."},
 
-{k:"zvati",hr:"zvati",tr:"aramak / çağırmak",pat:"+ akuzativ",
+{k:"zvati",hr:"zvati",en:"to call",pat:"+ accusative",
  c:["zovem","zoveš","zove","zovemo","zovete","zovu"],
- ex:[["[Zovem] mamu.","Annemi arıyorum."],["Kako se [zoveš]?","Adın ne?"]],
- note:"<b>zvati se</b> = adı olmak: <i>Zovem se Enes.</i>"},
+ ex:[["[Zovem] mamu.","I'm calling my mum."],["Kako se [zoveš]?","What's your name?"]],
+ note:"<b>zvati se</b> is to be called: <i>Zovem se Enes.</i>"},
 
-{k:null,hr:"trebati",tr:"ihtiyacı olmak",pat:"+ akuzativ · + mastar",
+{k:null,hr:"trebati",en:"to need",pat:"+ accusative · + infinitive",
  c:["trebam","trebaš","treba","trebamo","trebate","trebaju"],
- ex:[["[Trebam] pomoć.","Yardıma ihtiyacım var."],["Što ti [treba]?","Neye ihtiyacın var?"]],
- note:"İki kuruluş da yaşıyor: <b>trebam pomoć</b> (ben özne) ve <b>treba mi pomoć</b> (dativ, bana lazım)."},
+ ex:[["[Trebam] pomoć.","I need help."],["Što ti [treba]?","What do you need?"]],
+ note:"Both patterns live side by side: <b>trebam pomoć</b> (you're the subject) and <b>treba mi pomoć</b> (dative — help is needed to me)."},
 
-{k:null,hr:"morati",tr:"-meli / zorunda olmak",pat:"+ mastar",
+{k:null,hr:"morati",en:"must / to have to",pat:"+ infinitive",
  c:["moram","moraš","mora","moramo","morate","moraju"],
- ex:[["[Moram] raditi u subotu.","Cumartesi çalışmak zorundayım."],["[Moraš] li već ići?","Şimdiden gitmen mi gerekiyor?"]]},
+ ex:[["[Moram] raditi u subotu.","I have to work on Saturday."],["[Moraš] li već ići?","Do you have to go already?"]]},
 
-{k:null,hr:"smjeti",tr:"izni olmak / -ebilmek (izin)",pat:"+ mastar",
+{k:null,hr:"smjeti",en:"to be allowed to",pat:"+ infinitive",
  c:["smijem","smiješ","smije","smijemo","smijete","smiju"],
- ex:[["Ovdje se ne [smije] pušiti.","Burada sigara içilmez."],["[Smijem] li ući?","Girebilir miyim?"]],
- note:"<b>moći</b> elinden gelmek, <b>smjeti</b> izinli olmak. <i>Mogu plivati</i> yüzme bilirim; <i>smijem plivati</i> yüzmeme izin var."},
+ ex:[["Ovdje se ne [smije] pušiti.","Smoking isn't allowed here."],["[Smijem] li ući?","May I come in?"]],
+ note:"<b>moći</b> is capability, <b>smjeti</b> is permission. <i>Mogu plivati</i> I can swim; <i>smijem plivati</i> I'm allowed to swim."},
 
-{k:null,hr:"sviđati se",tr:"hoşuna gitmek / beğenmek",pat:"+ <b>dativ</b> — beğenen kişi dativde",
+{k:null,hr:"sviđati se",en:"to like",pat:"+ <b>dative</b> — the person who likes goes in the dative",
  c:[D,D,"sviđa se",D,D,"sviđaju se"],
- ex:[["[Sviđa] mi se ovaj grad.","Bu şehri beğeniyorum. (şehir bana hoş geliyor)"],["Kako ti se [sviđa] film?","Filmi nasıl buldun?"]],
- note:"<b>voljeti</b> ile karıştırma: <i>volim te</i> seni seviyorum, <i>sviđaš mi se</i> senden hoşlanıyorum."},
+ ex:[["[Sviđa] mi se ovaj grad.","I like this city."],["Kako ti se [sviđa] film?","How do you like the film?"]],
+ note:"Not the same as <b>voljeti</b>: <i>volim te</i> I love you, <i>sviđaš mi se</i> I fancy you."},
 
-{k:null,hr:"bojati se",tr:"korkmak",pat:"+ <b>genitiv</b>",
+{k:null,hr:"bojati se",en:"to be afraid",pat:"+ <b>genitive</b>",
  c:["bojim se","bojiš se","boji se","bojimo se","bojite se","boje se"],
- ex:[["[Bojim] se psa.","Köpekten korkuyorum."],["Ne [boj] se!","Korkma!"]],
- note:"Genitiv ister: <i>bojim se <b>mraka</b></i>, <i>bojim se <b>vode</b></i>."},
+ ex:[["[Bojim] se psa.","I'm afraid of the dog."],["Ne [boj] se!","Don't be afraid!"]],
+ note:"Genitive follows: <i>bojim se <b>mraka</b></i>, <i>bojim se <b>vode</b></i>."},
 
-{k:null,hr:"sjećati se",tr:"hatırlamak",pat:"+ <b>genitiv</b>",
+{k:null,hr:"sjećati se",en:"to remember",pat:"+ <b>genitive</b>",
  c:["sjećam se","sjećaš se","sjeća se","sjećamo se","sjećate se","sjećaju se"],
- ex:[["[Sjećaš] li me se?","Beni hatırlıyor musun?"],["Ne [sjećam] se njegova imena.","Adını hatırlamıyorum."]],
- note:"Genitiv ister: <i>sjećam se <b>ljeta</b></i>, <i>sjećam se <b>tebe</b></i>."},
+ ex:[["[Sjećaš] li me se?","Do you remember me?"],["Ne [sjećam] se njegova imena.","I can't remember his name."]],
+ note:"Genitive follows: <i>sjećam se <b>ljeta</b></i>, <i>sjećam se <b>tebe</b></i>."},
 
-{k:null,hr:"brinuti se",tr:"endişelenmek / ilgilenmek",pat:"o + <b>lokativ</b>",
+{k:null,hr:"brinuti se",en:"to worry / to look after",pat:"o + <b>locative</b>",
  c:["brinem se","brineš se","brine se","brinemo se","brinete se","brinu se"],
- ex:[["Ne [brini]!","Merak etme!"],["[Brinem] se o djeci.","Çocuklarla ilgileniyorum."]],
- note:"Aynı fiil hem endişelenmeyi hem bakıp gözetmeyi karşılar."},
+ ex:[["Ne [brini]!","Don't worry!"],["[Brinem] se o djeci.","I look after the children."]],
+ note:"One verb covers both worrying about someone and taking care of them."},
 
-{k:null,hr:"radovati se",tr:"iple çekmek / sevinmek",pat:"+ <b>dativ</b>",
+{k:null,hr:"radovati se",en:"to look forward to",pat:"+ <b>dative</b>",
  c:["radujem se","raduješ se","raduje se","radujemo se","radujete se","raduju se"],
- ex:[["[Radujem] se putovanju.","Yolculuğu iple çekiyorum."],["[Raduje] me što te vidim.","Seni gördüğüme sevindim."]],
- note:"Türkçede tam karşılığı yok: gelecekteki bir şeyi şimdiden sevinerek beklemek."},
+ ex:[["[Radujem] se putovanju.","I'm looking forward to the trip."],["[Raduje] me što te vidim.","It's good to see you."]],
+ note:"English needs four words for it: to be gladdened in advance by something."},
 
-{k:"kupatise",hr:"kupati se",tr:"yıkanmak / denize girmek",pat:"u + <b>lokativ</b>",
+{k:"kupatise",hr:"kupati se",en:"to bathe / to swim",pat:"u + <b>locative</b>",
  c:["kupam se","kupaš se","kupa se","kupamo se","kupate se","kupaju se"],
- ex:[["[Kupam] se u moru.","Denizde yüzüyorum."],["Idemo se [kupati]!","Denize girelim!"]],
- note:"<b>kupati se</b> suya girmek, <b>plivati</b> yüzme hareketini yapmak."},
+ ex:[["[Kupam] se u moru.","I'm swimming in the sea."],["Idemo se [kupati]!","Let's go for a swim!"]],
+ note:"<b>kupati se</b> is being in the water, <b>plivati</b> is doing the strokes."},
 
-{k:"plivati",hr:"plivati",tr:"yüzmek",pat:"nesnesiz",
+{k:"plivati",hr:"plivati",en:"to swim",pat:"no object",
  c:["plivam","plivaš","pliva","plivamo","plivate","plivaju"],
- ex:[["[Plivam] svaki dan.","Her gün yüzüyorum."],["Znaš li [plivati]?","Yüzme biliyor musun?"]]},
+ ex:[["[Plivam] svaki dan.","I swim every day."],["Znaš li [plivati]?","Can you swim?"]]},
 
-{k:"uci",hr:"ući",tr:"girmek",pat:"u + <b>akuzativ</b>",
+{k:"uci",hr:"ući",en:"to enter",pat:"u + <b>accusative</b>",
  c:["uđem","uđeš","uđe","uđemo","uđete","uđu"],
- ex:[["[Uđi], molim te.","Gir, lütfen."],["[Ušao] sam u sobu.","Odaya girdim."]]},
+ ex:[["[Uđi], molim te.","Come in, please."],["[Ušao] sam u sobu.","I went into the room."]]},
 
-{k:"izaci",hr:"izaći",tr:"çıkmak",pat:"iz + <b>genitiv</b>",
+{k:"izaci",hr:"izaći",en:"to go out",pat:"iz + <b>genitive</b>",
  c:["izađem","izađeš","izađe","izađemo","izađete","izađu"],
- ex:[["[Izađem] iz kuće u osam.","Sekizde evden çıkıyorum."],["Hoćemo li [izaći] večeras?","Bu akşam dışarı çıkalım mı?"]],
- note:"<b>iz</b> + genitiv: <i>iz kuće, iz grada, iz auta</i>."},
+ ex:[["[Izađem] iz kuće u osam.","I leave the house at eight."],["Hoćemo li [izaći] večeras?","Shall we go out tonight?"]],
+ note:"<b>iz</b> + genitive: <i>iz kuće, iz grada, iz auta</i>."},
 
-{k:"sjediti",hr:"sjediti",tr:"oturmak (oturur hâlde olmak)",pat:"u / na + <b>lokativ</b>",
+{k:"sjediti",hr:"sjediti",en:"to sit (be seated)",pat:"u / na + <b>locative</b>",
  c:["sjedim","sjediš","sjedi","sjedimo","sjedite","sjede"],
- ex:[["[Sjedim] u kafiću.","Kafede oturuyorum."],["[Sjedimo] vani.","Dışarıda oturuyoruz."]],
- note:"Oturur hâlde olmak <b>sjediti</b> + lokativ. Oturma eylemi <b>sjesti</b> + akuzativ."},
+ ex:[["[Sjedim] u kafiću.","I'm sitting in a café."],["[Sjedimo] vani.","We're sitting outside."]],
+ note:"Being seated is <b>sjediti</b> + locative. The act of sitting down is <b>sjesti</b> + accusative."},
 
-{k:null,hr:"sjesti",tr:"oturmak (oturma eylemi)",pat:"na + <b>akuzativ</b> — hareket",
+{k:null,hr:"sjesti",en:"to sit down",pat:"na + <b>accusative</b> — motion",
  c:["sjednem","sjedneš","sjedne","sjednemo","sjednete","sjednu"],
- ex:[["[Sjedni] ovdje.","Buraya otur."],["Možemo li [sjesti] vani?","Dışarıda oturabilir miyiz?"]],
- note:"Hareket → akuzativ: <i>sjednem <b>na stolicu</b></i>. Duruş → lokativ: <i>sjedim <b>na stolici</b></i>."},
+ ex:[["[Sjedni] ovdje.","Sit here."],["Možemo li [sjesti] vani?","Can we sit outside?"]],
+ note:"Motion → accusative: <i>sjednem <b>na stolicu</b></i>. Position → locative: <i>sjedim <b>na stolici</b></i>."},
 
-{k:"stajati",hr:"stajati",tr:"ayakta durmak",pat:"nesnesiz",
+{k:"stajati",hr:"stajati",en:"to stand",pat:"no object",
  c:["stojim","stojiš","stoji","stojimo","stojite","stoje"],
- ex:[["[Stojim] ispred kuće.","Evin önünde duruyorum."],["Zašto [stojiš]? Sjedni!","Niye ayakta duruyorsun? Otur!"]],
- note:"Mastar ile çekim uzak: <b>stajati → stojim</b>."},
+ ex:[["[Stojim] ispred kuće.","I'm standing in front of the house."],["Zašto [stojiš]? Sjedni!","Why are you standing? Sit down!"]],
+ note:"Infinitive and stem drift apart: <b>stajati → stojim</b>."},
 
-{k:"lezati",hr:"ležati",tr:"uzanmak (yatar hâlde olmak)",pat:"na + <b>lokativ</b>",
+{k:"lezati",hr:"ležati",en:"to lie (be lying)",pat:"na + <b>locative</b>",
  c:["ležim","ležiš","leži","ležimo","ležite","leže"],
- ex:[["[Ležim] na plaži.","Plajda uzanıyorum."],["Knjiga [leži] na stolu.","Kitap masanın üstünde duruyor."]]},
+ ex:[["[Ležim] na plaži.","I'm lying on the beach."],["Knjiga [leži] na stolu.","The book is lying on the table."]]},
 
-{k:null,hr:"leći",tr:"uzanmak (yatma eylemi)",pat:"na + <b>akuzativ</b> — hareket",
+{k:null,hr:"leći",en:"to lie down",pat:"na + <b>accusative</b> — motion",
  c:["legnem","legneš","legne","legnemo","legnete","legnu"],
- ex:[["Idem [leći].","Yatmaya gidiyorum."],["[Legnem] u deset.","Onda yatıyorum."]],
- note:"<b>ležati / leći</b> ikilisi <b>sjediti / sjesti</b> ile aynı mantıkta: duruş lokativ, hareket akuzativ."},
-{k:"oblacitise",hr:"oblačiti se",tr:"giyinmek",pat:"nesnesiz — <b>se</b> ile",
+ ex:[["Idem [leći].","I'm going to lie down."],["[Legnem] u deset.","I go to bed at ten."]],
+ note:"<b>ležati / leći</b> works exactly like <b>sjediti / sjesti</b>: position locative, movement accusative."},
+{k:"oblacitise",hr:"oblačiti se",en:"to get dressed",pat:"no object — takes <b>se</b>",
  c:["oblačim se","oblačiš se","oblači se","oblačimo se","oblačite se","oblače se"],
- ex:[["[Oblačim] se brzo.","Çabuk giyiniyorum."],["Što [oblačiš] danas?","Bugün ne giyiyorsun?"]],
- note:"<b>se</b> düşerse nesne gerekir: <i>oblačim dijete</i> çocuğu giydiriyorum."},
+ ex:[["[Oblačim] se brzo.","I get dressed quickly."],["Što [oblačiš] danas?","What are you wearing today?"]],
+ note:"Drop the <b>se</b> and you need an object: <i>oblačim dijete</i>, I'm dressing the child."},
 
-{k:"tusiratise",hr:"tuširati se",tr:"duş almak",pat:"nesnesiz — <b>se</b> ile",
+{k:"tusiratise",hr:"tuširati se",en:"to shower",pat:"no object — takes <b>se</b>",
  c:["tuširam se","tuširaš se","tušira se","tuširamo se","tuširate se","tuširaju se"],
- ex:[["[Tuširam] se ujutro.","Sabahları duş alıyorum."],["Idem se [tuširati].","Duş almaya gidiyorum."]],
- note:"<b>ujutro</b> her sabah (alışkanlık), <b>jutros</b> bu sabah (tek sefer)."},
+ ex:[["[Tuširam] se ujutro.","I shower in the mornings."],["Idem se [tuširati].","I'm off to shower."]],
+ note:"<b>ujutro</b> is mornings in general; <b>jutros</b> is this particular morning."},
 
-{k:null,hr:"kupiti",tr:"satın almak (tek sefer)",pat:"+ akuzativ",
+{k:null,hr:"kupiti",en:"to buy (once)",pat:"+ accusative",
  c:["kupim","kupiš","kupi","kupimo","kupite","kupe"],
- ex:[["[Kupio] sam kruh.","Ekmek aldım."],["Što da [kupim]?","Ne alayım?"]],
- note:"<b>kupiti</b> tek sefer, <b>kupovati</b> süregelen/alışkanlık."},
+ ex:[["[Kupio] sam kruh.","I bought bread."],["Što da [kupim]?","What should I buy?"]],
+ note:"<b>kupiti</b> is one purchase, <b>kupovati</b> is shopping as a habit."},
 
-{k:null,hr:"prodati",tr:"satmak",pat:"+ akuzativ",
+{k:null,hr:"prodati",en:"to sell",pat:"+ accusative",
  c:["prodam","prodaš","proda","prodamo","prodate","prodaju"],
- ex:[["[Prodali] su auto.","Arabayı sattılar."],["Želim [prodati] mobitel.","Telefonu satmak istiyorum."]]},
+ ex:[["[Prodali] su auto.","They sold the car."],["Želim [prodati] mobitel.","I want to sell my phone."]]},
 
-{k:"platiti",hr:"platiti",tr:"ödemek",pat:"+ akuzativ",
+{k:"platiti",hr:"platiti",en:"to pay",pat:"+ accusative",
  c:["platim","platiš","plati","platimo","platite","plate"],
- ex:[["Mogu li [platiti] karticom?","Kartla ödeyebilir miyim?"],["[Platio] sam račun.","Hesabı ödedim."]],
- note:"Geçmişte cinsiyet uyumu: erkek <b>platio sam</b>, kadın <b>platila sam</b>."},
+ ex:[["Mogu li [platiti] karticom?","Can I pay by card?"],["[Platio] sam račun.","I paid the bill."]],
+ note:"The past agrees with gender: a man says <b>platio sam</b>, a woman <b>platila sam</b>."},
 
-{k:"kostati",hr:"koštati",tr:"fiyatı olmak",pat:"nesnesiz — 3. şahıs",
+{k:"kostati",hr:"koštati",en:"to cost",pat:"no object — third person only",
  c:[D,D,"košta",D,D,"koštaju"],
- ex:[["Kava [košta] dva eura.","Kahve iki euro."],["Koliko [košta]?","Kaç para?"]],
- note:"Pratikte sadece 3. şahıs: <b>košta / koštaju</b>. <i>Koliko košta?</i> markette en çok kuracağın cümle."},
+ ex:[["Kava [košta] dva eura.","The coffee costs two euros."],["Koliko [košta]?","How much is it?"]],
+ note:"Only <b>košta / koštaju</b> ever appear. <i>Koliko košta?</i> is the sentence you'll use most in a shop."},
 
-{k:"dati",hr:"dati",tr:"vermek",pat:"+ akuzativ (ne) · + dativ (kime)",
+{k:"dati",hr:"dati",en:"to give",pat:"+ accusative (what) · + dative (to whom)",
  c:["dam","daš","da","damo","date","daju"],
- ex:[["[Daj] mi to, molim te.","Onu bana ver lütfen."],["[Dam] knjigu prijatelju.","Kitabı arkadaşıma veriyorum."]],
- note:"İki nesne: verilen şey akuzativ, alan kişi dativ."},
+ ex:[["[Daj] mi to, molim te.","Give me that, please."],["[Dam] knjigu prijatelju.","I give the book to my friend."]],
+ note:"Two objects: the thing given is accusative, the person receiving is dative."},
 
-{k:"uzeti",hr:"uzeti",tr:"almak (eline)",pat:"+ akuzativ",
+{k:"uzeti",hr:"uzeti",en:"to take",pat:"+ accusative",
  c:["uzmem","uzmeš","uzme","uzmemo","uzmete","uzmu"],
- ex:[["[Uzmi] torbu.","Çantayı al."],["[Uzet] ću kavu, molim.","Bir kahve alayım lütfen."]],
- note:"<b>uzeti</b> eline almak, <b>kupiti</b> parayla almak. Kafede sipariş için <i>uzet ću</i>."},
+ ex:[["[Uzmi] torbu.","Take the bag."],["[Uzet] ću kavu, molim.","I'll have a coffee, please."]],
+ note:"<b>uzeti</b> is picking something up, <b>kupiti</b> is paying for it. Ordering at a café uses <i>uzet ću</i>."},
 
-{k:null,hr:"donijeti",tr:"getirmek",pat:"+ akuzativ",
+{k:null,hr:"donijeti",en:"to bring",pat:"+ accusative",
  c:["donesem","doneseš","donese","donesemo","donesete","donesu"],
- ex:[["[Donesi] mi vodu, molim te.","Bana su getir lütfen."],["Što da [donesem]?","Ne getireyim?"]]},
+ ex:[["[Donesi] mi vodu, molim te.","Bring me water, please."],["Što da [donesem]?","What should I bring?"]]},
 
-{k:"nositi",hr:"nositi",tr:"taşımak / giymek",pat:"+ akuzativ",
+{k:"nositi",hr:"nositi",en:"to carry / to wear",pat:"+ accusative",
  c:["nosim","nosiš","nosi","nosimo","nosite","nose"],
- ex:[["[Nosim] jaknu.","Ceket giyiyorum."],["Da ti [nosim] torbu?","Çantanı taşıyayım mı?"]],
- note:"Üstünde taşımak da giymek de aynı fiil."},
+ ex:[["[Nosim] jaknu.","I'm wearing a jacket."],["Da ti [nosim] torbu?","Shall I carry your bag?"]],
+ note:"Carrying something and wearing it are the same verb here."},
 
-{k:"staviti",hr:"staviti",tr:"koymak",pat:"u / na + <b>akuzativ</b>",
+{k:"staviti",hr:"staviti",en:"to put",pat:"u / na + <b>accusative</b>",
  c:["stavim","staviš","stavi","stavimo","stavite","stave"],
- ex:[["[Stavi] knjigu na stol.","Kitabı masaya koy."],["Gdje da [stavim] torbu?","Çantayı nereye koyayım?"]],
- note:"Hareket var → akuzativ: <i>na stol</i>, <i>na stolu</i> değil."},
+ ex:[["[Stavi] knjigu na stol.","Put the book on the table."],["Gdje da [stavim] torbu?","Where should I put my bag?"]],
+ note:"There's movement, so accusative: <i>na stol</i>, not <i>na stolu</i>."},
 
-{k:"upaliti",hr:"upaliti",tr:"yakmak / açmak (cihaz)",pat:"+ akuzativ",
+{k:"upaliti",hr:"upaliti",en:"to turn on",pat:"+ accusative",
  c:["upalim","upališ","upali","upalimo","upalite","upale"],
- ex:[["[Upali] svjetlo.","Işığı aç."],["Možeš li [upaliti] klimu?","Klimayı açabilir misin?"]],
- note:"Cihaz açmak <b>upaliti</b>; kapı/pencere açmak <b>otvoriti</b>. Karıştırma."},
+ ex:[["[Upali] svjetlo.","Turn on the light."],["Možeš li [upaliti] klimu?","Can you turn on the air conditioning?"]],
+ note:"Devices are <b>upaliti</b>; doors and windows are <b>otvoriti</b>. English uses \"open\" for neither."},
 
-{k:"ugasiti",hr:"ugasiti",tr:"söndürmek / kapatmak (cihaz)",pat:"+ akuzativ",
+{k:"ugasiti",hr:"ugasiti",en:"to turn off",pat:"+ accusative",
  c:["ugasim","ugasiš","ugasi","ugasimo","ugasite","ugase"],
- ex:[["[Ugasi] televizor.","Televizyonu kapat."],["Jesi li [ugasio] svjetlo?","Işığı kapattın mı?"]]},
+ ex:[["[Ugasi] televizor.","Turn off the television."],["Jesi li [ugasio] svjetlo?","Did you turn off the light?"]]},
 
-{k:"razgovarati",hr:"razgovarati",tr:"sohbet etmek",pat:"s + <b>instrumental</b> · o + lokativ",
+{k:"razgovarati",hr:"razgovarati",en:"to converse",pat:"s + <b>instrumental</b> · o + locative",
  c:["razgovaram","razgovaraš","razgovara","razgovaramo","razgovarate","razgovaraju"],
- ex:[["[Razgovaram] s prijateljem.","Bir arkadaşımla konuşuyorum."],["Moramo [razgovarati].","Konuşmamız lazım."]],
- note:"Kiminle? <b>s</b> + instrumental. Ne hakkında? <b>o</b> + lokativ."},
+ ex:[["[Razgovaram] s prijateljem.","I'm talking with a friend."],["Moramo [razgovarati].","We need to talk."]],
+ note:"Who with? <b>s</b> + instrumental. What about? <b>o</b> + locative."},
 
-{k:null,hr:"pričati",tr:"anlatmak / sohbet etmek",pat:"o + <b>lokativ</b>",
+{k:null,hr:"pričati",en:"to tell / to chat",pat:"o + <b>locative</b>",
  c:["pričam","pričaš","priča","pričamo","pričate","pričaju"],
- ex:[["[Pričaj] mi o putovanju.","Bana yolculuğu anlat."],["O čemu [pričate]?","Neyden bahsediyorsunuz?"]],
- note:"Bir konu hakkında konuşurken <b>o</b> + lokativ zorunlu: <i>pričam <b>o poslu</b></i>."},
+ ex:[["[Pričaj] mi o putovanju.","Tell me about the trip."],["O čemu [pričate]?","What are you talking about?"]],
+ note:"Talking about a topic needs <b>o</b> + locative: <i>pričam <b>o poslu</b></i>."},
 
-{k:null,hr:"reći",tr:"söylemek",pat:"+ dativ (kime) · + akuzativ (ne)",
+{k:null,hr:"reći",en:"to say",pat:"+ dative (to whom) · + accusative (what)",
  c:["kažem","kažeš","kaže","kažemo","kažete","kažu"],
- ex:[["[Reci] mi istinu.","Bana gerçeği söyle."],["Što si [rekao]?","Ne dedin?"]],
- note:"Mastar ile çekim tamamen farklı: <b>reći → kažem</b>. Emir kipi <b>reci</b>."},
+ ex:[["[Reci] mi istinu.","Tell me the truth."],["Što si [rekao]?","What did you say?"]],
+ note:"Infinitive and present share nothing: <b>reći → kažem</b>. The imperative is <b>reci</b>."},
 
-{k:null,hr:"objasniti",tr:"açıklamak",pat:"+ akuzativ (ne) · + dativ (kime)",
+{k:null,hr:"objasniti",en:"to explain",pat:"+ accusative (what) · + dative (to whom)",
  c:["objasnim","objasniš","objasni","objasnimo","objasnite","objasne"],
- ex:[["Možeš li mi [objasniti]?","Bana açıklayabilir misin?"],["[Objasni] mi to još jednom.","Bunu bana bir daha açıkla."]]},
+ ex:[["Možeš li mi [objasniti]?","Can you explain it to me?"],["[Objasni] mi to još jednom.","Explain that to me once more."]]},
 
-{k:"ponoviti",hr:"ponoviti",tr:"tekrarlamak",pat:"+ akuzativ",
+{k:"ponoviti",hr:"ponoviti",en:"to repeat",pat:"+ accusative",
  c:["ponovim","ponoviš","ponovi","ponovimo","ponovite","ponove"],
- ex:[["Možete li [ponoviti], molim?","Tekrar eder misiniz lütfen?"],["[Ponovi] to još jednom.","Bunu bir daha tekrarla."]],
- note:"Karşındaki hızlı konuştuğunda ilk uzanacağın cümle."},
+ ex:[["Možete li [ponoviti], molim?","Could you repeat that, please?"],["[Ponovi] to još jednom.","Say it once more."]],
+ note:"The first thing you'll reach for when someone speaks too fast."},
 
-{k:null,hr:"posjetiti",tr:"ziyaret etmek",pat:"+ akuzativ",
+{k:null,hr:"posjetiti",en:"to visit",pat:"+ accusative",
  c:["posjetim","posjetiš","posjeti","posjetimo","posjetite","posjete"],
- ex:[["[Posjetit] ću baku.","Babaannemi ziyaret edeceğim."],["Došli su nas [posjetiti].","Bizi ziyarete geldiler."]]},
+ ex:[["[Posjetit] ću baku.","I'll visit my grandmother."],["Došli su nas [posjetiti].","They came to visit us."]]},
 
-{k:null,hr:"upoznati",tr:"tanışmak / tanıştırmak",pat:"+ akuzativ",
+{k:null,hr:"upoznati",en:"to meet / to introduce",pat:"+ accusative",
  c:["upoznam","upoznaš","upozna","upoznamo","upoznate","upoznaju"],
- ex:[["Drago mi je što smo se [upoznali].","Tanıştığımıza memnun oldum."],["Želim te [upoznati] s Anom.","Seni Ana ile tanıştırmak istiyorum."]],
- note:"<b>se</b> ile karşılıklı olur: <i>upoznali smo se</i> tanıştık."},
+ ex:[["Drago mi je što smo se [upoznali].","Nice to have met you."],["Želim te [upoznati] s Anom.","I want to introduce you to Ana."]],
+ note:"With <b>se</b> it becomes mutual: <i>upoznali smo se</i>, we met."},
 
-{k:null,hr:"probati",tr:"denemek / tatmak",pat:"+ akuzativ · + mastar",
+{k:null,hr:"probati",en:"to try",pat:"+ accusative · + infinitive",
  c:["probam","probaš","proba","probamo","probate","probaju"],
- ex:[["[Probaj] ovo!","Bunu bir dene!"],["Mogu li [probati]?","Deneyebilir miyim?"]],
- note:"Hem yemeği tatmak hem kıyafeti denemek hem de bir işe kalkışmak."},
+ ex:[["[Probaj] ovo!","Try this!"],["Mogu li [probati]?","Can I try it?"]],
+ note:"Tasting food, trying on clothes and attempting something all use this one verb."},
 
-{k:null,hr:"osjećati se",tr:"hissetmek",pat:"nesnesiz + <b>zarf</b>",
+{k:null,hr:"osjećati se",en:"to feel",pat:"no object + <b>adverb</b>",
  c:["osjećam se","osjećaš se","osjeća se","osjećamo se","osjećate se","osjećaju se"],
- ex:[["Kako se [osjećaš]?","Nasıl hissediyorsun?"],["[Osjećam] se dobro.","İyi hissediyorum."]],
- note:"Sıfat değil zarf: <i>dobr<b>o</b></i>, <i>loš<b>e</b></i>, <i>umorn<b>o</b></i>."},
+ ex:[["Kako se [osjećaš]?","How do you feel?"],["[Osjećam] se dobro.","I feel good."]],
+ note:"An adverb follows, not an adjective: <i>dobr<b>o</b></i>, <i>loš<b>e</b></i>, <i>umorn<b>o</b></i>."},
 
-{k:"boljeti",hr:"boljeti",tr:"ağrımak",pat:"+ <b>akuzativ</b> — ağrıyan kişi akuzatifte",
+{k:"boljeti",hr:"boljeti",en:"to hurt",pat:"+ <b>accusative</b> — the person in pain goes in the accusative",
  c:[D,D,"boli",D,D,"bole"],
- ex:[["[Boli] me glava.","Başım ağrıyor. (baş beni ağrıtıyor)"],["[Bole] me noge.","Bacaklarım ağrıyor."]],
- note:"Sadece 3. şahıs: <b>boli me / boli te / boli ga</b>. Ağrıyan organ öznedir, sen nesnesin."},
+ ex:[["[Boli] me glava.","My head hurts."],["[Bole] me noge.","My legs hurt."]],
+ note:"Third person only: <b>boli me / boli te / boli ga</b>. The aching part is the subject, you are the object."},
 
-{k:null,hr:"izgledati",tr:"görünmek",pat:"nesnesiz + <b>zarf</b>",
+{k:null,hr:"izgledati",en:"to look / to seem",pat:"no object + <b>adverb</b>",
  c:["izgledam","izgledaš","izgleda","izgledamo","izgledate","izgledaju"],
- ex:[["[Izgledaš] umorno.","Yorgun görünüyorsun."],["Ovo jelo [izgleda] odlično.","Bu yemek harika görünüyor."]],
- note:"Sıfat değil zarf gelir: <i>umorn<b>o</b></i>, <i>dobr<b>o</b></i>, <i>lijep<b>o</b></i>."},
+ ex:[["[Izgledaš] umorno.","You look tired."],["Ovo jelo [izgleda] odlično.","This dish looks excellent."]],
+ note:"An adverb follows, not an adjective: <i>umorn<b>o</b></i>, <i>dobr<b>o</b></i>, <i>lijep<b>o</b></i>."},
 
-{k:null,hr:"izgubiti",tr:"kaybetmek",pat:"+ akuzativ",
+{k:null,hr:"izgubiti",en:"to lose",pat:"+ accusative",
  c:["izgubim","izgubiš","izgubi","izgubimo","izgubite","izgube"],
- ex:[["[Izgubio] sam ključ.","Anahtarı kaybettim."],["Bojim se da ću [izgubiti] posao.","İşi kaybedeceğimden korkuyorum."]],
- note:"<b>izgubiti se</b> = kaybolmak: <i>izgubio sam se</i> kayboldum."},
+ ex:[["[Izgubio] sam ključ.","I lost my key."],["Bojim se da ću [izgubiti] posao.","I'm afraid I'll lose my job."]],
+ note:"With <b>se</b> it means getting lost: <i>izgubio sam se</i>."},
 
-{k:null,hr:"vjerovati",tr:"inanmak",pat:"+ <b>dativ</b>",
+{k:null,hr:"vjerovati",en:"to believe",pat:"+ <b>dative</b>",
  c:["vjerujem","vjeruješ","vjeruje","vjerujemo","vjerujete","vjeruju"],
- ex:[["[Vjerujem] ti.","Sana inanıyorum."],["Ne mogu [vjerovati]!","İnanamıyorum!"]],
- note:"Dativ ister: <i>vjerujem <b>ti</b></i>, <i>vjerujem <b>mu</b></i>."},
+ ex:[["[Vjerujem] ti.","I believe you."],["Ne mogu [vjerovati]!","I can't believe it!"]],
+ note:"Dative follows: <i>vjerujem <b>ti</b></i>, <i>vjerujem <b>mu</b></i>."},
 
-{k:null,hr:"pozvati",tr:"davet etmek / çağırmak",pat:"+ akuzativ",
+{k:null,hr:"pozvati",en:"to invite",pat:"+ accusative",
  c:["pozovem","pozoveš","pozove","pozovemo","pozovete","pozovu"],
- ex:[["[Pozvao] sam prijatelje.","Arkadaşları davet ettim."],["Hoćeš li ih [pozvati]?","Onları davet edecek misin?"]]},
+ ex:[["[Pozvao] sam prijatelje.","I invited my friends."],["Hoćeš li ih [pozvati]?","Are you going to invite them?"]]},
 
-{k:"slaviti",hr:"slaviti",tr:"kutlamak",pat:"+ akuzativ",
+{k:"slaviti",hr:"slaviti",en:"to celebrate",pat:"+ accusative",
  c:["slavim","slaviš","slavi","slavimo","slavite","slave"],
- ex:[["[Slavim] rođendan.","Doğum günümü kutluyorum."],["Što [slavite]?","Neyi kutluyorsunuz?"]]},
+ ex:[["[Slavim] rođendan.","I'm celebrating my birthday."],["Što [slavite]?","What are you celebrating?"]]},
 
-{k:null,hr:"paziti",tr:"dikkat etmek / göz kulak olmak",pat:"na + <b>akuzativ</b>",
+{k:null,hr:"paziti",en:"to be careful / to look after",pat:"na + <b>accusative</b>",
  c:["pazim","paziš","pazi","pazimo","pazite","paze"],
- ex:[["[Pazi]!","Dikkat et!"],["[Pazim] na djecu.","Çocuklara göz kulak oluyorum."]],
- note:"Tek kelimelik <b>Pazi!</b> sokakta en sık duyacağın uyarı."},
+ ex:[["[Pazi]!","Careful!"],["[Pazim] na djecu.","I'm looking after the children."]],
+ note:"A single word, <b>Pazi!</b>, is the warning you'll hear most often in the street."},
 
-{k:null,hr:"početi",tr:"başlamak",pat:"+ akuzativ · + mastar",
+{k:null,hr:"početi",en:"to begin",pat:"+ accusative · + infinitive",
  c:["počnem","počneš","počne","počnemo","počnete","počnu"],
- ex:[["[Počnimo]!","Başlayalım!"],["[Počeo] sam učiti hrvatski.","Hırvatça öğrenmeye başladım."]],
- note:"Süregelen biçim <b>počinjati</b>: <i>film počinje u osam</i> film sekizde başlıyor."},
+ ex:[["[Počnimo]!","Let's begin!"],["[Počeo] sam učiti hrvatski.","I've started learning Croatian."]],
+ note:"The ongoing form is <b>počinjati</b>: <i>film počinje u osam</i>, the film starts at eight."},
 
-{k:null,hr:"završiti",tr:"bitirmek",pat:"+ akuzativ",
+{k:null,hr:"završiti",en:"to finish",pat:"+ accusative",
  c:["završim","završiš","završi","završimo","završite","završe"],
- ex:[["[Završio] sam posao.","İşi bitirdim."],["Moram [završiti] do petka.","Cumaya kadar bitirmem lazım."]]},
+ ex:[["[Završio] sam posao.","I've finished the job."],["Moram [završiti] do petka.","I have to finish by Friday."]]},
 
-{k:null,hr:"ostati",tr:"kalmak",pat:"u / na + <b>lokativ</b>",
+{k:null,hr:"ostati",en:"to stay",pat:"u / na + <b>locative</b>",
  c:["ostanem","ostaneš","ostane","ostanemo","ostanete","ostanu"],
- ex:[["[Ostani] još malo.","Biraz daha kal."],["[Ostao] sam u hotelu.","Otelde kaldım."]]},
+ ex:[["[Ostani] još malo.","Stay a bit longer."],["[Ostao] sam u hotelu.","I stayed at the hotel."]]},
 
-{k:"vratitise",hr:"vratiti se",tr:"dönmek",pat:"iz + <b>genitiv</b>",
+{k:"vratitise",hr:"vratiti se",en:"to return",pat:"iz + <b>genitive</b>",
  c:["vratim se","vratiš se","vrati se","vratimo se","vratite se","vrate se"],
- ex:[["[Vratim] se iz škole u tri.","Okuldan üçte dönüyorum."],["Kad se [vraćaš]?","Ne zaman dönüyorsun?"]],
- note:"İkinci cümle süregelen biçimden: <b>vraćati se → vraćam se</b>."},
+ ex:[["[Vratim] se iz škole u tri.","I come back from school at three."],["Kad se [vraćaš]?","When are you coming back?"]],
+ note:"The second sentence uses the ongoing form <b>vraćati se → vraćam se</b>."},
 
-{k:"letjeti",hr:"letjeti",tr:"uçmak",pat:"u / na + <b>akuzativ</b>",
+{k:"letjeti",hr:"letjeti",en:"to fly",pat:"u / na + <b>accusative</b>",
  c:["letim","letiš","leti","letimo","letite","lete"],
- ex:[["[Letim] u Zagreb.","Zagreb'e uçuyorum."],["Avion [leti] u sedam.","Uçak yedide kalkıyor."]]},
+ ex:[["[Letim] u Zagreb.","I'm flying to Zagreb."],["Avion [leti] u sedam.","The plane leaves at seven."]]},
 
-{k:null,hr:"stanovati",tr:"ikamet etmek",pat:"u + <b>lokativ</b>",
+{k:null,hr:"stanovati",en:"to reside",pat:"u + <b>locative</b>",
  c:["stanujem","stanuješ","stanuje","stanujemo","stanujete","stanuju"],
- ex:[["[Stanujem] u Splitu.","Split'te oturuyorum."],["Gdje [stanuješ]?","Nerede oturuyorsun?"]],
- note:"<b>stanovati</b> adres bildirir, <b>živjeti</b> hayat sürmek. İkisi de doğru ama vurgu farklı."}
+ ex:[["[Stanujem] u Splitu.","I live in Split."],["Gdje [stanuješ]?","Where do you live?"]],
+ note:"<b>stanovati</b> points at the address, <b>živjeti</b> at the life. Both are correct, the emphasis differs."}
 ];
 
 /* ================= helpers ================= */
-function cue(s){return s.replace(/\[(.+?)\]/g,'<span class="blank">______</span>')}
-function full(s){return s.replace(/\[(.+?)\]/g,'<b class="hit">$1</b>')}
+function cue(s){return s.replace(/\[(.+?)\]/g,'<span class="blank">&nbsp;</span>')}
+function full(s){return s.replace(/\[(.+?)\]/g,'<span class="hit">$1</span>')}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 function pool(){
   if(filter==='icon')return V.filter(function(v){return v.k});
@@ -1021,53 +1009,54 @@ function pool(){
 }
 
 /* ================= state ================= */
-var SESSION=20;
+var PER_ROUND=20;
 var order=[],idx=0,shown=false,again=[],mode='quiz',filter='all';
 var view=document.getElementById('view');
 
 function start(){
-  order=shuffle(pool()).slice(0,SESSION);
+  order=shuffle(pool()).slice(0,PER_ROUND);
   idx=0;shown=false;again=[];render();
 }
 
 function render(){
   if(mode==='gallery')return gallery();
-  if(idx>=order.length)return end();
-  var v=order[idx],n=String(idx+1).padStart(2,'0'),h='';
+  if(idx>=order.length)return result();
+  var v=order[idx],h='';
 
-  h+='<div class="meta"><span>'+(idx+1)+' / '+order.length+'</span><span>'+(v.k?'ÇİZİM':'BAĞLAM')+'</span></div>';
-  h+='<div class="bar"><i style="width:'+(idx/order.length*100)+'%"></i></div>';
+  h+='<div class="quizbar"><span class="count">'+(idx+1)+' / '+order.length+'</span>'+
+     '<span class="score">'+(v.k?'drawn':'context')+'</span></div>';
+  h+='<div class="progress"><i style="width:'+(idx/order.length*100)+'%"></i></div>';
 
   if(v.k){
-    h+='<div class="frame" data-n="'+n+'">'+svg(v.k)+
-       '<p class="ask">'+(shown?'&nbsp;':'bu fiil Hırvatça ne?')+'</p></div>';
+    h+='<div class="pcard"><span class="n">'+String(idx+1).padStart(2,'0')+'</span>'+svg(v.k)+
+       (shown?'':'<p class="ask">which verb is this?</p>')+'</div>';
   }else{
-    h+='<div class="ctx" data-n="'+n+'">';
+    h+='<div class="ccard"><span class="n">'+String(idx+1).padStart(2,'0')+'</span>';
     for(var j=0;j<v.ex.length;j++){
       h+='<div class="line">'+(shown?full(v.ex[j][0]):cue(v.ex[j][0]))+'</div>';
     }
-    h+='<p class="ask">'+(shown?'&nbsp;':'boşluğa hangi fiil giriyor?')+'</p></div>';
+    h+=(shown?'':'<p class="ask">which verb fills the gap?</p>')+'</div>';
   }
 
   if(!shown){
-    h+='<button class="btn gold" onclick="reveal()">Cevabı göster</button>';
+    h+='<div class="btnrow"><button class="btn block" onclick="reveal()">Reveal</button></div>';
   }else{
-    h+='<div class="ans">';
-    h+='<div class="top"><p class="hrv">'+v.hr+'</p><p class="tr">'+v.tr+'</p><p class="pat">'+v.pat+'</p></div>';
+    h+='<div class="answer">';
+    h+='<div class="head"><p class="hrv">'+v.hr+'</p><p class="en">'+v.en+'</p><p class="rec">'+v.pat+'</p></div>';
     h+='<div class="conj">';
     for(var i=0;i<6;i++){
       h+='<div><span class="p">'+PRON[i]+'</span>'+
-         (v.c[i]===D?'<span style="color:#544C3F">—</span>':v.c[i])+'</div>';
+         (v.c[i]===D?'<span style="color:var(--stone)">—</span>':v.c[i])+'</div>';
     }
     h+='</div>';
     for(var e=0;e<v.ex.length;e++){
-      h+='<div class="ex"><div class="cro">'+full(v.ex[e][0])+'</div><div class="glo">'+v.ex[e][1]+'</div></div>';
+      h+='<div class="sent"><div class="hr">'+full(v.ex[e][0])+'</div><div class="gl">'+v.ex[e][1]+'</div></div>';
     }
-    if(v.note)h+='<div class="note">'+v.note+'</div>';
+    if(v.note)h+='<div class="why">'+v.note+'</div>';
     h+='</div>';
-    h+='<div class="row">'+
-       '<button class="btn small" onclick="next(false)">Bildim ✓</button>'+
-       '<button class="btn small again" onclick="next(true)">Tekrar et</button>'+
+    h+='<div class="btnrow">'+
+       '<button class="btn" onclick="next(false)">Knew it</button>'+
+       '<button class="btn ghost" onclick="next(true)">Practise again</button>'+
        '</div>';
   }
   view.innerHTML=h;window.scrollTo(0,0);
@@ -1076,37 +1065,44 @@ function render(){
 function reveal(){shown=true;render()}
 function next(f){if(f)again.push(order[idx]);idx++;shown=false;render()}
 
-function end(){
-  var h='<div class="end"><h2>Tur bitti</h2>';
-  if(again.length===0){
-    h+='<p>Bu turda tekrar işaretlediğin fiil yok.</p>';
-  }else{
-    h+='<p>Tekrar edilecek <b>'+again.length+'</b> fiil:</p><ul>';
+function result(){
+  var got=order.length-again.length,h='';
+  h+='<div class="result"><div class="glag">Ⰷ</div>'+
+     '<p class="big">'+got+'</p><p class="of">of '+order.length+' without a second look</p>';
+  h+='<p class="verdict">'+(again.length===0?'Nothing left to repeat.':
+      again.length<4?'Almost there.':'Worth another pass.')+'</p></div>';
+  if(again.length){
+    h+='<ul class="talk">';
     for(var i=0;i<again.length;i++){
-      h+='<li class="bad">'+again[i].hr+' <span style="color:var(--dim)">— '+again[i].tr+'</span></li>';
+      h+='<li><span class="hr">'+again[i].hr+'</span><span class="en">'+again[i].en+'</span></li>';
     }
-    h+='</ul><button class="btn gold" onclick="drill()">Sadece bunları çalış</button>';
+    h+='</ul>';
+    h+='<div class="btnrow"><button class="btn" onclick="drill()">Repeat these '+again.length+'</button>'+
+       '<button class="btn ghost" onclick="start()">New round</button></div>';
+  }else{
+    h+='<div class="btnrow"><button class="btn block" onclick="start()">New round</button></div>';
   }
-  h+='<button class="btn" onclick="start()">Yeni tur</button></div>';
-  view.innerHTML=h;
+  view.innerHTML=h;window.scrollTo(0,0);
 }
 function drill(){order=shuffle(again.slice());idx=0;shown=false;again=[];render()}
 
 function gallery(){
   var p=pool(),h='',ic=p.filter(function(v){return v.k}),cx=p.filter(function(v){return !v.k});
   if(ic.length){
-    h+='<div class="gsec">Çizimle — '+ic.length+' fiil</div><div class="grid">';
+    h+='<h3 class="sub">Drawn — '+ic.length+' verbs</h3><div class="iconwall">';
     for(var i=0;i<ic.length;i++){
-      h+='<div class="cell">'+svg(ic[i].k)+'<div class="n">'+ic[i].hr+'</div><div class="t">'+ic[i].tr+'</div></div>';
+      h+='<div class="box">'+svg(ic[i].k)+'<span class="w">'+ic[i].hr+'</span>'+
+         '<span class="g">'+ic[i].en+'</span></div>';
     }
     h+='</div>';
   }
   if(cx.length){
-    h+='<div class="gsec">Bağlamla — '+cx.length+' fiil</div>';
+    h+='<h3 class="sub">Context — '+cx.length+' verbs</h3><ul class="talk">';
     for(var j=0;j<cx.length;j++){
-      h+='<div class="crow"><div class="n">'+cx[j].hr+'<span>'+cx[j].tr+'</span></div>'+
-         '<div class="s">'+full(cx[j].ex[0][0])+'</div></div>';
+      h+='<li><span class="hr">'+full(cx[j].ex[0][0])+'</span>'+
+         '<span class="en">'+cx[j].hr+' · '+cx[j].en+'</span></li>';
     }
+    h+='</ul>';
   }
   view.innerHTML=h;window.scrollTo(0,0);
 }
@@ -1127,5 +1123,6 @@ document.getElementById('filter').addEventListener('click',function(e){
 
 start();
 </script>
+<script src="nav.js"></script>
 </body>
 </html>
