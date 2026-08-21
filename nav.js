@@ -11,7 +11,8 @@
     { file: "dativ.html",      glag: "Ⰴ", name: "Dative",          desc: "Who you give it to" },
     { file: "imenice.html",    glag: "Ⰵ", name: "Nouns",           desc: "Gender and plurals" },
     { file: "adjectives.html", glag: "Ⰶ", name: "Adjectives",      desc: "50 words that agree" },
-    { file: "verbtest.html",   glag: "Ⰷ", name: "Verbs",           desc: "105 verbs, present tense" }
+    { file: "verbtest.html",   glag: "Ⰷ", name: "Verbs",           desc: "105 verbs, present tense" },
+    { file: "conjunctions.html", glag: "Ⰸ", name: "Conjunctions",  desc: "Because, so, however" }
   ];
 
   var here = (location.pathname.split("/").pop() || "index.html").toLowerCase();

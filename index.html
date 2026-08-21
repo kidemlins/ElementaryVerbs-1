@@ -19,10 +19,10 @@
 
 <div class="pagehead">
   <div class="wrap">
-    <div class="glagstrip">Ⰰ Ⰱ Ⰲ Ⰳ Ⰴ Ⰵ Ⰶ Ⰷ</div>
+    <div class="glagstrip">Ⰰ Ⰱ Ⰲ Ⰳ Ⰴ Ⰵ Ⰶ Ⰷ Ⰸ</div>
     <h1>Croatian,<br><em>every day</em></h1>
     <p class="sub">A1 → A2 · speak first, parse later</p>
-    <p class="lede">Eight sections. Start with <b>Everyday talk</b> if you want to open your mouth today, or <b>The seven cases</b> if you want the map first.</p>
+    <p class="lede">Nine sections. Start with <b>Everyday talk</b> if you want to open your mouth today, or <b>The seven cases</b> if you want the map first.</p>
   </div>
 </div>
 <div class="headrule"></div>
@@ -64,7 +64,8 @@ var SECTIONS = [
   {file:"dativ.html",      glag:"Ⰴ", name:"Dative",          desc:"Who you give it to"},
   {file:"imenice.html",    glag:"Ⰵ", name:"Nouns",           desc:"Gender and plurals"},
   {file:"adjectives.html", glag:"Ⰶ", name:"Adjectives",      desc:"50 words that agree"},
-  {file:"verbtest.html",   glag:"Ⰷ", name:"Verbs",           desc:"105 verbs, present tense"}
+  {file:"verbtest.html",   glag:"Ⰷ", name:"Verbs",           desc:"105 verbs, present tense"},
+  {file:"conjunctions.html", glag:"Ⰸ", name:"Conjunctions",  desc:"Because, so, however"}
 ];
 document.getElementById("hub").innerHTML = SECTIONS.map(function(s){
   return '<a class="cell" href="'+s.file+'"><span class="glag">'+s.glag+'</span>'+
