@@ -1,4 +1,4 @@
-const CACHE = "hrvatski-glagoljica-v3";
+const CACHE = "hrvatski-glagoljica-v4";
 const ASSETS = [
   "./index.html",
   "./genel.html",
@@ -10,6 +10,7 @@ const ASSETS = [
   "./adjectives.html",
   "./verbtest.html",
   "./conjunctions.html",
+  "./grandtest.html",
   "./theme.css",
   "./nav.js",
   "./quiz.js",

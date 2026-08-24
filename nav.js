@@ -12,7 +12,8 @@
     { file: "imenice.html",    glag: "Ⰵ", name: "Nouns",           desc: "Gender and plurals" },
     { file: "adjectives.html", glag: "Ⰶ", name: "Adjectives",      desc: "50 words that agree" },
     { file: "verbtest.html",   glag: "Ⰷ", name: "Verbs",           desc: "105 verbs, present tense" },
-    { file: "conjunctions.html", glag: "Ⰸ", name: "Conjunctions",  desc: "Because, so, however" }
+    { file: "conjunctions.html", glag: "Ⰸ", name: "Conjunctions",  desc: "Because, so, however" },
+    { file: "grandtest.html",  glag: "Ⰹ", name: "Grand Test",      desc: "All four cases, together" }
   ];
 
   var here = (location.pathname.split("/").pop() || "index.html").toLowerCase();
