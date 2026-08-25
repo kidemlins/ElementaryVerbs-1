@@ -14,88 +14,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Glagolitic&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
-<style>
-/* ---------- page-specific: picture prompts ---------- */
-.pcard{
-  background:var(--parchment-lt);
-  border:1px solid var(--rule);
-  border-top:2px solid var(--ink);
-  padding:18px 15px 15px;margin-top:16px;
-  text-align:center;position:relative;
-}
-.pcard .n{
-  position:absolute;top:9px;left:12px;
-  font-family:var(--mono);font-size:10.5px;color:var(--stone);letter-spacing:.08em;
-}
-svg.ico{width:172px;height:172px;display:block;margin:0 auto;color:var(--ink)}
-svg.ico g.stroke{fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
-svg.ico .acc{stroke:var(--cinnabar)}
-svg.ico .accfill{fill:var(--cinnabar);stroke:none}
-.pcard .ask,.ccard .ask{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--cinnabar);margin:12px 0 0;
-}
-
-/* ---------- page-specific: context prompts ---------- */
-.ccard{
-  background:var(--parchment-lt);
-  border:1px solid var(--rule);
-  border-top:2px solid var(--ink);
-  padding:18px 15px 15px;margin-top:16px;position:relative;
-}
-.ccard .n{
-  position:absolute;top:9px;left:12px;
-  font-family:var(--mono);font-size:10.5px;color:var(--stone);letter-spacing:.08em;
-}
-.ccard .line{
-  font-family:var(--display);font-size:18px;line-height:1.45;
-  padding:11px 0;color:var(--ink);
-}
-.ccard .line:first-of-type{padding-top:8px}
-.ccard .line + .line{border-top:1px solid var(--rule-soft)}
-.blank{
-  display:inline-block;min-width:74px;
-  border-bottom:2px solid var(--cinnabar);
-}
-.hit{border-bottom:2px solid var(--cinnabar);font-weight:600}
-
-/* ---------- answer panel ---------- */
-.answer{border:1px solid var(--rule);border-top:2px solid var(--cinnabar);margin-top:14px}
-.answer .head{padding:14px 15px;background:var(--parchment-lt);border-bottom:1px solid var(--rule)}
-.answer .hrv{font-family:var(--display);font-size:24px;font-weight:700;line-height:1.15;margin:0}
-.answer .en{font-size:13.5px;color:var(--ink-soft);margin:2px 0 0}
-.answer .rec{font-family:var(--mono);font-size:11px;color:var(--cinnabar);
-  text-transform:uppercase;letter-spacing:.06em;margin:9px 0 0}
-.answer .rec b{color:var(--copper);font-weight:500}
-.conj{display:grid;grid-template-columns:1fr 1fr;background:var(--paper)}
-.conj div{padding:8px 15px;border-bottom:1px solid var(--rule-soft);font-size:14px}
-.conj div:nth-child(odd){border-right:1px solid var(--rule-soft)}
-.conj .p{font-family:var(--mono);font-size:10.5px;color:var(--stone);margin-right:7px}
-.sent{padding:11px 15px;background:var(--parchment-lt);border-bottom:1px solid var(--rule-soft)}
-.sent .hr{font-family:var(--display);font-size:16px;color:var(--ink)}
-.sent .gl{font-size:12.5px;color:var(--stone);margin-top:2px}
-.answer .why{margin:0;padding:12px 15px 13px;border-left:none;
-  background:var(--paper);border-top:1px solid var(--rule)}
-
-/* ---------- gallery ---------- */
-.iconwall{display:grid;grid-template-columns:1fr 1fr;gap:0;
-  border:1px solid var(--rule);background:var(--parchment-lt);margin-top:16px}
-.iconwall .box{padding:12px 8px 13px;text-align:center;
-  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-.iconwall .box:nth-child(2n){border-right:none}
-.iconwall .box svg{width:100%;height:auto;max-width:104px}
-.iconwall .box .w{font-family:var(--display);font-size:14.5px;font-weight:600;color:var(--ink);margin-top:3px;display:block}
-.iconwall .box .g{font-size:11.5px;color:var(--stone);display:block;line-height:1.3}
-</style>
 </head>
 <body>
 
 <div class="pagehead">
   <div class="wrap">
     <div class="glagstrip">Ⰷ · Glagoli</div>
-    <h1>105 verbs,<br><em>no English</em>.</h1>
-    <p class="sub">picture or context → Croatian · 20 per round</p>
-    <p class="lede">Naming a verb through English puts a station in the middle of the line: picture → <b>write</b> → <b>pisati</b>. Here that station is removed. Concrete verbs come as a drawing; abstract ones come as two Croatian sentences with the verb missing. Say the answer out loud before you reveal it.</p>
+    <h1>105 verbs,<br><em>present tense</em>.</h1>
+    <p class="sub">meaning · conjugation · what case follows</p>
+    <p class="lede">Knowing a Croatian verb means knowing two things: how it conjugates, and which case it drags along behind it. <b>Pomoći</b> takes the dative, <b>bojati se</b> takes the genitive — get the pairing wrong and the sentence collapses.</p>
   </div>
 </div>
 <div class="headrule"></div>
@@ -103,1025 +30,158 @@ svg.ico .accfill{fill:var(--cinnabar);stroke:none}
 <div class="wrap">
 
   <div class="seg" id="mode">
-    <button class="on" data-m="quiz">Practise</button>
-    <button data-m="gallery">Gallery</button>
-  </div>
-
-  <div class="seg" id="filter" style="margin-top:8px">
-    <button class="on" data-f="all">All 105</button>
-    <button data-f="icon">Drawn 57</button>
-    <button data-f="ctx">Context 48</button>
+    <button class="on" data-m="browse">Browse</button>
+    <button data-m="quiz">Quiz</button>
   </div>
 
   <div id="view"></div>
 
-  <div class="sec">
-    <h2><span class="glag">Ⰰ</span>Why some verbs aren't drawn</h2>
-    <p class="note">A picture can show an action, but it can't show a distinction. Two verbs that look identical on paper are separated by the sentence they live in.</p>
-    <ul class="chips">
-      <li><b>sjediti</b> / sjesti</li><li><b>ležati</b> / leći</li>
-      <li><b>kupiti</b> / kupovati</li><li><b>čuti</b> / slušati</li>
-      <li><b>tražiti</b> / naći</li><li><b>moći</b> / smjeti</li>
-      <li><b>živjeti</b> / stanovati</li><li><b>ići</b> / hodati</li>
-    </ul>
-    <div class="tip"><b>The pair to learn first</b>Position takes the locative, movement takes the accusative. <b>Sjedim na stolici</b> — I'm sitting on the chair. <b>Sjednem na stolicu</b> — I sit down on the chair. The same split runs through ležati / leći and stajati / stati.</div>
-  </div>
-
   <footer class="pagefoot">
-    <p>The six slots are always in this order: <b>ja · ti · on/ona · mi · vi · oni</b>. A dash means the verb only works in the third person — <b>boli me glava</b>, not <b>bolim</b>.</p>
+    <p>The six slots are always in this order: <b>ja · ti · on/ona · mi · vi · oni</b>.</p>
   </footer>
 </div>
 
 <script>
-var ICONS = {
-
-piti:
- '<circle cx="34" cy="30" r="13"/>'+
- '<path d="M16 84c0-15 8-26 18-26s18 11 18 26"/>'+
- '<path d="M44 62L60 42"/>'+
- '<g class="acc"><path d="M50 18l22 7-7 21-22-7z"/><path d="M76 16c3-3 7-3 9 0"/></g>',
-
-jesti:
- '<circle cx="28" cy="28" r="12"/>'+
- '<path d="M10 84c0-16 8-26 18-26s18 10 18 26"/>'+
- '<g class="acc"><path d="M44 36L64 58"/><ellipse cx="42" cy="34" rx="8" ry="5" transform="rotate(45 42 34)"/></g>'+
- '<path d="M42 66L58 56"/>'+
- '<path d="M56 68h34c0 10-8 18-17 18s-17-8-17-18z"/>',
-
-spavati:
- '<path d="M10 80h80"/>'+
- '<path d="M18 80V58h64v22"/>'+
- '<path d="M22 58c2-13 21-13 24 0"/>'+
- '<circle cx="34" cy="48" r="10"/>'+
- '<path d="M46 58c11-7 25-7 34 0"/>'+
- '<g class="acc"><path d="M54 34h11l-11 11h11"/><path d="M70 18h9l-9 9h9"/></g>',
-
-cekati:
- '<circle cx="28" cy="20" r="9"/>'+
- '<path d="M28 29v26"/>'+
- '<path d="M28 55l-8 24M28 55l8 24"/>'+
- '<path d="M28 36l-10 9M28 36l10 9"/>'+
- '<g class="acc"><circle cx="68" cy="56" r="19"/><path d="M68 43v13h10"/></g>',
-
-kupovati:
- '<path d="M8 20h10l5 14"/>'+
- '<path d="M23 34h61l-9 25H32z"/>'+
- '<circle cx="40" cy="72" r="6"/><circle cx="68" cy="72" r="6"/>'+
- '<g class="acc"><circle cx="48" cy="26" r="7"/><path d="M62 34l8-12 6 4-6 8"/></g>',
-
-pomoci:
- '<circle cx="22" cy="18" r="9"/>'+
- '<path d="M22 27v24"/>'+
- '<path d="M22 51l-8 26M22 51l8 26"/>'+
- '<path d="M22 34l22 11"/>'+
- '<circle cx="74" cy="44" r="9"/>'+
- '<path d="M74 53v16"/>'+
- '<path d="M74 58L52 47"/>'+
- '<path d="M74 69l-12 8M74 69h12"/>'+
- '<g class="acc"><circle cx="48" cy="46" r="6"/></g>',
-
-boljeti:
- '<circle cx="46" cy="52" r="21"/>'+
- '<path d="M35 46c3-4 8-4 11 0M50 46c3-4 8-4 11 0"/>'+
- '<path d="M37 64c5-9 13-9 18 0"/>'+
- '<g class="acc"><path d="M31 32l-7-8 9-3-6-9"/><path d="M63 32l8-7-9-4 6-9"/></g>',
-
-ici:
- '<circle cx="38" cy="18" r="9"/>'+
- '<path d="M38 27l-2 22"/>'+
- '<path d="M36 49l-10 26M36 49l13 24"/>'+
- '<path d="M37 34l-13 9M37 34l14 5"/>'+
- '<g class="acc"><path d="M62 64h24"/><path d="M78 56l9 8-9 8"/></g>',
-
-raditi:
- '<circle cx="24" cy="26" r="10"/>'+
- '<path d="M8 74c0-15 7-24 16-24"/>'+
- '<path d="M24 42l22 18"/>'+
- '<g class="acc"><path d="M52 46h24l4 20H48z"/><path d="M42 66h44l6 10H36z"/></g>'+
- '<path d="M6 80h88"/>',
-
-citati:
- '<circle cx="28" cy="20" r="11"/>'+
- '<path d="M10 76c0-15 8-25 18-25s18 10 18 25"/>'+
- '<g class="acc"><path d="M38 50c9-6 17-6 24 0 7-6 15-6 24 0v24c-9-6-17-6-24 0-7-6-15-6-24 0z"/>'+
- '<path d="M62 50v24"/></g>',
-
-pisati:
- '<path d="M14 16h56v66H14z"/>'+
- '<path d="M26 34h30M26 46h34M26 58h20"/>'+
- '<g class="acc"><path d="M48 86l4-16 24-24 12 12-24 24z"/><path d="M60 58l12 12"/></g>',
-
-kuhati:
- '<path d="M20 42h60l-7 34H27z"/>'+
- '<path d="M12 42h76"/>'+
- '<path d="M14 50h-6M86 50h6"/>'+
- '<g class="acc"><path d="M36 32c-6-6 4-10 0-16M52 32c-6-6 4-10 0-16M68 32c-6-6 4-10 0-16"/></g>'+
- '<path d="M16 84h68"/>',
-
-voziti:
- '<circle cx="50" cy="52" r="30"/>'+
- '<circle cx="50" cy="52" r="9"/>'+
- '<path d="M50 43V22M42 57L26 73M58 57l16 16"/>'+
- '<g class="acc"><path d="M22 40c4-6 11-8 16-4M78 40c-4-6-11-8-16-4"/></g>',
-
-trcati:
- '<circle cx="54" cy="18" r="9"/>'+
- '<path d="M54 28l-8 20"/>'+
- '<path d="M46 48l-3 15-11 13M46 48l15 9 3 19"/>'+
- '<path d="M51 34l16-5M51 34l-13 11"/>'+
- '<g class="acc"><path d="M6 28h16M2 46h18M8 64h14"/></g>',
-
-tusiratise:
- '<path d="M50 6v12"/>'+
- '<path d="M30 18h40l-7 12H37z"/>'+
- '<g class="acc"><path d="M38 38v12M46 36v16M54 36v16M62 38v12"/></g>'+
- '<circle cx="50" cy="64" r="10"/>'+
- '<path d="M32 94c0-15 8-24 18-24s18 9 18 24"/>',
-
-platiti:
- '<path d="M52 26h38v52H52z"/>'+
- '<path d="M58 34h26v14H58z"/>'+
- '<circle cx="63" cy="60" r="2.6"/><circle cx="71" cy="60" r="2.6"/><circle cx="79" cy="60" r="2.6"/>'+
- '<g class="acc"><path d="M8 40h32v20H8z"/><path d="M8 47h32"/></g>'+
- '<path d="M42 52h8"/><path d="M46 47l6 5-6 5"/>',
-
-gledati:
- '<path d="M40 22h52v40H40z"/>'+
- '<path d="M62 62v10M50 72h24"/>'+
- '<circle cx="18" cy="44" r="11"/>'+
- '<path d="M0 86c0-15 8-24 18-24s18 9 18 24"/>'+
- '<g class="accfill"><path d="M60 32l16 10-16 10z"/></g>',
-
-pjevati:
- '<circle cx="32" cy="40" r="16"/>'+
- '<circle cx="26" cy="34" r="2.6"/><circle cx="38" cy="34" r="2.6"/>'+
- '<ellipse cx="34" cy="49" rx="7" ry="6"/>'+
- '<path d="M12 86c0-15 9-24 20-24s20 9 20 24"/>'+
- '<g class="acc"><path d="M64 58V24l20-7v34"/><ellipse cx="58" cy="60" rx="7" ry="5"/><ellipse cx="78" cy="53" rx="7" ry="5"/></g>',
-
-sjediti:
- '<g class="acc"><path d="M28 14v46M28 60h42M32 60v22M68 60v22"/></g>'+
- '<circle cx="44" cy="26" r="10"/>'+
- '<path d="M44 36v20"/>'+
- '<path d="M44 56h20"/>'+
- '<path d="M64 56v26"/>'+
- '<path d="M44 42l14 10"/>',
-
-zvati:
- '<circle cx="30" cy="38" r="14"/>'+
- '<path d="M10 86c0-15 9-24 20-24s20 9 20 24"/>'+
- '<g class="acc"><path d="M46 22h16v32H46z"/></g>'+
- '<g class="acc"><path d="M70 28c6 6 6 20 0 26M80 20c10 10 10 34 0 44"/></g>',
-
-slusati:
- '<path d="M22 60V48a28 28 0 0 1 56 0v12"/>'+
- '<path d="M10 58h14v22H10z"/><path d="M76 58h14v22H76z"/>'+
- '<g class="acc"><path d="M44 44V22l16-5v22"/><ellipse cx="38" cy="46" rx="6" ry="4.5"/><ellipse cx="54" cy="41" rx="6" ry="4.5"/></g>',
-
-govoriti:
- '<circle cx="24" cy="46" r="14"/>'+
- '<path d="M4 90c0-16 9-26 20-26s20 10 20 26"/>'+
- '<g class="acc"><path d="M48 10h46v34H68l-12 12V44h-8z"/><path d="M58 20h26M58 32h18"/></g>',
-
-igratise:
- '<circle cx="24" cy="24" r="9"/>'+
- '<path d="M24 33v18"/>'+
- '<path d="M24 51l-8 22M24 51l9 22"/>'+
- '<path d="M24 38l-11 8M24 38l13-5"/>'+
- '<g class="acc"><circle cx="68" cy="62" r="16"/><path d="M52 62h32M68 46v32"/></g>',
-
-plesati:
- '<circle cx="42" cy="18" r="9"/>'+
- '<path d="M42 27l5 21"/>'+
- '<path d="M47 48l-15 14v16M47 48l14 9 3 20"/>'+
- '<path d="M43 34l-17-7M43 34l13-13"/>'+
- '<g class="acc"><path d="M76 40V16l12-4v24"/><ellipse cx="71" cy="42" rx="6" ry="4.5"/><ellipse cx="83" cy="38" rx="6" ry="4.5"/></g>',
-
-cistiti:
- '<path d="M72 8L38 50"/>'+
- '<path d="M26 46l16 14-10 12-16-14z"/>'+
- '<path d="M20 62l-6 6M28 70l-6 6M12 54l-6 6"/>'+
- '<g class="accfill"><path d="M74 60l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/><path d="M56 76l1.5 5 5 1.5-5 1.5-1.5 5-1.5-5-5-1.5 5-1.5z"/></g>',
-
-prati:
- '<path d="M14 14h30v18"/>'+
- '<path d="M24 58h52c0 15-12 26-26 26S24 73 24 58z"/>'+
- '<g class="acc"><path d="M44 36v10M38 42v8M50 42v8"/><circle cx="34" cy="50" r="4"/><circle cx="62" cy="44" r="5"/><circle cx="74" cy="54" r="3.5"/></g>',
-
-putovati:
- '<path d="M24 42h44v36H24z"/>'+
- '<path d="M38 42v-8h16v8"/>'+
- '<path d="M46 42v36"/>'+
- '<g class="acc"><path d="M4 24c22-14 62-14 82 0" stroke-dasharray="6 7"/></g>'+
- '<g class="accfill"><path d="M78 10l14 8-14 8-2-8z"/></g>',
-
-otvoriti:
- '<path d="M28 86V18h32v68"/>'+
- '<path d="M60 18l22-10v88l-22-10"/>'+
- '<circle cx="66" cy="52" r="2.4"/>'+
- '<g class="acc"><path d="M6 52h26"/><path d="M24 44l9 8-9 8"/></g>',
-
-zatvoriti:
- '<path d="M40 86V18h32v68"/>'+
- '<path d="M40 18L20 8v88l20-10"/>'+
- '<circle cx="46" cy="52" r="2.4"/>'+
- '<g class="acc"><path d="M92 52H70"/><path d="M78 44l-9 8 9 8"/></g>',
-
-traziti:
- '<circle cx="42" cy="40" r="24"/>'+
- '<path d="M60 58l24 24"/>'+
- '<g class="acc"><path d="M35 33c0-9 14-9 14 0 0 7-7 6-7 13"/><circle cx="42" cy="54" r="2.6"/></g>',
-
-vidjeti:
- '<path d="M4 50c14-21 30-31 46-31s32 10 46 31c-14 21-30 31-46 31S18 71 4 50z"/>'+
- '<g class="acc"><circle cx="50" cy="50" r="13"/></g>'+
- '<g class="accfill"><circle cx="50" cy="50" r="5"/></g>',
-
-smijatise:
- '<circle cx="44" cy="50" r="22"/>'+
- '<path d="M32 42c3-5 9-5 12 0M46 42c3-5 9-5 12 0"/>'+
- '<path d="M30 56c4 12 24 12 28 0z"/>'+
- '<g class="acc"><path d="M78 28l8-6M82 46h12M76 62l9 6"/></g>',
-
-plakati:
- '<circle cx="42" cy="48" r="22"/>'+
- '<path d="M30 44c3 5 9 5 12 0M44 44c3 5 9 5 12 0"/>'+
- '<path d="M32 64c5-9 15-9 20 0"/>'+
- '<g class="accfill"><path d="M62 50c0 0-8 11-8 16a8 8 0 0 0 16 0c0-5-8-16-8-16z"/></g>',
-
-ustati:
- '<circle cx="38" cy="24" r="10"/>'+
- '<path d="M38 34v24"/>'+
- '<path d="M38 58l-9 24M38 58l9 24"/>'+
- '<path d="M38 40l-12 8M38 40l12 8"/>'+
- '<g class="acc"><path d="M76 84V32"/><path d="M66 42l10-10 10 10"/></g>',
-
-setati:
- '<circle cx="26" cy="24" r="9"/>'+
- '<path d="M26 33v18"/>'+
- '<path d="M26 51l-9 24M26 51l11 24"/>'+
- '<path d="M26 38l-9 9M26 38l11 5"/>'+
- '<g class="acc"><circle cx="68" cy="42" r="15"/><path d="M68 57v22"/><circle cx="88" cy="58" r="9"/><path d="M88 67v12"/></g>'+
- '<path d="M8 80h84"/>',
-
-peci:
- '<path d="M12 22h76v60H12z"/>'+
- '<path d="M12 42h76"/>'+
- '<path d="M24 32h44"/>'+
- '<g class="acc"><path d="M28 72c0-11 9-18 22-18s22 7 22 18z"/><path d="M40 62l5-7M56 60l5-7"/></g>',
-
-pitati:
- '<circle cx="22" cy="48" r="13"/>'+
- '<path d="M2 88c0-15 9-24 20-24s20 9 20 24"/>'+
- '<g class="acc"><path d="M48 8h46v34H70l-11 12V42h-11z"/>'+
- '<path d="M64 20c0-8 14-8 14 0 0 6-7 5-7 12"/><circle cx="71" cy="38" r="2.4"/></g>',
-
-odgovoriti:
- '<circle cx="78" cy="48" r="13"/>'+
- '<path d="M58 88c0-15 9-24 20-24s20 9 20 24"/>'+
- '<g class="acc"><path d="M52 8H6v34h24l11 12V42h11z"/>'+
- '<path d="M29 18v16"/><circle cx="29" cy="40" r="2.4"/></g>',
-
-kupatise:
- '<path d="M8 52h84v8c0 13-10 22-24 22H32c-14 0-24-9-24-22z"/>'+
- '<path d="M14 52V30a8 8 0 0 1 16 0"/>'+
- '<circle cx="52" cy="40" r="10"/>'+
- '<g class="acc"><path d="M72 44c-6-7 5-11 0-17M86 44c-6-7 5-11 0-17"/></g>',
-
-plivati:
- '<circle cx="34" cy="34" r="10"/>'+
- '<path d="M44 42h30"/>'+
- '<path d="M34 24l12-14"/>'+
- '<g class="acc"><path d="M4 62c7-7 14-7 21 0s14 7 21 0 14-7 21 0 14 7 21 0"/>'+
- '<path d="M4 78c7-7 14-7 21 0s14 7 21 0 14-7 21 0 14 7 21 0"/></g>',
-
-uci:
- '<path d="M52 88V14h34v74"/>'+
- '<circle cx="58" cy="52" r="2.4"/>'+
- '<g class="acc"><path d="M8 52h30"/><path d="M30 44l9 8-9 8"/></g>',
-
-izaci:
- '<path d="M14 88V14h34v74"/>'+
- '<circle cx="42" cy="52" r="2.4"/>'+
- '<g class="acc"><path d="M58 52h30"/><path d="M80 44l9 8-9 8"/></g>',
-
-stajati:
- '<circle cx="50" cy="20" r="10"/>'+
- '<path d="M50 30v28"/>'+
- '<path d="M50 38l-14 12M50 38l14 12"/>'+
- '<path d="M50 58l-8 22M50 58l8 22"/>'+
- '<g class="acc"><path d="M14 82h72"/><path d="M34 88v6M66 88v6"/></g>',
-
-lezati:
- '<circle cx="22" cy="50" r="11"/>'+
- '<path d="M33 56h32"/>'+
- '<path d="M65 56l16 8"/>'+
- '<path d="M42 54l12-10"/>'+
- '<g class="acc"><path d="M6 70h86"/></g>',
-
-oblacitise:
- '<path d="M36 30L16 42l10 14 10-8v38h38V48l10 8 10-14-20-12z"/>'+
- '<path d="M36 30c0 8 6 12 14 12s14-4 14-12"/>'+
- '<g class="acc"><path d="M50 4v16"/><path d="M42 14l8 10 8-10"/></g>',
-
-kostati:
- '<path d="M6 48L46 8h36v36L42 84z"/>'+
- '<circle cx="68" cy="22" r="5"/>'+
- '<g class="acc"><path d="M52 34c-9-4-16 3-16 12s7 16 16 12M32 42h14M32 52h14"/></g>',
-
-dati:
- '<g class="acc"><path d="M18 34h22v20H18z"/></g>'+
- '<path d="M6 62c6-8 24-8 30 0"/>'+
- '<path d="M6 62v12h30V62"/>'+
- '<g class="acc"><path d="M46 46h30"/><path d="M68 38l9 8-9 8"/></g>'+
- '<path d="M94 66c-4-10-14-12-20-6"/>',
-
-uzeti:
- '<g class="acc"><path d="M60 34h22v20H60z"/></g>'+
- '<path d="M64 62c6-8 24-8 30 0"/>'+
- '<path d="M64 62v12h30V62"/>'+
- '<g class="acc"><path d="M54 46H24"/><path d="M32 38l-9 8 9 8"/></g>'+
- '<path d="M6 66c4-10 14-12 20-6"/>',
-
-nositi:
- '<circle cx="32" cy="20" r="10"/>'+
- '<path d="M32 30v24"/>'+
- '<path d="M32 54l-8 26M32 54l8 26"/>'+
- '<path d="M32 38l14 14"/>'+
- '<g class="acc"><path d="M46 52h24v24H46z"/><path d="M52 52v-6a6 6 0 0 1 12 0v6"/></g>',
-
-staviti:
- '<path d="M8 74h84"/>'+
- '<path d="M18 74v10M82 74v10"/>'+
- '<g class="acc"><path d="M32 58h36v14H32z"/></g>'+
- '<g class="acc"><path d="M50 20v22"/><path d="M40 34l10 10 10-10"/></g>',
-
-upaliti:
- '<path d="M36 54c-9-7-12-19-5-28s25-9 32 0 4 21-5 28v8H36z"/>'+
- '<path d="M36 70h20M40 78h12"/>'+
- '<g class="acc"><path d="M46 8V0M14 22l-8-6M78 22l8-6M16 50H6M76 50h10"/></g>',
-
-ugasiti:
- '<path d="M36 54c-9-7-12-19-5-28s25-9 32 0 4 21-5 28v8H36z"/>'+
- '<path d="M36 70h20M40 78h12"/>'+
- '<g class="acc"><path d="M12 12l70 70"/></g>',
-
-razgovarati:
- '<circle cx="18" cy="72" r="13"/>'+
- '<circle cx="82" cy="72" r="13"/>'+
- '<g class="acc"><path d="M4 8h40v26H4z"/><path d="M16 34l-2 12 14-12"/>'+
- '<path d="M56 8h40v26H56z"/><path d="M84 34l2 12-14-12"/></g>',
-
-ponoviti:
- '<path d="M78 50a28 28 0 1 1-14-24"/>'+
- '<g class="acc"><path d="M50 14l16 10-14 12"/></g>'+
- '<g class="acc"><path d="M40 44h20M40 56h20"/></g>',
-
-slaviti:
- '<path d="M16 52h68v30H16z"/>'+
- '<path d="M16 64h68"/>'+
- '<g class="acc"><path d="M32 52V38M50 52V34M68 52V38"/></g>'+
- '<g class="accfill"><path d="M32 36c-5-4-1-9 0-11 1 2 5 7 0 11z"/>'+
- '<path d="M50 32c-5-4-1-9 0-11 1 2 5 7 0 11z"/>'+
- '<path d="M68 36c-5-4-1-9 0-11 1 2 5 7 0 11z"/></g>',
-
-vratitise:
- '<path d="M58 84V54h30v30"/>'+
- '<path d="M54 54l19-17 19 17"/>'+
- '<g class="acc"><path d="M12 84V46c0-14 12-24 26-24"/><path d="M28 12l12 10-12 10"/></g>',
-
-letjeti:
- '<path d="M94 8L8 44l38 10 8 34 14-32z"/>'+
- '<path d="M94 8L46 54"/>'+
- '<g class="acc"><path d="M4 86c12-8 24-14 34-16" stroke-dasharray="6 7"/></g>'
-
-};
-
-function svg(k,cls){
-  return '<svg class="ico '+(cls||'')+'" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+
-         '<g class="stroke">'+ICONS[k]+'</g></svg>';
-}
-
-/* ================= data ================= */
-var PRON=['ja','ti','on/ona','mi','vi','oni'];
-var D='—';
-
-var V=[
-{k:null,hr:"biti",en:"to be",pat:"+ nominative",
- c:["sam","si","je","smo","ste","su"],
- ex:[["Ja [sam] student.","I'm a student."],["Gdje [si]?","Where are you?"]],
- note:"These forms are <b>enclitic</b> — they can never open a sentence. The stressed forms are jesam, jesi, jest."},
-
-{k:null,hr:"imati",en:"to have",pat:"+ accusative",
- c:["imam","imaš","ima","imamo","imate","imaju"],
- ex:[["[Imam] auto.","I have a car."],["[Imaš] li vremena?","Have you got time?"]],
- note:"The negative fuses into one word: <b>nemam, nemaš, nema</b>. Never \"ne imam\"."},
-
-{k:"raditi",hr:"raditi",en:"to work / to do",pat:"u / na + <b>locative</b>",
- c:["radim","radiš","radi","radimo","radite","rade"],
- ex:[["[Radim] u uredu.","I work in an office."],["Što [radiš] danas?","What are you doing today?"]]},
-
-{k:"jesti",hr:"jesti",en:"to eat",pat:"+ accusative",
- c:["jedem","jedeš","jede","jedemo","jedete","jedu"],
- ex:[["[Jedem] ribu i krumpir.","I'm eating fish and potatoes."],["Gdje [jedete] ručak?","Where do you have lunch?"]],
- note:"The infinitive hides the stem: <b>jesti → jedem</b>. The -d- only shows up once it's conjugated."},
-
-{k:"piti",hr:"piti",en:"to drink",pat:"+ accusative",
- c:["pijem","piješ","pije","pijemo","pijete","piju"],
- ex:[["[Pijem] kavu svako jutro.","I drink coffee every morning."],["Što [piješ], vodu ili sok?","What are you drinking, water or juice?"]]},
-
-{k:"spavati",hr:"spavati",en:"to sleep",pat:"no object · u + <b>locative</b>",
- c:["spavam","spavaš","spava","spavamo","spavate","spavaju"],
- ex:[["[Spavam] osam sati.","I sleep eight hours."],["Dijete [spava] u sobi.","The child is asleep in the room."]]},
-
-{k:"ici",hr:"ići",en:"to go",pat:"u / na + <b>accusative</b> (motion)",
- c:["idem","ideš","ide","idemo","idete","idu"],
- ex:[["[Idem] u grad.","I'm going into town."],["Kamo [ideš]?","Where are you going?"]],
- note:"Where to? <b>kamo</b> + accusative. Where at? <b>gdje</b> + locative."},
-
-{k:null,hr:"doći",en:"to come",pat:"u / na + <b>accusative</b> (motion)",
- c:["dođem","dođeš","dođe","dođemo","dođete","dođu"],
- ex:[["[Dođi] večeras kod nas.","Come over to ours tonight."],["[Došao] sam jučer.","I arrived yesterday."]],
- note:"For repeated arrivals use <b>dolaziti</b>: <i>dolazim svaki dan</i>."},
-
-{k:"gledati",hr:"gledati",en:"to watch / to look at",pat:"+ accusative",
- c:["gledam","gledaš","gleda","gledamo","gledate","gledaju"],
- ex:[["[Gledam] film.","I'm watching a film."],["Što [gledaš]?","What are you watching?"]]},
-
-{k:"slusati",hr:"slušati",en:"to listen",pat:"+ accusative — no preposition",
- c:["slušam","slušaš","sluša","slušamo","slušate","slušaju"],
- ex:[["[Slušam] glazbu.","I'm listening to music."],["[Slušaš] li me?","Are you listening to me?"]],
- note:"No preposition: <b>slušam glazbu</b>. The English \"listen to\" leads you astray here."},
-
-{k:"govoriti",hr:"govoriti",en:"to speak",pat:"o + locative · + accusative (a language)",
- c:["govorim","govoriš","govori","govorimo","govorite","govore"],
- ex:[["[Govorim] malo hrvatski.","I speak a little Croatian."],["[Govorite] li sporije, molim?","Could you speak more slowly, please?"]]},
-
-{k:"citati",hr:"čitati",en:"to read",pat:"+ accusative",
- c:["čitam","čitaš","čita","čitamo","čitate","čitaju"],
- ex:[["[Čitam] knjigu na hrvatskom.","I'm reading a book in Croatian."],["[Čitaš] li novine?","Do you read the paper?"]]},
-
-{k:"pisati",hr:"pisati",en:"to write",pat:"+ accusative (what) · + dative (to whom)",
- c:["pišem","pišeš","piše","pišemo","pišete","pišu"],
- ex:[["[Pišem] poruku prijatelju.","I'm writing a message to a friend."],["Kako se to [piše]?","How is that spelled?"]],
- note:"<b>pisati → pišem</b>: the s turns into š. The same change runs through <i>plesati → plešem</i>."},
-
-{k:null,hr:"učiti",en:"to learn / to study",pat:"+ accusative",
- c:["učim","učiš","uči","učimo","učite","uče"],
- ex:[["[Učim] hrvatski.","I'm learning Croatian."],["Što [učiš] danas?","What are you studying today?"]]},
-
-{k:"kupovati",hr:"kupovati",en:"to shop / to buy",pat:"+ accusative",
- c:["kupujem","kupuješ","kupuje","kupujemo","kupujete","kupuju"],
- ex:[["[Kupujem] kruh u pekarnici.","I buy bread at the bakery."],["Gdje [kupuješ] povrće?","Where do you buy vegetables?"]],
- note:"For a single purchase use <b>kupiti</b>. <i>Kupovati</i> is the ongoing, habitual one."},
-
-{k:null,hr:"voljeti",en:"to love",pat:"+ accusative",
- c:["volim","voliš","voli","volimo","volite","vole"],
- ex:[["[Volim] more.","I love the sea."],["[Voliš] li kavu?","Do you like coffee?"]],
- note:"<b>volim te</b> is I love you; <b>sviđaš mi se</b> is I fancy you. Don't swap them."},
-
-{k:null,hr:"znati",en:"to know",pat:"+ accusative · + infinitive",
- c:["znam","znaš","zna","znamo","znate","znaju"],
- ex:[["Ne [znam] gdje je.","I don't know where it is."],["[Znaš] li hrvatski?","Do you know Croatian?"]]},
-
-{k:null,hr:"htjeti",en:"to want",pat:"+ accusative · + infinitive",
- c:["hoću","hoćeš","hoće","hoćemo","hoćete","hoće"],
- ex:[["[Hoćeš] li kavu?","Do you want a coffee?"],["Što [hoćeš] jesti?","What do you want to eat?"]],
- note:"Nothing in the infinitive predicts it: <b>htjeti → hoću</b>. Its short forms (ću, ćeš, će…) build the future tense."},
-
-{k:null,hr:"moći",en:"can / to be able to",pat:"+ infinitive",
- c:["mogu","možeš","može","možemo","možete","mogu"],
- ex:[["[Možeš] li mi pomoći?","Can you help me?"],["Ne [mogu] doći večeras.","I can't come tonight."]],
- note:"First singular and third plural are identical: <b>mogu</b>. On its own, <i>Može!</i> means \"Sure!\" — you'll hear it constantly."},
-
-{k:null,hr:"živjeti",en:"to live",pat:"u + <b>locative</b>",
- c:["živim","živiš","živi","živimo","živite","žive"],
- ex:[["[Živim] u Zagrebu.","I live in Zagreb."],["Gdje [živiš]?","Where do you live?"]],
- note:"<b>živjeti</b> is to have a life somewhere; <b>stanovati</b> is to have an address there."},
-
-{k:"igratise",hr:"igrati se",en:"to play",pat:"s + instrumental · u + locative",
- c:["igram se","igraš se","igra se","igramo se","igrate se","igraju se"],
- ex:[["Djeca se [igraju] u parku.","The children are playing in the park."],["[Igraš] li se s njima?","Are you playing with them?"]],
- note:"Sport drops the <b>se</b>: <i>igram nogomet</i>, I play football."},
-
-{k:"plesati",hr:"plesati",en:"to dance",pat:"no object · u + locative",
- c:["plešem","plešeš","pleše","plešemo","plešete","plešu"],
- ex:[["[Plešem] cijelu noć.","I dance all night."],["Hoćeš li [plesati]?","Do you want to dance?"]]},
-
-{k:"pjevati",hr:"pjevati",en:"to sing",pat:"+ accusative",
- c:["pjevam","pjevaš","pjeva","pjevamo","pjevate","pjevaju"],
- ex:[["[Pjevam] u autu.","I sing in the car."],["Lijepo [pjevaš]!","You sing beautifully!"]]},
-
-{k:"kuhati",hr:"kuhati",en:"to cook",pat:"+ accusative",
- c:["kuham","kuhaš","kuha","kuhamo","kuhate","kuhaju"],
- ex:[["[Kuham] juhu za večeru.","I'm making soup for dinner."],["Tko [kuha] večeras?","Who's cooking tonight?"]]},
-
-{k:"cistiti",hr:"čistiti",en:"to clean",pat:"+ accusative",
- c:["čistim","čistiš","čisti","čistimo","čistite","čiste"],
- ex:[["[Čistim] sobu.","I'm cleaning the room."],["Kad [čistiš] stan?","When do you clean the flat?"]]},
-
-{k:"prati",hr:"prati",en:"to wash",pat:"+ accusative",
- c:["perem","pereš","pere","peremo","perete","peru"],
- ex:[["[Perem] auto.","I'm washing the car."],["[Operi] ruke!","Wash your hands!"]],
- note:"Infinitive and stem sit far apart: <b>prati → perem</b>. For one completed wash, <b>oprati</b>."},
-
-{k:"voziti",hr:"voziti",en:"to drive",pat:"+ accusative",
- c:["vozim","voziš","vozi","vozimo","vozite","voze"],
- ex:[["[Vozim] auto svaki dan.","I drive every day."],["[Voziš] prebrzo!","You're driving too fast!"]]},
-
-{k:"putovati",hr:"putovati",en:"to travel",pat:"u / na + accusative",
- c:["putujem","putuješ","putuje","putujemo","putujete","putuju"],
- ex:[["[Putujem] u Split.","I'm travelling to Split."],["Voliš li [putovati]?","Do you like travelling?"]]},
-
-{k:"cekati",hr:"čekati",en:"to wait for",pat:"+ accusative — no preposition",
- c:["čekam","čekaš","čeka","čekamo","čekate","čekaju"],
- ex:[["[Čekam] autobus već pola sata.","I've been waiting for the bus for half an hour."],["[Čekaj] me pet minuta!","Wait for me five minutes!"]],
- note:"It takes a plain object: <b>čekam autobus</b>. No \"za\" anywhere."},
-
-{k:"otvoriti",hr:"otvoriti",en:"to open",pat:"+ accusative",
- c:["otvorim","otvoriš","otvori","otvorimo","otvorite","otvore"],
- ex:[["[Otvori] prozor, molim te.","Open the window, please."],["Kad [otvara] dućan?","When does the shop open?"]],
- note:"The second sentence uses the ongoing form <b>otvarati</b>: <i>otvara, otvaraju</i>."},
-
-{k:"zatvoriti",hr:"zatvoriti",en:"to close",pat:"+ accusative",
- c:["zatvorim","zatvoriš","zatvori","zatvorimo","zatvorite","zatvore"],
- ex:[["[Zatvori] vrata, hladno je.","Close the door, it's cold."],["Možeš li [zatvoriti] prozor?","Can you close the window?"]]},
-
-{k:"pomoci",hr:"pomoći",en:"to help",pat:"+ <b>dative</b> — not the accusative",
- c:["pomognem","pomogneš","pomogne","pomognemo","pomognete","pomognu"],
- ex:[["Možeš li mi [pomoći]?","Can you help me?"],["[Pomogni] mi, molim te.","Help me, please."]],
- note:"You help <i>to</i> someone in Croatian: <b>pomognem majci</b>, never <b>majku</b>."},
-
-{k:"traziti",hr:"tražiti",en:"to look for",pat:"+ accusative — no preposition",
- c:["tražim","tražiš","traži","tražimo","tražite","traže"],
- ex:[["[Tražim] ključeve.","I'm looking for my keys."],["Što [tražiš]?","What are you looking for?"]],
- note:"<b>tražiti</b> is the searching, <b>naći</b> is the finding. Phoning someone is <b>zvati</b>."},
-
-{k:null,hr:"naći",en:"to find",pat:"+ accusative",
- c:["nađem","nađeš","nađe","nađemo","nađete","nađu"],
- ex:[["[Našao] sam ključ.","I found the key."],["Ne mogu [naći] mobitel.","I can't find my phone."]]},
-
-{k:null,hr:"misliti",en:"to think",pat:"o + locative · na + accusative",
- c:["mislim","misliš","misli","mislimo","mislite","misle"],
- ex:[["[Mislim] da je dobro.","I think it's fine."],["Na što [misliš]?","What are you thinking about?"]],
- note:"<b>na</b> + accusative for having someone on your mind; <b>o</b> + locative for thinking a subject over."},
-{k:"vidjeti",hr:"vidjeti",en:"to see",pat:"+ accusative",
- c:["vidim","vidiš","vidi","vidimo","vidite","vide"],
- ex:[["[Vidim] more s prozora.","I can see the sea from the window."],["[Vidimo] se sutra!","See you tomorrow!"]],
- note:"<b>Vidimo se!</b> is the everyday goodbye — literally \"we see each other\"."},
-
-{k:null,hr:"čuti",en:"to hear",pat:"+ accusative",
- c:["čujem","čuješ","čuje","čujemo","čujete","čuju"],
- ex:[["[Čuješ] li me?","Can you hear me?"],["Ne [čujem] ništa.","I can't hear anything."]],
- note:"<b>čuti</b> happens to you, <b>slušati</b> you choose. <i>Čujemo se!</i> = we'll speak soon."},
-
-{k:"smijatise",hr:"smijati se",en:"to laugh",pat:"no object · + dative (at someone)",
- c:["smijem se","smiješ se","smije se","smijemo se","smijete se","smiju se"],
- ex:[["Djeca se [smiju].","The children are laughing."],["Zašto se [smiješ]?","Why are you laughing?"]],
- note:"Almost identical to <b>smjeti</b>: <i>smijem</i> I'm allowed, <i>smijem se</i> I'm laughing. Only the <b>se</b> separates them."},
-
-{k:"plakati",hr:"plakati",en:"to cry",pat:"no object",
- c:["plačem","plačeš","plače","plačemo","plačete","plaču"],
- ex:[["Dijete [plače].","The child is crying."],["Nemoj [plakati].","Don't cry."]],
- note:"<b>plakati → plačem</b>: the k turns into č."},
-
-{k:"ustati",hr:"ustati",en:"to get up",pat:"no object · u + accusative (clock time)",
- c:["ustanem","ustaneš","ustane","ustanemo","ustanete","ustanu"],
- ex:[["[Ustanem] u sedam.","I get up at seven."],["Kad [ustaješ] ujutro?","What time do you get up?"]],
- note:"The second sentence uses the ongoing form <b>ustajati → ustajem, ustaješ</b>."},
-
-{k:null,hr:"nedostajati",en:"to miss (someone)",pat:"+ <b>dative</b> — the one missing goes in the dative",
- c:[D,D,"nedostaje",D,D,"nedostaju"],
- ex:[["[Nedostaje] mi obitelj.","I miss my family."],["[Nedostaje] li ti Hrvatska?","Do you miss Croatia?"]],
- note:"The sentence flips: the thing missed becomes the subject. <b>Nedostaješ mi</b> = I miss you."},
-
-{k:null,hr:"nadati se",en:"to hope",pat:"+ dative · da + clause",
- c:["nadam se","nadaš se","nada se","nadamo se","nadate se","nadaju se"],
- ex:[["[Nadam] se da si dobro.","I hope you're well."],["[Nadam] se lijepom vremenu.","I'm hoping for good weather."]]},
-
-{k:null,hr:"zaboraviti",en:"to forget",pat:"+ accusative",
- c:["zaboravim","zaboraviš","zaboravi","zaboravimo","zaboravite","zaborave"],
- ex:[["[Zaboravio] sam ključeve.","I forgot my keys."],["Nemoj [zaboraviti] mlijeko!","Don't forget the milk!"]],
- note:"The past agrees with gender: a man says <b>zaboravio sam</b>, a woman <b>zaboravila sam</b>."},
-
-{k:"setati",hr:"šetati",en:"to stroll",pat:"po + <b>locative</b>",
- c:["šetam","šetaš","šeta","šetamo","šetate","šetaju"],
- ex:[["[Šetam] po gradu.","I'm strolling around the city."],["Idemo [šetati]?","Shall we go for a walk?"]],
- note:"<b>po</b> + locative covers wandering around an area rather than crossing it."},
-
-{k:null,hr:"hodati",en:"to walk",pat:"no object",
- c:["hodam","hodaš","hoda","hodamo","hodate","hodaju"],
- ex:[["[Hodam] polako.","I walk slowly."],["Dijete već [hoda].","The child can walk already."]],
- note:"<b>hodati</b> is the physical act, <b>ići</b> is heading somewhere, <b>šetati</b> is walking for pleasure."},
-
-{k:"trcati",hr:"trčati",en:"to run",pat:"no object · u + locative",
- c:["trčim","trčiš","trči","trčimo","trčite","trče"],
- ex:[["[Trčim] u parku ujutro.","I run in the park in the mornings."],["[Trči], kasnimo!","Run, we're late!"]]},
-
-{k:"peci",hr:"peći",en:"to bake / to roast",pat:"+ accusative",
- c:["pečem","pečeš","peče","pečemo","pečete","peku"],
- ex:[["[Pečem] kruh.","I'm baking bread."],["Mama [peče] kolač.","Mum is baking a cake."]],
- note:"<b>peći</b> is dry heat, <b>kuhati</b> is in a pot. Third plural is <b>peku</b> — k, not č."},
-
-{k:null,hr:"pripremati",en:"to prepare",pat:"+ accusative",
- c:["pripremam","pripremaš","priprema","pripremamo","pripremate","pripremaju"],
- ex:[["[Pripremam] večeru.","I'm preparing dinner."],["Što [pripremaš]?","What are you making?"]]},
-
-{k:null,hr:"napraviti",en:"to make / to do",pat:"+ accusative",
- c:["napravim","napraviš","napravi","napravimo","napravite","naprave"],
- ex:[["[Napravi] mi kavu, molim te.","Make me a coffee, please."],["Što si [napravio]?","What have you done?"]],
- note:"<b>raditi</b> is the doing, <b>napraviti</b> is the finishing."},
-
-{k:null,hr:"razumjeti",en:"to understand",pat:"+ accusative",
- c:["razumijem","razumiješ","razumije","razumijemo","razumijete","razumiju"],
- ex:[["Ne [razumijem].","I don't understand."],["[Razumiješ] li me?","Do you understand me?"]],
- note:"If you learn one sentence from this page, make it <b>Ne razumijem.</b>"},
-
-{k:"pitati",hr:"pitati",en:"to ask",pat:"+ accusative — the person too",
- c:["pitam","pitaš","pita","pitamo","pitate","pitaju"],
- ex:[["[Pitam] učitelja.","I'm asking the teacher."],["Mogu li te nešto [pitati]?","Can I ask you something?"]],
- note:"The person asked goes in the <b>accusative</b>: <i>pitam te</i>. Compare odgovoriti, which wants the dative."},
-
-{k:"odgovoriti",hr:"odgovoriti",en:"to answer",pat:"+ <b>dative</b> (to whom)",
- c:["odgovorim","odgovoriš","odgovori","odgovorimo","odgovorite","odgovore"],
- ex:[["[Odgovori] mi, molim te.","Answer me, please."],["Nije [odgovorio] na poruku.","He didn't reply to the message."]],
- note:"Careful: <b>pitati</b> takes the accusative but <b>odgovoriti</b> takes the dative."},
-
-{k:"zvati",hr:"zvati",en:"to call",pat:"+ accusative",
- c:["zovem","zoveš","zove","zovemo","zovete","zovu"],
- ex:[["[Zovem] mamu.","I'm calling my mum."],["Kako se [zoveš]?","What's your name?"]],
- note:"<b>zvati se</b> is to be called: <i>Zovem se Enes.</i>"},
-
-{k:null,hr:"trebati",en:"to need",pat:"+ accusative · + infinitive",
- c:["trebam","trebaš","treba","trebamo","trebate","trebaju"],
- ex:[["[Trebam] pomoć.","I need help."],["Što ti [treba]?","What do you need?"]],
- note:"Both patterns live side by side: <b>trebam pomoć</b> (you're the subject) and <b>treba mi pomoć</b> (dative — help is needed to me)."},
-
-{k:null,hr:"morati",en:"must / to have to",pat:"+ infinitive",
- c:["moram","moraš","mora","moramo","morate","moraju"],
- ex:[["[Moram] raditi u subotu.","I have to work on Saturday."],["[Moraš] li već ići?","Do you have to go already?"]]},
-
-{k:null,hr:"smjeti",en:"to be allowed to",pat:"+ infinitive",
- c:["smijem","smiješ","smije","smijemo","smijete","smiju"],
- ex:[["Ovdje se ne [smije] pušiti.","Smoking isn't allowed here."],["[Smijem] li ući?","May I come in?"]],
- note:"<b>moći</b> is capability, <b>smjeti</b> is permission. <i>Mogu plivati</i> I can swim; <i>smijem plivati</i> I'm allowed to swim."},
-
-{k:null,hr:"sviđati se",en:"to like",pat:"+ <b>dative</b> — the person who likes goes in the dative",
- c:[D,D,"sviđa se",D,D,"sviđaju se"],
- ex:[["[Sviđa] mi se ovaj grad.","I like this city."],["Kako ti se [sviđa] film?","How do you like the film?"]],
- note:"Not the same as <b>voljeti</b>: <i>volim te</i> I love you, <i>sviđaš mi se</i> I fancy you."},
-
-{k:null,hr:"bojati se",en:"to be afraid",pat:"+ <b>genitive</b>",
- c:["bojim se","bojiš se","boji se","bojimo se","bojite se","boje se"],
- ex:[["[Bojim] se psa.","I'm afraid of the dog."],["Ne [boj] se!","Don't be afraid!"]],
- note:"Genitive follows: <i>bojim se <b>mraka</b></i>, <i>bojim se <b>vode</b></i>."},
-
-{k:null,hr:"sjećati se",en:"to remember",pat:"+ <b>genitive</b>",
- c:["sjećam se","sjećaš se","sjeća se","sjećamo se","sjećate se","sjećaju se"],
- ex:[["[Sjećaš] li me se?","Do you remember me?"],["Ne [sjećam] se njegova imena.","I can't remember his name."]],
- note:"Genitive follows: <i>sjećam se <b>ljeta</b></i>, <i>sjećam se <b>tebe</b></i>."},
-
-{k:null,hr:"brinuti se",en:"to worry / to look after",pat:"o + <b>locative</b>",
- c:["brinem se","brineš se","brine se","brinemo se","brinete se","brinu se"],
- ex:[["Ne [brini]!","Don't worry!"],["[Brinem] se o djeci.","I look after the children."]],
- note:"One verb covers both worrying about someone and taking care of them."},
-
-{k:null,hr:"radovati se",en:"to look forward to",pat:"+ <b>dative</b>",
- c:["radujem se","raduješ se","raduje se","radujemo se","radujete se","raduju se"],
- ex:[["[Radujem] se putovanju.","I'm looking forward to the trip."],["[Raduje] me što te vidim.","It's good to see you."]],
- note:"English needs four words for it: to be gladdened in advance by something."},
-
-{k:"kupatise",hr:"kupati se",en:"to bathe / to swim",pat:"u + <b>locative</b>",
- c:["kupam se","kupaš se","kupa se","kupamo se","kupate se","kupaju se"],
- ex:[["[Kupam] se u moru.","I'm swimming in the sea."],["Idemo se [kupati]!","Let's go for a swim!"]],
- note:"<b>kupati se</b> is being in the water, <b>plivati</b> is doing the strokes."},
-
-{k:"plivati",hr:"plivati",en:"to swim",pat:"no object",
- c:["plivam","plivaš","pliva","plivamo","plivate","plivaju"],
- ex:[["[Plivam] svaki dan.","I swim every day."],["Znaš li [plivati]?","Can you swim?"]]},
-
-{k:"uci",hr:"ući",en:"to enter",pat:"u + <b>accusative</b>",
- c:["uđem","uđeš","uđe","uđemo","uđete","uđu"],
- ex:[["[Uđi], molim te.","Come in, please."],["[Ušao] sam u sobu.","I went into the room."]]},
-
-{k:"izaci",hr:"izaći",en:"to go out",pat:"iz + <b>genitive</b>",
- c:["izađem","izađeš","izađe","izađemo","izađete","izađu"],
- ex:[["[Izađem] iz kuće u osam.","I leave the house at eight."],["Hoćemo li [izaći] večeras?","Shall we go out tonight?"]],
- note:"<b>iz</b> + genitive: <i>iz kuće, iz grada, iz auta</i>."},
-
-{k:"sjediti",hr:"sjediti",en:"to sit (be seated)",pat:"u / na + <b>locative</b>",
- c:["sjedim","sjediš","sjedi","sjedimo","sjedite","sjede"],
- ex:[["[Sjedim] u kafiću.","I'm sitting in a café."],["[Sjedimo] vani.","We're sitting outside."]],
- note:"Being seated is <b>sjediti</b> + locative. The act of sitting down is <b>sjesti</b> + accusative."},
-
-{k:null,hr:"sjesti",en:"to sit down",pat:"na + <b>accusative</b> — motion",
- c:["sjednem","sjedneš","sjedne","sjednemo","sjednete","sjednu"],
- ex:[["[Sjedni] ovdje.","Sit here."],["Možemo li [sjesti] vani?","Can we sit outside?"]],
- note:"Motion → accusative: <i>sjednem <b>na stolicu</b></i>. Position → locative: <i>sjedim <b>na stolici</b></i>."},
-
-{k:"stajati",hr:"stajati",en:"to stand",pat:"no object",
- c:["stojim","stojiš","stoji","stojimo","stojite","stoje"],
- ex:[["[Stojim] ispred kuće.","I'm standing in front of the house."],["Zašto [stojiš]? Sjedni!","Why are you standing? Sit down!"]],
- note:"Infinitive and stem drift apart: <b>stajati → stojim</b>."},
-
-{k:"lezati",hr:"ležati",en:"to lie (be lying)",pat:"na + <b>locative</b>",
- c:["ležim","ležiš","leži","ležimo","ležite","leže"],
- ex:[["[Ležim] na plaži.","I'm lying on the beach."],["Knjiga [leži] na stolu.","The book is lying on the table."]]},
-
-{k:null,hr:"leći",en:"to lie down",pat:"na + <b>accusative</b> — motion",
- c:["legnem","legneš","legne","legnemo","legnete","legnu"],
- ex:[["Idem [leći].","I'm going to lie down."],["[Legnem] u deset.","I go to bed at ten."]],
- note:"<b>ležati / leći</b> works exactly like <b>sjediti / sjesti</b>: position locative, movement accusative."},
-{k:"oblacitise",hr:"oblačiti se",en:"to get dressed",pat:"no object — takes <b>se</b>",
- c:["oblačim se","oblačiš se","oblači se","oblačimo se","oblačite se","oblače se"],
- ex:[["[Oblačim] se brzo.","I get dressed quickly."],["Što [oblačiš] danas?","What are you wearing today?"]],
- note:"Drop the <b>se</b> and you need an object: <i>oblačim dijete</i>, I'm dressing the child."},
-
-{k:"tusiratise",hr:"tuširati se",en:"to shower",pat:"no object — takes <b>se</b>",
- c:["tuširam se","tuširaš se","tušira se","tuširamo se","tuširate se","tuširaju se"],
- ex:[["[Tuširam] se ujutro.","I shower in the mornings."],["Idem se [tuširati].","I'm off to shower."]],
- note:"<b>ujutro</b> is mornings in general; <b>jutros</b> is this particular morning."},
-
-{k:null,hr:"kupiti",en:"to buy (once)",pat:"+ accusative",
- c:["kupim","kupiš","kupi","kupimo","kupite","kupe"],
- ex:[["[Kupio] sam kruh.","I bought bread."],["Što da [kupim]?","What should I buy?"]],
- note:"<b>kupiti</b> is one purchase, <b>kupovati</b> is shopping as a habit."},
-
-{k:null,hr:"prodati",en:"to sell",pat:"+ accusative",
- c:["prodam","prodaš","proda","prodamo","prodate","prodaju"],
- ex:[["[Prodali] su auto.","They sold the car."],["Želim [prodati] mobitel.","I want to sell my phone."]]},
-
-{k:"platiti",hr:"platiti",en:"to pay",pat:"+ accusative",
- c:["platim","platiš","plati","platimo","platite","plate"],
- ex:[["Mogu li [platiti] karticom?","Can I pay by card?"],["[Platio] sam račun.","I paid the bill."]],
- note:"The past agrees with gender: a man says <b>platio sam</b>, a woman <b>platila sam</b>."},
-
-{k:"kostati",hr:"koštati",en:"to cost",pat:"no object — third person only",
- c:[D,D,"košta",D,D,"koštaju"],
- ex:[["Kava [košta] dva eura.","The coffee costs two euros."],["Koliko [košta]?","How much is it?"]],
- note:"Only <b>košta / koštaju</b> ever appear. <i>Koliko košta?</i> is the sentence you'll use most in a shop."},
-
-{k:"dati",hr:"dati",en:"to give",pat:"+ accusative (what) · + dative (to whom)",
- c:["dam","daš","da","damo","date","daju"],
- ex:[["[Daj] mi to, molim te.","Give me that, please."],["[Dam] knjigu prijatelju.","I give the book to my friend."]],
- note:"Two objects: the thing given is accusative, the person receiving is dative."},
-
-{k:"uzeti",hr:"uzeti",en:"to take",pat:"+ accusative",
- c:["uzmem","uzmeš","uzme","uzmemo","uzmete","uzmu"],
- ex:[["[Uzmi] torbu.","Take the bag."],["[Uzet] ću kavu, molim.","I'll have a coffee, please."]],
- note:"<b>uzeti</b> is picking something up, <b>kupiti</b> is paying for it. Ordering at a café uses <i>uzet ću</i>."},
-
-{k:null,hr:"donijeti",en:"to bring",pat:"+ accusative",
- c:["donesem","doneseš","donese","donesemo","donesete","donesu"],
- ex:[["[Donesi] mi vodu, molim te.","Bring me water, please."],["Što da [donesem]?","What should I bring?"]]},
-
-{k:"nositi",hr:"nositi",en:"to carry / to wear",pat:"+ accusative",
- c:["nosim","nosiš","nosi","nosimo","nosite","nose"],
- ex:[["[Nosim] jaknu.","I'm wearing a jacket."],["Da ti [nosim] torbu?","Shall I carry your bag?"]],
- note:"Carrying something and wearing it are the same verb here."},
-
-{k:"staviti",hr:"staviti",en:"to put",pat:"u / na + <b>accusative</b>",
- c:["stavim","staviš","stavi","stavimo","stavite","stave"],
- ex:[["[Stavi] knjigu na stol.","Put the book on the table."],["Gdje da [stavim] torbu?","Where should I put my bag?"]],
- note:"There's movement, so accusative: <i>na stol</i>, not <i>na stolu</i>."},
-
-{k:"upaliti",hr:"upaliti",en:"to turn on",pat:"+ accusative",
- c:["upalim","upališ","upali","upalimo","upalite","upale"],
- ex:[["[Upali] svjetlo.","Turn on the light."],["Možeš li [upaliti] klimu?","Can you turn on the air conditioning?"]],
- note:"Devices are <b>upaliti</b>; doors and windows are <b>otvoriti</b>. English uses \"open\" for neither."},
-
-{k:"ugasiti",hr:"ugasiti",en:"to turn off",pat:"+ accusative",
- c:["ugasim","ugasiš","ugasi","ugasimo","ugasite","ugase"],
- ex:[["[Ugasi] televizor.","Turn off the television."],["Jesi li [ugasio] svjetlo?","Did you turn off the light?"]]},
-
-{k:"razgovarati",hr:"razgovarati",en:"to converse",pat:"s + <b>instrumental</b> · o + locative",
- c:["razgovaram","razgovaraš","razgovara","razgovaramo","razgovarate","razgovaraju"],
- ex:[["[Razgovaram] s prijateljem.","I'm talking with a friend."],["Moramo [razgovarati].","We need to talk."]],
- note:"Who with? <b>s</b> + instrumental. What about? <b>o</b> + locative."},
-
-{k:null,hr:"pričati",en:"to tell / to chat",pat:"o + <b>locative</b>",
- c:["pričam","pričaš","priča","pričamo","pričate","pričaju"],
- ex:[["[Pričaj] mi o putovanju.","Tell me about the trip."],["O čemu [pričate]?","What are you talking about?"]],
- note:"Talking about a topic needs <b>o</b> + locative: <i>pričam <b>o poslu</b></i>."},
-
-{k:null,hr:"reći",en:"to say",pat:"+ dative (to whom) · + accusative (what)",
- c:["kažem","kažeš","kaže","kažemo","kažete","kažu"],
- ex:[["[Reci] mi istinu.","Tell me the truth."],["Što si [rekao]?","What did you say?"]],
- note:"Infinitive and present share nothing: <b>reći → kažem</b>. The imperative is <b>reci</b>."},
-
-{k:null,hr:"objasniti",en:"to explain",pat:"+ accusative (what) · + dative (to whom)",
- c:["objasnim","objasniš","objasni","objasnimo","objasnite","objasne"],
- ex:[["Možeš li mi [objasniti]?","Can you explain it to me?"],["[Objasni] mi to još jednom.","Explain that to me once more."]]},
-
-{k:"ponoviti",hr:"ponoviti",en:"to repeat",pat:"+ accusative",
- c:["ponovim","ponoviš","ponovi","ponovimo","ponovite","ponove"],
- ex:[["Možete li [ponoviti], molim?","Could you repeat that, please?"],["[Ponovi] to još jednom.","Say it once more."]],
- note:"The first thing you'll reach for when someone speaks too fast."},
-
-{k:null,hr:"posjetiti",en:"to visit",pat:"+ accusative",
- c:["posjetim","posjetiš","posjeti","posjetimo","posjetite","posjete"],
- ex:[["[Posjetit] ću baku.","I'll visit my grandmother."],["Došli su nas [posjetiti].","They came to visit us."]]},
-
-{k:null,hr:"upoznati",en:"to meet / to introduce",pat:"+ accusative",
- c:["upoznam","upoznaš","upozna","upoznamo","upoznate","upoznaju"],
- ex:[["Drago mi je što smo se [upoznali].","Nice to have met you."],["Želim te [upoznati] s Anom.","I want to introduce you to Ana."]],
- note:"With <b>se</b> it becomes mutual: <i>upoznali smo se</i>, we met."},
-
-{k:null,hr:"probati",en:"to try",pat:"+ accusative · + infinitive",
- c:["probam","probaš","proba","probamo","probate","probaju"],
- ex:[["[Probaj] ovo!","Try this!"],["Mogu li [probati]?","Can I try it?"]],
- note:"Tasting food, trying on clothes and attempting something all use this one verb."},
-
-{k:null,hr:"osjećati se",en:"to feel",pat:"no object + <b>adverb</b>",
- c:["osjećam se","osjećaš se","osjeća se","osjećamo se","osjećate se","osjećaju se"],
- ex:[["Kako se [osjećaš]?","How do you feel?"],["[Osjećam] se dobro.","I feel good."]],
- note:"An adverb follows, not an adjective: <i>dobr<b>o</b></i>, <i>loš<b>e</b></i>, <i>umorn<b>o</b></i>."},
-
-{k:"boljeti",hr:"boljeti",en:"to hurt",pat:"+ <b>accusative</b> — the person in pain goes in the accusative",
- c:[D,D,"boli",D,D,"bole"],
- ex:[["[Boli] me glava.","My head hurts."],["[Bole] me noge.","My legs hurt."]],
- note:"Third person only: <b>boli me / boli te / boli ga</b>. The aching part is the subject, you are the object."},
-
-{k:null,hr:"izgledati",en:"to look / to seem",pat:"no object + <b>adverb</b>",
- c:["izgledam","izgledaš","izgleda","izgledamo","izgledate","izgledaju"],
- ex:[["[Izgledaš] umorno.","You look tired."],["Ovo jelo [izgleda] odlično.","This dish looks excellent."]],
- note:"An adverb follows, not an adjective: <i>umorn<b>o</b></i>, <i>dobr<b>o</b></i>, <i>lijep<b>o</b></i>."},
-
-{k:null,hr:"izgubiti",en:"to lose",pat:"+ accusative",
- c:["izgubim","izgubiš","izgubi","izgubimo","izgubite","izgube"],
- ex:[["[Izgubio] sam ključ.","I lost my key."],["Bojim se da ću [izgubiti] posao.","I'm afraid I'll lose my job."]],
- note:"With <b>se</b> it means getting lost: <i>izgubio sam se</i>."},
-
-{k:null,hr:"vjerovati",en:"to believe",pat:"+ <b>dative</b>",
- c:["vjerujem","vjeruješ","vjeruje","vjerujemo","vjerujete","vjeruju"],
- ex:[["[Vjerujem] ti.","I believe you."],["Ne mogu [vjerovati]!","I can't believe it!"]],
- note:"Dative follows: <i>vjerujem <b>ti</b></i>, <i>vjerujem <b>mu</b></i>."},
-
-{k:null,hr:"pozvati",en:"to invite",pat:"+ accusative",
- c:["pozovem","pozoveš","pozove","pozovemo","pozovete","pozovu"],
- ex:[["[Pozvao] sam prijatelje.","I invited my friends."],["Hoćeš li ih [pozvati]?","Are you going to invite them?"]]},
-
-{k:"slaviti",hr:"slaviti",en:"to celebrate",pat:"+ accusative",
- c:["slavim","slaviš","slavi","slavimo","slavite","slave"],
- ex:[["[Slavim] rođendan.","I'm celebrating my birthday."],["Što [slavite]?","What are you celebrating?"]]},
-
-{k:null,hr:"paziti",en:"to be careful / to look after",pat:"na + <b>accusative</b>",
- c:["pazim","paziš","pazi","pazimo","pazite","paze"],
- ex:[["[Pazi]!","Careful!"],["[Pazim] na djecu.","I'm looking after the children."]],
- note:"A single word, <b>Pazi!</b>, is the warning you'll hear most often in the street."},
-
-{k:null,hr:"početi",en:"to begin",pat:"+ accusative · + infinitive",
- c:["počnem","počneš","počne","počnemo","počnete","počnu"],
- ex:[["[Počnimo]!","Let's begin!"],["[Počeo] sam učiti hrvatski.","I've started learning Croatian."]],
- note:"The ongoing form is <b>počinjati</b>: <i>film počinje u osam</i>, the film starts at eight."},
-
-{k:null,hr:"završiti",en:"to finish",pat:"+ accusative",
- c:["završim","završiš","završi","završimo","završite","završe"],
- ex:[["[Završio] sam posao.","I've finished the job."],["Moram [završiti] do petka.","I have to finish by Friday."]]},
-
-{k:null,hr:"ostati",en:"to stay",pat:"u / na + <b>locative</b>",
- c:["ostanem","ostaneš","ostane","ostanemo","ostanete","ostanu"],
- ex:[["[Ostani] još malo.","Stay a bit longer."],["[Ostao] sam u hotelu.","I stayed at the hotel."]]},
-
-{k:"vratitise",hr:"vratiti se",en:"to return",pat:"iz + <b>genitive</b>",
- c:["vratim se","vratiš se","vrati se","vratimo se","vratite se","vrate se"],
- ex:[["[Vratim] se iz škole u tri.","I come back from school at three."],["Kad se [vraćaš]?","When are you coming back?"]],
- note:"The second sentence uses the ongoing form <b>vraćati se → vraćam se</b>."},
-
-{k:"letjeti",hr:"letjeti",en:"to fly",pat:"u / na + <b>accusative</b>",
- c:["letim","letiš","leti","letimo","letite","lete"],
- ex:[["[Letim] u Zagreb.","I'm flying to Zagreb."],["Avion [leti] u sedam.","The plane leaves at seven."]]},
-
-{k:null,hr:"stanovati",en:"to reside",pat:"u + <b>locative</b>",
- c:["stanujem","stanuješ","stanuje","stanujemo","stanujete","stanuju"],
- ex:[["[Stanujem] u Splitu.","I live in Split."],["Gdje [stanuješ]?","Where do you live?"]],
- note:"<b>stanovati</b> points at the address, <b>živjeti</b> at the life. Both are correct, the emphasis differs."}
-];
-
-/* ================= helpers ================= */
-function cue(s){return s.replace(/\[(.+?)\]/g,'<span class="blank">&nbsp;</span>')}
-function full(s){return s.replace(/\[(.+?)\]/g,'<span class="hit">$1</span>')}
-function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
-function pool(){
-  if(filter==='icon')return V.filter(function(v){return v.k});
-  if(filter==='ctx')return V.filter(function(v){return !v.k});
-  return V.slice();
-}
-
-/* ================= state ================= */
-var PER_ROUND=20;
-var order=[],idx=0,shown=false,again=[],mode='quiz',filter='all';
-var view=document.getElementById('view');
-
-function start(){
-  order=shuffle(pool()).slice(0,PER_ROUND);
-  idx=0;shown=false;again=[];render();
-}
-
-function render(){
-  if(mode==='gallery')return gallery();
-  if(idx>=order.length)return result();
-  var v=order[idx],h='';
-
-  h+='<div class="quizbar"><span class="count">'+(idx+1)+' / '+order.length+'</span>'+
-     '<span class="score">'+(v.k?'drawn':'context')+'</span></div>';
-  h+='<div class="progress"><i style="width:'+(idx/order.length*100)+'%"></i></div>';
-
-  if(v.k){
-    h+='<div class="pcard"><span class="n">'+String(idx+1).padStart(2,'0')+'</span>'+svg(v.k)+
-       (shown?'':'<p class="ask">which verb is this?</p>')+'</div>';
-  }else{
-    h+='<div class="ccard"><span class="n">'+String(idx+1).padStart(2,'0')+'</span>';
-    for(var j=0;j<v.ex.length;j++){
-      h+='<div class="line">'+(shown?full(v.ex[j][0]):cue(v.ex[j][0]))+'</div>';
-    }
-    h+=(shown?'':'<p class="ask">which verb fills the gap?</p>')+'</div>';
-  }
-
-  if(!shown){
-    h+='<div class="btnrow"><button class="btn block" onclick="reveal()">Reveal</button></div>';
-  }else{
-    h+='<div class="answer">';
-    h+='<div class="head"><p class="hrv">'+v.hr+'</p><p class="en">'+v.en+'</p><p class="rec">'+v.pat+'</p></div>';
-    h+='<div class="conj">';
-    for(var i=0;i<6;i++){
-      h+='<div><span class="p">'+PRON[i]+'</span>'+
-         (v.c[i]===D?'<span style="color:var(--stone)">—</span>':v.c[i])+'</div>';
-    }
-    h+='</div>';
-    for(var e=0;e<v.ex.length;e++){
-      h+='<div class="sent"><div class="hr">'+full(v.ex[e][0])+'</div><div class="gl">'+v.ex[e][1]+'</div></div>';
-    }
-    if(v.note)h+='<div class="why">'+v.note+'</div>';
-    h+='</div>';
-    h+='<div class="btnrow">'+
-       '<button class="btn" onclick="next(false)">Knew it</button>'+
-       '<button class="btn ghost" onclick="next(true)">Practise again</button>'+
-       '</div>';
-  }
-  view.innerHTML=h;window.scrollTo(0,0);
-}
-
-function reveal(){shown=true;render()}
-function next(f){if(f)again.push(order[idx]);idx++;shown=false;render()}
-
-function result(){
-  var got=order.length-again.length,h='';
-  h+='<div class="result"><div class="glag">Ⰷ</div>'+
-     '<p class="big">'+got+'</p><p class="of">of '+order.length+' without a second look</p>';
-  h+='<p class="verdict">'+(again.length===0?'Nothing left to repeat.':
-      again.length<4?'Almost there.':'Worth another pass.')+'</p></div>';
-  if(again.length){
-    h+='<ul class="talk">';
-    for(var i=0;i<again.length;i++){
-      h+='<li><span class="hr">'+again[i].hr+'</span><span class="en">'+again[i].en+'</span></li>';
-    }
-    h+='</ul>';
-    h+='<div class="btnrow"><button class="btn" onclick="drill()">Repeat these '+again.length+'</button>'+
-       '<button class="btn ghost" onclick="start()">New round</button></div>';
-  }else{
-    h+='<div class="btnrow"><button class="btn block" onclick="start()">New round</button></div>';
-  }
-  view.innerHTML=h;window.scrollTo(0,0);
-}
-function drill(){order=shuffle(again.slice());idx=0;shown=false;again=[];render()}
-
-function gallery(){
-  var p=pool(),h='',ic=p.filter(function(v){return v.k}),cx=p.filter(function(v){return !v.k});
-  if(ic.length){
-    h+='<h3 class="sub">Drawn — '+ic.length+' verbs</h3><div class="iconwall">';
-    for(var i=0;i<ic.length;i++){
-      h+='<div class="box">'+svg(ic[i].k)+'<span class="w">'+ic[i].hr+'</span>'+
-         '<span class="g">'+ic[i].en+'</span></div>';
-    }
-    h+='</div>';
-  }
-  if(cx.length){
-    h+='<h3 class="sub">Context — '+cx.length+' verbs</h3><ul class="talk">';
-    for(var j=0;j<cx.length;j++){
-      h+='<li><span class="hr">'+full(cx[j].ex[0][0])+'</span>'+
-         '<span class="en">'+cx[j].hr+' · '+cx[j].en+'</span></li>';
-    }
-    h+='</ul>';
-  }
-  view.innerHTML=h;window.scrollTo(0,0);
-}
-
-document.getElementById('mode').addEventListener('click',function(e){
-  var b=e.target.closest('button');if(!b)return;
-  [].forEach.call(this.children,function(c){c.classList.remove('on')});
-  b.classList.add('on');mode=b.dataset.m;
-  if(mode==='quiz'&&idx>=order.length){start()}else{render()}
+var VERBS = [{"hr": "biti", "en": "to be", "conj": ["sam", "si", "je", "smo", "ste", "su"], "pat": "+ nominative", "ex": "Ja sam student.", "gloss": "I'm a student."}, {"hr": "imati", "en": "to have", "conj": ["imam", "imaš", "ima", "imamo", "imate", "imaju"], "pat": "+ accusative", "ex": "Imam auto.", "gloss": "I have a car."}, {"hr": "raditi", "en": "to work / to do", "conj": ["radim", "radiš", "radi", "radimo", "radite", "rade"], "pat": "u / na + locative (place)", "ex": "Radim u uredu.", "gloss": "I work in an office."}, {"hr": "jesti", "en": "to eat", "conj": ["jedem", "jedeš", "jede", "jedemo", "jedete", "jedu"], "pat": "+ accusative", "ex": "Jedem kruh.", "gloss": "I'm eating bread."}, {"hr": "piti", "en": "to drink", "conj": ["pijem", "piješ", "pije", "pijemo", "pijete", "piju"], "pat": "+ accusative", "ex": "Pijem vodu.", "gloss": "I'm drinking water."}, {"hr": "spavati", "en": "to sleep", "conj": ["spavam", "spavaš", "spava", "spavamo", "spavate", "spavaju"], "pat": "no object · u + locative", "ex": "Spavam u sobi.", "gloss": "I sleep in the room."}, {"hr": "ići", "en": "to go", "conj": ["idem", "ideš", "ide", "idemo", "idete", "idu"], "pat": "u / na + accusative (motion)", "ex": "Idem u grad.", "gloss": "I'm going into town."}, {"hr": "doći", "en": "to come", "conj": ["dođem", "dođeš", "dođe", "dođemo", "dođete", "dođu"], "pat": "u / na + accusative (motion)", "ex": "Došao sam u Zagreb.", "gloss": "I came to Zagreb."}, {"hr": "gledati", "en": "to watch", "conj": ["gledam", "gledaš", "gleda", "gledamo", "gledate", "gledaju"], "pat": "+ accusative", "ex": "Gledam film.", "gloss": "I'm watching a film."}, {"hr": "slušati", "en": "to listen", "conj": ["slušam", "slušaš", "sluša", "slušamo", "slušate", "slušaju"], "pat": "+ accusative — no preposition", "ex": "Slušam glazbu.", "gloss": "I'm listening to music."}, {"hr": "govoriti", "en": "to speak", "conj": ["govorim", "govoriš", "govori", "govorimo", "govorite", "govore"], "pat": "o + locative · + accusative (a language)", "ex": "Govorim o poslu.", "gloss": "I'm talking about work."}, {"hr": "čitati", "en": "to read", "conj": ["čitam", "čitaš", "čita", "čitamo", "čitate", "čitaju"], "pat": "+ accusative", "ex": "Čitam knjigu.", "gloss": "I'm reading a book."}, {"hr": "pisati", "en": "to write", "conj": ["pišem", "pišeš", "piše", "pišemo", "pišete", "pišu"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Pišem pismo majci.", "gloss": "I'm writing a letter to my mother."}, {"hr": "učiti", "en": "to study / to learn", "conj": ["učim", "učiš", "uči", "učimo", "učite", "uče"], "pat": "+ accusative", "ex": "Učim hrvatski.", "gloss": "I'm learning Croatian."}, {"hr": "kupovati", "en": "to buy / to shop", "conj": ["kupujem", "kupuješ", "kupuje", "kupujemo", "kupujete", "kupuju"], "pat": "+ accusative", "ex": "Kupujem kruh.", "gloss": "I'm buying bread."}, {"hr": "voljeti", "en": "to love", "conj": ["volim", "voliš", "voli", "volimo", "volite", "vole"], "pat": "+ accusative", "ex": "Volim more.", "gloss": "I love the sea."}, {"hr": "znati", "en": "to know", "conj": ["znam", "znaš", "zna", "znamo", "znate", "znaju"], "pat": "+ accusative", "ex": "Znam odgovor.", "gloss": "I know the answer."}, {"hr": "htjeti", "en": "to want", "conj": ["hoću", "hoćeš", "hoće", "hoćemo", "hoćete", "hoće"], "pat": "+ accusative · + infinitive", "ex": "Hoću kavu.", "gloss": "I want a coffee."}, {"hr": "moći", "en": "can / to be able to", "conj": ["mogu", "možeš", "može", "možemo", "možete", "mogu"], "pat": "+ infinitive", "ex": "Mogu doći.", "gloss": "I can come."}, {"hr": "živjeti", "en": "to live", "conj": ["živim", "živiš", "živi", "živimo", "živite", "žive"], "pat": "u + locative", "ex": "Živim u Zagrebu.", "gloss": "I live in Zagreb."}, {"hr": "igrati se", "en": "to play", "conj": ["igram se", "igraš se", "igra se", "igramo se", "igrate se", "igraju se"], "pat": "s + instrumental · u + locative", "ex": "Djeca se igraju u parku.", "gloss": "The children are playing in the park."}, {"hr": "plesati", "en": "to dance", "conj": ["plešem", "plešeš", "pleše", "plešemo", "plešete", "plešu"], "pat": "no object · u + locative", "ex": "Plešem u klubu.", "gloss": "I'm dancing at the club."}, {"hr": "pjevati", "en": "to sing", "conj": ["pjevam", "pjevaš", "pjeva", "pjevamo", "pjevate", "pjevaju"], "pat": "+ accusative", "ex": "Pjevam pjesmu.", "gloss": "I'm singing a song."}, {"hr": "kuhati", "en": "to cook", "conj": ["kuham", "kuhaš", "kuha", "kuhamo", "kuhate", "kuhaju"], "pat": "+ accusative", "ex": "Kuham ribu.", "gloss": "I'm cooking fish."}, {"hr": "čistiti", "en": "to clean", "conj": ["čistim", "čistiš", "čisti", "čistimo", "čistite", "čiste"], "pat": "+ accusative", "ex": "Čistim sobu.", "gloss": "I'm cleaning the room."}, {"hr": "prati", "en": "to wash", "conj": ["perem", "pereš", "pere", "peremo", "perete", "peru"], "pat": "+ accusative", "ex": "Perem auto.", "gloss": "I'm washing the car."}, {"hr": "voziti", "en": "to drive", "conj": ["vozim", "voziš", "vozi", "vozimo", "vozite", "voze"], "pat": "+ accusative", "ex": "Vozim auto.", "gloss": "I'm driving the car."}, {"hr": "putovati", "en": "to travel", "conj": ["putujem", "putuješ", "putuje", "putujemo", "putujete", "putuju"], "pat": "u / na + accusative", "ex": "Putujem u Split.", "gloss": "I'm travelling to Split."}, {"hr": "čekati", "en": "to wait", "conj": ["čekam", "čekaš", "čeka", "čekamo", "čekate", "čekaju"], "pat": "+ accusative — no preposition", "ex": "Čekam autobus.", "gloss": "I'm waiting for the bus."}, {"hr": "otvoriti", "en": "to open", "conj": ["otvorim", "otvoriš", "otvori", "otvorimo", "otvorite", "otvore"], "pat": "+ accusative", "ex": "Otvorim prozor.", "gloss": "I open the window."}, {"hr": "zatvoriti", "en": "to close", "conj": ["zatvorim", "zatvoriš", "zatvori", "zatvorimo", "zatvorite", "zatvore"], "pat": "+ accusative", "ex": "Zatvorim vrata.", "gloss": "I close the door."}, {"hr": "pomoći", "en": "to help", "conj": ["pomognem", "pomogneš", "pomogne", "pomognemo", "pomognete", "pomognu"], "pat": "+ <b>dative</b> — not the accusative", "ex": "Pomognem majci.", "gloss": "I help my mother."}, {"hr": "tražiti", "en": "to look for", "conj": ["tražim", "tražiš", "traži", "tražimo", "tražite", "traže"], "pat": "+ accusative — no preposition", "ex": "Tražim ključ.", "gloss": "I'm looking for the key."}, {"hr": "naći", "en": "to find", "conj": ["nađem", "nađeš", "nađe", "nađemo", "nađete", "nađu"], "pat": "+ accusative", "ex": "Našao sam ključ.", "gloss": "I found the key."}, {"hr": "misliti", "en": "to think", "conj": ["mislim", "misliš", "misli", "mislimo", "mislite", "misle"], "pat": "o + locative · na + accusative", "ex": "Mislim o poslu.", "gloss": "I'm thinking about work."}, {"hr": "vidjeti", "en": "to see", "conj": ["vidim", "vidiš", "vidi", "vidimo", "vidite", "vide"], "pat": "+ accusative", "ex": "Vidim more.", "gloss": "I see the sea."}, {"hr": "čuti", "en": "to hear", "conj": ["čujem", "čuješ", "čuje", "čujemo", "čujete", "čuju"], "pat": "+ accusative", "ex": "Čujem glazbu.", "gloss": "I hear the music."}, {"hr": "smijati se", "en": "to laugh", "conj": ["smijem se", "smiješ se", "smije se", "smijemo se", "smijete se", "smiju se"], "pat": "no object · + dative (to laugh at someone)", "ex": "Djeca se smiju.", "gloss": "The children are laughing."}, {"hr": "plakati", "en": "to cry", "conj": ["plačem", "plačeš", "plače", "plačemo", "plačete", "plaču"], "pat": "no object", "ex": "Dijete plače.", "gloss": "The child is crying."}, {"hr": "ustati", "en": "to get up", "conj": ["ustanem", "ustaneš", "ustane", "ustanemo", "ustanete", "ustanu"], "pat": "no object · u + accusative (clock time)", "ex": "Ustanem u sedam.", "gloss": "I get up at seven."}, {"hr": "nedostajati", "en": "to miss (someone)", "conj": ["nedostajem", "nedostaješ", "nedostaje", "nedostajemo", "nedostajete", "nedostaju"], "pat": "+ <b>dative</b> — the one doing the missing goes in the dative", "ex": "Nedostaje mi obitelj.", "gloss": "I miss my family. (literally: my family is missing to me)"}, {"hr": "nadati se", "en": "to hope", "conj": ["nadam se", "nadaš se", "nada se", "nadamo se", "nadate se", "nadaju se"], "pat": "+ dative · da + clause", "ex": "Nadam se lijepom vremenu.", "gloss": "I'm hoping for good weather."}, {"hr": "zaboraviti", "en": "to forget", "conj": ["zaboravim", "zaboraviš", "zaboravi", "zaboravimo", "zaboravite", "zaborave"], "pat": "+ accusative", "ex": "Zaboravio sam ključ.", "gloss": "I forgot the key."}, {"hr": "šetati", "en": "to stroll / to walk around", "conj": ["šetam", "šetaš", "šeta", "šetamo", "šetate", "šetaju"], "pat": "po + locative", "ex": "Šetam po gradu.", "gloss": "I'm strolling around the city."}, {"hr": "hodati", "en": "to walk", "conj": ["hodam", "hodaš", "hoda", "hodamo", "hodate", "hodaju"], "pat": "no object", "ex": "Hodam polako.", "gloss": "I walk slowly."}, {"hr": "trčati", "en": "to run", "conj": ["trčim", "trčiš", "trči", "trčimo", "trčite", "trče"], "pat": "no object · u + locative", "ex": "Trčim u parku.", "gloss": "I run in the park."}, {"hr": "peći", "en": "to bake / to roast", "conj": ["pečem", "pečeš", "peče", "pečemo", "pečete", "peku"], "pat": "+ accusative", "ex": "Pečem kruh.", "gloss": "I'm baking bread."}, {"hr": "pripremati", "en": "to prepare", "conj": ["pripremam", "pripremaš", "priprema", "pripremamo", "pripremate", "pripremaju"], "pat": "+ accusative", "ex": "Pripremam večeru.", "gloss": "I'm preparing dinner."}, {"hr": "napraviti", "en": "to make / to do", "conj": ["napravim", "napraviš", "napravi", "napravimo", "napravite", "naprave"], "pat": "+ accusative", "ex": "Napravim kavu.", "gloss": "I make a coffee."}, {"hr": "razumjeti", "en": "to understand", "conj": ["razumijem", "razumiješ", "razumije", "razumijemo", "razumijete", "razumiju"], "pat": "+ accusative", "ex": "Razumijem hrvatski.", "gloss": "I understand Croatian."}, {"hr": "pitati", "en": "to ask", "conj": ["pitam", "pitaš", "pita", "pitamo", "pitate", "pitaju"], "pat": "+ accusative — the person too", "ex": "Pitam učitelja.", "gloss": "I'm asking the teacher."}, {"hr": "odgovoriti", "en": "to answer", "conj": ["odgovorim", "odgovoriš", "odgovori", "odgovorimo", "odgovorite", "odgovore"], "pat": "+ dative (to whom)", "ex": "Odgovorim prijatelju.", "gloss": "I answer my friend."}, {"hr": "zvati", "en": "to call", "conj": ["zovem", "zoveš", "zove", "zovemo", "zovete", "zovu"], "pat": "+ accusative", "ex": "Zovem majku.", "gloss": "I'm calling my mother."}, {"hr": "trebati", "en": "to need", "conj": ["trebam", "trebaš", "treba", "trebamo", "trebate", "trebaju"], "pat": "+ accusative · + infinitive", "ex": "Trebam pomoć.", "gloss": "I need help."}, {"hr": "morati", "en": "must / to have to", "conj": ["moram", "moraš", "mora", "moramo", "morate", "moraju"], "pat": "+ infinitive", "ex": "Moram raditi.", "gloss": "I have to work."}, {"hr": "smjeti", "en": "to be allowed to", "conj": ["smijem", "smiješ", "smije", "smijemo", "smijete", "smiju"], "pat": "+ infinitive", "ex": "Smijem ući.", "gloss": "I'm allowed in."}, {"hr": "sviđati se", "en": "to like", "conj": ["sviđam se", "sviđaš se", "sviđa se", "sviđamo se", "sviđate se", "sviđaju se"], "pat": "+ <b>dative</b> — the person who likes it goes in the dative", "ex": "Sviđa mi se grad.", "gloss": "I like the city."}, {"hr": "bojati se", "en": "to be afraid", "conj": ["bojim se", "bojiš se", "boji se", "bojimo se", "bojite se", "boje se"], "pat": "+ <b>genitive</b>", "ex": "Bojim se psa.", "gloss": "I'm afraid of the dog."}, {"hr": "sjećati se", "en": "to remember", "conj": ["sjećam se", "sjećaš se", "sjeća se", "sjećamo se", "sjećate se", "sjećaju se"], "pat": "+ <b>genitive</b>", "ex": "Sjećam se ljeta.", "gloss": "I remember the summer."}, {"hr": "brinuti se", "en": "to worry", "conj": ["brinem se", "brineš se", "brine se", "brinemo se", "brinete se", "brinu se"], "pat": "o + locative", "ex": "Brinem se o djeci.", "gloss": "I worry about the children."}, {"hr": "radovati se", "en": "to look forward to", "conj": ["radujem se", "raduješ se", "raduje se", "radujemo se", "radujete se", "raduju se"], "pat": "+ dative", "ex": "Radujem se putovanju.", "gloss": "I'm looking forward to the trip."}, {"hr": "kupati se", "en": "to bathe / to swim", "conj": ["kupam se", "kupaš se", "kupa se", "kupamo se", "kupate se", "kupaju se"], "pat": "u + locative", "ex": "Kupam se u moru.", "gloss": "I'm swimming in the sea."}, {"hr": "plivati", "en": "to swim", "conj": ["plivam", "plivaš", "pliva", "plivamo", "plivate", "plivaju"], "pat": "no object", "ex": "Plivam svaki dan.", "gloss": "I swim every day."}, {"hr": "ući", "en": "to enter", "conj": ["uđem", "uđeš", "uđe", "uđemo", "uđete", "uđu"], "pat": "u + accusative", "ex": "Uđem u sobu.", "gloss": "I go into the room."}, {"hr": "izaći", "en": "to go out", "conj": ["izađem", "izađeš", "izađe", "izađemo", "izađete", "izađu"], "pat": "iz + <b>genitive</b>", "ex": "Izađem iz kuće.", "gloss": "I leave the house."}, {"hr": "sjediti", "en": "to sit (be seated)", "conj": ["sjedim", "sjediš", "sjedi", "sjedimo", "sjedite", "sjede"], "pat": "u / na + locative", "ex": "Sjedim u kafiću.", "gloss": "I'm sitting in a café."}, {"hr": "sjesti", "en": "to sit down", "conj": ["sjednem", "sjedneš", "sjedne", "sjednemo", "sjednete", "sjednu"], "pat": "na + accusative — motion", "ex": "Sjednem na stolicu.", "gloss": "I sit down on the chair."}, {"hr": "stajati", "en": "to stand", "conj": ["stojim", "stojiš", "stoji", "stojimo", "stojite", "stoje"], "pat": "no object", "ex": "Stojim ispred kuće.", "gloss": "I'm standing in front of the house."}, {"hr": "ležati", "en": "to lie (be lying)", "conj": ["ležim", "ležiš", "leži", "ležimo", "ležite", "leže"], "pat": "na + locative", "ex": "Ležim na plaži.", "gloss": "I'm lying on the beach."}, {"hr": "leći", "en": "to lie down", "conj": ["legnem", "legneš", "legne", "legnemo", "legnete", "legnu"], "pat": "na + accusative — motion", "ex": "Legnem na krevet.", "gloss": "I lie down on the bed."}, {"hr": "oblačiti se", "en": "to get dressed", "conj": ["oblačim se", "oblačiš se", "oblači se", "oblačimo se", "oblačite se", "oblače se"], "pat": "no object", "ex": "Oblačim se brzo.", "gloss": "I get dressed quickly."}, {"hr": "tuširati se", "en": "to shower", "conj": ["tuširam se", "tuširaš se", "tušira se", "tuširamo se", "tuširate se", "tuširaju se"], "pat": "no object", "ex": "Tuširam se ujutro.", "gloss": "I shower in the morning."}, {"hr": "kupiti", "en": "to buy", "conj": ["kupim", "kupiš", "kupi", "kupimo", "kupite", "kupe"], "pat": "+ accusative", "ex": "Kupim kruh.", "gloss": "I buy bread."}, {"hr": "prodati", "en": "to sell", "conj": ["prodam", "prodaš", "proda", "prodamo", "prodate", "prodaju"], "pat": "+ accusative", "ex": "Prodam auto.", "gloss": "I sell the car."}, {"hr": "platiti", "en": "to pay", "conj": ["platim", "platiš", "plati", "platimo", "platite", "plate"], "pat": "+ accusative", "ex": "Platim račun.", "gloss": "I pay the bill."}, {"hr": "koštati", "en": "to cost", "conj": ["koštam", "koštaš", "košta", "koštamo", "koštate", "koštaju"], "pat": "no object", "ex": "Kava košta dva eura.", "gloss": "The coffee costs two euros."}, {"hr": "dati", "en": "to give", "conj": ["dam", "daš", "da", "damo", "date", "daju"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Dam knjigu prijatelju.", "gloss": "I give the book to my friend."}, {"hr": "uzeti", "en": "to take", "conj": ["uzmem", "uzmeš", "uzme", "uzmemo", "uzmete", "uzmu"], "pat": "+ accusative", "ex": "Uzmem torbu.", "gloss": "I take the bag."}, {"hr": "donijeti", "en": "to bring", "conj": ["donesem", "doneseš", "donese", "donesemo", "donesete", "donesu"], "pat": "+ accusative", "ex": "Donesem vodu.", "gloss": "I bring water."}, {"hr": "nositi", "en": "to carry / to wear", "conj": ["nosim", "nosiš", "nosi", "nosimo", "nosite", "nose"], "pat": "+ accusative", "ex": "Nosim jaknu.", "gloss": "I'm wearing a jacket."}, {"hr": "staviti", "en": "to put", "conj": ["stavim", "staviš", "stavi", "stavimo", "stavite", "stave"], "pat": "u / na + accusative", "ex": "Stavim knjigu na stol.", "gloss": "I put the book on the table."}, {"hr": "upaliti", "en": "to turn on", "conj": ["upalim", "upališ", "upali", "upalimo", "upalite", "upale"], "pat": "+ accusative", "ex": "Upalim svjetlo.", "gloss": "I turn on the light."}, {"hr": "ugasiti", "en": "to turn off", "conj": ["ugasim", "ugasiš", "ugasi", "ugasimo", "ugasite", "ugase"], "pat": "+ accusative", "ex": "Ugasim televizor.", "gloss": "I turn off the television."}, {"hr": "razgovarati", "en": "to converse", "conj": ["razgovaram", "razgovaraš", "razgovara", "razgovaramo", "razgovarate", "razgovaraju"], "pat": "s + <b>instrumental</b> · o + locative", "ex": "Razgovaram s prijateljem.", "gloss": "I'm talking with a friend."}, {"hr": "pričati", "en": "to tell / to chat", "conj": ["pričam", "pričaš", "priča", "pričamo", "pričate", "pričaju"], "pat": "o + locative", "ex": "Pričam o putovanju.", "gloss": "I'm telling you about the trip."}, {"hr": "reći", "en": "to say", "conj": ["kažem", "kažeš", "kaže", "kažemo", "kažete", "kažu"], "pat": "+ dative (to whom) · + accusative (what)", "ex": "Kažem ti istinu.", "gloss": "I'm telling you the truth."}, {"hr": "objasniti", "en": "to explain", "conj": ["objasnim", "objasniš", "objasni", "objasnimo", "objasnite", "objasne"], "pat": "+ accusative (what) · + dative (to whom)", "ex": "Objasnim lekciju studentu.", "gloss": "I explain the lesson to the student."}, {"hr": "ponoviti", "en": "to repeat", "conj": ["ponovim", "ponoviš", "ponovi", "ponovimo", "ponovite", "ponove"], "pat": "+ accusative", "ex": "Ponovim riječ.", "gloss": "I repeat the word."}, {"hr": "posjetiti", "en": "to visit", "conj": ["posjetim", "posjetiš", "posjeti", "posjetimo", "posjetite", "posjete"], "pat": "+ accusative", "ex": "Posjetim baku.", "gloss": "I visit my grandmother."}, {"hr": "upoznati", "en": "to meet / to get to know", "conj": ["upoznam", "upoznaš", "upozna", "upoznamo", "upoznate", "upoznaju"], "pat": "+ accusative", "ex": "Upoznam novog susjeda.", "gloss": "I meet the new neighbour."}, {"hr": "probati", "en": "to try", "conj": ["probam", "probaš", "proba", "probamo", "probate", "probaju"], "pat": "+ accusative · + infinitive", "ex": "Probam kolač.", "gloss": "I try the cake."}, {"hr": "osjećati se", "en": "to feel", "conj": ["osjećam se", "osjećaš se", "osjeća se", "osjećamo se", "osjećate se", "osjećaju se"], "pat": "no object + adverb", "ex": "Osjećam se dobro.", "gloss": "I feel good."}, {"hr": "boljeti", "en": "to hurt", "conj": ["bolim", "boliš", "boli", "bolimo", "bolite", "bole"], "pat": "+ <b>accusative</b> — the person in pain goes in the accusative", "ex": "Boli me glava.", "gloss": "My head hurts. (literally: it hurts me, the head)"}, {"hr": "izgledati", "en": "to look / to seem", "conj": ["izgledam", "izgledaš", "izgleda", "izgledamo", "izgledate", "izgledaju"], "pat": "no object + adverb", "ex": "Izgledaš umorno.", "gloss": "You look tired."}, {"hr": "izgubiti", "en": "to lose", "conj": ["izgubim", "izgubiš", "izgubi", "izgubimo", "izgubite", "izgube"], "pat": "+ accusative", "ex": "Izgubim ključ.", "gloss": "I lose the key."}, {"hr": "vjerovati", "en": "to believe", "conj": ["vjerujem", "vjeruješ", "vjeruje", "vjerujemo", "vjerujete", "vjeruju"], "pat": "+ <b>dative</b>", "ex": "Vjerujem ti.", "gloss": "I believe you."}, {"hr": "pozvati", "en": "to invite", "conj": ["pozovem", "pozoveš", "pozove", "pozovemo", "pozovete", "pozovu"], "pat": "+ accusative", "ex": "Pozovem prijatelje.", "gloss": "I invite my friends."}, {"hr": "slaviti", "en": "to celebrate", "conj": ["slavim", "slaviš", "slavi", "slavimo", "slavite", "slave"], "pat": "+ accusative", "ex": "Slavim rođendan.", "gloss": "I'm celebrating a birthday."}, {"hr": "paziti", "en": "to be careful / to look after", "conj": ["pazim", "paziš", "pazi", "pazimo", "pazite", "paze"], "pat": "na + accusative", "ex": "Pazim na djecu.", "gloss": "I'm looking after the children."}, {"hr": "početi", "en": "to begin", "conj": ["počnem", "počneš", "počne", "počnemo", "počnete", "počnu"], "pat": "+ accusative · + infinitive", "ex": "Počnem raditi.", "gloss": "I start working."}, {"hr": "završiti", "en": "to finish", "conj": ["završim", "završiš", "završi", "završimo", "završite", "završe"], "pat": "+ accusative", "ex": "Završim posao.", "gloss": "I finish the job."}, {"hr": "ostati", "en": "to stay", "conj": ["ostanem", "ostaneš", "ostane", "ostanemo", "ostanete", "ostanu"], "pat": "u / na + locative", "ex": "Ostanem u hotelu.", "gloss": "I stay in the hotel."}, {"hr": "vratiti se", "en": "to return", "conj": ["vratim se", "vratiš se", "vrati se", "vratimo se", "vratite se", "vrate se"], "pat": "iz + <b>genitive</b>", "ex": "Vratim se iz škole.", "gloss": "I come back from school."}, {"hr": "letjeti", "en": "to fly", "conj": ["letim", "letiš", "leti", "letimo", "letite", "lete"], "pat": "u / na + accusative", "ex": "Letim u Zagreb.", "gloss": "I'm flying to Zagreb."}, {"hr": "stanovati", "en": "to reside", "conj": ["stanujem", "stanuješ", "stanuje", "stanujemo", "stanujete", "stanuju"], "pat": "u + locative", "ex": "Stanujem u Splitu.", "gloss": "I live in Split."}];
+var PRON = ["ja","ti","on / ona","mi","vi","oni"];
+var KEYS = ["A","B","C","D"];
+var GLAG = ["Ⰰ","Ⰱ","Ⰲ","Ⰳ","Ⰴ","Ⰵ","Ⰶ","Ⰷ","Ⰸ","Ⰹ"];
+
+var view = document.getElementById("view");
+var mode = "browse";
+
+document.querySelectorAll("#mode button").forEach(function(b){
+  b.addEventListener("click", function(){
+    document.querySelectorAll("#mode button").forEach(function(x){ x.classList.remove("on"); });
+    b.classList.add("on");
+    mode = b.dataset.m;
+    if(mode === "browse") browse(); else startQuiz();
+  });
 });
 
-document.getElementById('filter').addEventListener('click',function(e){
-  var b=e.target.closest('button');if(!b)return;
-  [].forEach.call(this.children,function(c){c.classList.remove('on')});
-  b.classList.add('on');filter=b.dataset.f;
-  if(mode==='gallery'){gallery()}else{start()}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function conjTable(v){
+  return '<div class="scroll"><table><tbody>'+
+    v.conj.map(function(c,i){
+      return '<tr><th>'+PRON[i]+'</th><td><span class="end">'+c+'</span></td></tr>';
+    }).join("")+'</tbody></table></div>';
+}
+
+/* ---------------- browse ---------------- */
+function browse(){
+  view.innerHTML =
+    '<div class="sec"><h2><span class="glag">Ⰰ</span>All '+VERBS.length+' verbs</h2>'+
+    '<p class="note">Tap a verb to open its conjugation.</p>'+
+    '<div class="grid" id="vlist"></div></div>'+
+    '<div id="detail"></div>';
+
+  var list = document.getElementById("vlist");
+  VERBS.forEach(function(v, i){
+    var a = document.createElement("a");
+    a.className = "cell"; a.href = "#";
+    a.innerHTML = '<h2>'+v.hr+'</h2><p>'+v.en+'</p>';
+    a.addEventListener("click", function(e){ e.preventDefault(); detail(i); });
+    list.appendChild(a);
+  });
+}
+
+function detail(i){
+  var v = VERBS[i];
+  var d = document.getElementById("detail");
+  d.innerHTML =
+    '<div class="card"><h2>'+v.hr+' <span>·</span> '+v.en+'</h2>'+
+    '<p class="cap">'+v.pat+'</p>'+
+    conjTable(v)+
+    '<ul class="talk"><li><span class="hr">'+v.ex+'</span>'+
+    '<span class="en">'+v.gloss+'</span></li></ul></div>';
+  d.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto":"smooth", block:"center"});
+}
+
+/* ---------------- quiz ---------------- */
+var round=[], idx=0, score=0, answered=false, missed=[];
+
+function startQuiz(){
+  round = shuffle(VERBS).slice(0,20);
+  idx=0; score=0; missed=[];
+  question();
+}
+
+function question(){
+  answered = false;
+  var v = round[idx];
+  var wrong = shuffle(VERBS.filter(function(x){ return x.en !== v.en; })).slice(0,3);
+  var all = shuffle([v].concat(wrong));
+  var correct = all.indexOf(v);
+
+  view.innerHTML =
+    '<div class="quizbar"><span class="count">'+(idx+1)+' / '+round.length+'</span>'+
+    '<span class="score">'+score+' correct</span></div>'+
+    '<div class="progress"><i style="width:'+(idx/round.length*100)+'%"></i></div>'+
+    '<div class="qcard">'+
+      '<p class="prompt">What does it mean?</p>'+
+      '<p class="target">'+v.hr+'</p>'+
+      '<div class="opts" id="opts"></div><div id="why"></div>'+
+    '</div><div class="btnrow" id="btnrow"></div>';
+
+  var box = document.getElementById("opts");
+  all.forEach(function(x,i){
+    var b=document.createElement("button");
+    b.className="opt"; b.type="button";
+    b.innerHTML='<span class="key">'+KEYS[i]+'</span><span>'+x.en+'</span>';
+    b.addEventListener("click", function(){ answer(i, correct, v); });
+    box.appendChild(b);
+  });
+}
+
+function answer(i, correct, v){
+  if(answered) return; answered=true;
+  if(i===correct) score++; else missed.push(v);
+  document.querySelectorAll("#opts .opt").forEach(function(b,j){
+    b.disabled=true;
+    if(j===correct) b.classList.add("correct");
+    else if(j===i) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  document.querySelector(".score").textContent = score+" correct";
+  document.getElementById("why").innerHTML =
+    '<div class="why"><b>'+v.hr+'</b> — '+v.en+'. Takes '+v.pat+'.</div>'+
+    conjTable(v)+
+    '<ul class="talk"><li><span class="hr">'+v.ex+'</span><span class="en">'+v.gloss+'</span></li></ul>';
+  var row=document.getElementById("btnrow");
+  row.innerHTML='<button class="btn" id="next">'+(idx+1<round.length?"Next":"See results")+'</button>';
+  document.getElementById("next").addEventListener("click", next);
+  document.getElementById("next").focus();
+}
+
+function next(){ idx++; if(idx<round.length) question(); else results(); }
+
+function results(){
+  var pct=Math.round(score/round.length*100);
+  var review = missed.length
+    ? '<h3 class="sub">What slipped</h3><ul class="talk">'+missed.map(function(v){
+        return '<li><span class="hr">'+v.hr+'</span><span class="en">'+v.en+' · '+v.pat+'</span></li>';
+      }).join("")+'</ul>' : "";
+  view.innerHTML='<div class="card"><div class="result">'+
+    '<div class="glag">'+GLAG[Math.min(Math.floor(pct/10),9)]+'</div>'+
+    '<p class="big">'+pct+'%</p><p class="of">'+score+' of '+round.length+'</p></div>'+
+    review+'<div class="btnrow"><button class="btn" id="again">New round</button>'+
+    '<a class="btn ghost" href="index.html">Home</a></div></div>';
+  document.getElementById("again").addEventListener("click", startQuiz);
+}
+
+document.addEventListener("keydown", function(e){
+  if(mode!=="quiz") return;
+  if(!answered){
+    var k=KEYS.indexOf(e.key.toUpperCase());
+    var btns=document.querySelectorAll("#opts .opt");
+    if(k>-1 && k<btns.length){ e.preventDefault(); btns[k].click(); }
+  } else if(e.key==="Enter"||e.key===" "){
+    var n=document.getElementById("next"); if(n){ e.preventDefault(); n.click(); }
+  }
 });
 
-start();
+browse();
 </script>
 <script src="nav.js"></script>
 </body>
