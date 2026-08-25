@@ -345,6 +345,39 @@ table td{background:var(--parchment-lt)}
 .why b{color:var(--ink);font-weight:600}
 .why .mono{font-family:var(--mono);font-size:12px}
 
+/* ---- sentence builder (type: "build" quiz items) ---- */
+.build-answer{
+  min-height:50px;
+  display:flex;flex-wrap:wrap;align-content:flex-start;gap:7px;
+  border:1px dashed var(--rule);background:var(--paper);
+  padding:10px;margin-bottom:12px;
+}
+.build-answer:empty::before{
+  content:"Tap words below to build the sentence";
+  font-size:12px;font-style:italic;color:var(--stone);
+}
+.build-answer.right{border-style:solid;border-color:var(--copper);background:var(--copper-lt)}
+.build-answer.wrong{border-style:solid;border-color:var(--cinnabar);background:var(--cinnabar-lt)}
+.build-bank{display:flex;flex-wrap:wrap;gap:7px}
+.tile{
+  font-family:var(--display);font-size:15px;
+  background:var(--parchment-lt);border:1px solid var(--rule);
+  padding:8px 12px;color:var(--ink);cursor:pointer;
+}
+.tile:active{background:var(--parchment)}
+.tile.placed{background:var(--paper)}
+.build-answer.right .tile.placed{background:transparent;border-color:var(--copper);color:var(--copper)}
+.build-answer.wrong .tile.placed{background:transparent;border-color:var(--cinnabar);color:var(--cinnabar);text-decoration:line-through}
+.tile:disabled{cursor:default}
+.build-reveal{
+  font-family:var(--display);font-size:17px;font-weight:600;
+  margin:14px 0 0;color:var(--ink);line-height:1.35;
+}
+.build-reveal .tag{
+  display:block;font-family:var(--body);font-weight:600;font-size:10px;
+  text-transform:uppercase;letter-spacing:.11em;color:var(--stone);margin-bottom:4px;
+}
+
 /* ============================================================
    BUTTONS
    ============================================================ */

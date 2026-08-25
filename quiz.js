@@ -27,6 +27,9 @@
 
   /* shuffle options too, tracking where the right answer lands */
   function prepare(item) {
+    if (item.type === "build") {
+      return { src: item, bankWords: shuffle(item.words) };
+    }
     var pairs = item.o.map(function (text, i) { return { text: text, ok: i === item.c }; });
     pairs = shuffle(pairs);
     return {
@@ -47,6 +50,11 @@
     answered = false;
     var q = round[idx];
     var item = q.src;
+
+    if (item.type === "build") {
+      renderBuildQuestion(q, item);
+      return;
+    }
 
     var sentence;
     if (item.hr && item.hr.length) {
@@ -79,6 +87,106 @@
       b.addEventListener("click", function () { answer(i); });
       box.appendChild(b);
     });
+  }
+
+  /* ---------- sentence-builder (type: "build") ---------- */
+  function renderBuildQuestion(q, item) {
+    root.innerHTML =
+      '<div class="quizbar">' +
+        '<span class="count">' + (idx + 1) + " / " + round.length + "</span>" +
+        '<span class="score">' + score + " correct</span>" +
+      "</div>" +
+      '<div class="progress"><i style="width:' + (idx / round.length * 100) + '%"></i></div>' +
+      '<div class="qcard">' +
+        '<p class="prompt">' + item.en + "</p>" +
+        '<div class="build">' +
+          '<div class="build-answer" id="buildAnswer"></div>' +
+          '<div class="build-bank" id="buildBank"></div>' +
+        "</div>" +
+        '<div id="why"></div>' +
+      "</div>" +
+      '<div class="btnrow" id="btnrow"></div>';
+
+    var built = [];
+    var pool = q.bankWords.slice();
+
+    function draw() {
+      var ansBox = document.getElementById("buildAnswer");
+      var bankBox = document.getElementById("buildBank");
+      ansBox.innerHTML = built.map(function (w, i) {
+        return '<button type="button" class="tile placed" data-i="' + i + '">' + w + "</button>";
+      }).join("");
+      bankBox.innerHTML = pool.map(function (w, i) {
+        return '<button type="button" class="tile" data-i="' + i + '">' + w + "</button>";
+      }).join("");
+
+      ansBox.querySelectorAll(".tile").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (answered) return;
+          var i = +b.getAttribute("data-i");
+          pool.push(built[i]);
+          built.splice(i, 1);
+          draw();
+        });
+      });
+      bankBox.querySelectorAll(".tile").forEach(function (b) {
+        b.addEventListener("click", function () {
+          if (answered) return;
+          var i = +b.getAttribute("data-i");
+          built.push(pool[i]);
+          pool.splice(i, 1);
+          draw();
+        });
+      });
+
+      var row = document.getElementById("btnrow");
+      row.innerHTML =
+        '<button class="btn ghost" id="buildClear" type="button">Clear</button>' +
+        '<button class="btn" id="buildCheck" type="button">Check</button>';
+      document.getElementById("buildClear").addEventListener("click", function () {
+        if (answered) return;
+        pool = pool.concat(built);
+        built = [];
+        draw();
+      });
+      document.getElementById("buildCheck").addEventListener("click", function () {
+        checkBuild(q, item, built);
+      });
+    }
+
+    draw();
+  }
+
+  function checkBuild(q, item, built) {
+    if (answered) return;
+    answered = true;
+
+    var right = built.length === item.answer.length &&
+      built.every(function (w, i) { return w === item.answer[i]; });
+    if (right) score++;
+    else missed.push(q);
+
+    if (per[item.s]) {
+      per[item.s].total++;
+      if (right) per[item.s].ok++;
+    }
+
+    var ansBox = document.getElementById("buildAnswer");
+    ansBox.classList.add(right ? "right" : "wrong");
+    document.querySelectorAll("#buildBank .tile, #buildAnswer .tile").forEach(function (b) {
+      b.disabled = true;
+    });
+
+    var reveal = right ? "" :
+      '<p class="build-reveal"><span class="tag">Correct order</span>' + item.answer.join(" ") + "</p>";
+    document.getElementById("why").innerHTML = reveal + '<div class="why">' + item.w + "</div>";
+    document.querySelector(".score").textContent = score + " correct";
+
+    var row = document.getElementById("btnrow");
+    row.innerHTML = '<button class="btn" id="next">' +
+      (idx + 1 < round.length ? "Next" : "See results") + "</button>";
+    document.getElementById("next").addEventListener("click", next);
+    document.getElementById("next").focus();
   }
 
   function answer(i) {
@@ -141,9 +249,14 @@
       ? '<h3 class="sub">What slipped</h3><ul class="talk">' +
         missed.map(function (q) {
           var it = q.src;
-          var line = (it.hr && it.hr.length)
-            ? it.hr[0] + "<u>" + q.opts[q.c] + "</u>" + (it.hr[1] || "")
-            : q.opts[q.c];
+          var line;
+          if (it.type === "build") {
+            line = it.answer.join(" ");
+          } else if (it.hr && it.hr.length) {
+            line = it.hr[0] + "<u>" + q.opts[q.c] + "</u>" + (it.hr[1] || "");
+          } else {
+            line = q.opts[q.c];
+          }
           return '<li><span class="hr">' + line + '</span>' +
                  '<span class="en">' + it.en + "</span></li>";
         }).join("") + "</ul>"
