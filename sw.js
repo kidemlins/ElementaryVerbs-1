@@ -1,4 +1,4 @@
-const CACHE = "hrvatski-glagoljica-v5";
+const CACHE = "hrvatski-glagoljica-v6";
 const ASSETS = [
   "./index.html",
   "./genel.html",
@@ -15,13 +15,21 @@ const ASSETS = [
   "./nav.js",
   "./quiz.js",
   "./manifest.json",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png",
-  "./icons/icon-512-maskable.png"
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-512-maskable.png"
 ];
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
+  e.waitUntil(
+    caches.open(CACHE).then((c) =>
+      Promise.all(
+        ASSETS.map((url) =>
+          c.add(url).catch((err) => console.warn("SW cache skip:", url, err))
+        )
+      )
+    )
+  );
   self.skipWaiting();
 });
 
